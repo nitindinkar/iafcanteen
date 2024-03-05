@@ -18,14 +18,31 @@
                         <div class="quickview-content login" *ngIf="showLoginForm">
                             <h2>Login</h2>
                             <form action="/action_page.php">
-                                <div class="mb-3 mt-3">
-                                  <label for="email" class="form-label">Email:</label>
-                                  <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
-                                </div>
-                                <div class="mb-3 mt-3">
-                                    <label for="number" class="form-label">Mobile:</label>
-                                    <input type="phone" class="form-control" id="mobile" placeholder="Enter mobile number" name="mobile">
+                                <!-- <div class="mb-3 mt-3">
+                                  <label for="email" class="form-label">Card Number:</label>
+                                  <input type="CdNum" class="form-control" id="CdNum" placeholder="Enter Number" name="CdNum">
+                                </div> -->
+                                <!-- <div class="mb-3 mt-3">
+                                    <label for="number" class="form-label">Card Type:</label>
+                                    <input type="card" class="form-control" id="CrdTyp" placeholder="Enter card number" name="card">
+                                    <option>Liquor Card</option>
+                                      <option>Grocery Card</option>
+                                  </div> -->
+                                  <div class="form-group">
+                                    <label for="exampleFormControlSelect1">Card Type</label>
+                                    <select class="form-control" id="exampleFormControlSelect1">
+                                      <option>Liquor Card</option>
+                                      <option>Grocery Card</option>
+                                    </select>
                                   </div>
+
+                                  <div class="mb-3 mt-3">
+                                    <label for="email" class="form-label">Card Number:</label>
+                                    <input type="CdNum" class="form-control" id="CdNum" placeholder="Enter Number" name="CdNum">
+                                  </div>
+
+
+
                                 <div class="mb-3">
                                   <label for="pwd" class="form-label">Password:</label>
                                   <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd">
@@ -75,6 +92,18 @@
                                 <label for="pwd" class="form-label">Password:</label>
                                 <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd">
                               </div>
+
+                              <div class="mb-3 mt-3 col-md-6 px-2">
+                                <label for="pwd" class="form-label">Gmail:</label>
+                                <input type="gmail" class="form-control" id="pwd" placeholder="Enter gmail" name="gml">
+                              </div>
+
+                              <div class="mb-3 mt-3 col-md-6 px-2">
+                                <!-- <label for="pwd" class="form-label">Gmail:</label>
+                                <input type="gmail" class="form-control" id="pwd" placeholder="Enter gmail" name="gml"> -->
+                              </div>
+
+
                               <div class="form-check mb-3 px-2">
                                 <label class="form-check-label">
                                   <input class="form-check-input" type="checkbox" name="remember"> Remember me
