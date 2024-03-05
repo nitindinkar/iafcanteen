@@ -11,6 +11,8 @@ import { Router } from '@angular/router';
   styleUrl: './login.component.scss'
 })
 export class LoginComponent implements OnInit{
+  showOtpInput: boolean = false;
+    otp: string = '';
 
    constructor(private HttpClient: HttpClient,private ConstServiceService:ConstServiceService,
     private router:Router) { }
@@ -36,6 +38,13 @@ export class LoginComponent implements OnInit{
     this.showLoginForm = !this.showLoginForm;
     this.showRegistrationForm = !this.showRegistrationForm;
   }
+
+  sendOtp() {
+    // Logic to send OTP via email or SMS
+    // For now, just toggle the visibility of OTP input box
+    this.showOtpInput = true;
+    this.verify();
+}
 
   verify(){
      const credentials={

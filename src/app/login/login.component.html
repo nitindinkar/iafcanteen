@@ -95,13 +95,18 @@
 
                               <div class="mb-3 mt-3 col-md-6 px-2">
                                 <label for="pwd" class="form-label">Gmail:</label>
-                                <input type="gmail" class="form-control" id="pwd" placeholder="Enter gmail" name="gml" [(ngModel)]="email">
+                                <input type="gmail" class="form-control" id="pwd" placeholder="Enter E-mail" name="gml" [(ngModel)]="email">
                               </div>
 
                               <div class="mb-3 mt-3 col-md-6 px-2">
-                                <!-- <label for="pwd" class="form-label">Gmail:</label>
-                                <input type="gmail" class="form-control" id="pwd" placeholder="Enter gmail" name="gml"> -->
+                                <button type="button" class="btn btn-primary mb-3" (click)="sendOtp()">Verify</button>
                               </div>
+
+                             <!-- New box for OTP filling -->
+            <div *ngIf="showOtpInput" class="mb-3 mt-3 col-md-6 px-2">
+              <label for="otp" class="form-label">Enter OTP:</label>
+              <input type="text" class="form-control" id="otp" placeholder="Enter OTP" name="otp" [(ngModel)]="otp">
+          </div>
 
 
                               <div class="form-check mb-3 px-2">
