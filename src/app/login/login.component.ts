@@ -1,9 +1,10 @@
 import { ConstServiceService } from './../const-service.service';
 import { Component, OnInit } from '@angular/core';
 import * as $ from 'jquery';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-login',
@@ -13,6 +14,8 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit{
   showOtpInput: boolean = false;
     otp: string = '';
+    Liquor: any;
+    Grocery: any;
 
    constructor(private HttpClient: HttpClient,private ConstServiceService:ConstServiceService,
     private router:Router) { }
@@ -28,6 +31,18 @@ export class LoginComponent implements OnInit{
   contactNumber:any;
   password:any;
   email:any;
+  getotp:any | undefined;
+  cardNumber:any;
+  cardType:any=[{
+    value:'Liquor',
+    desc:'Liquor'},{
+      value:'Grocery',
+      desc:'Grocery'
+    }];
+    selected:any;
+  loginPassword:any;
+  type:String='';
+
   ngOnInit(): void {
     $.getScript('assets/js/flex-slider.js');
 
@@ -51,9 +66,9 @@ export class LoginComponent implements OnInit{
       email:this.email,
      }
 
-      const verifyUrl =this.ConstServiceService.api.emailVerifyUrl;
+      const verifyUrl =this.ConstServiceService.api.sendOtp;
 
-     this.HttpClient.post(verifyUrl, credentials,{responseType:'text'})
+     this.HttpClient.get(verifyUrl, { params: credentials, responseType: 'text' })
       .subscribe(
         (response: any) => {
           // Handle successful login, e.g., redirect the user or perform other actions
@@ -68,8 +83,37 @@ export class LoginComponent implements OnInit{
       );
 }
   
+verifyOtp() {
+  const credentials = {
+    email: this.email,
+    otp: this.getotp
+  };
+
+  const verifyOtpUrl = this.ConstServiceService.api.verifyEmailotp;
+
+  this.HttpClient.post(verifyOtpUrl, credentials, { responseType: 'text' })
+    .subscribe(
+      (response: any) => {
+        // Handle successful OTP verification
+        console.log('OTP verification successful:', response);
+        if(response!="otp verified"){
+          alert("please Enter valid Otp for login");
+        }
+
+        
+        // Call your registration function or any other function here
+        this.registration();
+      },
+      (error) => {
+        // Handle OTP verification failure
+        console.error('OTP verification failed:', error);
+      }
+    );
+}
+
 
   registration(){
+ 
 
     const credentials = { 
       name: this.name,
@@ -80,17 +124,20 @@ export class LoginComponent implements OnInit{
       dob:this.dob,
       contactNumber:this.contactNumber,
       password:this.password,
-      email:this.email
+      email:this.email,
+      getotp:this.getotp
       };
 
       const registerationUrl= this.ConstServiceService.api.registrationUrl;
 
-
+      console.log(credentials);
       this.HttpClient.post(registerationUrl, credentials,{responseType:'text'})
       .subscribe(
         (response: any) => {
           // Handle successful login, e.g., redirect the user or perform other actions
           console.log(response);
+          console.log("registration ka response hai...");
+          
                     
           
         },
@@ -99,5 +146,34 @@ export class LoginComponent implements OnInit{
           console.error('Login failed:', error);
         }
       );
-}
+   }
+
+   login(){
+  
+           const loginUrl=this.ConstServiceService.api.login;
+
+    const headers = new HttpHeaders({
+      'cardType': this.selected,
+    });
+    console.log(headers);
+
+    const credentials={cardNumber:this.cardNumber,loginPassword:this.loginPassword}
+     console.log(credentials);
+    
+    this.HttpClient.post(loginUrl, credentials,{ headers:headers,responseType: 'text' })
+      .subscribe(
+        (response: any) => {
+          // Handle successful login, e.g., redirect the user or perform other actions
+          console.log(response);
+                 
+                    
+          
+        },
+        (error) => {
+          // Handle login failure, e.g., display an error message
+          console.error('Login failed:', error);
+        }
+      );
+
+   }
 }
