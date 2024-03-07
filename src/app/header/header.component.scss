@@ -14,3 +14,11 @@
     font-size: 40px;
     font-weight: 600;
 }
+.main-category {
+  display: none;
+}
+
+.cat-heading:hover + .main-category,
+.main-category:hover {
+  display: block;
+}
