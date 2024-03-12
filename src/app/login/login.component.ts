@@ -4,6 +4,7 @@ import * as $ from 'jquery';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import {ConstantsService} from "../services/constants/constants.service";
 
 
 @Component({
@@ -17,10 +18,10 @@ export class LoginComponent implements OnInit{
     Liquor: any;
     Grocery: any;
 
-   constructor(private HttpClient: HttpClient,private ConstServiceService:ConstServiceService,
+   constructor(private HttpClient: HttpClient,private ConstServiceService:ConstantsService,
     private router:Router) { }
 
-  showRegistrationForm: boolean = false; 
+  showRegistrationForm: boolean = false;
   showLoginForm: boolean = true;
   name:any;
   liquorCardNumber:any;
@@ -47,7 +48,7 @@ export class LoginComponent implements OnInit{
     $.getScript('assets/js/flex-slider.js');
 
   }
-  
+
 
   toggleRegistrationForm() {
     this.showLoginForm = !this.showLoginForm;
@@ -73,8 +74,8 @@ export class LoginComponent implements OnInit{
         (response: any) => {
           // Handle successful login, e.g., redirect the user or perform other actions
           console.log(response);
-                    
-          
+
+
         },
         (error) => {
           // Handle login failure, e.g., display an error message
@@ -82,7 +83,7 @@ export class LoginComponent implements OnInit{
         }
       );
 }
-  
+
 verifyOtp() {
   const credentials = {
     email: this.email,
@@ -100,7 +101,7 @@ verifyOtp() {
           alert("please Enter valid Otp for login");
         }
 
-        
+
         // Call your registration function or any other function here
         this.registration();
       },
@@ -113,9 +114,9 @@ verifyOtp() {
 
 
   registration(){
- 
 
-    const credentials = { 
+
+    const credentials = {
       name: this.name,
       liquorCardNumber: this.liquorCardNumber,
       groceryCardNumber:this.groceryCardNumber,
@@ -137,9 +138,9 @@ verifyOtp() {
           // Handle successful login, e.g., redirect the user or perform other actions
           console.log(response);
           console.log("registration ka response hai...");
-          
-                    
-          
+
+
+
         },
         (error) => {
           // Handle login failure, e.g., display an error message
@@ -149,26 +150,28 @@ verifyOtp() {
    }
 
    login(){
-  
-           const loginUrl=this.ConstServiceService.api.login;
 
-    const headers = new HttpHeaders({
+    const loginUrl=this.ConstServiceService.api.login;
+const headers = new HttpHeaders({
       'cardType': this.selected,
     });
     console.log(headers);
-
-    const credentials={cardNumber:this.cardNumber,loginPassword:this.loginPassword}
-     console.log(credentials);
-    
+    let credentials:any = {
+      cardNumber:this.cardNumber,
+      userPassword:this.loginPassword
+    }
+    console.log(credentials);
     this.HttpClient.post(loginUrl, credentials,{ headers:headers,responseType: 'text' })
       .subscribe(
         (response: any) => {
           // Handle successful login, e.g., redirect the user or perform other actions
-          console.log(response);
-                 
-                    
-          
-        },
+          console.log(response.jwtToken);
+          if(response.jwtToken!=undefined){
+            localStorage.setItem('token',response.jwtToken);
+            // console.log(response.jwtToken);
+            this.router.navigate(['']);
+          }
+          },
         (error) => {
           // Handle login failure, e.g., display an error message
           console.error('Login failed:', error);

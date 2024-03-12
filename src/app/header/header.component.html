@@ -201,7 +201,9 @@
                           <li><a href="#">Cart</a></li>
                           <li><a href="#">Checkout</a></li>
                           <li><a href="#">Contact Us</a></li>
-                        </ul>
+                          <li [routerLink]="['add-product']" [routerLinkActive]="['active']"><a>Add/Update Product</a></li>
+<!--                        <li (click)="redirect('add-product')"><a  >Add/Update Product</a></li>  -->
+                      </ul>
                     </div>
                   </div>
                 </nav>
