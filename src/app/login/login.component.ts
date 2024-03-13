@@ -157,8 +157,8 @@ verifyOtp() {
    login(){
 
     const loginUrl=this.ConstServiceService.api.login;
-const headers = new HttpHeaders({
-      'cardType': this.selected,
+    const headers = new HttpHeaders({
+           'cardType': this.selected,
     });
     console.log(headers);
     let credentials:any = {
@@ -175,7 +175,8 @@ const headers = new HttpHeaders({
           debugger;
           if(result['message']=='success'){
             this.token=result['response'].jwtToken.toString();
-            localStorage.setItem('token',this.token);
+            localStorage.setItem('token', 'Bearer ' + this.token);
+            debugger;
             this.header.login=true;
             this.header.username=result['response'].user.name;
             this.router.navigate(['']);

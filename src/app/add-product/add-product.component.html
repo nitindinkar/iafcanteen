@@ -5,22 +5,26 @@
 
                 <div class="mb-3 mt-3">
                   <label for="CdNum" class="form-label">Product Name:</label>
-                  <input type="CdNum" class="form-control" id="CdNum" [(ngModel)]="name" placeholder="Enter Number" name="CdNum">
+                  <input type="CdNum" class="form-control" id="CdNum" [(ngModel)]="name" placeholder="Enter Name" name="CdNum">
                 </div>
 
 
 
                 <div class="mb-3">
                   <label for="pwd" class="form-label">Description:</label>
-                  <input type="text" class="form-control" id="pwd" [(ngModel)]="desc" placeholder="Enter password" name="pswd" >
+                  <input type="text" class="form-control" id="pwd" [(ngModel)]="desc" placeholder="Enter Description" name="pswd" >
                 </div>
                 <div class="mb-3">
                   <label for="pwd" class="form-label">Actual Price:</label>
-                  <input type="number" class="form-control" id="pwd" [(ngModel)]="aPrice" placeholder="Enter password" name="pswd" >
+                  <input type="number" class="form-control" id="pwd" [(ngModel)]="aPrice" placeholder="Enter Actual Price" name="pswd" >
                 </div>
                 <div class="mb-3">
                   <label for="pwd" class="form-label">Discounted Price:</label>
-                  <input type="number" class="form-control" id="pwd" [(ngModel)]="dPrice" placeholder="Enter password" name="pswd" >
+                  <input type="number" class="form-control" id="pwd" [(ngModel)]="dPrice" placeholder="Enter Discounted Price" name="pswd" >
+                </div>
+                <div class="mb-3">
+                  <label for="pwd" class="form-label">catagory Id:</label>
+                  <input type="number" class="form-control" id="pwd" [(ngModel)]="catagoryId" placeholder="Enter Catagory Id" name="pswd" >
                 </div>
                 <div class="mb-3">
                   <label for="image">Choose an image:</label>
@@ -31,7 +35,7 @@
                 </div>
 
                 <button type="submit" class="btn btn-primary mb-3" >Clear</button>
-                <button type="submit" class="btn btn-primary mb-3" (click)="addProduct()" >Add Product</button>
+                <button type="submit" class="btn btn-primary mb-3" (click)="addProductDetails()" >Add Product</button>
                 <button type="submit" class="btn btn-primary mb-3" >Update Product</button>
 
               </form>

@@ -7,6 +7,9 @@ import { Observable, throwError } from 'rxjs';
   providedIn: 'root',
 })
 export class ApiCallingServiceService {
+  postApiwithToken(addProduct: string, formData: FormData, token: any) {
+    throw new Error('Method not implemented.');
+  }
 
   constructor(private http: HttpClient) {}
 
@@ -24,28 +27,28 @@ export class ApiCallingServiceService {
       catchError(this.handleError)
     );
   }
-  //
-  // postApiWithToken(url: any, jsonPayload: any) {
-  //   this.token=localStorage.getItem('token');
-  //   if(this.token!=null){
-  //     debugger;
-  //     const headers = new HttpHeaders({
-  //       'Authorization': this.token
-  //     });
-  //     return this.http.post(url, jsonPayload,{headers}).pipe(
-  //       map((results) => results),
-  //       catchError(this.handleError)
-  //     );
-  //   }
-  //   else{
-  //     debugger;
-  //     console.log(localStorage.getItem('token'));
-  //     return this.http.post(url, jsonPayload).pipe(
-  //       map((results) => results),
-  //       catchError(this.handleError));
-  //   }
-  // }
-  //
+  token:string|null='';
+  postApiWithToken(url: any, jsonPayload: any) {
+    this.token=localStorage.getItem('token');
+    if(this.token!=null){
+      debugger;
+      const headers = new HttpHeaders({
+        'Authorization': this.token
+      });
+      return this.http.post(url, jsonPayload,{headers}).pipe(
+        map((results) => results),
+        catchError(this.handleError)
+      );
+    }
+    else{
+      debugger;
+      console.log(localStorage.getItem('token'));
+      return this.http.post(url, jsonPayload).pipe(
+        map((results) => results),
+        catchError(this.handleError));
+    }
+  }
+  
 
   getApi(url: any) {
     return this.http.get(url).pipe(
