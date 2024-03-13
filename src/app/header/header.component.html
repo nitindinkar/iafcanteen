@@ -21,7 +21,9 @@
                 <li><i class="ti-location-pin"></i> Store location</li>
                 <li><i class="ti-alarm-clock"></i> <a href="#">Daily deal</a></li>
                 <li><i class="ti-user"></i> <a href="#">My account</a></li>
-                <li><i class="ti-power-off"></i><a href="#" [routerLink]="['/login']">Login</a></li>
+                <li *ngIf="!login"><i class="ti-power-off"></i><a href="#" [routerLink]="['/login']">Login</a></li>
+                <li *ngIf="login"><i class="ti-power-off" (click)="logout()"></i><a href="#" >Logout</a></li>
+                <li><a href="#" >{{username}}</a></li>
               </ul>
             </div>
             <!-- End Top Right -->

@@ -5,6 +5,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import {ConstantsService} from "../services/constants/constants.service";
+import {ApiCallingServiceService} from "../services/api-calling/api-calling-service.service";
+import {HeaderComponent} from "../header/header.component";
 
 
 @Component({
@@ -17,9 +19,12 @@ export class LoginComponent implements OnInit{
     otp: string = '';
     Liquor: any;
     Grocery: any;
-
-   constructor(private HttpClient: HttpClient,private ConstServiceService:ConstantsService,
-    private router:Router) { }
+    token='';
+   constructor(private HttpClient: HttpClient,
+               private ConstServiceService:ConstantsService,
+               private apiService: ApiCallingServiceService,
+               private router:Router,
+               private header:HeaderComponent) { }
 
   showRegistrationForm: boolean = false;
   showLoginForm: boolean = true;
@@ -161,14 +166,18 @@ const headers = new HttpHeaders({
       userPassword:this.loginPassword
     }
     console.log(credentials);
-    this.HttpClient.post(loginUrl, credentials,{ headers:headers,responseType: 'text' })
+    this.HttpClient.post(loginUrl, credentials,{ headers:headers})
       .subscribe(
-        (response: any) => {
+        (response: object) => {
+          let result: { [key: string]: any } = response;
           // Handle successful login, e.g., redirect the user or perform other actions
-          console.log(response.jwtToken);
-          if(response.jwtToken!=undefined){
-            localStorage.setItem('token',response.jwtToken);
-            // console.log(response.jwtToken);
+          console.log(result);
+          debugger;
+          if(result['message']=='success'){
+            this.token=result['response'].jwtToken.toString();
+            localStorage.setItem('token',this.token);
+            this.header.login=true;
+            this.header.username=result['response'].user.name;
             this.router.navigate(['']);
           }
           },

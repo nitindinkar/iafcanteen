@@ -1,0 +1,38 @@
+
+              <h2>Login</h2>
+              <form >
+
+
+                <div class="mb-3 mt-3">
+                  <label for="CdNum" class="form-label">Product Name:</label>
+                  <input type="CdNum" class="form-control" id="CdNum" [(ngModel)]="name" placeholder="Enter Number" name="CdNum">
+                </div>
+
+
+
+                <div class="mb-3">
+                  <label for="pwd" class="form-label">Description:</label>
+                  <input type="text" class="form-control" id="pwd" [(ngModel)]="desc" placeholder="Enter password" name="pswd" >
+                </div>
+                <div class="mb-3">
+                  <label for="pwd" class="form-label">Actual Price:</label>
+                  <input type="number" class="form-control" id="pwd" [(ngModel)]="aPrice" placeholder="Enter password" name="pswd" >
+                </div>
+                <div class="mb-3">
+                  <label for="pwd" class="form-label">Discounted Price:</label>
+                  <input type="number" class="form-control" id="pwd" [(ngModel)]="dPrice" placeholder="Enter password" name="pswd" >
+                </div>
+                <div class="mb-3">
+                  <label for="image">Choose an image:</label>
+                  <input type="file" id="image" name="image" accept="image/*" #invoiceFileInput>
+                  <br>
+                  <input type="submit" value="Upload Image">
+
+                </div>
+
+                <button type="submit" class="btn btn-primary mb-3" >Clear</button>
+                <button type="submit" class="btn btn-primary mb-3" (click)="addProduct()" >Add Product</button>
+                <button type="submit" class="btn btn-primary mb-3" >Update Product</button>
+
+              </form>
+
