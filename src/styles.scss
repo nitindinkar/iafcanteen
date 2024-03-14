@@ -1,1 +1,29 @@
 /* You can add global styles to this file, and also import other style files */
+.blank{
+    opacity: 0;
+}
+.btn-verify{
+    padding-top: 8px ;
+    padding-bottom: 8px;
+}
+.bg-secondary{
+    background-color: transparent !important;
+}
+.btn-minus,.btn-plus{
+    background-color: #f7941d !important;
+    border: none !important;
+}
+.btn-minus:hover, .btn-plus:hover{
+    background-color: #0e0d0d !important;
+}
+.btn-danger{
+background-color: #dc3545 !important;
+}
+.btn-danger:hover{
+    background-color: #0e0d0d !important;
+}
+.section-title{
+    text-align: left;
+    padding: 10px 15px;
+    margin-bottom: 0px !important;
+}

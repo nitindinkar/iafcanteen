@@ -196,9 +196,9 @@
                   <div class="navbar-collapse">  
                     <div class="nav-inner">  
                       <ul class="nav main-menu menu navbar-nav">
-                          <li class="active"><a href="#">Home</a></li>
-                          <li><a href="#">Product<span class="new">New</span></a></li>                        
-                          <li><a href="#">Cart</a></li>
+                        
+                          <li  [routerLinkActive]="['active']"><a href="#" [routerLink]="['/product']">Product<span class="new">New</span></a></li>                        
+                          <li  [routerLinkActive]="['active']"><a href="#" [routerLink]="['/cart']">Cart</a></li>
                           <li><a href="#">Checkout</a></li>                  
                           <li><a href="#">Contact Us</a></li>
                         </ul>

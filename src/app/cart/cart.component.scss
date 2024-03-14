@@ -1,0 +1,23 @@
+.btn-sm {
+    padding: 0.25rem 0.5rem !important;
+    font-size: .875rem !important;
+    line-height: 1.5 !important;
+    border-radius: 0.2rem !important;
+}
+.section-title::after {
+    position: absolute;
+    content: "";
+    width: 47%;
+    height: 0;
+    top: 48%;
+    right: 0;
+    border-top: 1px dashed #bec5cb;
+    z-index: -1;
+}
+ h6{
+    font-weight: 500 !important;
+    font-size: .8rem !important;
+}
+h5{
+    font-weight: 500 !important;
+}

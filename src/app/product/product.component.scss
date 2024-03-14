@@ -1,0 +1,63 @@
+.section-title{
+    text-align: left;
+    padding: 10px 15px;
+    margin-bottom: 0px !important;
+}
+.single-product {
+    margin-top: 15px;
+}
+.custom-control-label::before {
+    position: absolute;
+    top: 0.25rem;
+    left: -.5rem;
+    display: block;
+    width: 1rem;
+    height: 1rem;
+    pointer-events: none;
+    content: "";
+    background-color: #fff;
+    border: #adb5bd solid 1px;
+}
+.custom-control-label::after {
+    position: absolute;
+    top: 0.25rem;
+    left: -.5rem;
+    display: block;
+    width: 1rem;
+    height: 1rem;
+    content: "";
+    background: no-repeat 50% / 50% 50%;
+}
+.custom-control-input:checked ~ .custom-control-label::before {
+    color: #fff;
+    border-color: #FFD333;
+    background-color: #FFD333;
+  }
+  
+  .custom-control-input:focus ~ .custom-control-label::before {
+    box-shadow: none;
+  }
+  
+  .custom-control-input:focus:not(:checked) ~ .custom-control-label::before {
+    border-color: #ffefb3;
+  }
+  
+  .custom-control-input:not(:disabled):active ~ .custom-control-label::before {
+    color: #fff;
+    background-color: #fffae6;
+    border-color: #fffae6;
+  }
+  
+  .custom-control-input[disabled] ~ .custom-control-label, .custom-control-input:disabled ~ .custom-control-label {
+    color: #6c757d;
+  }
+  
+  .custom-control-input[disabled] ~ .custom-control-label::before, .custom-control-input:disabled ~ .custom-control-label::before {
+    background-color: #e9ecef;
+  }
+  .custom-checkbox .custom-control-input:checked ~ .custom-control-label::after {
+    background-image: url('../../assets/images/check.png');
+}  
+.main-category{
+    opacity: 0 !important;
+}
