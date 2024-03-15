@@ -1,121 +1,118 @@
-  <!-- Modal -->
-  <div class="modal" id="exampleModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-            </div>
-            <div class="modal-body">
-                <div class="row no-gutters">
-                    <div class="login-image col-lg-6 col-md-12 col-sm-12 col-xs-12">
-                        <!-- Product Slider -->
-          <div class="product-gallery">
+<!-- Modal -->
+<div class="modal" id="exampleModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+      </div>
+      <div class="modal-body">
+        <div class="row no-gutters">
+          <div class="login-image col-lg-6 col-md-12 col-sm-12 col-xs-12">
+            <!-- Product Slider -->
+            <div class="product-gallery">
 
-    
+
+            </div>
+            <!-- End Product slider -->
           </div>
-        <!-- End Product slider -->
-                    </div>
-                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
-                        <div class="quickview-content login" *ngIf="showLoginForm">
-                            <h2>Login</h2>
-                            <form action="/action_page.php">
-                                <!-- <div class="mb-3 mt-3">
-                                  <label for="email" class="form-label">Card Number:</label>
-                                  <input type="CdNum" class="form-control" id="CdNum" placeholder="Enter Number" name="CdNum">
-                                </div> -->
-                                <!-- <div class="mb-3 mt-3">
-                                    <label for="number" class="form-label">Card Type:</label>
-                                    <input type="card" class="form-control" id="CrdTyp" placeholder="Enter card number" name="card">
-                                    <option>Liquor Card</option>
-                                      <option>Grocery Card</option>
-                                  </div> -->
-                                  <div class="form-group">
-                                    <label for="exampleFormControlSelect1">Card Type</label>
-                                    <select class="form-control" id="exampleFormControlSelect1">
-                                      <option>Liquor Card</option>
-                                      <option>Grocery Card</option>
-                                    </select>
-                                  </div>
-
-                                  <div class="mb-3 mt-3">
-                                    <label for="email" class="form-label">Card Number:</label>
-                                    <input type="CdNum" class="form-control" id="CdNum" placeholder="Enter Number" name="CdNum">
-                                  </div>
-
-
-
-                                <div class="mb-3">
-                                  <label for="pwd" class="form-label">Password:</label>
-                                  <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd">
-                                </div>
-                                <div class="form-check mb-3">
-                                  <label class="form-check-label">
-                                    <input class="form-check-input" type="checkbox" name="remember"> Remember me
-                                  </label>
-                                </div>
-                                <button type="submit" class="btn btn-primary mb-3">Submit</button>
-                                <h6>Don't have an account? <a class="register-link" (click)="toggleRegistrationForm()">Register Here</a></h6>
-                              </form>
-                        </div>
-                        <div class="quickview-content register" *ngIf="showRegistrationForm">
-                          <h2>Sign Up</h2>
-                          <form action="/action_page.php">
-                            <div class="row">
-                              <div class="mb-3 mt-3 col-md-6 px-2">
-                                <label for="name" class="form-label">Name:</label>
-                                <input type="text" class="form-control" id="name" placeholder="Enter Name" name="name">
-                              </div>
-                              <div class="mb-3 mt-3 col-md-6 px-2">
-                                <label for="name" class="form-label">Liquir Card No:</label>
-                                <input type="text" class="form-control" id="Liquir" placeholder="Enter Liquir Card Number" name="Liquir">
-                              </div>
-                              <div class="mb-3 mt-3 col-md-6 px-2">
-                                <label for="name" class="form-label">Grocery Card No:</label>
-                                <input type="text" class="form-control" id="Grocery" placeholder="Enter Grocery Card Number" name="Grocery">
-                              </div>
-                              <div class="mb-3 mt-3 col-md-6 px-2">
-                                <label for="name" class="form-label">Pan No:</label>
-                                <input type="text" class="form-control" id="Pan" placeholder="Enter Pan Number" name="Pan">
-                              </div>
-                              <div class="mb-3 mt-3 col-md-6 px-2">
-                                <label for="name" class="form-label">Adhaar No:</label>
-                                <input type="text" class="form-control" id="Adhaar" placeholder="Enter Adhaar Number" name="Adhaar">
-                              </div>
-                              <div class="mb-3 mt-3 col-md-6 px-2">
-                                <label for="name" class="form-label">Date of Birth:</label>
-                                <input type="date" class="form-control" id="Date" placeholder="Enter Date" name="Date">
-                              </div>
-                              <div class="mb-3 mt-3 col-md-6 px-2">
-                                  <label for="number" class="form-label">Mobile:</label>
-                                  <input type="phone" class="form-control" id="mobile" placeholder="Enter mobile number" name="mobile">
-                                </div>
-                              <div class="mb-3 mt-3 col-md-6 px-2">
-                                <label for="pwd" class="form-label">Password:</label>
-                                <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd">
-                              </div>
-
-                              <div class="mb-3 mt-3 col-md-6 px-2">
-                                <label for="pwd" class="form-label">Email:</label>
-                                <input type="gmail" class="form-control" id="pwd" placeholder="Enter gmail" name="gml">
-                              </div>
-                              <div class="mb-3 mt-3 col-md-6 px-2">
-                                <label for="pwd" class="form-label blank">.</label><br>
-                                <button type="submit" class="btn btn-primary btn-verify mb-3">Verify Email</button>
-                              </div>
-                              
-                              <div class="form-check mb-3 px-2">
-                                <label class="form-check-label">
-                                  <input class="form-check-input" type="checkbox" name="remember"> Remember me
-                                </label>
-                              </div>
-                            </div>
-                              <button type="submit" class="btn btn-primary mb-3">Submit</button>
-                              <h6>Already have an account? <a class="register-link" (click)="toggleRegistrationForm()">Login Here</a></h6>
-                            </form>
-                      </div>
-                    </div>
+          <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+            <div class="quickview-content login" *ngIf="showLoginForm">
+              <h2>Login</h2>
+              <form action="/action_page.php">
+                <div class="form-group">
+                  <label for="exampleFormControlSelect1">Card Type</label>
+                  <select class="form-control" id="exampleFormControlSelect1" [(ngModel)]="selected" [ngModelOptions]="{standalone: true}">
+                    <option *ngFor="let option of this.cardType" [value]="option.value" >{{option.desc}}</option>
+<!--                    <option>Liquor Card</option>-->
+<!--                    <option>Grocery Card</option>-->
+                  </select>
                 </div>
+
+                <div class="mb-3 mt-3">
+                  <label for="CdNum" class="form-label">Card Number:</label>
+                  <input type="CdNum" class="form-control" id="CdNum" [(ngModel)]="cardNumber" placeholder="Enter Number" name="CdNum">
+                </div>
+                <div class="mb-3">
+                  <label for="pwd" class="form-label">Password:</label>
+                  <input type="password" class="form-control" [(ngModel)]="loginPassword" id="pwd" placeholder="Enter password" name="pswd">
+                </div>
+                <div class="form-check mb-3">
+                  <label class="form-check-label">
+                    <input class="form-check-input" type="checkbox" name="remember"> Remember me
+                  </label>
+                </div>
+                <button type="submit" class="btn btn-primary mb-3" (click)="login()">Submit</button>
+                <h6>Don't have an account? <a class="register-link" (click)="toggleRegistrationForm()">Register Here</a>
+                </h6>
+              </form>
             </div>
+            <div class="quickview-content register" *ngIf="showRegistrationForm">
+              <h2>Sign Up</h2>
+              <form action="/action_page.php">
+                <div class="row">
+                  <div class="mb-3 mt-3 col-md-6 px-2">
+                    <label for="name" class="form-label">Name:</label>
+                    <input type="text" class="form-control" [(ngModel)]="name" id="name" placeholder="Enter Name" name="name">
+                  </div>
+                  <div class="mb-3 mt-3 col-md-6 px-2">
+                    <label for="name" class="form-label">Liquir Card No:</label>
+                    <input type="text" class="form-control" id="Liquir" [(ngModel)]="liquorCardNumber" placeholder="Enter Liquir Card Number"
+                           name="Liquir">
+                  </div>
+                  <div class="mb-3 mt-3 col-md-6 px-2">
+                    <label for="name" class="form-label">Grocery Card No:</label>
+                    <input type="text" class="form-control" id="Grocery" [(ngModel)]="groceryCardNumber" placeholder="Enter Grocery Card Number"
+                           name="Grocery">
+                  </div>
+                  <div class="mb-3 mt-3 col-md-6 px-2">
+                    <label for="name" class="form-label">Pan No:</label>
+                    <input type="text" class="form-control" id="Pan" [(ngModel)]="pan" placeholder="Enter Pan Number" name="Pan">
+                  </div>
+                  <div class="mb-3 mt-3 col-md-6 px-2">
+                    <label for="name" class="form-label">Adhaar No:</label>
+                    <input type="text" class="form-control" id="Adhaar" [(ngModel)]="adhaar" placeholder="Enter Adhaar Number" name="Adhaar">
+                  </div>
+                  <div class="mb-3 mt-3 col-md-6 px-2">
+                    <label for="name" class="form-label">Date of Birth:</label>
+                    <input type="date" class="form-control" id="Date" [(ngModel)]="dob" placeholder="Enter Date" name="Date">
+                  </div>
+                  <div class="mb-3 mt-3 col-md-6 px-2">
+                    <label for="mobile" class="form-label">Mobile:</label>
+                    <input type="phone" class="form-control" id="mobile" [(ngModel)]="contactNumber" placeholder="Enter mobile number"
+                           name="mobile">
+                  </div>
+                  <div class="mb-3 mt-3 col-md-6 px-2">
+                    <label for="pwd1" class="form-label">Password:</label>
+                    <input type="password" class="form-control" id="pwd1" [(ngModel)]="password" placeholder="Enter password" name="pswd">
+                  </div>
+
+                  <div class="mb-3 mt-3 col-md-6 px-2">
+                    <label for="pwd2" class="form-label">Email:</label>
+                    <input type="gmail" class="form-control" id="pwd2" [(ngModel)]="email" placeholder="Enter gmail" name="gml">
+                  </div>
+                  <div class="mb-3 mt-3 col-md-6 px-2">
+                    <label for="pwd" class="form-label blank">.</label><br>
+                    <button type="submit" class="btn btn-primary btn-verify mb-3" (click)="sendOtp()">Verify Email</button>
+                  </div>
+                  <div *ngIf="showOtpInput" class="mb-3 mt-3 col-md-6 px-2">
+                    <label for="otp" class="form-label">Enter OTP:</label>
+                    <input type="text" class="form-control" id="otp" placeholder="Enter OTP" name="otp" [(ngModel)]="getotp">
+                  </div>
+
+<!--                  <div class="form-check mb-3 px-2">-->
+<!--                    <label class="form-check-label">-->
+<!--                      <input class="form-check-input" type="checkbox" name="remember"> Remember me-->
+<!--                    </label>-->
+<!--                  </div>-->
+                </div>
+                <button type="submit" class="btn btn-primary mb-3" (click)="verifyOtp()">Submit</button>
+                <h6>Already have an account? <a class="register-link" (click)="toggleRegistrationForm()">Login Here</a>
+                </h6>
+              </form>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </div>
 <!-- Modal end -->
