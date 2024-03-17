@@ -106,7 +106,7 @@
                       <span>Total</span>
                       <span class="total-amount">$134.00</span>
                     </div>
-                    <a href="#" class="btn animate">Checkout</a>
+                    <a href="#" class="btn animate" [routerLink]="['/checkout']">Checkout</a>
                   </div>
                 </div>
                 <!--/ End Shopping Item -->
@@ -199,7 +199,9 @@
                         
                           <li  [routerLinkActive]="['active']"><a href="#" [routerLink]="['/product']">Product<span class="new">New</span></a></li>                        
                           <li  [routerLinkActive]="['active']"><a href="#" [routerLink]="['/cart']">Cart</a></li>
-                          <li><a href="#">Checkout</a></li>                  
+                          <li  [routerLinkActive]="['active']"><a href="#" [routerLink]="['/add-product']">Add Product</a></li>
+                          <li  [routerLinkActive]="['active']"><a href="#" [routerLink]="['/my-account']">My Account</a></li>
+                          <li  [routerLinkActive]="['active']"><a href="#" [routerLink]="['/inventory']">Inventory</a></li>
                           <li><a href="#">Contact Us</a></li>
                         </ul>
                     </div>

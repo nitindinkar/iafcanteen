@@ -27,3 +27,40 @@ background-color: #dc3545 !important;
     padding: 10px 15px;
     margin-bottom: 0px !important;
 }
+.section {
+    padding: 50px 0 !important;
+    position: relative;
+}
+.range-slider{
+    width: 100%;
+}
+.price_label{
+    font-size: 13px;
+
+}
+
+.add-product ::placeholder{
+    font-size: 14px;
+}
+input[type="file"]{
+    padding: 0px 0px !important;
+}
+select{
+    padding: 0px 0px !important;
+}
+select {
+    font-size: 14px !important;
+}
+.form-filter{
+    padding: 11px 15px !important;
+}
+.inventory-image{
+    width: 40px;
+    height: 40px;
+}
+.mrp{
+    text-decoration: line-through;
+}
+.border-bottom {
+    border-bottom: 1px solid #dee2e6 !important;
+}

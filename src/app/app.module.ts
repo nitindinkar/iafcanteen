@@ -10,6 +10,9 @@ import { LoginComponent } from './login/login.component';
 import { ProductComponent } from './product/product.component';
 import { CartComponent } from './cart/cart.component';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { AddProductComponent } from './add-product/add-product.component';
+import { MyAccountComponent } from './my-account/my-account.component';
+import { InventoryComponent } from './inventory/inventory.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +23,10 @@ import { CheckoutComponent } from './checkout/checkout.component';
     LoginComponent,
     ProductComponent,
     CartComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    AddProductComponent,
+    MyAccountComponent,
+    InventoryComponent
   ],
   imports: [
     BrowserModule,

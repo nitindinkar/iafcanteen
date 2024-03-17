@@ -1,0 +1,4 @@
+
+  select.form-control:not([size]):not([multiple]){
+    height: calc(32px) !important;/* Fix the input control height*/
+  }
