@@ -10,7 +10,6 @@ import { ConstantsService } from '../services/constants/constants.service';
   styleUrl: './add-product.component.scss'
 })
 export class AddProductComponent {
-
   @ViewChild('invoiceFileInput') invoiceFileInput: any;
 
   name: any;
@@ -35,8 +34,6 @@ export class AddProductComponent {
         next: (v: object) => {
 
           let result: { [key: string]: any } = v;
-
-
             this.upload=result['response'].uploadDocId;
 
 
@@ -45,9 +42,8 @@ export class AddProductComponent {
           console.error(e);
         },
         complete: () => console.log(),
-      });
-
-  }
+      });
+  }
 
 addProduct() {
   const file: File = this.invoiceFileInput.nativeElement;
