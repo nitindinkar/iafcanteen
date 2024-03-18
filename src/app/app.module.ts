@@ -13,6 +13,9 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import {HttpClientModule} from "@angular/common/http";
 import {FormsModule} from "@angular/forms";
 import {NgIf} from "@angular/common";
+import {AddProductComponent} from "./add-product/add-product.component";
+import {InventoryComponent} from "./inventory/inventory.component";
+import {MyAccountComponent} from "./my-account/my-account.component";
 
 @NgModule({
   declarations: [
@@ -23,7 +26,10 @@ import {NgIf} from "@angular/common";
     LoginComponent,
     ProductComponent,
     CartComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    AddProductComponent,
+    InventoryComponent,
+    MyAccountComponent
   ],
   imports: [
     BrowserModule,
