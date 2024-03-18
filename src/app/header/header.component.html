@@ -193,19 +193,23 @@
               <div class="menu-area">
                 <!-- Main Menu -->
                 <nav class="navbar navbar-expand-lg">
-                  <div class="navbar-collapse">  
-                    <div class="nav-inner">  
+                  <div class="navbar-collapse">
+                    <div class="nav-inner">
                       <ul class="nav main-menu menu navbar-nav">
-                        
-                          <li  [routerLinkActive]="['active']"><a href="#" [routerLink]="['/product']">Product<span class="new">New</span></a></li>                        
+
+                          <li  [routerLinkActive]="['active']"><a href="#" [routerLink]="['/product']">Product<span class="new">New</span></a></li>
                           <li  [routerLinkActive]="['active']"><a href="#" [routerLink]="['/cart']">Cart</a></li>
-                          <li><a href="#">Checkout</a></li>                  
+                        <li  [routerLinkActive]="['active']"><a href="#" [routerLink]="['/add-product']">Add Product</a></li>
+                        <li  [routerLinkActive]="['active']"><a href="#" [routerLink]="['/my-account']">My Account</a></li>
+                        <li  [routerLinkActive]="['active']"><a href="#" [routerLink]="['/inventory']">Inventory</a></li>
+
+                        <li><a href="#">Checkout</a></li>
                           <li><a href="#">Contact Us</a></li>
                         </ul>
                     </div>
                   </div>
                 </nav>
-                <!--/ End Main Menu -->  
+                <!--/ End Main Menu -->
               </div>
             </div>
           </div>
