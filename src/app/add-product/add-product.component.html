@@ -6,11 +6,11 @@
               <div class="row">
                 <div class="mb-3 mt-3 col-md-6 px-2">
                   <label for="name" class="form-label">Product Name</label>
-                  <input type="text" class="form-control" id="name" placeholder="Enter Name" name="name">
+                  <input type="text" class="form-control" id="name" [(ngModel)]="name" placeholder="Enter Name" name="name">
                 </div>
                 <div class="mb-3 mt-3 col-md-6 px-2">
                   <label for="name" class="form-label">Discription</label>
-                  <input type="text" class="form-control" id="Liquir" placeholder="Discription" name="Liquir">
+                  <input type="text" class="form-control" id="Liquir"  [(ngModel)]="desc" placeholder="Discription" name="Liquir">
                 </div>
                 <div class="mb-3 mt-3 col-md-6 px-2">
                   <label for="name" class="form-label">Category</label>
@@ -22,11 +22,11 @@
                 </div>
                 <div class="mb-3 mt-3 col-md-6 px-2">
                   <label for="name" class="form-label">Actual Price</label>
-                  <input type="text" class="form-control" id="Pan" placeholder="Actual Price" name="Pan">
+                  <input type="text" class="form-control" id="Pan"  [(ngModel)]="aPrice" placeholder="Actual Price"  name="Pan">
                 </div>
                 <div class="mb-3 mt-3 col-md-6 px-2">
                   <label for="name" class="form-label">Discounted Price</label>
-                  <input type="text" class="form-control" id="Adhaar" placeholder="Discounted Price" name="Adhaar">
+                  <input type="text" class="form-control" id="Discounted"  [(ngModel)]="dPrice" placeholder="Discounted Price" name="Discounted">
                 </div>
                 <div class="mb-3 mt-3 col-md-6 px-2">
                   <label for="name" class="form-label"> Upload Images (550 x 750px in less than 500kb)</label>

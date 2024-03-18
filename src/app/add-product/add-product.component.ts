@@ -45,9 +45,8 @@ export class AddProductComponent {
           console.error(e);
         },
         complete: () => console.log(),
-      });
-
-  }
+    });
+}
 
 addProduct() {
   const file: File = this.invoiceFileInput.nativeElement;
