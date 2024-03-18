@@ -13,7 +13,7 @@ export class CartComponent implements OnInit{
   cart: any;
   ngOnInit(): void {
     this.getCartDetails();
-    
+
   }
 
 
@@ -29,10 +29,11 @@ export class CartComponent implements OnInit{
         let result: { [key: string]: any } = response;
         this.cart=result['response'];
         debugger;
-        // for(let product of this.products){
-        //   product.imageUrl=this.cons.serviceUrl+product.imageUrl;
+        for(let product of this.cart){
+          product.product.quantity=1;
+          console.log(product.product);
 
-        // }
+        }
       },
       (error) => {
         console.error('Add Product failed:', error);
@@ -40,8 +41,16 @@ export class CartComponent implements OnInit{
     );
   }
 
-  
 
-  
+  print(cart: any) {
+    console.log(cart);
+  }
 
+  decreaseQuantity(i: number) {
+    debugger;
+    this.cart[i].product.quantity=Number(this.cart[i].product.quantity)-1;
+  }
+  increaseQuantity(i: number) {
+    this.cart[i].product.quantity=Number(this.cart[i].product.quantity)+1;
+  }
 }

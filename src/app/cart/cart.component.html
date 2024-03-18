@@ -12,19 +12,19 @@
                     </tr>
                 </thead>
                 <tbody class="align-middle">
-                    <tr *ngFor="let cart of cart">
+                    <tr *ngFor="let cart of cart;let i=index">
                         <td class="align-middle"><img src="img/product-1.jpg" alt="" style="width: 50px;">{{cart.product.productName}}</td>
                         <td class="align-middle">{{cart.product.productDiscountedPrice}}</td>
                         <td class="align-middle">
                             <div class="input-group quantity mx-auto" style="width: 100px;">
                                 <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-primary btn-minus">
+                                    <button class="btn btn-sm btn-primary btn-minus" (click)="decreaseQuantity(i)">
                                     <i class="fa fa-minus"></i>
                                     </button>
                                 </div>
-                                <input type="text" class="form-control form-control-sm bg-light border-0 text-center" value="1">
+                                <input type="text" class="form-control form-control-sm bg-light border-0 text-center" value="{{cart.product.quantity}}" [(ngModel)]="cart.product.quantity" (change)="print(cart)">
                                 <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-primary btn-plus">
+                                    <button class="btn btn-sm btn-primary btn-plus" (click)="increaseQuantity(i)">
                                         <i class="fa fa-plus"></i>
                                     </button>
                                 </div>
