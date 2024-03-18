@@ -6,8 +6,9 @@ import { Injectable } from '@angular/core';
 export class ConstantsService {
   constructor() {}
 
-  serviceUrl = 'http://192.168.120.78:8082/';
+  //serviceUrl = 'http://192.168.120.78:8082/';
   // serviceUrl = 'http://192.168.43.200:8082/';
+  serviceUrl = 'http://localhost:8082/';
   api = {
     getCartDetailsOfUser:this.serviceUrl+'cart/getCartDetailsOfUser',
     getProductById:this.serviceUrl+'product/getProductById',
