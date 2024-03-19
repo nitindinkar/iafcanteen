@@ -11,8 +11,11 @@ import { Router } from '@angular/router';
 export class CartComponent implements OnInit{
   products: any;
   cart: any;
+  subtotal: number = 0;
+  acc:any|number;
   ngOnInit(): void {
     this.getCartDetails();
+    
 
   }
 
@@ -34,6 +37,7 @@ export class CartComponent implements OnInit{
           console.log(product.product);
 
         }
+        this.calculateSubtotal();
       },
       (error) => {
         console.error('Add Product failed:', error);
@@ -48,9 +52,35 @@ export class CartComponent implements OnInit{
 
   decreaseQuantity(i: number) {
     debugger;
-    this.cart[i].product.quantity=Number(this.cart[i].product.quantity)-1;
+    if (this.cart[i].product.quantity > 1) {
+      this.cart[i].product.quantity--; 
+      this.calculateSubtotal();
+      // Decrease quantity, ensuring it doesn't go below 1
+  }
+    //this.cart[i].product.quantity=Number(this.cart[i].product.quantity)-1;
   }
   increaseQuantity(i: number) {
     this.cart[i].product.quantity=Number(this.cart[i].product.quantity)+1;
+    this.calculateSubtotal();
+    
   }
+  removeItem(i: number) {
+    this.cart.splice(i, 1);
+    this.calculateSubtotal(); // Remove the item at the specified index from the cart array
+}
+
+calculateSubtotal() {
+  this.subtotal = 0;
+  debugger;
+  if (this.cart && this.cart.length > 0) {
+    for (let cartItem of this.cart) {
+      if (cartItem.product && cartItem.product.quantity && cartItem.product.productDiscountedPrice) {
+        this.subtotal += cartItem.product.quantity * cartItem.product.productDiscountedPrice;
+      }
+    }
+  }
+  console.log("This is my subtotal"+this.subtotal);
+  return this.subtotal;
+  }
+
 }

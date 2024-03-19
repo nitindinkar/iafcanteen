@@ -20,6 +20,7 @@ export class ConstantsService {
     addToCart:this.serviceUrl+"cart/addToCart",
     getAllCategories:this.serviceUrl+"category/categories",
     getAllProducts:this.serviceUrl+"product/getAllProducts",
-    upload:this.serviceUrl+"fileUpload/uploadFile"
+    upload:this.serviceUrl+"fileUpload/uploadFile",
+    buyProduct:this.serviceUrl+"order/placeOder"
   };
 }
