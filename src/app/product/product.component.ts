@@ -3,8 +3,7 @@ import {ConstantsService} from "../services/constants/constants.service";
 import {ApiCallingServiceService} from "../services/api-calling/api-calling-service.service";
 import {Router} from "@angular/router";
 
-import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { MatSnackBar } from '@angular/material/snack-bar'
+
 
 @Component({
   selector: 'app-product',
@@ -18,8 +17,7 @@ export class ProductComponent implements OnInit{
 
   constructor(private cons:ConstantsService,
               private apiService: ApiCallingServiceService,
-              private router: Router,
-              private snackBar: MatSnackBar) {
+              private router: Router) {
   }
 
   ngOnInit(): void {
