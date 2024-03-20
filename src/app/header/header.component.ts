@@ -27,6 +27,7 @@ export class HeaderComponent implements OnInit {
       (response: object) => {
         let result: { [key: string]: any } = response;
         this.categories=result['response'];
+        
                
       },
       (error) => {

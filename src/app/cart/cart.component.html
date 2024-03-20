@@ -31,7 +31,7 @@
                             </div>
                         </td>
                     <td class="align-middle">{{ cart.product.quantity * cart.product.productDiscountedPrice }}</td>
-                        <td class="align-middle"><button class="btn btn-sm btn-danger"><i class="fa fa-times" (click)="removeItem(i)"></i></button></td>
+                        <td class="align-middle"><button class="btn btn-sm btn-danger"><i class="fa fa-times" (click)="removeItem(i,cart.cartId)" ></i></button></td>
                     </tr>
                     <!-- <tr>
                         <td class="align-middle"><img src="img/product-2.jpg" alt="" style="width: 50px;"> Product Name</td>

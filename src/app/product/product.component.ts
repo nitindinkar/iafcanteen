@@ -3,6 +3,9 @@ import {ConstantsService} from "../services/constants/constants.service";
 import {ApiCallingServiceService} from "../services/api-calling/api-calling-service.service";
 import {Router} from "@angular/router";
 
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar'
+
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
@@ -15,10 +18,13 @@ export class ProductComponent implements OnInit{
 
   constructor(private cons:ConstantsService,
               private apiService: ApiCallingServiceService,
-              private router: Router) {
+              private router: Router,
+              private snackBar: MatSnackBar) {
   }
 
-  ngOnInit(): void {this.getAllCategories();
+  ngOnInit(): void {
+    
+    this.getAllCategories();
     this.getAllProduct();
   }
   private getAllCategories() {
@@ -53,10 +59,26 @@ export class ProductComponent implements OnInit{
 
   addToCart(product:any) {
     debugger;
+
+    if (product.isInCart) {
+      alert("Product is already in the cart!");
+      return; // Exit the function to prevent further execution
+    }
     this.apiService.getApiWithToken(this.cons.api.addToCart+'/'+product.productId).subscribe(
       (response: object) => {
         let result: { [key: string]: any } = response;
         this.products=result['response'];
+
+        if(result['status']==200){
+          debugger;
+          alert("Product added successfully");
+          
+          //this.showSnackBar('Product added to cart successfully.');
+          product.isInCart = true;
+        }else{
+          alert("Product not added");
+          //this.showSnackBar('Failed to add product to cart.');
+        }
       },
       (error) => {
         console.error('Add Product failed:', error);
@@ -78,4 +100,22 @@ export class ProductComponent implements OnInit{
     }
 
   }
+
+//   showSnackBar(message: string) {
+//     const snackBarRef=this.snackBar.open(message, 'Close', 
+//     {
+//       duration: 1000, // Duration in milliseconds
+//       horizontalPosition: 'center', // Position horizontally (start, center, end, or left, center, right)
+//       verticalPosition: 'bottom' // Position vertically (top or bottom)
+//     });
+
+
+// snackBarRef.afterDismissed().subscribe(() => {
+//   // Perform any cleanup or additional actions here
+// });
+
+// setTimeout(() => {
+//   snackBarRef.dismiss();
+// }, 3000);
+//   }
 }

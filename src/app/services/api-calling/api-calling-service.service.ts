@@ -7,6 +7,9 @@ import { Observable, throwError } from 'rxjs';
   providedIn: 'root',
 })
 export class ApiCallingServiceService {
+  delete(arg0: string) {
+    throw new Error('Method not implemented.');
+  }
 
   constructor(private http: HttpClient) {}
 
@@ -86,4 +89,20 @@ export class ApiCallingServiceService {
     return throwError(() => error);
 
   }
+
+  deleteApiWithToken(url: string) {
+    const token = localStorage.getItem('token');
+    if (token) {
+      const headers = new HttpHeaders({
+        'Authorization': token
+      });
+      return this.http.delete(url, { headers }).pipe(
+        catchError(this.handleError)
+      );
+    } else {
+      return throwError('Token not available'); // Return an Observable that throws an error
+    }
+  }
+  
+    
 }

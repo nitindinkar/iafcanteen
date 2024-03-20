@@ -32,19 +32,19 @@
             <label for="name" class="form-label">Alternate Number</label>
             <input type="text" class="form-control" id="Adhaar" placeholder="Alternate Number" [(ngModel)]="alternateContactNumber" name="altnumber">
           </div>
-
+                                  
           <div class="mt-3 col-md-6 px-2">
             <button type="submit" class="btn btn-primary mb-3">Submit</button>
           </div>
         </div>
       </form>
     </div>
-    <div class="col-lg-4" *ngFor="let cart of cart;let i=index">
+    <div class="col-lg-4" >
       <h5 class="section-title position-relative text-uppercase mb-3 px-0"><span class="bg-secondary pr-3" >ORDER TOTAL</span></h5>
       <div class="bg-light p-4 mb-5">
-        <div class="border-bottom pb-3">
+        <div class="border-bottom pb-3" >
           <h6 class="mb-3">Products</h6>
-          <div class="d-flex justify-content-between" >
+          <div class="d-flex justify-content-between" *ngFor="let cart of cart;let i=index">
             <p>{{cart.product.productName}}</p>
             <p>{{cart.product.productDiscountedPrice}}</p>
            </div>

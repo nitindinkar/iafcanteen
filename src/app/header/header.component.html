@@ -36,7 +36,7 @@
           <div class="col-lg-2 col-md-2 col-12">
             <!-- Logo -->
             <div class="logo">
-              <a href="#"><img src="assets/images/logo.png" alt="logo">  IFC</a>
+              <a href="#"><img src="assets/images/logo.png" alt="logo">  IAF</a>
             </div>
             <!--/ End Logo -->
             <!-- Search Form -->
@@ -122,10 +122,10 @@
         <div class="cat-nav-head">
           <div class="row">
             <div class="col-lg-3">
-              <div class="all-category" *ngFor="let cat of categories">
+              <div class="all-category" >
                 <h3 class="cat-heading"><i class="fa fa-bars" aria-hidden="true"></i>CATEGORIES</h3>
                 <ul class="main-category">
-                <li><a href="#">{{cat.name}}<i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                <li *ngFor="let cat of categories"><a href="#">{{cat.name}}<i class="fa fa-angle-right" aria-hidden="true"></i></a>
                     <!-- <ul class="sub-category">
                       <li><a href="#">accessories</a></li>
                       <li><a href="#">best selling</a></li>

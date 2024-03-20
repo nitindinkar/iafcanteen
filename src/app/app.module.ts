@@ -15,6 +15,10 @@ import {AddProductComponent} from "./add-product/add-product.component";
 import {InventoryComponent} from "./inventory/inventory.component";
 import {MyAccountComponent} from "./my-account/my-account.component";
 import { ProductComponent } from './product/product.component';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 @NgModule({
   declarations: [
@@ -29,6 +33,7 @@ import { ProductComponent } from './product/product.component';
     AddProductComponent,
     InventoryComponent,
     MyAccountComponent
+
   ],
   imports: [
     BrowserModule,
@@ -36,8 +41,14 @@ import { ProductComponent } from './product/product.component';
     NgIf,
     FormsModule,
     HttpClientModule,
+    MatSnackBarModule,
+    BrowserAnimationsModule
+    
+    
   ],
-  providers: [],
+  providers: [
+    provideAnimationsAsync()
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
