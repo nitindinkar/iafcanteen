@@ -13,6 +13,7 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { AddProductComponent } from './add-product/add-product.component';
 import { MyAccountComponent } from './my-account/my-account.component';
 import { InventoryComponent } from './inventory/inventory.component';
+import { ContactUsComponent } from './contact-us/contact-us.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { InventoryComponent } from './inventory/inventory.component';
     CheckoutComponent,
     AddProductComponent,
     MyAccountComponent,
-    InventoryComponent
+    InventoryComponent,
+    ContactUsComponent
   ],
   imports: [
     BrowserModule,

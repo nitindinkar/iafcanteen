@@ -8,6 +8,7 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { AddProductComponent } from './add-product/add-product.component';
 import { MyAccountComponent } from './my-account/my-account.component';
 import { InventoryComponent } from './inventory/inventory.component';
+import { ContactUsComponent } from './contact-us/contact-us.component';
 
 const routes: Routes = [
   { path: '', component:  HomeComponent},
@@ -18,6 +19,8 @@ const routes: Routes = [
   { path: 'add-product', component:  AddProductComponent},
   { path: 'my-account', component:  MyAccountComponent},
   { path: 'inventory', component:  InventoryComponent},
+  { path: 'contact-us', component:  ContactUsComponent},
+
 ];
 
 @NgModule({
