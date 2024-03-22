@@ -43,6 +43,9 @@ export class ProductComponent implements OnInit{
       (response: object) => {
         let result: { [key: string]: any } = response;
         this.products=result['response'];
+        this.products.forEach((product: any) => {
+          product.image= 'data:image/jpeg;base64,'+product.image;
+        });
         debugger;
         for(let product of this.products){
           product.imageUrl=this.cons.serviceUrl+product.imageUrl;
