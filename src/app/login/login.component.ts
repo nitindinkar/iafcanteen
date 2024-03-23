@@ -4,7 +4,6 @@ import {ConstantsService} from "../services/constants/constants.service";
 import {ApiCallingServiceService} from "../services/api-calling/api-calling-service.service";
 import {Router} from "@angular/router";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
 import {SharedService} from "../services/shared/shared.service";
 @Component({
   selector: 'app-login',
@@ -13,7 +12,6 @@ import {SharedService} from "../services/shared/shared.service";
 })
 export class LoginComponent implements OnInit{
   showOtpInput: boolean = false;
-  otp: string = '';
   Liquor: any;
   Grocery: any;
   token='';

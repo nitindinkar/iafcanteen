@@ -13,15 +13,11 @@ import {CommonService} from "../common/common.service";
 
 
 export class SharedService {
-  
-  private subtotal: number = 0;
-  private itemTotals: ItemTotals = {};
-  setItemTotal: any;
-  
-  
 
   public cardType: string|undefined; // Property to hold the shared value
   public loginResponse=localStorage.getItem('loginResponse');
+  public cartTotal: any;
+  public cart: any;
   constructor(
     private router: Router,
     private http: HttpClient,

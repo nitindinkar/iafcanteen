@@ -18,11 +18,8 @@ export class CheckoutComponent implements OnInit {
   flag: boolean = false;
   cart: any;
   subtotal: any | Number;
-  itemId:any;
-  itemTotals: Record<string, number> | undefined;
-
-  
-  
+  private cartTotal: any;
+  private cartItems: any;
 
   constructor(
     private router: Router,
@@ -34,7 +31,8 @@ export class CheckoutComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCartDetails();
-          
+    this.cartItems=this.sharedService.cart;
+    this.cartTotal=this.sharedService.cartTotal;
   }
 
 
@@ -45,20 +43,20 @@ export class CheckoutComponent implements OnInit {
       fullAddress: this.fullAddress,
       contactNumber: this.contactNumber,
       alternateContactNumber: this.alternateContactNumber,
-        
+
     };
 
     this.apiService.postApiWithToken(this.cons.api.buyProduct+"/"+this.flag, billingData).subscribe({
       next: (v: object) => {
         let result: { [key: string]: any } = v;
         if (result['message'] == 'success') {
-  
+
         } else {
-  
+
         }
       },
       error: (e) => {
-  
+
         console.error(e);
       },
       complete: () => console.log(),
