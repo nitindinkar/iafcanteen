@@ -17,6 +17,7 @@ import {MyAccountComponent} from "./my-account/my-account.component";
 import { ProductComponent } from './product/product.component';
 
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { LiquorHomeComponent } from './liquor-home/liquor-home.component';
 
 
 
@@ -34,6 +35,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
     AddProductComponent,
     InventoryComponent,
     MyAccountComponent,
+    LiquorHomeComponent,
     
 
   ],

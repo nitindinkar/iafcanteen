@@ -8,8 +8,10 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import {AddProductComponent} from "./add-product/add-product.component";
 import {MyAccountComponent} from "./my-account/my-account.component";
 import {InventoryComponent} from "./inventory/inventory.component";
+import { LiquorHomeComponent } from './liquor-home/liquor-home.component';
 const routes: Routes = [
   { path: '', component:  HomeComponent},
+  { path: 'liquor', component:  LiquorHomeComponent},
   { path: 'login', component:  LoginComponent},
   { path: 'product', component:  ProductComponent},
   { path: 'cart', component:  CartComponent},

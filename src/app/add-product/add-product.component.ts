@@ -62,6 +62,11 @@ export class AddProductComponent implements OnInit {
 
           let result: { [key: string]: any } = v;
             this.upload=result['response'].uploadDocId;
+            if(result["status"]==200){
+              alert("Image Uploaded Successfully")
+            }else{
+              alert("Please Upload of same size image");
+            }
 
 
         },

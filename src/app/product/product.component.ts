@@ -11,6 +11,7 @@ import {Router} from "@angular/router";
   styleUrl: './product.component.scss'
 })
 export class ProductComponent implements OnInit{
+
   // @ViewChild('image') imageElement: ElementRef;
   categories:any;
   products: any;
@@ -102,21 +103,29 @@ export class ProductComponent implements OnInit{
 
   }
 
-//   showSnackBar(message: string) {
-//     const snackBarRef=this.snackBar.open(message, 'Close', 
-//     {
-//       duration: 1000, // Duration in milliseconds
-//       horizontalPosition: 'center', // Position horizontally (start, center, end, or left, center, right)
-//       verticalPosition: 'bottom' // Position vertically (top or bottom)
-//     });
 
+  addToWish(product:any) {
+    debugger;
 
-// snackBarRef.afterDismissed().subscribe(() => {
-//   // Perform any cleanup or additional actions here
-// });
+    this.apiService.getApiWithToken(this.cons.api.addToWishlist+'/'+product.productId).subscribe(
+      (response: object) => {
+        let result: { [key: string]: any } = response;
+        this.products=result['response'];
 
-// setTimeout(() => {
-//   snackBarRef.dismiss();
-// }, 3000);
-//   }
+        if(result['status']==200){
+       
+          alert("Product added successfully");
+          }else{
+          alert("Product not added");
+          }
+      },
+      (error) => {
+        console.error('Add Product failed:', error);
+      }
+    );
+  }
+
+    
 }
+
+ 

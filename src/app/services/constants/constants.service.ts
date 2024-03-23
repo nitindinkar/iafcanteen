@@ -7,9 +7,9 @@ export class ConstantsService {
   constructor() {}
 
   //serviceUrl = 'http://192.168.120.78:8082/';
-  // serviceUrl = 'http://192.168.43.200:8082/';
-   //serviceUrl = 'http://localhost:8082/';
-  serviceUrl = 'http://13.200.245.74:8083/ecommerce/';
+   //serviceUrl = 'http://192.168.212.84:8082/';
+   serviceUrl = 'http://localhost:8082/';
+  //serviceUrl = 'http://13.200.245.74:8083/ecommerce/';
    
   api = {
     getCartDetailsOfUser:this.serviceUrl+'cart/getCartDetailsOfUser',
@@ -24,6 +24,7 @@ export class ConstantsService {
     getAllProducts:this.serviceUrl+"product/getAllProducts",
     upload:this.serviceUrl+"fileUpload/uploadFile",
     buyProduct:this.serviceUrl+"order/placeOder",
-    deleteCartItemsById:this.serviceUrl+"cart/deleteCartItem"
+    deleteCartItemsById:this.serviceUrl+"cart/deleteCartItem",
+    addToWishlist:this.serviceUrl+"wishlist/addToWishlist"
   };
 }
