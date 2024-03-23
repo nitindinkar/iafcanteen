@@ -1,3 +1,4 @@
+import { SharedService } from './../services/shared/shared.service';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -17,25 +18,28 @@ export class CheckoutComponent implements OnInit {
   flag: boolean = false;
   cart: any;
   subtotal: any | Number;
+  itemId:any;
+  itemTotals: Record<string, number> | undefined;
 
-  ngOnInit(): void {
-    this.getCartDetails();
-      
-  }
+  
+  
 
   constructor(
     private router: Router,
     private http: HttpClient,
     private apiService: ApiCallingServiceService,
     private cons: ConstantsService,
+    private sharedService:SharedService
   ) {}
 
+  ngOnInit(): void {
+    this.getCartDetails();
+          
+  }
+
+
   bookOrder(){
-
-    debugger;
-    
     this.flag=true;
-
     const billingData = {
       fullName: this.fullName,
       fullAddress: this.fullAddress,
@@ -75,7 +79,7 @@ export class CheckoutComponent implements OnInit {
           console.log(product.product);
 
         }
-        this.calculateSubtotal();
+        //this.calculateSubtotal();
       },
       (error) => {
         console.error('Add Product failed:', error);

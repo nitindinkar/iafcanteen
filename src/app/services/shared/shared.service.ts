@@ -5,8 +5,20 @@ import {ApiCallingServiceService} from "../api-calling/api-calling-service.servi
 import {ConstantsService} from "../constants/constants.service";
 import {CommonService} from "../common/common.service";
 
-@Injectable()
+ type ItemTotals = Record<string, number>;
+@Injectable({
+  providedIn: 'root'
+})
+
+
+
 export class SharedService {
+  
+  private subtotal: number = 0;
+  private itemTotals: ItemTotals = {};
+  setItemTotal: any;
+  
+  
 
   public cardType: string|undefined; // Property to hold the shared value
   public loginResponse=localStorage.getItem('loginResponse');

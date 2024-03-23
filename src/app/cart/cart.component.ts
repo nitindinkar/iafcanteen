@@ -21,8 +21,6 @@ export class CartComponent implements OnInit{
   
   ngOnInit(): void {
     this.getCartDetails();
-    
-
   }
 
 
@@ -113,6 +111,5 @@ calculateSubtotal() {
   }
 
   
-
 }
 
