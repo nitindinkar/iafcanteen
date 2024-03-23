@@ -41,14 +41,29 @@ export class CheckoutComponent implements OnInit {
 
   bookOrder(){
     debugger;
+
+    const orderProductQuantityList = [];
+
+    if (this.cartItems) {
+    for (let cart of this.cartItems) {
+      // Extract productId and quantity for the current item
+      const productId = cart.product.productId;
+      const quantity = cart.product.quantity;
+  
+      // Push the productId and quantity to the productQuantityList array
+      orderProductQuantityList.push({ productId: productId, quantity: quantity });
+    }
+  }
+    
     this.flag=true;
     const billingData = {
       fullName: this.fullName,
       fullAddress: this.fullAddress,
       contactNumber: this.contactNumber,
       alternateContactNumber: this.alternateContactNumber,
-      productId:this.cartTotal.productId,
-      quantity:this.cartTotal.quantity
+      productId:this.cartItems.productId,
+      quantity:this.cartItems.quantity,
+      orderProductQuantityList
       };
       console.log(billingData);
 
@@ -56,6 +71,8 @@ export class CheckoutComponent implements OnInit {
       next: (v: object) => {
         let result: { [key: string]: any } = v;
         if (result['message'] == 'success') {
+           alert('Your Order has been placed successfully,Please Collect your Order at your respected slot to avoid cancellation of order.');
+           this.generateReport();
 
         } else {
 
@@ -107,6 +124,24 @@ export class CheckoutComponent implements OnInit {
     saveAddress(){
       alert("Address saved sucessfully");
       this.display=true;
+    }
+
+    generateReport(){
+
+      this.apiService.getApiWithToken(this.cons.api.generatePdf).subscribe(
+        (response: object) => {
+          let result: { [key: string]: any } = response;
+          this.cart=result['response'];
+          if (result['message'] == 'success') {
+            alert('Your PdF report  has been placed successfully downloaded');
+          }
+
+           
+        },
+        (error) => {
+          console.error('Add Product failed:', error);
+        }
+      );
     }
 
    

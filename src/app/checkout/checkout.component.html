@@ -32,6 +32,15 @@
             <label for="name" class="form-label">Alternate Number</label>
             <input type="text" class="form-control" id="Adhaar" placeholder="Alternate Number" [(ngModel)]="alternateContactNumber" name="altnumber">
           </div>
+          <div class="mb-3 mt-3 col-md-6 px-2">
+            <label for="name" class="form-label">Select Store</label>
+            <select class="form-control" id="Category">
+              <option>10 am to 12 pm</option>
+              <option>12 pm to 2 pm</option>
+              <option>2 pm to 4 pm</option>
+            </select>
+          </div>
+          
                                   
           <div class="mt-3 col-md-6 px-2">
             <button type="submit" class="btn btn-primary mb-3" (click)="saveAddress()">Submit</button>
