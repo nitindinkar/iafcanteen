@@ -18,6 +18,7 @@ import { ProductComponent } from './product/product.component';
 
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { LiquorHomeComponent } from './liquor-home/liquor-home.component';
+import {SharedService} from "./services/shared/shared.service";
 
 
 
@@ -36,7 +37,7 @@ import { LiquorHomeComponent } from './liquor-home/liquor-home.component';
     InventoryComponent,
     MyAccountComponent,
     LiquorHomeComponent,
-    
+
 
   ],
   imports: [
@@ -45,11 +46,11 @@ import { LiquorHomeComponent } from './liquor-home/liquor-home.component';
     NgIf,
     FormsModule,
     HttpClientModule,
-   
-    
-    
+
+
+
   ],
-  providers: [
+  providers: [ SharedService,
     provideAnimationsAsync()
   ],
   bootstrap: [AppComponent]

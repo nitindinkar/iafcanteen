@@ -3,6 +3,7 @@ import { ConstantsService } from '../services/constants/constants.service';
 import { ApiCallingServiceService } from '../services/api-calling/api-calling-service.service';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
+import {SharedService} from "../services/shared/shared.service";
 
 @Component({
   selector: 'app-header',
@@ -18,9 +19,11 @@ export class HeaderComponent implements OnInit {
   products: any;
 
 
+
   constructor(private cons:ConstantsService,
-    private apiService: ApiCallingServiceService,
-    private router: Router) {
+              private apiService: ApiCallingServiceService,
+              private router: Router,
+              public sharedService:SharedService) {
 }
 
   ngOnInit(): void {
@@ -33,8 +36,8 @@ export class HeaderComponent implements OnInit {
       (response: object) => {
         let result: { [key: string]: any } = response;
         this.categories=result['response'];
-        
-               
+
+
       },
       (error) => {
         console.error('Add Product failed:', error);
@@ -77,14 +80,17 @@ private getAllProduct() {
   logout() {
     // Call your authentication service logout method
     localStorage.removeItem('token');
+    localStorage.removeItem('loginResponse');
+    this.sharedService.loginResponse=null;
     this.loggedIn.next(false);
-   
+    this.router.navigateByUrl('');
+
   }
   login(){
     this.loggedIn.next(true);
   }
 
-  
+
 
 
 

@@ -8,9 +8,12 @@ export class ConstantsService {
 
   //serviceUrl = 'http://192.168.120.78:8082/';
    //serviceUrl = 'http://192.168.212.84:8082/';
-   serviceUrl = 'http://localhost:8082/';
-  //serviceUrl = 'http://13.200.245.74:8083/ecommerce/';
-   
+   // serviceUrl = 'http://localhost:8082/';
+  serviceUrl = 'http://13.200.245.74:8083/ecommerce/';
+  constants={
+    groceryCard:'Grocery',
+    liquorCard: 'Liquor'
+  };
   api = {
     getCartDetailsOfUser:this.serviceUrl+'cart/getCartDetailsOfUser',
     getProductById:this.serviceUrl+'product/getProductById',

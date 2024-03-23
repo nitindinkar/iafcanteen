@@ -5,6 +5,7 @@ import {ApiCallingServiceService} from "../services/api-calling/api-calling-serv
 import {Router} from "@angular/router";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import {SharedService} from "../services/shared/shared.service";
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -20,7 +21,7 @@ export class LoginComponent implements OnInit{
               private ConstServiceService:ConstantsService,
               private apiService: ApiCallingServiceService,
               private router:Router,
-              // private header:HeaderComponent
+              private sharedService:SharedService
   ) { }
 
   showRegistrationForm: boolean = false;
@@ -144,7 +145,17 @@ export class LoginComponent implements OnInit{
             this.token=result['response'].jwtToken.toString();
             localStorage.setItem('token','Bearer '+this.token);
             localStorage.setItem('loginResponse', JSON.stringify(result['response']));
-            this.router.navigate(['']);
+            this.sharedService.loginResponse=JSON.stringify(result['response']);
+            if(this.selected=='Grocery'){
+
+              this.router.navigate(['']);
+              this.sharedService.cardType=this.ConstServiceService.constants.groceryCard
+            }
+
+            else if(this.selected=='Liquor'){
+              this.sharedService.cardType=this.ConstServiceService.constants.liquorCard
+              this.router.navigate(['/liquor']);
+            }
 
           }
         },
