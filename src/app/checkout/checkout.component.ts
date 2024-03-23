@@ -18,9 +18,10 @@ export class CheckoutComponent implements OnInit {
   flag: boolean = false;
   cart: any;
   subtotal: any | Number;
-  private cartTotal: any;
-  private cartItems: any;
-
+  public cartTotal: any;
+  public  cartItems: any;
+  
+  display:Boolean=false;
   constructor(
     private router: Router,
     private http: HttpClient,
@@ -30,21 +31,26 @@ export class CheckoutComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    
     this.getCartDetails();
     this.cartItems=this.sharedService.cart;
     this.cartTotal=this.sharedService.cartTotal;
+    debugger;
   }
 
 
   bookOrder(){
+    debugger;
     this.flag=true;
     const billingData = {
       fullName: this.fullName,
       fullAddress: this.fullAddress,
       contactNumber: this.contactNumber,
       alternateContactNumber: this.alternateContactNumber,
-
-    };
+      productId:this.cartTotal.productId,
+      quantity:this.cartTotal.quantity
+      };
+      console.log(billingData);
 
     this.apiService.postApiWithToken(this.cons.api.buyProduct+"/"+this.flag, billingData).subscribe({
       next: (v: object) => {
@@ -97,6 +103,15 @@ export class CheckoutComponent implements OnInit {
     console.log("This is my subtotal"+this.subtotal);
     return this.subtotal;
     }
+
+    saveAddress(){
+      alert("Address saved sucessfully");
+      this.display=true;
+    }
+
+   
+
+      
 
 }
 
