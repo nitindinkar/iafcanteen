@@ -15,6 +15,7 @@ export class ProductComponent implements OnInit{
   // @ViewChild('image') imageElement: ElementRef;
   categories:any;
   products: any;
+  products2: any;
 
   constructor(private cons:ConstantsService,
               private apiService: ApiCallingServiceService,
@@ -22,7 +23,7 @@ export class ProductComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    
+
     this.getAllCategories();
     this.getAllProduct();
   }
@@ -31,6 +32,9 @@ export class ProductComponent implements OnInit{
       (response: object) => {
         let result: { [key: string]: any } = response;
         this.categories=result['response'];
+        for(let cat of this.categories){
+          cat.selected=false;
+        }
         debugger;
       },
       (error) => {
@@ -52,6 +56,7 @@ export class ProductComponent implements OnInit{
           product.imageUrl=this.cons.serviceUrl+product.imageUrl;
 
         }
+        this.products2=this.products;
       },
       (error) => {
         console.error('Add Product failed:', error);
@@ -74,7 +79,7 @@ export class ProductComponent implements OnInit{
         if(result['status']==200){
           debugger;
           alert("Product added successfully");
-          
+
           //this.showSnackBar('Product added to cart successfully.');
           product.isInCart = true;
         }else{
@@ -111,9 +116,9 @@ export class ProductComponent implements OnInit{
       (response: object) => {
         let result: { [key: string]: any } = response;
         this.products=result['response'];
-
+        this.products2 =result['response'];
         if(result['status']==200){
-       
+
           alert("Product added successfully");
           }else{
           alert("Product not added");
@@ -125,7 +130,27 @@ export class ProductComponent implements OnInit{
     );
   }
 
-    
+
+  selectCat(i: number) {
+    this.categories[i].selected=!this.categories[i].selected;
+
+    let count=0;
+    this.products2=[];
+    for(let cat of this.categories){
+      if(cat.selected==true){
+        count++;
+        for(let prod of this.products){
+          if(prod.category.id==cat.id){
+            this.products2.push(prod)
+          }
+        }
+      }
+    }
+    debugger;
+    if(count == 0){
+      this.products2=this.products;
+    }
+  }
 }
 
- 
+

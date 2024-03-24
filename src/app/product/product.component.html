@@ -45,41 +45,36 @@
                     <!-- Price End -->
 
                     <!-- Color Start -->
-                    <!-- <h5 class="section-title position-relative text-uppercase mb-3"><span class="pr-3">Filter by color</span></h5> -->
-                    <!-- <div class="bg-light p-4 mb-30">
+                     <h5 class="section-title position-relative text-uppercase mb-3"><span class="pr-3">Filter by Category</span></h5>
+                     <div class="bg-light p-4 mb-30">
                         <form>
-                            <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                                <input type="checkbox" class="custom-control-input" checked="" id="color-all">
-                                <label class="custom-control-label" for="price-all">All Color</label>
-                                <span class="badge border font-weight-normal">1000</span>
+                            <div *ngFor="let cat of categories; let i=index" class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                                <input type="checkbox" class="custom-control-input" id="{{i}}" (change)="selectCat(i)">
+                                <label class="custom-control-label" for="{{i}}">{{ cat.name }}</label>
+                                <span class="badge border font-weight-normal">{{ cat.totalProducts }}</span>
                             </div>
-                            <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                                <input type="checkbox" class="custom-control-input" id="color-1">
-                                <label class="custom-control-label" for="color-1">Black</label>
-                                <span class="badge border font-weight-normal">150</span>
-                            </div>
-                            <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                                <input type="checkbox" class="custom-control-input" id="color-2">
-                                <label class="custom-control-label" for="color-2">White</label>
-                                <span class="badge border font-weight-normal">295</span>
-                            </div>
-                            <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                                <input type="checkbox" class="custom-control-input" id="color-3">
-                                <label class="custom-control-label" for="color-3">Red</label>
-                                <span class="badge border font-weight-normal">246</span>
-                            </div>
-                            <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                                <input type="checkbox" class="custom-control-input" id="color-4">
-                                <label class="custom-control-label" for="color-4">Blue</label>
-                                <span class="badge border font-weight-normal">145</span>
-                            </div>
-                            <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
-                                <input type="checkbox" class="custom-control-input" id="color-5">
-                                <label class="custom-control-label" for="color-5">Green</label>
-                                <span class="badge border font-weight-normal">168</span>
-                            </div>
+<!--                            <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">-->
+<!--                                <input type="checkbox" class="custom-control-input" id="color-2">-->
+<!--                                <label class="custom-control-label" for="color-2">White</label>-->
+<!--                                <span class="badge border font-weight-normal">295</span>-->
+<!--                            </div>-->
+<!--                            <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">-->
+<!--                                <input type="checkbox" class="custom-control-input" id="color-3">-->
+<!--                                <label class="custom-control-label" for="color-3">Red</label>-->
+<!--                                <span class="badge border font-weight-normal">246</span>-->
+<!--                            </div>-->
+<!--                            <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">-->
+<!--                                <input type="checkbox" class="custom-control-input" id="color-4">-->
+<!--                                <label class="custom-control-label" for="color-4">Blue</label>-->
+<!--                                <span class="badge border font-weight-normal">145</span>-->
+<!--                            </div>-->
+<!--                            <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between">-->
+<!--                                <input type="checkbox" class="custom-control-input" id="color-5">-->
+<!--                                <label class="custom-control-label" for="color-5">Green</label>-->
+<!--                                <span class="badge border font-weight-normal">168</span>-->
+<!--                            </div>-->
                         </form>
-                    </div> -->
+                    </div>
                     <!-- Color End -->
 
                     <!-- Size Start -->
@@ -343,7 +338,7 @@
 <!--                                            </div>-->
 <!--                                          </div>-->
 <!--                                        </div>-->
-                                        <div class="col-xl-3 col-lg-4 col-md-4 col-12" *ngFor="let product of products">
+                                        <div class="col-xl-3 col-lg-4 col-md-4 col-12" *ngFor="let product of products2">
                                           <div class="single-product">
                                             <div class="product-img">
                                               <a href="#">
@@ -356,8 +351,8 @@
                                               <div class="button-head">
                                                 <div class="product-action">
                                                   <a data-toggle="modal" data-target="#exampleModal" title="Quick View" href="#"><i class=" ti-eye"></i><span>Quick Shop</span></a>
-                                                   <a title="Wishlist"   (click)="addToWish(product)"><i class=" ti-heart "></i><span >Add to Wishlist</span></a> 
-                                                  
+                                                   <a title="Wishlist"   (click)="addToWish(product)"><i class=" ti-heart "></i><span >Add to Wishlist</span></a>
+
                                                   <a title="Compare"  href="#"><i class="ti-bar-chart-alt"></i><span>Add to Compare</span></a>
                                                 </div>
                                                 <div class="product-action-2">
