@@ -2,6 +2,7 @@ import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {ConstantsService} from "../services/constants/constants.service";
 import {ApiCallingServiceService} from "../services/api-calling/api-calling-service.service";
 import {Router} from "@angular/router";
+import {SharedService} from "../services/shared/shared.service";
 
 
 
@@ -17,25 +18,33 @@ export class ProductComponent implements OnInit{
   products: any;
   products2: any;
 
+
   constructor(private cons:ConstantsService,
               private apiService: ApiCallingServiceService,
-              private router: Router) {
+              private router: Router,
+              private sharedService: SharedService) {
   }
 
   ngOnInit(): void {
-
-    this.getAllCategories();
     this.getAllProduct();
   }
-  private getAllCategories() {
+  public getAllCategories() {
     this.apiService.getApiWithToken(this.cons.api.getAllCategories).subscribe(
       (response: object) => {
         let result: { [key: string]: any } = response;
         this.categories=result['response'];
         for(let cat of this.categories){
-          cat.selected=false;
+          if(this.sharedService.selectedCategory!=undefined){
+            if(this.sharedService.selectedCategory.id==cat.id)
+              cat.selected=true;
+            else
+              cat.selected=false;
+          }
+          else{
+            cat.selected=false;
+          }
         }
-        debugger;
+        this.selectCat();
       },
       (error) => {
         console.error('Add Product failed:', error);
@@ -43,7 +52,7 @@ export class ProductComponent implements OnInit{
     );
   }
 
-  private getAllProduct() {
+  public getAllProduct() {
     this.apiService.getApiWithToken(this.cons.api.getAllProducts).subscribe(
       (response: object) => {
         let result: { [key: string]: any } = response;
@@ -51,12 +60,13 @@ export class ProductComponent implements OnInit{
         this.products.forEach((product: any) => {
           product.image= 'data:image/jpeg;base64,'+product.image;
         });
-        debugger;
+        // debugger;
         for(let product of this.products){
           product.imageUrl=this.cons.serviceUrl+product.imageUrl;
 
         }
         this.products2=this.products;
+        this.getAllCategories();
       },
       (error) => {
         console.error('Add Product failed:', error);
@@ -131,9 +141,7 @@ export class ProductComponent implements OnInit{
   }
 
 
-  selectCat(i: number) {
-    this.categories[i].selected=!this.categories[i].selected;
-
+  selectCat() {
     let count=0;
     this.products2=[];
     for(let cat of this.categories){

@@ -51,7 +51,7 @@ import { MyAccountComponent } from './my-account/my-account.component';
 
 
   ],
-  providers: [ SharedService,
+  providers: [ SharedService,ProductComponent,
     provideAnimationsAsync()
   ],
   bootstrap: [AppComponent]

@@ -18,6 +18,7 @@ export class SharedService {
   public loginResponse=localStorage.getItem('loginResponse');
   public cartTotal: any;
   public cart: any;
+  selectedCategory: any;
   constructor(
     private router: Router,
     private http: HttpClient,

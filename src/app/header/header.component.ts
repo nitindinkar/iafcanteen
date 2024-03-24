@@ -4,6 +4,7 @@ import { ApiCallingServiceService } from '../services/api-calling/api-calling-se
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import {SharedService} from "../services/shared/shared.service";
+import {ProductComponent} from "../product/product.component";
 
 @Component({
   selector: 'app-header',
@@ -23,7 +24,8 @@ export class HeaderComponent implements OnInit {
   constructor(private cons:ConstantsService,
               private apiService: ApiCallingServiceService,
               private router: Router,
-              public sharedService:SharedService) {
+              public sharedService:SharedService,
+              private productComp:ProductComponent) {
 }
 
   ngOnInit(): void {
@@ -91,9 +93,15 @@ private getAllProduct() {
   }
 
 
+  redirect(cat: any) {
+    this.sharedService.selectedCategory=cat;
+    if(this.router.url=='/product'){
+      this.productComp.getAllProduct();
+    }
+    else
+      this.router.navigateByUrl('/product');
 
-
-
+  }
 }
 
 
