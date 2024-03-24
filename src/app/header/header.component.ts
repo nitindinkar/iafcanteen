@@ -18,6 +18,7 @@ export class HeaderComponent implements OnInit {
    loggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   selectedCategory: string | undefined;
   products: any;
+  public cartCount: string | null=localStorage.getItem('cartCount');
 
 
 
@@ -30,6 +31,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.getcategories();
+    this.getCartItems();
   }
 
   getcategories(){
@@ -101,6 +103,21 @@ private getAllProduct() {
     else
       this.router.navigateByUrl('/product');
 
+  }
+
+  private getCartItems() {
+    this.cartCount;
+    this.apiService.getApiWithToken(this.cons.api.getCartDetailsOfUser).subscribe(
+      (response: object) => {
+        let result: { [key: string]: any } = response;
+        this.cartCount=result['response'].length;
+        localStorage.setItem('cartCount',result['response'].length);
+        debugger;
+      },
+      (error) => {
+        console.error('Add Product failed:', error);
+      }
+    );
   }
 }
 

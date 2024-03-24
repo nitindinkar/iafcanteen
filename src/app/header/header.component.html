@@ -82,11 +82,11 @@
                 <a href="#" class="single-icon"><i class="fa fa-user-circle-o" aria-hidden="true"></i></a>
               </div>
               <div class="sinlge-bar shopping">
-                <a href="#" class="single-icon"><i class="ti-bag"></i> <span class="total-count">2</span></a>
+                <a href="#" class="single-icon"><i class="ti-bag"></i> <span class="total-count" *ngIf="cartCount!=null">{{cartCount}}</span></a>
                 <!-- Shopping Item -->
-                <div class="shopping-item">
+                <div class="shopping-item" *ngIf="cartCount!=null">
                   <div class="dropdown-cart-header">
-                    <span>2 Items</span>
+                    <span>{{cartCount}} Items</span>
                     <a href="#">View Cart</a>
                   </div>
                   <ul class="shopping-list">
@@ -199,8 +199,10 @@
                     <div class="nav-inner">
                       <ul class="nav main-menu menu navbar-nav">
 
-                          <li  [routerLinkActive]="['active']"><a href="#" [routerLink]="['/product']">Product<span class="new">New</span></a></li>
-                          <li  [routerLinkActive]="['active']"><a href="#" [routerLink]="['/cart']">Cart</a></li>
+                          <li  [routerLinkActive]="['active']"><a href="#" [routerLink]="['/product']">Product
+<!--                            <span class="new">New</span>-->
+                          </a></li>
+                          <li  [routerLinkActive]="['active']"><a href="#" [routerLink]="['/cart']">Cart <span class="new" *ngIf="cartCount!=null">{{cartCount}}</span></a></li>
                         <li  [routerLinkActive]="['active']"><a href="#" [routerLink]="['/add-product']">Add Product</a></li>
                         <li  [routerLinkActive]="['active']"><a href="#" [routerLink]="['/my-account']">My Account</a></li>
                         <li  [routerLinkActive]="['active']"><a href="#" [routerLink]="['/inventory']">Inventory</a></li>
