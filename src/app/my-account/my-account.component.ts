@@ -1,22 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-
+import * as $ from 'jquery';
 @Component({
   selector: 'app-my-account',
   templateUrl: './my-account.component.html',
   styleUrl: './my-account.component.scss'
 })
-export class MyAccountComponent implements OnInit {
-  
-
-
-
-  showRegistrationForm: boolean = false; 
+export class MyAccountComponent implements OnInit{
+  showRegistrationForm: boolean = false;
   showLoginForm: boolean = true;
   ngOnInit(): void {
     $.getScript('../../assets/js/bootstrap.min.js');
     const defaultTab = document.querySelector('.nav-tabs li:first-child');
     defaultTab?.classList.add('active');
-    
+
   }
 
   setActiveTab(event: MouseEvent) {

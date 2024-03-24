@@ -1,0 +1,32 @@
+
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
+  color: #ffffff;
+  cursor: default;
+  background-color: #f7941d;
+  border-bottom-color: transparent;
+  position: relative;
+  display: block;
+  padding: 10px 15px;
+  border-radius: 4px 4px 0 0;
+  border: 1px solid #ddd;
+
+}
+.nav>li>a {
+  position: relative;
+  display: block;
+  padding: 10px 15px;
+}
+.nav-tabs {
+  border-bottom: 1px solid #ddd;
+}
+.nav-tabs>li {
+  margin-bottom: -1px !important;
+}
+.table th{
+  border-top: none !important;
+}
+.tab-content{
+  border-width: 0 1px 1px 1px;
+  border-style: solid;
+  border-color: #e6e6e6;
+}
