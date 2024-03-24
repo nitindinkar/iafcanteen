@@ -26,8 +26,9 @@ export class ConstantsService {
     getAllCategories:this.serviceUrl+"category/categories",
     getAllProducts:this.serviceUrl+"product/getAllProducts",
     upload:this.serviceUrl+"fileUpload/uploadFile",
-    buyProduct:this.serviceUrl+"order/placeOder",
+    buyProduct:this.serviceUrl+"order/placeOrder",
     deleteCartItemsById:this.serviceUrl+"cart/deleteCartItem",
-    addToWishlist:this.serviceUrl+"wishlist/addToWishlist"
+    addToWishlist:this.serviceUrl+"wishlist/addToWishlist",
+    generatePdf:this.serviceUrl+"order/pdf"
   };
 }

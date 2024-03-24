@@ -100,7 +100,7 @@ export class CartComponent implements OnInit{
 
 calculateSubtotal() {
   this.subtotal = 0;
-  debugger;
+  
   if (this.cart && this.cart.length > 0) {
     for (let cartItem of this.cart) {
       if (cartItem.product && cartItem.product.quantity && cartItem.product.productDiscountedPrice) {

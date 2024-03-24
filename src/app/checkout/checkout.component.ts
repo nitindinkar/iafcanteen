@@ -18,9 +18,10 @@ export class CheckoutComponent implements OnInit {
   flag: boolean = false;
   cart: any;
   subtotal: any | Number;
-  private cartTotal: any;
-  private cartItems: any;
-
+  public cartTotal: any;
+  public  cartItems: any;
+  
+  display:Boolean=false;
   constructor(
     private router: Router,
     private http: HttpClient,
@@ -30,26 +31,48 @@ export class CheckoutComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    
     this.getCartDetails();
     this.cartItems=this.sharedService.cart;
     this.cartTotal=this.sharedService.cartTotal;
+    debugger;
   }
 
 
   bookOrder(){
+    debugger;
+
+    const orderProductQuantityList = [];
+
+    if (this.cartItems) {
+    for (let cart of this.cartItems) {
+      // Extract productId and quantity for the current item
+      const productId = cart.product.productId;
+      const quantity = cart.product.quantity;
+  
+      // Push the productId and quantity to the productQuantityList array
+      orderProductQuantityList.push({ productId: productId, quantity: quantity });
+    }
+  }
+    
     this.flag=true;
     const billingData = {
       fullName: this.fullName,
       fullAddress: this.fullAddress,
       contactNumber: this.contactNumber,
       alternateContactNumber: this.alternateContactNumber,
-
-    };
+      productId:this.cartItems.productId,
+      quantity:this.cartItems.quantity,
+      orderProductQuantityList
+      };
+      console.log(billingData);
 
     this.apiService.postApiWithToken(this.cons.api.buyProduct+"/"+this.flag, billingData).subscribe({
       next: (v: object) => {
         let result: { [key: string]: any } = v;
         if (result['message'] == 'success') {
+           alert('Your Order has been placed successfully,Please Collect your Order at your respected slot to avoid cancellation of order.');
+           this.generateReport();
 
         } else {
 
@@ -97,6 +120,33 @@ export class CheckoutComponent implements OnInit {
     console.log("This is my subtotal"+this.subtotal);
     return this.subtotal;
     }
+
+    saveAddress(){
+      alert("Address saved sucessfully");
+      this.display=true;
+    }
+
+    generateReport(){
+
+      this.apiService.getApiWithToken(this.cons.api.generatePdf).subscribe(
+        (response: object) => {
+          let result: { [key: string]: any } = response;
+          this.cart=result['response'];
+          if (result['message'] == 'success') {
+            alert('Your PdF report  has been placed successfully downloaded');
+          }
+
+           
+        },
+        (error) => {
+          console.error('Add Product failed:', error);
+        }
+      );
+    }
+
+   
+
+      
 
 }
 
