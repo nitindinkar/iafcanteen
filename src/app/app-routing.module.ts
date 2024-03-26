@@ -9,6 +9,7 @@ import { AddProductComponent } from './add-product/add-product.component';
 import { MyAccountComponent } from './my-account/my-account.component';
 import { InventoryComponent } from './inventory/inventory.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
+import { WishlistComponent } from './wishlist/wishlist.component';
 
 const routes: Routes = [
   { path: '', component:  HomeComponent},
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'my-account', component:  MyAccountComponent},
   { path: 'inventory', component:  InventoryComponent},
   { path: 'contact-us', component:  ContactUsComponent},
+  { path: 'wishlist', component:  WishlistComponent},
 
 ];
 
