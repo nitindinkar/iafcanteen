@@ -29,6 +29,10 @@ export class ConstantsService {
     buyProduct:this.serviceUrl+"order/placeOrder",
     deleteCartItemsById:this.serviceUrl+"cart/deleteCartItem",
     addToWishlist:this.serviceUrl+"wishlist/addToWishlist",
-    generatePdf:this.serviceUrl+"order/pdf"
+    generatePdf:this.serviceUrl+"order/pdf",
+    viewProductById:this.serviceUrl+"product/getProductById",
+    myAccountDetails:this.serviceUrl+"loginAuth/getAddress",
+    getOrderDetails:this.serviceUrl+"order/getOrderDetailsOfUser"
+
   };
 }

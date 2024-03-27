@@ -13,10 +13,18 @@ import {SharedService} from "../services/shared/shared.service";
 })
 export class ProductComponent implements OnInit{
 
+
   // @ViewChild('image') imageElement: ElementRef;
   categories:any;
   products: any;
   products2: any;
+  viewProducts: any;
+  displayedCategories: any[] = [];
+  currentPage: number = 1;
+  itemsPerPage: number = 5;
+  totalPages: number = 0; 
+pages: any;
+    
 
 
   constructor(private cons:ConstantsService,
@@ -35,6 +43,8 @@ export class ProductComponent implements OnInit{
         this.categories=result['response'];
         for(let cat of this.categories){
           if(this.sharedService.selectedCategory!=undefined){
+            console.log(this.sharedService.selectedCategory.id);
+            console.log(cat.id);
             if(this.sharedService.selectedCategory.id==cat.id)
               cat.selected=true;
             else
@@ -81,6 +91,7 @@ export class ProductComponent implements OnInit{
       alert("Product is already in the cart!");
       return; // Exit the function to prevent further execution
     }
+
     this.apiService.getApiWithToken(this.cons.api.addToCart+'/'+product.productId).subscribe(
       (response: object) => {
         let result: { [key: string]: any } = response;
@@ -102,6 +113,37 @@ export class ProductComponent implements OnInit{
       }
     );
   }
+
+  viewAddToCart(prodId:any) {
+    debugger;
+
+    if (prodId.isInCart) {
+      alert("Product is already in the cart!");
+      return; // Exit the function to prevent further execution
+    }
+    
+    this.apiService.getApiWithToken(this.cons.api.addToCart+'/'+prodId).subscribe(
+      (response: object) => {
+        let result: { [key: string]: any } = response;
+        this.products=result['response'];
+
+        if(result['status']==200){
+          debugger;
+          alert("Product added successfully");
+
+          //this.showSnackBar('Product added to cart successfully.');
+          prodId.isInCart = true;
+        }else{
+          alert("Product not added");
+          //this.showSnackBar('Failed to add product to cart.');
+        }
+      },
+      (error) => {
+        console.error('Add Product failed:', error);
+      }
+    );
+  }
+
 
   redirect(productId: any) {
     localStorage.removeItem('productId');
@@ -159,6 +201,25 @@ export class ProductComponent implements OnInit{
       this.products2=this.products;
     }
   }
+  viewProduct(product:any) {
+    this.apiService.getApiWithToken(this.cons.api.viewProductById+'/'+product.productId).subscribe(
+      (response: object) => {
+        let result: { [key: string]: any } = response;
+        this.viewProducts=result['response'];
+        
+        //this.products2 =result['response'];
+        
+      },
+      (error) => {
+        console.error('Add Product failed:', error);
+      }
+    );
+    
+    }
+
+    // pagination start....
+
+    
 }
 
 

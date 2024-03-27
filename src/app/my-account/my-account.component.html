@@ -4,8 +4,8 @@
       <h2 class="mb-4">My Account</h2>
       <div class="my-account">
         <ul class="nav nav-tabs">
-          <li><a (click)="setActiveTab($event)" data-toggle="tab" href="#home">Orders</a></li>
-          <li><a (click)="setActiveTab($event)" data-toggle="tab" href="#menu1">Account Details</a></li>
+          <li><a (click)="setActiveTab($event)" data-toggle="tab" href="#home" (click)="order()">Orders</a></li>
+          <li><a (click)="setActiveTab($event)" data-toggle="tab" href="#menu1" (click)="myAccount()">Account Details</a></li>
           <li><a (click)="setActiveTab($event)" data-toggle="tab" href="#menu2">Change password</a></li>
         </ul>
 
@@ -16,14 +16,23 @@
               <thead>
               <tr>
                 <th scope="col"><input type="checkbox" name="selectAll" id="selectAll"></th>
-                <th scope="col">Images</th>
-                <th scope="col">Name</th>
-                <th scope="col">SKU</th>
-                <th scope="col">Category</th>
-                <th scope="col">Price</th>
+                <th scope="col">Product Name </th>
+                <th scope="col">Price </th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Catagory</th>
+                <th scope="col">Total</th>
               </tr>
               </thead>
               <tbody>
+              <tr >
+                <th scope="row"><input type="checkbox" name="selectAll" id="selectAll"></th>
+                <!-- <td><img src="../../assets/images/550x750.png" class="inventory-image"></td> -->
+                <td>poduct</td>
+                <td>Blackdog</td>
+                <td>SK_12345</td>
+                <td>Liquir</td>
+                <td>₹850 <span class="mrp">(₹1560)</span></td>
+              <!-- </tr>
               <tr>
                 <th scope="row"><input type="checkbox" name="selectAll" id="selectAll"></th>
                 <td><img src="../../assets/images/550x750.png" class="inventory-image"></td>
@@ -47,55 +56,47 @@
                 <td>SK_12345</td>
                 <td>Liquir</td>
                 <td>₹850 <span class="mrp">(₹1560)</span></td>
-              </tr>
-              <tr>
-                <th scope="row"><input type="checkbox" name="selectAll" id="selectAll"></th>
-                <td><img src="../../assets/images/550x750.png" class="inventory-image"></td>
-                <td>Blackdog</td>
-                <td>SK_12345</td>
-                <td>Liquir</td>
-                <td>₹850 <span class="mrp">(₹1560)</span></td>
-              </tr>
+              </tr> -->
               </tbody>
             </table>
           </div>
           <div id="menu1" class="tab-pane">
             <!-- My Account content -->
             <div class="quickview-content updateregister">
-              <form action="/action_page.php">
+              <form >
                 <div class="row">
                   <div class="mb-3 mt-3 col-md-6 px-2">
                     <label for="name" class="form-label">Name:</label>
-                    <input type="text" class="form-control" id="name" placeholder="Abc Kumar" name="name">
+                    <input type="text" class="form-control" id="name" placeholder="Abc Kumar" name="name" [(ngModel)]="parsedLoginResponse.user.name" >
                   </div>
                   <div class="mb-3 mt-3 col-md-6 px-2">
                     <label for="name" class="form-label">Liquir Card No:</label>
-                    <input type="text" class="form-control" id="Liquir" placeholder="0123456" name="Liquir">
+                    <input type="text" class="form-control" id="Liquir" placeholder="0123456" name="Liquir" parsedLoginResponse.user.liquorCardNumber>
                   </div>
                   <div class="mb-3 mt-3 col-md-6 px-2">
                     <label for="name" class="form-label">Grocery Card No:</label>
-                    <input type="text" class="form-control" id="Grocery" placeholder="1234567" name="Grocery">
+                    <input type="text" class="form-control" id="Grocery" placeholder="1234567" name="Grocery"  [(ngModel)]="parsedLoginResponse.user.groceryCardNumber">
                   </div>
                   <div class="mb-3 mt-3 col-md-6 px-2">
                     <label for="name" class="form-label">Pan No:</label>
-                    <input type="text" class="form-control" id="Pan" placeholder="CHUDG8922" name="Pan">
+                    <input type="text" class="form-control" id="Pan" placeholder="CHUDG8922" name="Pan" [(ngModel)]="parsedLoginResponse.user.pan">
                   </div>
                   <div class="mb-3 mt-3 col-md-6 px-2">
                     <label for="name" class="form-label">Adhaar No:</label>
-                    <input type="text" class="form-control" id="Adhaar" placeholder="567776579876" name="Adhaar">
+                    <input type="text" class="form-control" id="Adhaar" placeholder="567776579876" name="Adhaar" [(ngModel)]="parsedLoginResponse.user.adhaar">
                   </div>
                   <div class="mb-3 mt-3 col-md-6 px-2">
                     <label for="name" class="form-label">Date of Birth:</label>
-                    <input type="text" class="form-control" id="Date" name="Date" placeholder="00-00-0000" (focus)="changeInputType($event.target)">
+                    <input type="text" class="form-control" id="Date" name="Date" placeholder="00-00-0000" [(ngModel)]="parsedLoginResponse.user.dob" (focus)="changeInputType($event.target)">
                   </div>
                   <div class="mb-3 mt-3 col-md-6 px-2">
                     <label for="number" class="form-label">Mobile:</label>
-                    <input type="phone" class="form-control" id="mobile" placeholder="Enter mobile number" name="mobile">
+                    <input type="phone" class="form-control" id="mobile" placeholder="Enter mobile number" name="mobile" [(ngModel)]="parsedLoginResponse.user.contactNumber">
                   </div>
 
                   <div class="mb-3 mt-3 col-md-6 px-2">
                     <label for="pwd" class="form-label">Email:</label>
-                    <input type="gmail" class="form-control" id="pwd" placeholder="abc@gmail.com" name="gml">
+                    <input type="gmail" class="form-control" id="pwd" placeholder="abc@gmail.com" name="gmal" [(ngModel)]="parsedLoginResponse.user.email">
                   </div>
 
                 </div>
