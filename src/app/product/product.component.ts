@@ -23,10 +23,14 @@ export class ProductComponent implements OnInit{
   products2: any;
   viewProducts: any;
   displayedCategories: any[] = [];
-  currentPage: number = 1;
+  
   itemsPerPage: number = 5;
-  totalPages: number = 0; 
+  
   pages: any;
+  totalItems: any;
+  currentPage: any;
+  pageChanged: any;
+  
     
 
 
@@ -221,6 +225,17 @@ export class ProductComponent implements OnInit{
     }
 
     // pagination start....
+
+    get totalPages(): number {
+      return Math.ceil(this.totalItems / this.itemsPerPage);
+    }
+  
+    changePage(page: number): void {
+      if (page >= 1 && page <= this.totalPages) {
+        this.currentPage = page;
+        this.pageChanged.emit(page);
+      }
+    }
 
     
 }

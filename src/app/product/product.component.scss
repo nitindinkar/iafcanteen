@@ -61,3 +61,31 @@
 .main-category{
     opacity: 0 !important;
 }
+
+.pagination {
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  margin-top: 10px;
+  margin-bottom: 30px;
+  margin-left: 150px;
+  
+  
+  button {
+    margin: 0 5px; 
+    padding: 5px 10px; 
+    border: 1px solid #ccc;
+    background-color: #f0f0f0; 
+    cursor: pointer;
+  }
+  
+  span {
+    margin: 0 10px; 
+  }
+  
+  button:disabled {
+    opacity: 0.5; 
+    cursor: not-allowed;
+   }
+
+}
