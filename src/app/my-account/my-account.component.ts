@@ -23,10 +23,13 @@ export class MyAccountComponent implements OnInit{
     private sharedService: SharedService) {
 }
   ngOnInit(): void {
+    
     $.getScript('../../assets/js/bootstrap.min.js');
     const defaultTab = document.querySelector('.nav-tabs li:first-child');
     defaultTab?.classList.add('active');
+
     this.myAccount();
+    this.order();
 
   }
 
@@ -55,10 +58,8 @@ export class MyAccountComponent implements OnInit{
     var loginResponse = this.sharedService.loginResponse;
        if (typeof loginResponse === 'string') {
     this.parsedLoginResponse = JSON.parse(loginResponse);
-    console.log(this.parsedLoginResponse);
     
     }
-   
   }
 
   order(){
@@ -67,16 +68,9 @@ export class MyAccountComponent implements OnInit{
         let result: { [key: string]: any } = response;
         this.orderDetails=result['response'];
         console.log(this.orderDetails);
-        // this.products.forEach((product: any) => {
-        //   product.image= 'data:image/jpeg;base64,'+product.image;
-        // });
-        // debugger;
-        // for(let product of this.products){
-        //   product.imageUrl=this.cons.serviceUrl+product.imageUrl;
 
-        // }
-        // this.products2=this.products;
-        // this.getAllCategories();
+        this.orderDetails = this.orderDetails.filter((order: { user: { id: any; }; }) => order.user.id === this.parsedLoginResponse.user.id);
+        console.log("user id 1 wali hai...."+this.orderDetails)
       },
       (error) => {
         console.error('Add Product failed:', error);
@@ -84,4 +78,6 @@ export class MyAccountComponent implements OnInit{
     );
 
   }
+
+  
 }

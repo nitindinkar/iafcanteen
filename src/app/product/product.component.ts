@@ -1,8 +1,11 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {ConstantsService} from "../services/constants/constants.service";
-import {ApiCallingServiceService} from "../services/api-calling/api-calling-service.service";
+
+
 import {Router} from "@angular/router";
-import {SharedService} from "../services/shared/shared.service";
+
+import { ConstantsService } from '../services/constants/constants.service';
+import { ApiCallingServiceService } from '../services/api-calling/api-calling-service.service';
+import { SharedService } from '../services/shared/shared.service';
 
 
 
@@ -23,7 +26,7 @@ export class ProductComponent implements OnInit{
   currentPage: number = 1;
   itemsPerPage: number = 5;
   totalPages: number = 0; 
-pages: any;
+  pages: any;
     
 
 
