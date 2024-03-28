@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiCallingServiceService } from '../services/api-calling/api-calling-service.service';
 import { Router } from '@angular/router';
 import { ConstantsService } from '../services/constants/constants.service';
+import {SharedService} from "../services/shared/shared.service";
 
 @Component({
   selector: 'app-home',
@@ -13,6 +14,9 @@ export class HomeComponent implements OnInit {
   products: any;
 
   ngOnInit(): void {
+    if(this.sharedService.loggedIn == true){
+      window.location.reload();
+    }
     this.getAllCategories();
     this.getAllProduct();
 
@@ -20,7 +24,8 @@ export class HomeComponent implements OnInit {
 
   constructor(private cons:ConstantsService,
     private apiService: ApiCallingServiceService,
-    private router: Router) {
+    private router: Router,
+              private sharedService:SharedService) {
 }
 
   private getAllCategories() {

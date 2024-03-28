@@ -19,6 +19,7 @@ export class SharedService {
   public cartTotal: any;
   public cart: any;
   selectedCategory: any;
+  loggedIn: boolean=false;
   constructor(
     private router: Router,
     private http: HttpClient,

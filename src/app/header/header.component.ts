@@ -21,10 +21,9 @@ export class HeaderComponent implements OnInit {
   pageNumber:any;
   pageSize:any;
   searchKey:any;
+  admin:boolean=false;
   public cartCount: string | null=localStorage.getItem('cartCount');
-
-
-
+  loginResponse: any;
   constructor(private cons:ConstantsService,
               private apiService: ApiCallingServiceService,
               private router: Router,
@@ -33,6 +32,18 @@ export class HeaderComponent implements OnInit {
 }
 
   ngOnInit(): void {
+    const storedData = localStorage.getItem('loginResponse');
+    if (storedData) {
+      this.loginResponse = JSON.parse(storedData);
+      console.log(storedData);
+      debugger;
+      for(let role of this.loginResponse.user.roles){
+        debugger;
+        if(role.roleName=='ADMIN')
+          this.admin=true;
+      }
+    }
+
     this.getcategories();
     this.getCartItems();
   }
@@ -94,6 +105,7 @@ private getAllProduct() {
     this.sharedService.selectedCategory=undefined;
     this.loggedIn.next(false);
     this.router.navigateByUrl('');
+    this.admin=false;
   }
   login(){
     this.loggedIn.next(true);

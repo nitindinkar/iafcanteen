@@ -101,7 +101,7 @@ export class LoginComponent implements OnInit{
     };
 
     const registerationUrl= this.ConstServiceService.api.registrationUrl;
-    
+
     this.HttpClient.post(registerationUrl, credentials,{responseType:'text'})
       .subscribe(
         (response: any) => {
@@ -110,7 +110,7 @@ export class LoginComponent implements OnInit{
             alert("Registration Successful");
           }
           // Handle successful login, e.g., redirect the user or perform other actions
-         
+
         },
         (error) => {
           // Handle login failure, e.g., display an error message
@@ -139,6 +139,7 @@ export class LoginComponent implements OnInit{
           console.log(result);
           debugger;
           if(result['message']=='success'){
+            this.sharedService.loggedIn=true;
             this.token=result['response'].jwtToken.toString();
             localStorage.setItem('token','Bearer '+this.token);
             localStorage.setItem('loginResponse', JSON.stringify(result['response']));

@@ -46,9 +46,9 @@ export class ProductComponent implements OnInit{
     debugger;
     if(localStorage.getItem('card')==this.cons.constants.liquorCard){
       this.sharedService.selectedCategory={id:8};
-      console.log("this is shared service "+this.sharedService.selectedCategory);
-      console.log(localStorage.getItem('card'));
-      console.log(this.cons.constants.liquorCard);
+      // console.log("this is shared service "+this.sharedService.selectedCategory);
+      // console.log(localStorage.getItem('card'));
+      // console.log(this.cons.constants.liquorCard);
     }
     this.getAllProduct();
   }
@@ -221,8 +221,8 @@ export class ProductComponent implements OnInit{
       if(cat.selected==true){
         count++;
         for(let prod of this.products){
-          if(prod.category.id==cat.id){
-            this.products2.push(prod)
+          if(prod.dto.categoryId==cat.id){
+            this.products2.push(prod);
           }
         }
       }

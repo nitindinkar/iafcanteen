@@ -204,9 +204,9 @@
 <!--                            <span class="new">New</span>-->
                           </a></li>
                           <li  [routerLinkActive]="['active']"><a href="#" [routerLink]="['/cart']">Cart <span class="new" *ngIf="cartCount!=null">{{cartCount}}</span></a></li>
-                        <li  [routerLinkActive]="['active']"><a href="#" [routerLink]="['/add-product']">Add Product</a></li>
+                        <li *ngIf="admin" [routerLinkActive]="['active']"><a href="#" [routerLink]="['/add-product']">Add Product</a></li>
                         <li  [routerLinkActive]="['active']"><a href="#" [routerLink]="['/my-account']">My Account</a></li>
-                        <li  [routerLinkActive]="['active']"><a href="#" [routerLink]="['/inventory']">Inventory</a></li>
+                        <li *ngIf="admin" [routerLinkActive]="['active']"><a href="#" [routerLink]="['/inventory']">Inventory</a></li>
                         <li   [routerLinkActive]="['active']"><a href="#" [routerLink]="['/WishList']">WishList</a></li>
                         <li  [routerLinkActive]="['active']"><a href="#" [routerLink]="['/contact-us']">Contact Us</a></li>
                         </ul>
