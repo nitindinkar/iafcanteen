@@ -25,7 +25,7 @@ export class ProductComponent implements OnInit{
   products2: any;
   viewProducts: any;
   pageNumber: number = 1;
-  pageSize: number=8;
+  pageSize: number=6;
   searchKey: string = '';
   displayedCategories: any[] = [];
 
@@ -80,15 +80,15 @@ export class ProductComponent implements OnInit{
   }
 
   public getAllProduct() {
-    const params = {
-      pageNumber: this.pageNumber,
-      pageSize: this.pageSize,
-      searchKey: this.searchKey
+    // const params = {
+    //   pageNumber: this.pageNumber,
+    //   pageSize: this.pageSize,
+    //   searchKey: this.searchKey
 
-    };
-    console.log(params);
+    // };
+    
 
-    this.apiService.getApiWithTokenAndParams(this.cons.api.getAllProducts,params).subscribe(
+    this.apiService.getApiWithToken(this.cons.api.getAllProducts).subscribe(
       (response: object) => {
         let result: { [key: string]: any } = response;
         this.products=result['response'];
