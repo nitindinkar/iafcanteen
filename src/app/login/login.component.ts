@@ -101,17 +101,16 @@ export class LoginComponent implements OnInit{
     };
 
     const registerationUrl= this.ConstServiceService.api.registrationUrl;
-
-    console.log(credentials);
+    
     this.HttpClient.post(registerationUrl, credentials,{responseType:'text'})
       .subscribe(
         (response: any) => {
-          // Handle successful login, e.g., redirect the user or perform other actions
           console.log(response);
-          console.log("registration ka response hai...");
-
-
-
+          if(response['message']=="success"){
+            alert("Registration Successful");
+          }
+          // Handle successful login, e.g., redirect the user or perform other actions
+         
         },
         (error) => {
           // Handle login failure, e.g., display an error message
@@ -179,12 +178,7 @@ export class LoginComponent implements OnInit{
         (response: any) => {
           // Handle successful OTP verification
           console.log('OTP verification successful:', response);
-          if(response!="otp verified"){
-            alert("please Enter valid Otp for login");
-          }
-
-
-          // Call your registration function or any other function here
+           // Call your registration function or any other function here
           this.registration();
         },
         (error) => {

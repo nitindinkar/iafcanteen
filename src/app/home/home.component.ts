@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiCallingServiceService } from '../../services/api-calling/api-calling-service.service';
+import { ApiCallingServiceService } from '../services/api-calling/api-calling-service.service';
 import { Router } from '@angular/router';
-import { ConstantsService } from '../../services/constants/constants.service';
+import { ConstantsService } from '../services/constants/constants.service';
 
 @Component({
   selector: 'app-home',

@@ -5,8 +5,9 @@
         <div class="container-fluid">
             <div class="row px-xl-5">
 
-                <div class="col-lg-3 col-md-4" *ngIf="localStorage.getItem('card')!=this.cons.constants.liquorCard">
-
+                <!-- <div class="col-lg-3 col-md-4" *ngIf="localStorage.getItem('card')!=this.cons.constants.liquorCard"> -->
+                  
+                  <div class="col-lg-3 col-md-4">
                     <!-- Color Start -->
                      <h5 class="section-title position-relative text-uppercase mb-3"><span class="pr-3">Filter by Category</span></h5>
                      <div class="bg-light p-4 mb-30">
@@ -55,7 +56,7 @@
                                   <div class="tab-pane fade show active" id="man" role="tabpanel">
                                     <div class="tab-single">
                                       <div class="row">
-                                        <div class="col-xl-3 col-lg-4 col-md-4 col-12" *ngFor="let product of products2| paginate :{itemsPerPage:20,currentPage:p}; let i = index">
+                                        <div class="col-xl-3 col-lg-4 col-md-4 col-12" *ngFor="let product of products2">
                                           <div class="single-product">
                                             <div class="product-img">
                                               <a href="#">
@@ -89,7 +90,7 @@
                                 </div>
                               </div>
                             </div>
-                      <pagination-controls class="pagination float-right" (pageChange)="p = $event"></pagination-controls>
+                      <!-- <pagination-controls class="pagination float-right" (pageChange)="p = $event"></pagination-controls> -->
 
                     </div>
                 </div>
