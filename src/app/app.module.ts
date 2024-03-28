@@ -13,13 +13,13 @@ import {FormsModule} from "@angular/forms";
 import {NgIf} from "@angular/common";
 import {AddProductComponent} from "./add-product/add-product.component";
 import {InventoryComponent} from "./inventory/inventory.component";
-
 import { ProductComponent } from './product/product.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { LiquorHomeComponent } from './liquor-home/liquor-home.component';
 import {SharedService} from "./services/shared/shared.service";
 import { MyAccountComponent } from './my-account/my-account.component';
-import {NgxPaginationModule} from "ngx-pagination";
+import { NgxPaginationModule } from 'ngx-pagination';
+
 
 
 
@@ -50,7 +50,8 @@ import {NgxPaginationModule} from "ngx-pagination";
     NgxPaginationModule,
 
 
-
+    
+    
   ],
   providers: [ SharedService,ProductComponent,
     provideAnimationsAsync()
