@@ -13,7 +13,7 @@ import { SharedService } from '../services/shared/shared.service';
   styleUrl: './product.component.scss'
 })
 export class ProductComponent implements OnInit{
-  
+
 
 
   // @ViewChild('image') imageElement: ElementRef;
@@ -21,17 +21,17 @@ export class ProductComponent implements OnInit{
   products: any;
   products2: any;
   viewProducts: any;
-  pageNumber: number = 1;
-  pageSize: number=6;
-  searchKey: string = '';
-  displayedCategories: any[] = [];
+  // pageNumber: number = 1;
+  // pageSize: number=6;
+  // searchKey: string = '';
+  // displayedCategories: any[] = [];
 
-  itemsPerPage: number = 5;
+  // itemsPerPage: number = 5;
 
-  pages: any;
-  totalItems: any;
-  currentPage: any;
-  pageChanged: any;
+  // pages: any;
+  // totalItems: any;
+  // currentPage: any;
+  // pageChanged: any;
 
 
 
@@ -43,15 +43,16 @@ export class ProductComponent implements OnInit{
   }
 
   ngOnInit(): void {
+    debugger;
     if(localStorage.getItem('card')==this.cons.constants.liquorCard){
-      this.sharedService.selectedCategory={id:7};
+      this.sharedService.selectedCategory={id:8};
       console.log("this is shared service "+this.sharedService.selectedCategory);
       console.log(localStorage.getItem('card'));
       console.log(this.cons.constants.liquorCard);
     }
     this.getAllProduct();
   }
-  
+
   public getAllCategories() {
     this.apiService.getApiWithToken(this.cons.api.getAllCategories).subscribe(
       (response: object) => {
@@ -85,19 +86,19 @@ export class ProductComponent implements OnInit{
     //   searchKey: this.searchKey
 
     // };
-    
+
 
     this.apiService.getApiWithToken(this.cons.api.getAllProducts).subscribe(
       (response: object) => {
         let result: { [key: string]: any } = response;
         this.products=result['response'];
-       
-        
+
+
         this.products.forEach((product: any) => {
         product.image= 'data:image/jpeg;base64,'+product.image;
         });
 
-        
+
         for(let product of this.products){
           product.imageUrl=this.cons.serviceUrl+product.imageUrl;
 
@@ -111,7 +112,7 @@ export class ProductComponent implements OnInit{
     );
   }
 
- 
+
 
 
   addToCart(product:any) {
@@ -249,19 +250,19 @@ export class ProductComponent implements OnInit{
 
     // pagination start....
 
-    get totalPages(): number {
-      return Math.ceil(this.totalItems / this.itemsPerPage);
-    }
+  //   get totalPages(): number {
+  //     return Math.ceil(this.totalItems / this.itemsPerPage);
+  //   }
+  //
+  //   changePage(page: number): void {
+  //     if (page >= 1 && page <= this.totalPages) {
+  //       this.currentPage = page;
+  //       this.pageChanged.emit(page);
+  //     }
+  //   }
 
-    changePage(page: number): void {
-      if (page >= 1 && page <= this.totalPages) {
-        this.currentPage = page;
-        this.pageChanged.emit(page);
-      }
-    }
 
-
-  protected readonly localStorage = localStorage;
+  // protected readonly localStorage = localStorage;
 }
 
 

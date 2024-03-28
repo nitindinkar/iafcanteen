@@ -88,12 +88,12 @@ private getAllProduct() {
     // Call your authentication service logout method
     localStorage.removeItem('token');
     localStorage.removeItem('loginResponse');
+    localStorage.removeItem('card');
     this.sharedService.loginResponse=null;
-    window.location.reload();
+    this.sharedService.cardType=undefined;
+    this.sharedService.selectedCategory=undefined;
     this.loggedIn.next(false);
     this.router.navigateByUrl('');
-    
-  
   }
   login(){
     this.loggedIn.next(true);
