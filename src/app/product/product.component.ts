@@ -1,8 +1,5 @@
 import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
-
-
 import {Router} from "@angular/router";
-
 import { ConstantsService } from '../services/constants/constants.service';
 import { ApiCallingServiceService } from '../services/api-calling/api-calling-service.service';
 import { SharedService } from '../services/shared/shared.service';
@@ -47,8 +44,10 @@ export class ProductComponent implements OnInit{
 
   ngOnInit(): void {
     if(localStorage.getItem('card')==this.cons.constants.liquorCard){
-
       this.sharedService.selectedCategory={id:7};
+      console.log("this is shared service "+this.sharedService.selectedCategory);
+      console.log(localStorage.getItem('card'));
+      console.log(this.cons.constants.liquorCard);
     }
     this.getAllProduct();
   }

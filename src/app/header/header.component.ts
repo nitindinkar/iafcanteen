@@ -89,9 +89,11 @@ private getAllProduct() {
     localStorage.removeItem('token');
     localStorage.removeItem('loginResponse');
     this.sharedService.loginResponse=null;
+    window.location.reload();
     this.loggedIn.next(false);
     this.router.navigateByUrl('');
-
+    
+  
   }
   login(){
     this.loggedIn.next(true);
