@@ -28,29 +28,29 @@ export class ProductComponent implements OnInit{
   pageSize: number=8;
   searchKey: string = '';
   displayedCategories: any[] = [];
-  totalPages: number = 0;
+
+  itemsPerPage: number = 5;
+
+  pages: any;
   totalItems: any;
-  
-  
-    
+  currentPage: any;
+  pageChanged: any;
+
+
 
   p: number = 1;
-  constructor(private cons:ConstantsService,
+  constructor(public cons:ConstantsService,
               private apiService: ApiCallingServiceService,
               private router: Router,
               private sharedService: SharedService) {
   }
 
   ngOnInit(): void {
-    this.getAllProduct();
-   
-  }
+    if(localStorage.getItem('card')==this.cons.constants.liquorCard){
 
-  setPageSize(size: number) {
-    this.pageSize = size;
-    console.log('Selected page size:', this.pageSize);
+      this.sharedService.selectedCategory={id:7};
+    }
     this.getAllProduct();
-
   }
   
   public getAllCategories() {
@@ -152,7 +152,7 @@ export class ProductComponent implements OnInit{
       alert("Product is already in the cart!");
       return; // Exit the function to prevent further execution
     }
-    
+
     this.apiService.getApiWithToken(this.cons.api.addToCart+'/'+prodId).subscribe(
       (response: object) => {
         let result: { [key: string]: any } = response;
@@ -237,23 +237,32 @@ export class ProductComponent implements OnInit{
       (response: object) => {
         let result: { [key: string]: any } = response;
         this.viewProducts=result['response'];
-        
+
         //this.products2 =result['response'];
-        
+
       },
       (error) => {
         console.error('Add Product failed:', error);
       }
     );
-    
+
     }
-// pagination
+
+    // pagination start....
+
+    get totalPages(): number {
+      return Math.ceil(this.totalItems / this.itemsPerPage);
+    }
+
+    changePage(page: number): void {
+      if (page >= 1 && page <= this.totalPages) {
+        this.currentPage = page;
+        this.pageChanged.emit(page);
+      }
+    }
 
 
-
+  protected readonly localStorage = localStorage;
 }
-
-    
-
 
 

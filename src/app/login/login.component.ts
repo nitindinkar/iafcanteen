@@ -151,7 +151,8 @@ export class LoginComponent implements OnInit{
             }
 
             else if(this.selected=='Liquor'){
-              this.sharedService.cardType=this.ConstServiceService.constants.liquorCard
+              localStorage.setItem('card',this.ConstServiceService.constants.liquorCard);
+              this.sharedService.cardType=this.ConstServiceService.constants.liquorCard;
               this.router.navigate(['/liquor']);
             }
 
