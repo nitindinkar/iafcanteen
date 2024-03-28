@@ -4,7 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
-import { HomeComponent } from './header/home/home.component';
+import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { CartComponent } from './cart/cart.component';
 import { CheckoutComponent } from './checkout/checkout.component';
@@ -19,6 +19,7 @@ import { LiquorHomeComponent } from './liquor-home/liquor-home.component';
 import {SharedService} from "./services/shared/shared.service";
 import { MyAccountComponent } from './my-account/my-account.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import {WishlistComponent} from "./wishlist/wishlist.component";
 
 
 
@@ -38,6 +39,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     InventoryComponent,
     MyAccountComponent,
     LiquorHomeComponent,
+    WishlistComponent
 
 
   ],
@@ -50,8 +52,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     NgxPaginationModule,
 
 
-    
-    
+
+
   ],
   providers: [ SharedService,ProductComponent,
     provideAnimationsAsync()

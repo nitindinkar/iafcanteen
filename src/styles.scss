@@ -65,6 +65,33 @@ select {
 .border-bottom {
   border-bottom: 1px solid #dee2e6 !important;
 }
+span.wishlist-in-stock{
+  color: #090;
+}
+
+span.wishlist-out-of-stock{
+  color: #f50000;
+}
+span.wishlist-in-stock:before{
+  font-family: 'FontAwesome';
+  letter-spacing: 0;
+  display: inline-block;
+  content: "\f00c";
+  margin-right: 5px;
+  font-weight: 900;
+}
+
+span.wishlist-out-of-stock:before{
+  font-family: 'FontAwesome';
+  letter-spacing: 0;
+  display: inline-block;
+  content: "\f00d";
+  margin-right: 5px;
+  font-weight: 900;
+}
+.overflow-auto{
+  overflow: auto;
+}
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
