@@ -52,12 +52,34 @@ export class ApiCallingServiceService {
 
 
   getApiWithToken(url: any) {
+
     this.token=localStorage.getItem('token');
     if(this.token!=null) {
       const headers = new HttpHeaders({
         'Authorization': this.token
       });
       return this.http.get(url,{headers}).pipe(
+        map((results) => results),
+        catchError(this.handleError)
+      );
+    }
+    else{
+
+      console.log(localStorage.getItem('token'));
+      return this.http.get(url).pipe(
+        map((results) => results),
+        catchError(this.handleError));
+    }
+  }
+
+  getApiWithTokenAndParams(url: any,params:any) {
+
+    this.token=localStorage.getItem('token');
+    if(this.token!=null) {
+      const headers = new HttpHeaders({
+        'Authorization': this.token
+      });
+      return this.http.get(url,{headers,params}).pipe(
         map((results) => results),
         catchError(this.handleError)
       );

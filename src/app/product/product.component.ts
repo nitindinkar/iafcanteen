@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 
 
 import {Router} from "@angular/router";
@@ -15,6 +15,7 @@ import { SharedService } from '../services/shared/shared.service';
   styleUrl: './product.component.scss'
 })
 export class ProductComponent implements OnInit{
+  
 
 
   // @ViewChild('image') imageElement: ElementRef;
@@ -22,14 +23,13 @@ export class ProductComponent implements OnInit{
   products: any;
   products2: any;
   viewProducts: any;
+  pageNumber: number = 1;
+  pageSize: number=8;
+  searchKey: string = '';
   displayedCategories: any[] = [];
-  
-  itemsPerPage: number = 5;
-  
-  pages: any;
+  totalPages: number = 0;
   totalItems: any;
-  currentPage: any;
-  pageChanged: any;
+  
   
     
 
@@ -42,7 +42,16 @@ export class ProductComponent implements OnInit{
 
   ngOnInit(): void {
     this.getAllProduct();
+   
   }
+
+  setPageSize(size: number) {
+    this.pageSize = size;
+    console.log('Selected page size:', this.pageSize);
+    this.getAllProduct();
+
+  }
+  
   public getAllCategories() {
     this.apiService.getApiWithToken(this.cons.api.getAllCategories).subscribe(
       (response: object) => {
@@ -70,14 +79,25 @@ export class ProductComponent implements OnInit{
   }
 
   public getAllProduct() {
-    this.apiService.getApiWithToken(this.cons.api.getAllProducts).subscribe(
+    const params = {
+      pageNumber: this.pageNumber,
+      pageSize: this.pageSize,
+      searchKey: this.searchKey
+
+    };
+    console.log(params);
+
+    this.apiService.getApiWithTokenAndParams(this.cons.api.getAllProducts,params).subscribe(
       (response: object) => {
         let result: { [key: string]: any } = response;
         this.products=result['response'];
+       
+        
         this.products.forEach((product: any) => {
-          product.image= 'data:image/jpeg;base64,'+product.image;
+        product.image= 'data:image/jpeg;base64,'+product.image;
         });
-        // debugger;
+
+        
         for(let product of this.products){
           product.imageUrl=this.cons.serviceUrl+product.imageUrl;
 
@@ -90,6 +110,9 @@ export class ProductComponent implements OnInit{
       }
     );
   }
+
+ 
+
 
   addToCart(product:any) {
     debugger;
@@ -223,21 +246,13 @@ export class ProductComponent implements OnInit{
     );
     
     }
+// pagination
 
-    // pagination start....
 
-    get totalPages(): number {
-      return Math.ceil(this.totalItems / this.itemsPerPage);
-    }
-  
-    changePage(page: number): void {
-      if (page >= 1 && page <= this.totalPages) {
-        this.currentPage = page;
-        this.pageChanged.emit(page);
-      }
-    }
+
+}
 
     
-}
+
 
 

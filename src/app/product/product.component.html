@@ -42,9 +42,9 @@
                                     <div class="btn-group ml-2">
                                         <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">Showing</button>
                                         <div class="dropdown-menu dropdown-menu-right">
-                                            <a class="dropdown-item" href="#">10</a>
-                                            <a class="dropdown-item" href="#">20</a>
-                                            <a class="dropdown-item" href="#">30</a>
+                                            <a class="dropdown-item" (click)="setPageSize(5)">5</a>
+                                            <a class="dropdown-item" (click)="setPageSize(10)">10</a>
+                                            <a class="dropdown-item" (click)="setPageSize(15)">15</a>
                                         </div>
                                     </div>
                                 </div>
@@ -499,11 +499,7 @@
             </div>
         </div>
     </div>
-    <div class="pagination">
-      <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">Previous</button>
-      <span>Page {{ currentPage }} of {{ totalPages }}</span>
-      <button (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages">Next</button>
-    </div>
+       <!-- pagination will start here....           -->
    
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">

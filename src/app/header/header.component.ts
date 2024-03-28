@@ -18,6 +18,9 @@ export class HeaderComponent implements OnInit {
    loggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   selectedCategory: string | undefined;
   products: any;
+  pageNumber:any;
+  pageSize:any;
+  searchKey:any;
   public cartCount: string | null=localStorage.getItem('cartCount');
 
 
