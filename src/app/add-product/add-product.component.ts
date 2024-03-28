@@ -99,7 +99,13 @@ addProduct() {
     next: (v: object) => {
       let result: { [key: string]: any } = v;
       if (result['message'] == 'success') {
-
+        alert("Product added Successfully");
+        this.name = '';
+        this.desc = '';
+        this.aPrice = null; 
+        this.dPrice = null; 
+        this.category = null;
+        
       } else {
 
       }

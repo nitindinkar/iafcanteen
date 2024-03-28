@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiCallingServiceService } from '../services/api-calling/api-calling-service.service';
 import { ConstantsService } from '../services/constants/constants.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-checkout',
@@ -40,8 +41,7 @@ export class CheckoutComponent implements OnInit {
 
 
   bookOrder(){
-    debugger;
-
+    
     const orderProductQuantityList = [];
 
     if (this.cartItems) {
@@ -132,7 +132,7 @@ export class CheckoutComponent implements OnInit {
         (response: object) => {
           let result: { [key: string]: any } = response;
           this.cart=result['response'];
-          if (result['message'] == 'success') {
+          if (result['status'] == '200') {
             alert('Your PdF report  has been placed successfully downloaded');
           }
 
@@ -144,10 +144,14 @@ export class CheckoutComponent implements OnInit {
       );
     }
 
+  
+}
+    
+
    
 
       
 
-}
+
 
 

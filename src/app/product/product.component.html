@@ -1,10 +1,10 @@
 
-  <!-- Start Product Area -->
+
     <div class="product-area section">
 
         <div class="container-fluid">
             <div class="row px-xl-5">
-                <!-- Shop Sidebar Start -->
+
                 <div class="col-lg-3 col-md-4">
 
                     <!-- Color Start -->
@@ -19,10 +19,7 @@
                         </form>
                     </div>
                 </div>
-                <!-- Shop Sidebar End -->
 
-
-                <!-- Shop Product Start -->
                 <div class="col-lg-9 col-md-8">
                     <div class="row pb-3">
                         <div class="col-12 pb-1">
@@ -129,11 +126,12 @@
                       </div>
                     </div>
                   </div>
+                </div>
                 <!-- End Product slider -->
-                            </div>
-                            <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
-                                <div class="quickview-content">
-                                    <h2>Flared Shift Dress</h2>
+
+                            <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12"  >
+                                <div class="quickview-content" *ngIf="viewProducts">
+                                    <h2 >{{viewProducts.productName}}</h2>
                                     <div class="quickview-ratting-review">
                                         <div class="quickview-ratting-wrap">
                                             <div class="quickview-ratting">
@@ -149,13 +147,13 @@
                                             <span><i class="fa fa-check-circle-o"></i> in stock</span>
                                         </div>
                                     </div>
-                                    <h3>₹29.00</h3>
+                                    <h3>{{viewProducts.productActualPrice}}</h3>
                                     <div class="quickview-peragraph">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia iste laborum ad impedit pariatur esse optio tempora sint ullam autem deleniti nam in quos qui nemo ipsum numquam.</p>
+                                        <p>{{viewProducts.productDescription}}</p>
                                     </div>
                   <div class="size">
                     <div class="row">
-                      <div class="col-lg-6 col-12">
+                      <!-- <div class="col-lg-6 col-12">
                         <h5 class="title">Size</h5>
                         <select>
                           <option selected="selected">s</option>
@@ -163,8 +161,8 @@
                           <option>l</option>
                           <option>xl</option>
                         </select>
-                      </div>
-                      <div class="col-lg-6 col-12">
+                      </div> -->
+                      <!-- <div class="col-lg-6 col-12">
                         <h5 class="title">Color</h5>
                         <select>
                           <option selected="selected">orange</option>
@@ -172,12 +170,11 @@
                           <option>black</option>
                           <option>pink</option>
                         </select>
-                      </div>
+                      </div> -->
                     </div>
                   </div>
-                                    <div class="quantity">
-                    <!-- Input Order -->
-                    <div class="input-group">
+                   <div class="quantity">
+                      <div class="input-group">
                       <div class="button minus">
                         <button type="button" class="btn btn-primary btn-number" disabled="disabled" data-type="minus" data-field="quant[1]">
                           <i class="ti-minus"></i>
@@ -213,4 +210,4 @@
                 </div>
             </div>
     </div>
-    <!-- Modal end -->
+
