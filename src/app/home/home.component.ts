@@ -15,7 +15,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.getAllCategories();
     this.getAllProduct();
-    
+
   }
 
   constructor(private cons:ConstantsService,
@@ -28,7 +28,7 @@ export class HomeComponent implements OnInit {
       (response: object) => {
         let result: { [key: string]: any } = response;
         this.categories=result['response'];
-        
+
       },
       (error) => {
         console.error('Add Product failed:', error);
@@ -41,7 +41,7 @@ export class HomeComponent implements OnInit {
       (response: object) => {
         let result: { [key: string]: any } = response;
         this.products=result['response'];
-       
+
         for(let product of this.products){
           product.imageUrl=this.cons.serviceUrl+product.imageUrl;
 

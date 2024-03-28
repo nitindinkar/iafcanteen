@@ -19,6 +19,7 @@ import { LiquorHomeComponent } from './liquor-home/liquor-home.component';
 import {SharedService} from "./services/shared/shared.service";
 import { MyAccountComponent } from './my-account/my-account.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import {WishlistComponent} from "./wishlist/wishlist.component";
 
 
 
@@ -38,6 +39,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     InventoryComponent,
     MyAccountComponent,
     LiquorHomeComponent,
+    WishlistComponent
 
 
   ],
@@ -50,8 +52,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     NgxPaginationModule,
 
 
-    
-    
+
+
   ],
   providers: [ SharedService,ProductComponent,
     provideAnimationsAsync()
