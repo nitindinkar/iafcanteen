@@ -215,6 +215,7 @@ export class ProductComponent implements OnInit{
 
 
   selectCat() {
+    this.p=1;
     let count=0;
     this.products2=[];
     for(let cat of this.categories){
