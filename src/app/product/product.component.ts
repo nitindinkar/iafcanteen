@@ -33,7 +33,7 @@ export class ProductComponent implements OnInit{
   
     
 
-
+  p: number = 1;
   constructor(private cons:ConstantsService,
               private apiService: ApiCallingServiceService,
               private router: Router,

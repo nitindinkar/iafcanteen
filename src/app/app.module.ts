@@ -20,6 +20,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { LiquorHomeComponent } from './liquor-home/liquor-home.component';
 import {SharedService} from "./services/shared/shared.service";
 import { MyAccountComponent } from './my-account/my-account.component';
+import {NgxPaginationModule} from "ngx-pagination";
 
 
 
@@ -47,6 +48,7 @@ import { MyAccountComponent } from './my-account/my-account.component';
     NgIf,
     FormsModule,
     HttpClientModule,
+    NgxPaginationModule,
 
 
 
