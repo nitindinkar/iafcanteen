@@ -19,7 +19,6 @@
                   <th scope="col">Product Name</th>
                   <th scope="col">Price</th>
                   <th scope="col">Quantity</th>
-                  <th scope="col">Category</th>
                   <th scope="col">Total</th>
                   <th scope="col">Order Status</th>
                 </tr>
@@ -46,12 +45,7 @@
                     <br>
                   </ng-container>
                 </td>
-                <td>
-                  <ng-container *ngFor="let userOrder of order.userOrders">
-                    {{ userOrder.product.category.name }}
-                    <br>
-                  </ng-container>
-                </td>
+                
                  <td>{{ order.totalOrderAmount | currency:'INR' }}</td>
                 
                 <td>{{ order.orderStatus }}</td>
@@ -187,7 +181,7 @@
                     <label for="pwd" class="form-label">New Password:</label>
                     <input type="password" class="form-control" id="pwd" placeholder="Enter newpassword" name="pswd">
                   </div>
-                  <div class="mb-3 mt-3 col-md-12 px-2">
+                  <div class="mb-3 mt-3 col-md-12 px-2ter">
                     <label for="pwd" class="form-label">Confirm Password:</label>
                     <input type="password" class="form-control" id="pwd" placeholder="Enter confirm password" name="pswd">
                   </div>

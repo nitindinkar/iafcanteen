@@ -10,6 +10,7 @@ import {MyAccountComponent} from "./my-account/my-account.component";
 import {InventoryComponent} from "./inventory/inventory.component";
 import { LiquorHomeComponent } from './liquor-home/liquor-home.component';
 import {WishlistComponent} from "./wishlist/wishlist.component";
+import { ContactUsComponent } from './contact-us/contact-us.component';
 const routes: Routes = [
   { path: '', component:  HomeComponent},
   { path: 'liquor', component:  LiquorHomeComponent},
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: 'my-account', component:  MyAccountComponent},
   { path: 'inventory', component:  InventoryComponent},
   { path: 'wishlist', component:  WishlistComponent},
+  { path: 'contact-us', component: ContactUsComponent}
 ];
 
 @NgModule({

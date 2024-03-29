@@ -32,7 +32,8 @@ export class ConstantsService {
     generatePdf:this.serviceUrl+"order/pdf",
     viewProductById:this.serviceUrl+"product/getProductById",
     myAccountDetails:this.serviceUrl+"loginAuth/getAddress",
-    getOrderDetails:this.serviceUrl+"order/getOrderDetailsOfUser"
+    getOrderDetails:this.serviceUrl+"order/getOrderDetailsOfUser",
+    getWishList:this.serviceUrl+"wishlist/WishlistDetailsOfUser"
 
   };
 }
