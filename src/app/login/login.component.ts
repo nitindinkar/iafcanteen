@@ -113,10 +113,37 @@ export class LoginComponent implements OnInit{
 
         },
         (error) => {
+          alert("Please Enter Valid Details")
           // Handle login failure, e.g., display an error message
           console.error('Login failed:', error);
         }
       );
+  }
+
+
+  verifyLoginCredentials(){
+    const cardType= this.selected;
+    const cardNumber=this.cardNumber;
+    const extractedLetters = this.cardNumber.substring(0, 2);
+ 
+
+    console.log("Frst two letter of card"+extractedLetters);
+
+    console.log("the card Type is ...............>>>>>>>>>>>>>>>>>>"+this.selected);
+    if(this.selected=="Grocery" && extractedLetters==="Gq"){
+        this.login();
+      
+    }
+    else if(this.selected=="Liquor"&& extractedLetters==="Lq"){
+      this.login();
+      }
+      else{
+        alert("please Card Number According to the Card Type Entered")
+      }
+
+
+    
+
   }
 
   login(){
@@ -125,20 +152,20 @@ export class LoginComponent implements OnInit{
     const headers = new HttpHeaders({
       'cardType': this.selected,
     });
-    console.log(headers);
-    let credentials:any = {
+    
+      let credentials:any = {
       cardNumber:this.cardNumber,
       userPassword:this.loginPassword
     }
-    console.log(credentials);
-    this.HttpClient.post(loginUrl, credentials,{ headers:headers})
+        
+      this.HttpClient.post(loginUrl, credentials,{ headers:headers})
       .subscribe(
         (response: object) => {
           let result: { [key: string]: any } = response;
+          
           // Handle successful login, e.g., redirect the user or perform other actions
-          console.log(result);
-          debugger;
-          if(result['message']=='success'){
+          
+            if(result['message']=='success'){
             this.sharedService.loggedIn=true;
             this.token=result['response'].jwtToken.toString();
             localStorage.setItem('token','Bearer '+this.token);
@@ -157,10 +184,10 @@ export class LoginComponent implements OnInit{
             }
 
           }
+          
         },
-        (error) => {
-          // Handle login failure, e.g., display an error message
-          console.error('Login failed:', error);
+        (error) => {           
+          alert("please Enter Valid Credential");     
         }
       );
 

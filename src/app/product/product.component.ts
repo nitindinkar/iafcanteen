@@ -116,7 +116,7 @@ export class ProductComponent implements OnInit{
 
 
   addToCart(product:any) {
-    debugger;
+  
 
     if (product.isInCart) {
       alert("Product is already in the cart!");
@@ -140,6 +140,7 @@ export class ProductComponent implements OnInit{
         }
       },
       (error) => {
+        alert("You are Admin OR You have logged In.. Please Login first to add Product to Cart")
         console.error('Add Product failed:', error);
       }
     );

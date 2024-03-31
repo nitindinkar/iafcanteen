@@ -21,6 +21,8 @@
                   <th scope="col">Quantity</th>
                   <th scope="col">Total</th>
                   <th scope="col">Order Status</th>
+                  <th scope="col">Cancel Order</th>
+
                 </tr>
               </thead>
               <tbody>
@@ -49,6 +51,9 @@
                  <td>{{ order.totalOrderAmount | currency:'INR' }}</td>
                 
                 <td>{{ order.orderStatus }}</td>
+                <td class="align-middle">
+                  <i style="font-size:24px" class="fa">&#xf00d;</i>
+                </td>
               </tr>
               <!-- <tr>
                 <th scope="row"><input type="checkbox" name="selectAll" id="selectAll"></th>
@@ -136,7 +141,7 @@
                   </div>
                   <div class="mb-3 mt-3 col-md-6 px-2">
                     <label for="name" class="form-label">Liquir Card No:</label>
-                    <input type="text" class="form-control" id="Liquir" placeholder="0123456" name="Liquir" parsedLoginResponse.user.liquorCardNumber>
+                    <input type="text" class="form-control" id="Liquir" placeholder="0123456" name="Liquir" [(ngModel)]="parsedLoginResponse.user.liquorCardNumber">
                   </div>
                   <div class="mb-3 mt-3 col-md-6 px-2">
                     <label for="name" class="form-label">Grocery Card No:</label>
