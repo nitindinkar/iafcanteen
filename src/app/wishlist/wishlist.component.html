@@ -7,35 +7,45 @@
               <table class="table table-striped">
                 <thead>
                   <tr>
-                    <th scope="col">Images</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Stock Status</th>
+                    <!-- <th scope="col">Images</th> -->
+                    <th scope="col">Name</th>                    
+                    
                     <th scope="col">Price</th>
-                    <th scope="col">Action</th>
+                    <th scope="col">Stock Status</th>
+                    <th scope="col">Add To Cart </th>
+                    <th scope="col">Remove</th>
+                    
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td><img src="../../assets/images/550x750.png" class="inventory-image"></td>
-                    <td>Blackdog</td>
+                  <tr *ngFor="let wishList of wishResponse" >
+                    <!-- <td><img src="../../assets/images/550x750.png" class="inventory-image"></td> -->
+                    <td>{{ wishList.product.dto.productName }}</td>            
+                    
+                    <td>₹{{ wishList.product.dto.productDiscountedPrice }}<span class="mrp">(₹{{ wishList.product.dto.productActualPrice }})</span></td>
                     <td><span class="wishlist-in-stock">In Stock</span></td>
-                    <td>Liquir</td>
-                    <td>₹850 <span class="mrp">(₹1560)</span></td>
+                    <td class="align-middle">
+                      <i style="font-size:24px" class="fa">&#xf07a;</i>
+                    </td>
+                    <td class="align-middle">
+                      <i style="font-size:24px" class="fa">&#xf00d;</i>
+                    </td>
+                    
                   </tr>
-                  <tr>
+                  <!-- <tr>
                     <td><img src="../../assets/images/550x750.png" class="inventory-image"></td>
                     <td>Blenders Pride</td>
                     <td><span class="wishlist-out-of-stock">Out of Stock</span></td>
                     <td>Liquir</td>
                     <td>₹850 <span class="mrp">(₹1560)</span></td>
-                  </tr>
-                  <tr>
+                  </tr> -->
+                  <!-- <tr>
                     <td><img src="../../assets/images/550x750.png" class="inventory-image"></td>
                     <td>Old MOnk</td>
                     <td><span class="wishlist-in-stock">In Stock</span></td>
                     <td>Liquir</td>
                     <td>₹850 <span class="mrp">(₹1560)</span></td>
-                  </tr>
+                  </tr> -->
                 </tbody>
               </table>
               

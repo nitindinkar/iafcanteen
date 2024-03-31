@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ConstantsService } from '../services/constants/constants.service';
+import { ApiCallingServiceService } from '../services/api-calling/api-calling-service.service';
+import { Router } from '@angular/router';
+import { SharedService } from '../services/shared/shared.service';
 
 @Component({
   selector: 'app-wishlist',
@@ -6,9 +10,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrl: './wishlist.component.scss'
 })
 export class WishlistComponent implements OnInit {
-  apiService: any;
-  cons: any;
+ 
+  
   wishResponse: any;
+
+
+  constructor(public cons:ConstantsService,
+    private apiService: ApiCallingServiceService,
+    private router: Router,
+    private sharedService: SharedService) {
+}
   
   
   
