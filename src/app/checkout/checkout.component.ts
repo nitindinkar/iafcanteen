@@ -127,21 +127,19 @@ export class CheckoutComponent implements OnInit {
     }
 
     generateReport(){
+      debugger;
 
       this.apiService.getApiWithToken(this.cons.api.generatePdf).subscribe(
         (response: object) => {
           let result: { [key: string]: any } = response;
 
-          // let pdfUrl: string = result['response'];
-          let pdfUrl="D:\Reports\dummy.pdf";
+          let pdfUrl: string = result['response'];
           const link = document.createElement('a');
           link.href = pdfUrl;
           link.download = 'report.pdf'; // You can specify any file name here
-
-        // Triggering the click event programmatically
+          link.target = '_blank'; // Open in a new tab if needed
+          // Triggering the click event programmatically
           link.click();
-
-
         },
         (error) => {
           console.error('Add Product failed:', error);
