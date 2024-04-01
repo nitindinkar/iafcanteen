@@ -21,7 +21,7 @@ export class CheckoutComponent implements OnInit {
   subtotal: any | Number;
   public cartTotal: any;
   public  cartItems: any;
-  
+
   display:Boolean=false;
   constructor(
     private router: Router,
@@ -32,7 +32,7 @@ export class CheckoutComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    
+
     this.getCartDetails();
     this.cartItems=this.sharedService.cart;
     this.cartTotal=this.sharedService.cartTotal;
@@ -41,7 +41,7 @@ export class CheckoutComponent implements OnInit {
 
 
   bookOrder(){
-    
+
     const orderProductQuantityList = [];
 
     if (this.cartItems) {
@@ -49,12 +49,12 @@ export class CheckoutComponent implements OnInit {
       // Extract productId and quantity for the current item
       const productId = cart.product.productId;
       const quantity = cart.product.quantity;
-  
+
       // Push the productId and quantity to the productQuantityList array
       orderProductQuantityList.push({ productId: productId, quantity: quantity });
     }
   }
-    
+
     this.flag=true;
     const billingData = {
       fullName: this.fullName,
@@ -131,17 +131,17 @@ export class CheckoutComponent implements OnInit {
       this.apiService.getApiWithToken(this.cons.api.generatePdf).subscribe(
         (response: object) => {
           let result: { [key: string]: any } = response;
-          
+
           // let pdfUrl: string = result['response'];
           let pdfUrl="D:\Reports\dummy.pdf";
           const link = document.createElement('a');
           link.href = pdfUrl;
           link.download = 'report.pdf'; // You can specify any file name here
-  
+
         // Triggering the click event programmatically
           link.click();
-          
-                   
+
+
         },
         (error) => {
           console.error('Add Product failed:', error);
@@ -149,13 +149,13 @@ export class CheckoutComponent implements OnInit {
       );
     }
 
-    
+
 }
-    
 
-   
 
-      
+
+
+
 
 
 

@@ -11,6 +11,7 @@ import {InventoryComponent} from "./inventory/inventory.component";
 import { LiquorHomeComponent } from './liquor-home/liquor-home.component';
 import {WishlistComponent} from "./wishlist/wishlist.component";
 import { ContactUsComponent } from './contact-us/contact-us.component';
+import {AddCategoryComponent} from "./add-category/add-category.component";
 const routes: Routes = [
   { path: '', component:  HomeComponent},
   { path: 'liquor', component:  LiquorHomeComponent},
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'cart', component:  CartComponent},
   { path: 'checkout', component:  CheckoutComponent},
   { path: 'add-product', component:  AddProductComponent},
+  { path: 'add-category', component:  AddCategoryComponent},
   { path: 'my-account', component:  MyAccountComponent},
   { path: 'inventory', component:  InventoryComponent},
   { path: 'wishlist', component:  WishlistComponent},

@@ -20,6 +20,7 @@ import {SharedService} from "./services/shared/shared.service";
 import { MyAccountComponent } from './my-account/my-account.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import {WishlistComponent} from "./wishlist/wishlist.component";
+import { AddCategoryComponent } from './add-category/add-category.component';
 
 
 
@@ -39,7 +40,8 @@ import {WishlistComponent} from "./wishlist/wishlist.component";
     InventoryComponent,
     MyAccountComponent,
     LiquorHomeComponent,
-    WishlistComponent
+    WishlistComponent,
+    AddCategoryComponent
 
 
   ],
