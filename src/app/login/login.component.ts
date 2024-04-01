@@ -105,10 +105,7 @@ export class LoginComponent implements OnInit{
     this.HttpClient.post(registerationUrl, credentials,{responseType:'text'})
       .subscribe(
         (response: any) => {
-          console.log(response);
-          if(response['message']=="success"){
-            alert("Registration Successful");
-          }
+          alert("registration Successfull");
           // Handle successful login, e.g., redirect the user or perform other actions
 
         },

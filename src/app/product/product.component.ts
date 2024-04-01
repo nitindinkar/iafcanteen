@@ -93,11 +93,12 @@ export class ProductComponent implements OnInit{
       (response: object) => {
         let result: { [key: string]: any } = response;
         this.products=result['response'];
+        this.products2 = this.products.map((product: { imageUrl: string; }) => ({ ...product, imageUrl: this.cons.serviceUrl + product.imageUrl }));
 
 
-        this.products.forEach((product: any) => {
-        product.image= 'data:image/jpeg;base64,'+product.image;
-        });
+        // this.products.forEach((product: any) => {
+        // product.image= 'data:image/jpeg;base64,'+product.image;
+        // });
 
 
         for(let product of this.products){
