@@ -131,10 +131,17 @@ export class CheckoutComponent implements OnInit {
       this.apiService.getApiWithToken(this.cons.api.generatePdf).subscribe(
         (response: object) => {
           let result: { [key: string]: any } = response;
-          let pdfUrl: string = result['response'];
-         
-          console.log("pdf report response is "+pdfUrl);
           
+          // let pdfUrl: string = result['response'];
+          let pdfUrl="D:\Reports\dummy.pdf";
+          const link = document.createElement('a');
+          link.href = pdfUrl;
+          link.download = 'report.pdf'; // You can specify any file name here
+  
+        // Triggering the click event programmatically
+          link.click();
+          
+                   
         },
         (error) => {
           console.error('Add Product failed:', error);
@@ -142,8 +149,6 @@ export class CheckoutComponent implements OnInit {
       );
     }
 
-    
-  
     
 }
     
