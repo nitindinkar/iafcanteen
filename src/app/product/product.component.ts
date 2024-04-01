@@ -36,6 +36,7 @@ export class ProductComponent implements OnInit{
 
 
   p: number = 1;
+  public currentIndex:number=0;
   constructor(public cons:ConstantsService,
               private apiService: ApiCallingServiceService,
               private router: Router,
@@ -116,7 +117,7 @@ export class ProductComponent implements OnInit{
 
 
   addToCart(product:any) {
-  
+
 
     if (product.isInCart) {
       alert("Product is already in the cart!");
@@ -265,6 +266,11 @@ export class ProductComponent implements OnInit{
 
 
   // protected readonly localStorage = localStorage;
+  setIndex(i: number) {
+    this.currentIndex=i;
+    debugger;
+
+  }
 }
 
 

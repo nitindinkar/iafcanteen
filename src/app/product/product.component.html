@@ -65,7 +65,7 @@
                                               </a>
                                               <div class="button-head">
                                                 <div class="product-action">
-                                                  <a data-toggle="modal" data-target="#exampleModal" title="Quick View" href="#"><i class=" ti-eye"></i><span>Quick Shop</span></a>
+                                                  <a data-toggle="modal" (click)="setIndex(i)" data-target="#exampleModal" title="Quick View" href="#"><i class=" ti-eye"></i><span>Quick Shop</span></a>
                                                    <a title="Wishlist"   (click)="addToWish(product)"><i class=" ti-heart "></i><span >Add to Wishlist</span></a>
 
                                                   <a title="Compare"  href="#"><i class="ti-bar-chart-alt"></i><span>Add to Compare</span></a>
@@ -106,7 +106,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span class="ti-close" aria-hidden="true"></span></button>
+                        <button type="button" class="close" data-dismiss="modal"  aria-label="Close"><span class="ti-close" aria-hidden="true"></span></button>
                     </div>
                     <div class="modal-body">
                         <div class="row no-gutters">
@@ -132,8 +132,8 @@
                 <!-- End Product slider -->
 
                             <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12"  >
-                                <div class="quickview-content" *ngIf="viewProducts">
-                                    <h2 >{{viewProducts.productName}}</h2>
+                                <div class="quickview-content" *ngIf="products2">
+                                    <h2 >{{products2[currentIndex].productName}}</h2>
                                     <div class="quickview-ratting-review">
                                         <div class="quickview-ratting-wrap">
                                             <div class="quickview-ratting">
@@ -149,9 +149,9 @@
                                             <span><i class="fa fa-check-circle-o"></i> in stock</span>
                                         </div>
                                     </div>
-                                    <h3>{{viewProducts.productActualPrice}}</h3>
+                                    <h3>{{products2[currentIndex].productActualPrice}}</h3>
                                     <div class="quickview-peragraph">
-                                        <p>{{viewProducts.productDescription}}</p>
+                                        <p>{{products2[currentIndex].productDescription}}</p>
                                     </div>
                   <div class="size">
                     <div class="row">
