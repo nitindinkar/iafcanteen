@@ -63,6 +63,8 @@ export class MyAccountComponent implements OnInit{
     }
   }
 
+
+
   order(){
     this.apiService.getApiWithToken(this.cons.api.getOrderDetails).subscribe(
       (response: object) => {
@@ -72,13 +74,16 @@ export class MyAccountComponent implements OnInit{
 
         this.orderDetails = this.orderDetails.filter((order: { user: { id: any; }; }) => order.user.id === this.parsedLoginResponse.user.id);
         console.log("user id 1 wali hai...."+this.orderDetails)
+        
       },
       (error) => {
         console.error('Add Product failed:', error);
       }
+      
     );
 
   }
+  
 
   
 }

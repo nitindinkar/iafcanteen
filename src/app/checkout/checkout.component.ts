@@ -131,12 +131,10 @@ export class CheckoutComponent implements OnInit {
       this.apiService.getApiWithToken(this.cons.api.generatePdf).subscribe(
         (response: object) => {
           let result: { [key: string]: any } = response;
-          this.cart=result['response'];
-          if (result['status'] == '200') {
-            alert('Your PdF report  has been placed successfully downloaded');
-          }
-
-           
+          let pdfUrl: string = result['response'];
+         
+          console.log("pdf report response is "+pdfUrl);
+          
         },
         (error) => {
           console.error('Add Product failed:', error);
@@ -144,7 +142,9 @@ export class CheckoutComponent implements OnInit {
       );
     }
 
+    
   
+    
 }
     
 
