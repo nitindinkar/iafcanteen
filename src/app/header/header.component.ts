@@ -25,6 +25,7 @@ export class HeaderComponent implements OnInit {
   loginResponse: any;
   products2: any;
   groccery: boolean=true;
+  private cardType: string='';
   filterProducts: any;
   filteredProducts: any[] | undefined;
 
@@ -55,6 +56,8 @@ export class HeaderComponent implements OnInit {
     }
     if(localStorage.getItem('card')==this.cons.constants.liquorCard){
       this.groccery=false;
+      this.cardType='L'
+      this.getCartItems();
       // this.sharedService.selectedCategory={id:8};
       // console.log("this is shared service "+this.sharedService.selectedCategory);
       // console.log(localStorage.getItem('card'));
@@ -62,9 +65,11 @@ export class HeaderComponent implements OnInit {
     }
     else{
       this.groccery=true;
+      this.cardType='G'
+      this.getCartItems();
     }
     this.getcategories();
-    this.getCartItems();
+
   }
 
 
@@ -147,7 +152,7 @@ export class HeaderComponent implements OnInit {
 
   private getCartItems() {
     this.cartCount;
-    this.apiService.getApiWithToken(this.cons.api.getCartDetailsOfUser).subscribe(
+    this.apiService.getApiWithToken(this.cons.api.getCartDetailsOfUser+'/'+this.cardType).subscribe(
       (response: object) => {
         let result: { [key: string]: any } = response;
         this.cartCount=result['response'].length;

@@ -18,11 +18,21 @@ export class CartComponent implements OnInit{
   cart: any;
   subtotal: number = 0;
   acc:any|number
+  private cardType: String='';
 
 
   ngOnInit(): void {
-    this.getCartDetails();
-  }
+
+    if(localStorage.getItem('card')==this.cons.constants.liquorCard) {
+      this.cardType = 'L';
+      this.getCartDetails();
+    }
+    else{
+      this.cardType = 'G';
+      this.getCartDetails();
+    }
+
+    }
 
 
   constructor(private cons:ConstantsService,
@@ -33,7 +43,7 @@ export class CartComponent implements OnInit{
 
   getCartDetails(){
 
-    this.apiService.getApiWithToken(this.cons.api.getCartDetailsOfUser).subscribe(
+    this.apiService.getApiWithToken(this.cons.api.getCartDetailsOfUser+'/'+this.cardType).subscribe(
       (response: object) => {
         let result: { [key: string]: any } = response;
         this.cart=result['response'];
@@ -100,7 +110,7 @@ export class CartComponent implements OnInit{
 
 calculateSubtotal() {
   this.subtotal = 0;
-  
+
   if (this.cart && this.cart.length > 0) {
     for (let cartItem of this.cart) {
       if (cartItem.product && cartItem.product.quantity && cartItem.product.productDiscountedPrice) {
