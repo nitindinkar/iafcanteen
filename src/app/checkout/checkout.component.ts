@@ -23,6 +23,7 @@ export class CheckoutComponent implements OnInit {
   public  cartItems: any;
 
   display:Boolean=false;
+  private cardType: string='';
   constructor(
     private router: Router,
     private http: HttpClient,
@@ -33,7 +34,14 @@ export class CheckoutComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.getCartDetails();
+    if(localStorage.getItem('card')==this.cons.constants.liquorCard) {
+      this.cardType = 'L';
+      this.getCartDetails();
+    }
+    else{
+      this.cardType = 'G';
+      this.getCartDetails();
+    }
     this.cartItems=this.sharedService.cart;
     this.cartTotal=this.sharedService.cartTotal;
     debugger;
@@ -62,6 +70,7 @@ debugger;
       contactNumber: this.contactNumber,
       alternateContactNumber: this.alternateContactNumber,
       selectedStore:"Delhi",
+      cardType:this.cardType,
       orderProductQuantityList
       };
       console.log(billingData);
@@ -89,7 +98,7 @@ debugger;
 
   getCartDetails(){
 
-    this.apiService.getApiWithToken(this.cons.api.getCartDetailsOfUser).subscribe(
+    this.apiService.getApiWithToken(this.cons.api.getCartDetailsOfUser+'/'+this.cardType).subscribe(
       (response: object) => {
         let result: { [key: string]: any } = response;
         this.cart=result['response'];
