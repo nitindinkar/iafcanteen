@@ -20,6 +20,7 @@ export class SharedService {
   public cart: any;
   selectedCategory: any;
   loggedIn: boolean=false;
+  searchKey: string='';
   constructor(
     private router: Router,
     private http: HttpClient,

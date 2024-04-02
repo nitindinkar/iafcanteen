@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit {
   constructor(private cons:ConstantsService,
     private apiService: ApiCallingServiceService,
     private router: Router,
-              private sharedService:SharedService) {
+    private sharedService:SharedService) {
 }
 
   private getAllCategories() {

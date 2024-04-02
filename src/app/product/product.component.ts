@@ -37,6 +37,7 @@ export class ProductComponent implements OnInit{
 
   p: number = 1;
   public currentIndex:number=0;
+  searchKey: string='';
   constructor(public cons:ConstantsService,
               private apiService: ApiCallingServiceService,
               private router: Router,
@@ -57,6 +58,8 @@ export class ProductComponent implements OnInit{
     }
     this.getAllProduct();
     this.getAllCategories();
+    this.searchKey = this.sharedService.searchKey;
+    console.log(this.searchKey);
   }
 
   public getAllCategories() {
@@ -98,6 +101,15 @@ export class ProductComponent implements OnInit{
       (response: object) => {
         let result: { [key: string]: any } = response;
         this.products=result['response'];
+
+        // Filter products based on the search key
+        if (this.searchKey && this.searchKey.trim() !== '') {
+          debugger;
+          this.products = this.products.filter((product: { productName: string; }) =>
+            product.productName.toLowerCase().includes(this.searchKey.toLowerCase())
+          );
+        }
+
         this.products = this.products.map((product: { imageUrl: string; }) => ({ ...product, imageUrl: this.cons.serviceUrl + product.imageUrl }));
         debugger;
 

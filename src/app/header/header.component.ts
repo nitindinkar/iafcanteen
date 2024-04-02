@@ -1,9 +1,10 @@
+import { SharedService } from './../services/shared/shared.service';
 import { Component, OnInit } from '@angular/core';
 import { ConstantsService } from '../services/constants/constants.service';
 import { ApiCallingServiceService } from '../services/api-calling/api-calling-service.service';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
-import {SharedService} from "../services/shared/shared.service";
+
 import {ProductComponent} from "../product/product.component";
 
 @Component({
@@ -13,19 +14,22 @@ import {ProductComponent} from "../product/product.component";
 })
 export class HeaderComponent implements OnInit {
   categories: any;
-  //loggedIn: any;
-
-   loggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  loggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   selectedCategory: string | undefined;
   products: any;
   pageNumber:any;
   pageSize:any;
-  searchKey:any;
+  searchKey: string = '';
   admin:boolean=false;
   public cartCount: string | null=localStorage.getItem('cartCount');
   loginResponse: any;
   products2: any;
   groccery: boolean=true;
+  filterProducts: any;
+  filteredProducts: any[] | undefined;
+
+
+  
 
 
 
@@ -33,7 +37,8 @@ export class HeaderComponent implements OnInit {
               private apiService: ApiCallingServiceService,
               private router: Router,
               public sharedService:SharedService,
-              private productComp:ProductComponent) {
+              private productComp:ProductComponent,
+              ) {
 }
 
   ngOnInit(): void {
@@ -70,6 +75,7 @@ export class HeaderComponent implements OnInit {
       (response: object) => {
         let result: { [key: string]: any } = response;
         this.categories=result['response'];
+               
         for(let cat of this.categories){
           if(this.groccery&&cat.type=='G'){
             this.categoriesSorted.push(cat);
@@ -87,13 +93,24 @@ export class HeaderComponent implements OnInit {
     );
   }
 
-  filterProductsByCategory(category: string) {
-    this.selectedCategory = category;
-}
+
+  
+ searchProducts(): void {
+  debugger;
+    this.sharedService.searchKey = this.searchKey;
+    this.router.navigate(['/product']);
+  }
+
+  
+
+
+  
+
+  
 
 // Method to get filtered products
   categoriesSorted:any[]=[];
-getFilteredProducts() {
+  getFilteredProducts() {
   return this.products.filter((product: { category: string; }) => {
       // If no category selected or product's category matches the selected category
       return !this.selectedCategory || product.category === this.selectedCategory;
