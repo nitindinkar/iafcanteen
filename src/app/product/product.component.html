@@ -6,15 +6,32 @@
 
                 <!-- <div class="col-lg-3 col-md-4" *ngIf="localStorage.getItem('card')!=this.cons.constants.liquorCard"> -->
 
-                  <div class="col-lg-3 col-md-4">
+                  <div class="col-lg-3 col-md-4" *ngIf="groccery">
                     <!-- Color Start -->
                      <h5 class="section-title position-relative text-uppercase mb-3"><span class="pr-3">Filter by Category</span></h5>
                      <div class="bg-light p-4 mb-30">
                         <form>
-                            <div *ngFor="let cat of categories; let i=index" class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                            <div *ngFor="let cat of categories; let i=index" >
+                              <div *ngIf="cat.type=='G'" class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                                 <input type="checkbox" class="custom-control-input" id="{{i}}" [(ngModel)]="cat.selected" [ngModelOptions]="{standalone: true}" (change)="selectCat()">
                                 <label class="custom-control-label" for="{{i}}">{{ cat.name }}</label>
                                 <span class="badge border font-weight-normal">{{ cat.totalProducts }}</span>
+                              </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                  <div class="col-lg-3 col-md-4" *ngIf="!groccery">
+                    <!-- Color Start -->
+                     <h5 class="section-title position-relative text-uppercase mb-3"><span class="pr-3">Filter by Category</span></h5>
+                     <div class="bg-light p-4 mb-30">
+                        <form>
+                            <div *ngFor="let cat of categories; let i=index">
+                              <div *ngIf="cat.type=='L'" class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                                <input type="checkbox" class="custom-control-input" id="{{i}}" [(ngModel)]="cat.selected" [ngModelOptions]="{standalone: true}" (change)="selectCat()">
+                                <label class="custom-control-label" for="{{i}}">{{ cat.name }}</label>
+                                <span class="badge border font-weight-normal">{{ cat.totalProducts }}</span>
+                              </div>
                             </div>
                         </form>
                     </div>

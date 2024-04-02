@@ -25,9 +25,10 @@ export class HeaderComponent implements OnInit {
   public cartCount: string | null=localStorage.getItem('cartCount');
   loginResponse: any;
   products2: any;
- 
-  
-  
+  groccery: boolean=true;
+
+
+
   constructor(private cons:ConstantsService,
               private apiService: ApiCallingServiceService,
               private router: Router,
@@ -47,12 +48,21 @@ export class HeaderComponent implements OnInit {
           this.admin=true;
       }
     }
-
+    if(localStorage.getItem('card')==this.cons.constants.liquorCard){
+      this.groccery=false;
+      // this.sharedService.selectedCategory={id:8};
+      // console.log("this is shared service "+this.sharedService.selectedCategory);
+      // console.log(localStorage.getItem('card'));
+      // console.log(this.cons.constants.liquorCard);
+    }
+    else{
+      this.groccery=true;
+    }
     this.getcategories();
     this.getCartItems();
   }
 
- 
+
 
   getcategories(){
 
@@ -60,7 +70,15 @@ export class HeaderComponent implements OnInit {
       (response: object) => {
         let result: { [key: string]: any } = response;
         this.categories=result['response'];
+        for(let cat of this.categories){
+          if(this.groccery&&cat.type=='G'){
+            this.categoriesSorted.push(cat);
+          }
+          else if(!this.groccery&&cat.type=='L'){
+            this.categoriesSorted.push(cat);
+          }
 
+        }
 
       },
       (error) => {
@@ -74,6 +92,7 @@ export class HeaderComponent implements OnInit {
 }
 
 // Method to get filtered products
+  categoriesSorted:any[]=[];
 getFilteredProducts() {
   return this.products.filter((product: { category: string; }) => {
       // If no category selected or product's category matches the selected category
@@ -81,39 +100,6 @@ getFilteredProducts() {
   });
 }
 
-public getAllProduct(searchKey?: string) {
-  // const params = {
-  //   pageNumber: this.pageNumber,
-  //   pageSize: this.pageSize,
-  //   searchKey: this.searchKey
-
-  // };
-
-
-  this.apiService.getApiWithToken(this.cons.api.getAllProducts).subscribe(
-    (response: object) => {
-      let result: { [key: string]: any } = response;
-      this.products=result['response'];
-      this.products2 = this.products.map((product: { imageUrl: string; }) => ({ ...product, imageUrl: this.cons.serviceUrl + product.imageUrl }));
-
-
-      // this.products.forEach((product: any) => {
-      // product.image= 'data:image/jpeg;base64,'+product.image;
-      // });
-
-
-      for(let product of this.products){
-        product.imageUrl=this.cons.serviceUrl+product.imageUrl;
-
-      }
-      this.products2=this.products;
-      
-    },
-    (error) => {
-      console.error('Add Product failed:', error);
-    }
-  );
-}
 
   logout() {
     // Call your authentication service logout method

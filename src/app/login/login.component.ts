@@ -122,14 +122,9 @@ export class LoginComponent implements OnInit{
     const cardType= this.selected;
     const cardNumber=this.cardNumber;
     const extractedLetters = this.cardNumber.substring(0, 2);
- 
-
-    console.log("Frst two letter of card"+extractedLetters);
-
-    console.log("the card Type is ...............>>>>>>>>>>>>>>>>>>"+this.selected);
     if(this.selected=="Grocery" && extractedLetters==="Gq"){
         this.login();
-      
+
     }
     else if(this.selected=="Liquor"&& extractedLetters==="Lq"){
       this.login();
@@ -139,7 +134,7 @@ export class LoginComponent implements OnInit{
       }
 
 
-    
+
 
   }
 
@@ -149,19 +144,19 @@ export class LoginComponent implements OnInit{
     const headers = new HttpHeaders({
       'cardType': this.selected,
     });
-    
+
       let credentials:any = {
       cardNumber:this.cardNumber,
       userPassword:this.loginPassword
     }
-        
+
       this.HttpClient.post(loginUrl, credentials,{ headers:headers})
       .subscribe(
         (response: object) => {
           let result: { [key: string]: any } = response;
-          
+
           // Handle successful login, e.g., redirect the user or perform other actions
-          
+
             if(result['message']=='success'){
             this.sharedService.loggedIn=true;
             this.token=result['response'].jwtToken.toString();
@@ -181,10 +176,10 @@ export class LoginComponent implements OnInit{
             }
 
           }
-          
+
         },
-        (error) => {           
-          alert("please Enter Valid Credential");     
+        (error) => {
+          alert("please Enter Valid Credential");
         }
       );
 

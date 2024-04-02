@@ -14,7 +14,7 @@ import { SharedService } from '../services/shared/shared.service';
 })
 export class ProductComponent implements OnInit{
 
-
+  groccery:boolean=true;
 
   // @ViewChild('image') imageElement: ElementRef;
   categories:any;
@@ -46,12 +46,17 @@ export class ProductComponent implements OnInit{
   ngOnInit(): void {
     debugger;
     if(localStorage.getItem('card')==this.cons.constants.liquorCard){
-      this.sharedService.selectedCategory={id:8};
+      this.groccery=false;
+      // this.sharedService.selectedCategory={id:8};
       // console.log("this is shared service "+this.sharedService.selectedCategory);
       // console.log(localStorage.getItem('card'));
       // console.log(this.cons.constants.liquorCard);
     }
+    else{
+      this.groccery=true;
+    }
     this.getAllProduct();
+    this.getAllCategories();
   }
 
   public getAllCategories() {
@@ -93,20 +98,26 @@ export class ProductComponent implements OnInit{
       (response: object) => {
         let result: { [key: string]: any } = response;
         this.products=result['response'];
-        this.products2 = this.products.map((product: { imageUrl: string; }) => ({ ...product, imageUrl: this.cons.serviceUrl + product.imageUrl }));
-
+        this.products = this.products.map((product: { imageUrl: string; }) => ({ ...product, imageUrl: this.cons.serviceUrl + product.imageUrl }));
+        debugger;
 
         // this.products.forEach((product: any) => {
         // product.image= 'data:image/jpeg;base64,'+product.image;
         // });
 
-
+        this.products2=[];
         for(let product of this.products){
           product.imageUrl=this.cons.serviceUrl+product.imageUrl;
-
+          if(this.groccery&&product.category.type=='G'){
+            this.products2.push(product);
+          }
+          else if(!this.groccery&&product.category.type=='L'){
+            this.products2.push(product);
+          }
         }
-        this.products2=this.products;
-        this.getAllCategories();
+
+        // this.products2=this.products;
+        // this.getAllCategories();
       },
       (error) => {
         console.error('Add Product failed:', error);
@@ -225,7 +236,7 @@ export class ProductComponent implements OnInit{
       if(cat.selected==true){
         count++;
         for(let prod of this.products){
-          if(prod.dto.categoryId==cat.id){
+          if(prod.category.id==cat.id){
             this.products2.push(prod);
           }
         }
@@ -233,7 +244,14 @@ export class ProductComponent implements OnInit{
     }
     debugger;
     if(count == 0){
-      this.products2=this.products;
+      for(let product of this.products){
+        if(this.groccery&&product.category.type=='G'){
+          this.products2.push(product);
+        }
+        else if(!this.groccery&&product.category.type=='L'){
+          this.products2.push(product);
+        }
+      }
     }
   }
   viewProduct(product:any) {
