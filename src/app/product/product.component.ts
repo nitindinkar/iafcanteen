@@ -37,6 +37,7 @@ export class ProductComponent implements OnInit{
 
   p: number = 1;
   public currentIndex:number=0;
+  private cardType: string='';
   constructor(public cons:ConstantsService,
               private apiService: ApiCallingServiceService,
               private router: Router,
@@ -47,6 +48,8 @@ export class ProductComponent implements OnInit{
     debugger;
     if(localStorage.getItem('card')==this.cons.constants.liquorCard){
       this.groccery=false;
+      this.cardType='L';
+      this.getAllProduct();
       // this.sharedService.selectedCategory={id:8};
       // console.log("this is shared service "+this.sharedService.selectedCategory);
       // console.log(localStorage.getItem('card'));
@@ -54,8 +57,10 @@ export class ProductComponent implements OnInit{
     }
     else{
       this.groccery=true;
+      this.cardType='G'
+      this.getAllProduct();
     }
-    this.getAllProduct();
+
     this.getAllCategories();
   }
 
@@ -94,7 +99,7 @@ export class ProductComponent implements OnInit{
     // };
 
 
-    this.apiService.getApiWithToken(this.cons.api.getAllProducts).subscribe(
+    this.apiService.getApiWithToken(this.cons.api.getAllProducts+'/'+this.cardType).subscribe(
       (response: object) => {
         let result: { [key: string]: any } = response;
         this.products=result['response'];
