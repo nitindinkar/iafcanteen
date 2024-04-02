@@ -59,14 +59,8 @@
           <div class="col-lg-8 col-md-7 col-12">
             <div class="search-bar-top">
               <div class="search-bar">
-                <select>
-                  <option selected="selected">All Category</option>
-                  <option>watch</option>
-                  <option>mobile</option>
-                  <option>kid’s item</option>
-                </select>
-                <form>
-                  <input name="search" placeholder="Search Products Here....." type="search">
+                <form >
+                  <input name="search" placeholder="Search Products Here....."  name="searchKey" [(ngModel)]="searchKey" type="search">
                   <button class="btnn"><i class="ti-search"></i></button>
                 </form>
               </div>
@@ -77,7 +71,7 @@
               <!-- Search Form -->
               <div class="sinlge-bar">
                 <a href="#" class="single-icon" [routerLink]="['/wishlist']"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
-<!--                <a href="#" class="single-icon"><i class="fa fa-heart-o" aria-hidden="true"></i></a>-->
+             <!--<a href="#" class="single-icon"><i class="fa fa-heart-o" aria-hidden="true"></i></a>-->
               </div>
               <div class="sinlge-bar">
                 <a href="#" class="single-icon" [routerLink]="['/my-account']"><i class="fa fa-user-circle-o" aria-hidden="true"></i></a>

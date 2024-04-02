@@ -24,6 +24,10 @@ export class HeaderComponent implements OnInit {
   admin:boolean=false;
   public cartCount: string | null=localStorage.getItem('cartCount');
   loginResponse: any;
+  products2: any;
+ 
+  
+  
   constructor(private cons:ConstantsService,
               private apiService: ApiCallingServiceService,
               private router: Router,
@@ -47,6 +51,8 @@ export class HeaderComponent implements OnInit {
     this.getcategories();
     this.getCartItems();
   }
+
+ 
 
   getcategories(){
 
@@ -75,19 +81,33 @@ getFilteredProducts() {
   });
 }
 
-private getAllProduct() {
+public getAllProduct(searchKey?: string) {
+  // const params = {
+  //   pageNumber: this.pageNumber,
+  //   pageSize: this.pageSize,
+  //   searchKey: this.searchKey
+
+  // };
+
+
   this.apiService.getApiWithToken(this.cons.api.getAllProducts).subscribe(
     (response: object) => {
       let result: { [key: string]: any } = response;
       this.products=result['response'];
-      this.products.forEach((product: any) => {
-        product.image= 'data:image/jpeg;base64,'+product.image;
-      });
-      debugger;
+      this.products2 = this.products.map((product: { imageUrl: string; }) => ({ ...product, imageUrl: this.cons.serviceUrl + product.imageUrl }));
+
+
+      // this.products.forEach((product: any) => {
+      // product.image= 'data:image/jpeg;base64,'+product.image;
+      // });
+
+
       for(let product of this.products){
         product.imageUrl=this.cons.serviceUrl+product.imageUrl;
 
       }
+      this.products2=this.products;
+      
     },
     (error) => {
       console.error('Add Product failed:', error);

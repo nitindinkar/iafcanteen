@@ -54,15 +54,14 @@ export class CheckoutComponent implements OnInit {
       orderProductQuantityList.push({ productId: productId, quantity: quantity });
     }
   }
-
+debugger;
     this.flag=true;
     const billingData = {
       fullName: this.fullName,
       fullAddress: this.fullAddress,
       contactNumber: this.contactNumber,
       alternateContactNumber: this.alternateContactNumber,
-      productId:this.cartItems.productId,
-      quantity:this.cartItems.quantity,
+      selectedStore:"Delhi",
       orderProductQuantityList
       };
       console.log(billingData);
