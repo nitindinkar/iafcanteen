@@ -164,6 +164,15 @@ debugger;
       );
     }
 
+    changeInputType(target: EventTarget | null) {
+      if (target instanceof HTMLInputElement) {
+        const inputField = target as HTMLInputElement;
+        inputField.setAttribute('type', 'date');
+        // Remove the focus event listener to prevent subsequent changes
+        inputField.removeEventListener('focus', () => this.changeInputType(target));
+      }
+    }
+
 
 }
 

@@ -62,4 +62,4 @@ import { AddCategoryComponent } from './add-category/add-category.component';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
