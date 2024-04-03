@@ -130,7 +130,7 @@ export class LoginComponent implements OnInit{
       this.login();
       }
       else{
-        alert("please Card Number According to the Card Type Entered")
+        alert("Please Enter Card Type  According to the Card Number");
       }
 
 

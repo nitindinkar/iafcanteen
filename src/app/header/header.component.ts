@@ -1,3 +1,4 @@
+import { ProductComponent } from './../product/product.component';
 import { SharedService } from './../services/shared/shared.service';
 import { Component, OnInit } from '@angular/core';
 import { ConstantsService } from '../services/constants/constants.service';
@@ -5,7 +6,7 @@ import { ApiCallingServiceService } from '../services/api-calling/api-calling-se
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 
-import {ProductComponent} from "../product/product.component";
+
 
 @Component({
   selector: 'app-header',
@@ -13,6 +14,7 @@ import {ProductComponent} from "../product/product.component";
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent implements OnInit {
+
   categories: any;
   loggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   selectedCategory: string | undefined;
@@ -28,10 +30,6 @@ export class HeaderComponent implements OnInit {
   private cardType: string='';
   filterProducts: any;
   filteredProducts: any[] | undefined;
-
-
-  
-
 
 
   constructor(private cons:ConstantsService,
@@ -88,9 +86,7 @@ export class HeaderComponent implements OnInit {
           else if(!this.groccery&&cat.type=='L'){
             this.categoriesSorted.push(cat);
           }
-
         }
-
       },
       (error) => {
         console.error('Add Product failed:', error);
@@ -102,17 +98,19 @@ export class HeaderComponent implements OnInit {
   
  searchProducts(): void {
   debugger;
+  if (this.router.url === '/product') {
+        this.sharedService.searchKey = this.searchKey;
+     
+    }
+     else{
     this.sharedService.searchKey = this.searchKey;
     this.router.navigate(['/product']);
+
+     }
+     
   }
 
   
-
-
-  
-
-  
-
 // Method to get filtered products
   categoriesSorted:any[]=[];
   getFilteredProducts() {
@@ -165,5 +163,6 @@ export class HeaderComponent implements OnInit {
     );
   }
 }
+
 
 

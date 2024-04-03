@@ -78,13 +78,17 @@ debugger;
     this.apiService.postApiWithToken(this.cons.api.buyProduct+"/"+this.flag, billingData).subscribe({
       next: (v: object) => {
         let result: { [key: string]: any } = v;
+        console.log(result['pdfUrl']);
         if (result['message'] == 'success') {
-           alert('Your Order has been placed successfully,Please Collect your Order at your respected slot to avoid cancellation of order.');
-           this.generateReport();
-
-        } else {
-
-        }
+           alert('Your Order has been placed successfully,Please Collect your Order as per the selected Time Slot.');
+           const pdfUrl = result['response']['pdfUrl'];
+           console.log("the pdf url is ......."+pdfUrl);
+           const link = document.createElement('a');
+           link.href = pdfUrl;
+           link.download = 'report.pdf'; // You can specify any file name here
+           link.target = '_blank'; // Open in a new tab if needed
+           link.click();          
+        } 
       },
       error: (e) => {
 
@@ -130,8 +134,13 @@ debugger;
     }
 
     saveAddress(){
+      if(this.display==true){
+        alert("Address Already Saved");
+        this.display=false;
+      }else{
       alert("Address saved sucessfully");
       this.display=true;
+      }
     }
 
     generateReport(){

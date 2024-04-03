@@ -94,34 +94,24 @@ export class ProductComponent implements OnInit{
   }
 
   public getAllProduct() {
-    // const params = {
-    //   pageNumber: this.pageNumber,
-    //   pageSize: this.pageSize,
-    //   searchKey: this.searchKey
-
-    // };
-
-
+    
     this.apiService.getApiWithToken(this.cons.api.getAllProducts+'/'+this.cardType).subscribe(
       (response: object) => {
         let result: { [key: string]: any } = response;
         this.products=result['response'];
 
         // Filter products based on the search key
-        if (this.searchKey && this.searchKey.trim() !== '') {
-          debugger;
-          this.products = this.products.filter((product: { productName: string; }) =>
+      if (this.searchKey && this.searchKey.trim() !== '') {
+            this.products = this.products.filter((product: { productName: string; }) =>
             product.productName.toLowerCase().includes(this.searchKey.toLowerCase())
           );
+          
         }
+        
+        
 
         this.products = this.products.map((product: { imageUrl: string; }) => ({ ...product, imageUrl: this.cons.serviceUrl + product.imageUrl }));
-        debugger;
-
-        // this.products.forEach((product: any) => {
-        // product.image= 'data:image/jpeg;base64,'+product.image;
-        // });
-
+        
         this.products2=[];
         for(let product of this.products){
           product.imageUrl=this.cons.serviceUrl+product.imageUrl;
@@ -133,8 +123,6 @@ export class ProductComponent implements OnInit{
           }
         }
 
-        // this.products2=this.products;
-        // this.getAllCategories();
       },
       (error) => {
         console.error('Add Product failed:', error);
@@ -146,6 +134,7 @@ export class ProductComponent implements OnInit{
 
 
   addToCart(product:any) {
+    debugger;
 
 
     if (product.isInCart) {
@@ -155,6 +144,7 @@ export class ProductComponent implements OnInit{
 
     this.apiService.getApiWithToken(this.cons.api.addToCart+'/'+product.productId).subscribe(
       (response: object) => {
+        debugger;
         let result: { [key: string]: any } = response;
         this.products=result['response'];
 
