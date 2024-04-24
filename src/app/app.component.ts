@@ -7,8 +7,12 @@ import { LoginComponent } from './login/login.component';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
+[x: string]: any;
   title = 'iafcanteen';
   isShow=false;
+  
+  
+
   // showHideNav(event:any){
   //   this.isShow= !(event instanceof LoginComponent);
   // }

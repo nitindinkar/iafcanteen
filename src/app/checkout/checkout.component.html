@@ -1,75 +1,144 @@
 <div class="container-fluid">
   <div class="row px-xl-5 pt-5">
     <div class="col-lg-8 table-responsive mb-5">
-      <h5 class="section-title position-relative text-uppercase mb-3 px-0"><span class="bg-secondary pr-3">Billing Details</span></h5>
+      <h5 class="section-title position-relative text-uppercase mb-3 px-0"><span class="bg-secondary pr-3">Billing
+          Details</span></h5>
 
       <form action="post">
         <div class="row billing-form p-3">
-          <div class="mb-3 mt-3 col-md-6 px-2">
-            <label for="name" class="form-label">Full Name</label>
-            <input type="text" class="form-control" id="name" placeholder="Enter  Full Name" [(ngModel)]="fullName" name="name">
-          </div>
-          <div class="mb-3 mt-3 col-md-6 px-2">
-            <label for="name" class="form-label">Full Address</label>
-            <input type="text" class="form-control" id="Liquir" placeholder="Full Address" [(ngModel)]="fullAddress"  name="address">
-          </div>
-          <div class="mb-3 mt-3 col-md-6 px-2">
-            <label for="name" class="form-label">Pincode</label>
-            <input type="text" class="form-control" id="Liquir" placeholder="Full Address"  name="address">
-          </div>
-          <div class="mb-3 mt-3 col-md-6 px-2">
-            <label for="name" class="form-label">Select Store</label>
-            <select class="form-control" id="Category">
-              <option>IAF Canteen 1</option>
-              <option>IAF Canteen 2</option>
-            </select>
-          </div>
-          <div class="mb-3 mt-3 col-md-6 px-2">
-            <label for="name" class="form-label">Contact Number</label>
-            <input type="text" class="form-control" id="Pan" placeholder="Contact Number" [(ngModel)]="contactNumber" name="contact">
-          </div>
-          <div class="mb-3 mt-3 col-md-6 px-2">
-            <label for="name" class="form-label">Alternate Number</label>
-            <input type="text" class="form-control" id="Adhaar" placeholder="Alternate Number" [(ngModel)]="alternateContactNumber" name="altnumber">
-          </div>
-          <div class="mb-3 mt-3 col-md-6 px-2">
-            <label for="name" class="form-label">Select Date</label>
-            <input type="text" class="form-control" id="Date" name="Date" placeholder="Select Date"  (focus)="changeInputType($event.target)">
-          </div>
-          <div class="mb-3 mt-3 col-md-6 px-2">
-            <label for="name" class="form-label">Select Your Slot</label>
-            <select class="form-control" id="Category">
-              <option>10 am to 12 pm</option>
-              <option>12 pm to 2 pm</option>
-              <option>2 pm to 4 pm</option>
-            </select>
+          <div class="mb-3 mt-3 col-md-6 px-2" >
+            <label class="form-label">Select Saved Address</label>
+            <div *ngFor="let address of savedAddresses" class="form-check">
+              <input class="form-check-input" type="radio" name="savedAddress" [value]="address.id"
+                [(ngModel)]="selectedSavedAddress" (change)="toggleSelectSlot(address)">
+              <label class="form-check-label" for="address{{address.id}}">
+                {{ address.flatNumberOrHouseNumber }} - {{ address.addressType }}<br>
+                {{ address.area }} - {{ address.city }} - {{ address.landMark }}<br>
+                {{ address.pinCode }} - {{ address.state }}<br>
+              </label>
+            </div>
+            <div class="mt-3 col-md-8 px-2">
+              <button class="btn btn-outline-primary" (click)="toggleAddAddressForm()">Add New Address</button>
+            </div>
           </div>
           
-                                  
-          <div class="mt-3 col-md-6 px-2">
-            <button type="submit" class="btn btn-primary mb-3" (click)="saveAddress()">Submit</button>
+          <!-- Add address form -->
+          <form  *ngIf="showAddAddressForm">
+            <form class="row billing-form p-3">
+
+
+              <div class="mb-3 mt-3 col-md-6 px-2">
+                <label for="address" class="form-label">Flat Number/House Number</label>
+                <input type="text" class="form-control" id="address" placeholder="Flat Number"
+                  [(ngModel)]="flatNumberOrHouseNumber" name="address">
+              </div>
+              <div class="mb-3 mt-3 col-md-6 px-2">
+                <label for="address" class="form-label">Locality</label>
+                <input type="text" class="form-control" id="address" placeholder="Locality" [(ngModel)]="area"
+                  name="address">
+              </div>
+              <div class="mb-3 mt-3 col-md-6 px-2">
+                <label for="pincode" class="form-label">LandMark</label>
+                <input type="text" class="form-control" id="pincode" placeholder="Enter State" [(ngModel)]="landMark"
+                  name="pincode">
+              </div>
+              <div class="mb-3 mt-3 col-md-6 px-2">
+                <label for="address" class="form-label">City</label>
+                <input type="text" class="form-control" id="address" placeholder="Enter City" [(ngModel)]="city"
+                  name="address">
+              </div>
+              <div class="mb-3 mt-3 col-md-6 px-2">
+                <label for="pincode" class="form-label">State</label>
+                <input type="text" class="form-control" id="pincode" placeholder="Enter State" [(ngModel)]="state"
+                  name="pincode">
+              </div>
+
+              <div class="mb-3 mt-3 col-md-6 px-2">
+                <label for="pincode" class="form-label">PinCode</label>
+                <input type="text" class="form-control" id="pincode" placeholder="Enter Pincode" name="pincode"[(ngModel)]="pinCode">
+              </div>
+
+              <div class="mb-3 mt-3 col-md-8 px-2">
+                <p class="labelish">Address Type</p>
+              </div>
+              <div class="mb-3 mt-3 col-md-8 px-4">
+                <div id="paymentContainer" name="paymentContainer" class="paymentOptions">
+                  <div id="payCC" class="floatBlock">
+                    <label for="paymentCC">
+                      <input id="paymentCC" name="paymentType" type="radio" value="Home"
+                        [(ngModel)]="selectedAddressType" />
+                      <span style="color: black; margin-left:7px;">Home</span>
+
+                    </label>
+                  </div>
+
+                  <div id="payInvoice" class="floatBlock">
+                    <label for="paymentInv">
+                      <input id="paymentInv" name="paymentType" type="radio" value="Office"
+                        [(ngModel)]="selectedAddressType" />
+                      <span style="color: black; margin-left:7px;">Office</span>
+
+                    </label>
+                  </div>
+
+                  <div id="pay3rdParty" class="floatBlock">
+                    <label for="payment3rd">
+                      <input id="payment3rd" name="paymentType" type="radio" value="Others"
+                        [(ngModel)]="selectedAddressType" />
+                      <span style="color: black; margin-left:7px;">Other</span>
+
+
+                    </label>
+                  </div>
+                  <div class="mt-3 col-md-6 px-2">
+                    <button type="submit" class="btn btn-primary mb-3" (click)="saveAddress()" >Submit</button>
+                  </div>
+                </div>
+              </div>
+            </form>
+
+            
+          </form>
+          <div class="row" *ngIf="showSelectSlot">
+            <div class="mb-3 mt-3 col-md-6 px-2">
+              <label for="date" class="form-label">Select Date</label>
+              <input type="date" class="form-control" id="date" name="date" placeholder="Select Date" min="{{ minDate }}" >
+            </div>
+            <div class="mb-3 mt-3 col-md-6 px-2">
+              <label for="store" class="form-label">Select Store</label>
+              <select class="form-control" id="store">
+                <option>IAF Canteen 1</option>
+                <option>IAF Canteen 2</option>
+              </select>
+            </div>
+            <div class="mb-3 mt-3 col-md-6 px-2">
+              <label for="slot" class="form-label">Select Your Slot</label>
+              <select class="form-control" id="slot">
+                <option>10 am to 11 pm</option>
+                <option>11 pm to 12pm</option>
+                <option>12 pm to 1 pm</option>
+                <option>1 pm to 2 pm</option>
+                <option>2 pm to 3 pm</option>
+                <option>3 pm to 4 pm</option>
+                <option>4 pm to 5 pm</option>
+              </select>
+            </div>
+            
           </div>
         </div>
       </form>
     </div>
-    <div class="col-lg-4" >
-      <h5 class="section-title position-relative text-uppercase mb-3 px-0"><span class="bg-secondary pr-3" >ORDER TOTAL</span></h5>
+    <div class="col-lg-4">
+      <h5 class="section-title position-relative text-uppercase mb-3 px-0"><span class="bg-secondary pr-3">ORDER
+          TOTAL</span></h5>
       <div class="bg-light p-4 mb-5">
-        <div class="border-bottom pb-3" >
+        <div class="border-bottom pb-3">
           <h6 class="mb-3">Products</h6>
           <div class="d-flex justify-content-between" *ngFor="let cart of cartItems;let i=index">
             <p>{{cart.product.productName}}</p>
             <p>{{cart.total}}</p>
-           </div>
-          <!-- <div class="d-flex justify-content-between">
-            <p>Product Name 2</p>
-            <p>$150</p>
           </div>
-          <div class="d-flex justify-content-between">
-            <p>Product Name 3</p>
-            <p>$150</p>
-          </div> -->
-        </div> 
+        </div>
         <div class="border-bottom pt-3 pb-3">
           <div class="d-flex justify-content-between mb-3">
             <h6>Subtotal</h6>
@@ -85,8 +154,7 @@
             <h5>Total</h5>
             <h5>{{cartTotal+10}}</h5>
           </div>
-          <button class="btn btn-block btn-primary font-weight-bold my-3 py-3" [routerLink]="['/checkout']" (click)="bookOrder()">Place Order</button>
-
+          <button class="btn btn-block btn-primary font-weight-bold my-3 py-3" (click)="bookOrder()">Place Order</button>
         </div>
       </div>
     </div>

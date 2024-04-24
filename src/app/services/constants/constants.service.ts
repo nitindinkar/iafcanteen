@@ -35,7 +35,11 @@ export class ConstantsService {
     myAccountDetails:this.serviceUrl+"loginAuth/getAddress",
     getOrderDetails:this.serviceUrl+"order/getOrderDetailsOfUser",
     getWishList:this.serviceUrl+"wishlist/WishlistDetailsOfUser",
-    addCategory: this.serviceUrl+'category/add-category'
+    addCategory: this.serviceUrl+"category/add-category",
+    deleteWish:this.serviceUrl+"wishlist/deleteWishlistItem",
+    getUserAddress:this.serviceUrl+"address/getAddressByUser",
+    saveAddress:this.serviceUrl+"address/addAddress",
+    getAdminOrders:this.serviceUrl+"order/getAllOrderDetailsOfAdmin/ALL",
 
   };
 }

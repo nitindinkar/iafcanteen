@@ -1,0 +1,60 @@
+<div class="container-fluid">
+    <div class="px-xl-5 py-5">
+      <div class="add-product">
+        <h2 class="mb-4">Order History Of User</h2>
+        <div class="my-account">
+         
+  
+           <div class="tab-content">
+            <div id="home" class="tab-pane in active">
+                <div class="search-bar mb-3">
+                    <input type="text" class="form-control" placeholder="Search by Order ID or Customer Name">
+                    <button class="btn btn-primary search-button" (click)="searchOrders()">Search</button>
+                  </div>
+                  
+                  
+              
+              <table class="table table-striped" >
+                <thead>
+                  <tr>
+                    <th scope="col">Order ID</th>
+                    <th scope="col">Order Date</th>
+                    <th scope="col">Customer Name</th>
+                    <th scope="col">Contact Number</th>
+                    <th scope="col">Order Status</th>
+                    <th scope="col">Total Amount</th>
+                    <th scope="col">Cancel Order</th>
+  
+                  </tr>
+                </thead>
+                <tbody>
+                            
+                            <tr *ngFor="let order of orderDetails">
+                                <td>
+                                    <a href="javascript:void(0)" (click)="openOrderDetailsDialog(order)">{{ order.orderId }}</a>
+                                  </td>
+                                
+                                <td>{{ order.orderDate  | date: 'dd-MM-yyyy'  }}</td>
+                                <td>{{ order.user.name }}</td>
+                                <td>{{ order.user.contactNumber }}</td>
+                                <td>{{ order.orderStatus }}</td>
+                                <td>{{ order.totalOrderAmount }}</td>
+                                
+                          <td class="align-middle">
+                          <i style="font-size:24px" class="fa">&#xf00d;</i>
+                      </td>
+                      </tr>
+                     </tbody>
+              </table>
+            </div>
+        </div> 
+  
+          
+          
+        </div>
+  
+  
+      </div>
+    </div>
+  </div>
+  

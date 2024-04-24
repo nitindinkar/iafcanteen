@@ -105,8 +105,20 @@ export class LoginComponent implements OnInit{
     this.HttpClient.post(registerationUrl, credentials,{responseType:'text'})
       .subscribe(
         (response: any) => {
-          alert("registration Successfull");
-          // Handle successful login, e.g., redirect the user or perform other actions
+          alert("Registration Successfull");
+
+          this.name = '';
+          this.liquorCardNumber = '';
+          this.groceryCardNumber = '';
+          this.pan = '';
+          this.adhaar = '';
+          this.dob = '';
+          this.contactNumber = '';
+          this.password = '';
+          this.email = '';
+          this.getotp = '';
+          
+         
 
         },
         (error) => {
@@ -154,7 +166,6 @@ export class LoginComponent implements OnInit{
       .subscribe(
         (response: object) => {
           let result: { [key: string]: any } = response;
-
           // Handle successful login, e.g., redirect the user or perform other actions
 
             if(result['message']=='success'){
@@ -162,9 +173,16 @@ export class LoginComponent implements OnInit{
             this.token=result['response'].jwtToken.toString();
             localStorage.setItem('token','Bearer '+this.token);
             localStorage.setItem('loginResponse', JSON.stringify(result['response']));
+            localStorage.setItem('userId',JSON.stringify(result['response']['user']['id']))
             this.sharedService.loginResponse=JSON.stringify(result['response']);
-            if(this.selected=='Grocery'){
+            const roleName = result['response']['user']['roles'][0]['roleName'];
+             this.sharedService.role=roleName;
+             console.log(roleName);
 
+            
+            
+            console.log(this.sharedService);
+            if(this.selected=='Grocery'){
               this.router.navigate(['']);
               this.sharedService.cardType=this.ConstServiceService.constants.groceryCard
             }
@@ -175,8 +193,13 @@ export class LoginComponent implements OnInit{
               this.router.navigate(['/liquor']);
             }
 
-          }
+            if(this.sharedService.role=='Admin'){
+              this.router.navigate(['/admin']);
+             }
+            
 
+          }
+         
         },
         (error) => {
           alert("please Enter Valid Credential");

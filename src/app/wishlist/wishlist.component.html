@@ -18,17 +18,17 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let wishList of wishResponse" >
+                  <tr *ngFor="let wishList of wishResponse;let i=index ">
                     <!-- <td><img src="../../assets/images/550x750.png" class="inventory-image"></td> -->
                     <td>{{ wishList.product.productName }}</td>            
                     
                     <td>₹{{ wishList.product.productDiscountedPrice }}<span class="mrp">(₹{{ wishList.product.productActualPrice }})</span></td>
                     <td><span class="wishlist-in-stock">In Stock</span></td>
                     <td class="align-middle">
-                      <i style="font-size:24px" class="fa">&#xf07a;</i>
+                      <button (click)="addToCart(wishList.product, i)"><i style="font-size:24px" class="fa">&#xf07a;</i></button>
                     </td>
                     <td class="align-middle">
-                      <i style="font-size:24px" class="fa">&#xf00d;</i>
+                      <button (click)="deleteWishlist(i,wishList.wishlistId)"><i style="font-size:24px" class="fa"  >&#xf00d;</i></button>
                     </td>
                     
                   </tr>

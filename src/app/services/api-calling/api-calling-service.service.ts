@@ -36,7 +36,11 @@ export class ApiCallingServiceService {
       const headers = new HttpHeaders({
         'Authorization': this.token
       });
+        console.log(url);
+        console.log(jsonPayload);
+        console.log(headers);
       return this.http.post(url, jsonPayload,{headers}).pipe(
+        
         map((results) => results),
         catchError(this.handleError)
       );

@@ -1,0 +1,98 @@
+.widget-container {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .widget {
+    width: 23%; /* Adjust width to fit 4 widgets per row */
+    height: 175px;
+    background-color: #fff;
+    color: #fff;
+    border-radius: 5px;
+    margin: 10px;
+    box-shadow: 5px 5px 5px #939393;
+    display: flex;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .widget h3 {
+    margin: 0;
+    font-size: 14px;
+    color: #333;
+  }
+  
+  .widget p {
+    margin: 0;
+    font-size: 12px;
+    color: #666;
+  }
+  
+  /* Colors for the widgets */
+  .widget.green {
+    background-color: rgb(4, 67, 66);
+  }
+  
+  .widget.yellow {
+    background-color: rgb(237, 158, 32);
+  }
+  
+  .widget.red {
+    background-color: rgb(126, 5, 5);
+  }
+  
+  .widget.blue {
+    background-color: rgb(105, 32, 251);
+  }
+  
+  @media only screen and (max-width: 1600px) {
+    .widget {
+      width: 22%;
+    }
+  }
+  
+  @media only screen and (max-width: 1500px) {
+    .widget {
+      width: 20%;
+    }
+  }
+  
+  @media only screen and (max-width: 1400px) {
+    .widget {
+      width: 18%;
+    }
+  }
+  
+  @media only screen and (max-width: 1200px) {
+    .widget {
+      width: 16%;
+    }
+  }
+  
+  .widget .icon {
+    width: 100px;
+    font-size: 60px;
+    text-align: center;
+  }
+  
+  .widget .value {
+    text-align: center;
+    width: 175px;
+  }
+  
+  .widget .value .top {
+    font-size: 30px;
+  }
+  
+  .widget .value .bottom {
+    font-size: 20px;
+    margin-top: 10px;
+  }
+  .chart-container {
+    margin-top: 20px; /* Adjust margin as needed */
+    width: 100%;
+    max-width: 800px; /* Adjust max-width as needed */
+    margin: 0 auto; /* Center the container */
+  }
+  
+  

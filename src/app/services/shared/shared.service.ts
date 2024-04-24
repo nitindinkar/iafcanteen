@@ -16,11 +16,19 @@ export class SharedService {
 
   public cardType: string|undefined; // Property to hold the shared value
   public loginResponse=localStorage.getItem('loginResponse');
+  public userId=localStorage.getItem('userId');
+  public userName=localStorage.getItem('userName');
+  public Mobile=localStorage.getItem('mobile');
   public cartTotal: any;
   public cart: any;
   selectedCategory: any;
   loggedIn: boolean=false;
   searchKey: string='';
+  role: any;
+  cartCount:any;
+  wishListCount:any;
+  cartItems: any;
+  cartList=[];
   constructor(
     private router: Router,
     private http: HttpClient,

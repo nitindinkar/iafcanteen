@@ -1,3 +1,4 @@
+
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
@@ -12,6 +13,12 @@ import { LiquorHomeComponent } from './liquor-home/liquor-home.component';
 import {WishlistComponent} from "./wishlist/wishlist.component";
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import {AddCategoryComponent} from "./add-category/add-category.component";
+import { AdminComponent } from './admin/admin.component';
+import { ManageAdminComponent } from './manage-admin/manage-admin.component';
+import { RegistrationComponent } from './registration/registration.component';
+import { ManageOrdersComponent } from './manage-orders/manage-orders.component';
+
+
 const routes: Routes = [
   { path: '', component:  HomeComponent},
   { path: 'liquor', component:  LiquorHomeComponent},
@@ -24,8 +31,15 @@ const routes: Routes = [
   { path: 'my-account', component:  MyAccountComponent},
   { path: 'inventory', component:  InventoryComponent},
   { path: 'wishlist', component:  WishlistComponent},
-  { path: 'contact-us', component: ContactUsComponent}
+  { path: 'contact-us', component: ContactUsComponent},
+  { path: 'admin', component: AdminComponent},
+  { path: 'manage-admin', component: ManageAdminComponent},
+  { path: 'registration', component: RegistrationComponent},
+  { path:  'manage-orders', component:ManageOrdersComponent},
+ 
+  
 ];
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

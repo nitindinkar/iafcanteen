@@ -19,6 +19,7 @@ export class CartComponent implements OnInit{
   subtotal: number = 0;
   acc:any|number
   private cardType: String='';
+  cartEmpty:boolean=false;
 
 
   ngOnInit(): void {
@@ -45,10 +46,35 @@ export class CartComponent implements OnInit{
 
     this.apiService.getApiWithToken(this.cons.api.getCartDetailsOfUser+'/'+this.cardType).subscribe(
       (response: object) => {
+        
         let result: { [key: string]: any } = response;
-        this.cart=result['response'];
-
         debugger;
+       
+        if(result['response']==="exception No products found in the cart for the user")
+          {
+           this.cartEmpty=true;
+           
+          }else{
+            this.cartEmpty=false;
+          }
+
+        this.cart=result['response'];
+        this.sharedService.cartList=this.cart;
+        console.log("this is the total cart"+this.cart);
+        
+        debugger;
+
+        if(result['response']!="exception No products found in the cart for the user"){
+        if(this.sharedService.cartList.length==0){
+          this.cartEmpty=true;
+        }else{
+          this.cartEmpty=false;
+        }
+      }
+
+        
+
+       
         for(let product of this.cart){
           product.product.quantity=1;
           console.log(product.product);
@@ -68,7 +94,7 @@ export class CartComponent implements OnInit{
   }
 
   decreaseQuantity(i: number) {
-    debugger;
+   
     if (this.cart[i].product.quantity > 1) {
       this.cart[i].product.quantity--;
       this.calculateSubtotal();
@@ -85,11 +111,12 @@ export class CartComponent implements OnInit{
 
   }
   removeItem(i: number,cartId: any) {
-    debugger;
+   
     this.cart.splice(i, 1);
     this.apiService.deleteApiWithToken(this.cons.api.deleteCartItemsById + '/' + cartId).subscribe({
       next: (response: any) => {
         console.log('Delete request successful:', response);
+        this.sharedService.cartCount--;
         this.calculateSubtotal();
 
       },

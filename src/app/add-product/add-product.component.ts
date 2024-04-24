@@ -105,7 +105,7 @@ addProduct() {
         this.aPrice = null; 
         this.dPrice = null; 
         this.category = null;
-        
+               
       } else {
 
       }

@@ -16,14 +16,13 @@
                           <div class="mt-3 col-md-1 px-2">
                             <button type="submit" class="btn btn-primary mb-3 form-filter">Apply</button>
                         </div>
-                          <div class="mb-3 mt-3 col-md-3 px-2">
-                            <select class="form-control" id="Category">
-                                <option>Filter By Category</option>
-                                <option>Grocery</option>
-                                <option>Electronics</option>
-                                <option>Accesories</option>
-                            </select>
-                          </div>
+                        <div class="mb-3 mt-3 col-md-3 px-2">
+                          <select class="form-control" id="Category" [(ngModel)]="selectedCategory" (change)="filterProductsByCategory()">
+                            <option value="Filter By Category">Filter By Category</option>
+                            <option *ngFor="let category of categories" [ngValue]="category.name">{{ category.name }}</option>
+                          </select>
+                        </div>
+                        
                           <div class="mb-3 mt-3 col-md-3 px-2">
                             <select class="form-control" id="status">
                             <option>Filter By Stock Status</option>
@@ -41,53 +40,26 @@
                 <div class="row overflow-auto">
               <table class="table table-striped">
                 <thead>
-                  <tr>
+                  <tr >
                     <th scope="col"><input type="checkbox" name="selectAll" id="selectAll"></th>
                     <th scope="col">Images</th>
                     <th scope="col">Name</th>
-                    <th scope="col">SKU</th>
                     <th scope="col">Category</th>
                     <th scope="col">Stock Status</th>
                     <th scope="col">Price</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
+                  <tr *ngFor="let product of products">
                     <th scope="row"><input type="checkbox" name="selectAll" id="selectAll"></th>
-                    <td><img src="../../assets/images/550x750.png" class="inventory-image"></td>
-                    <td>Blackdog</td>
-                    <td>SK_12345</td>
-                    <td>Liquir</td>
+                    <td><img  [src]="product.imageUrl" class="inventory-image"></td>
+                    <td>{{ product.productName }}</td>
+                    <td>{{ product.category.name }}</td>
                     <td><span class="wishlist-in-stock">In Stock</span></td>
-                    <td>₹850 <span class="mrp">(₹1560)</span></td>
+                    <td>₹{{ product.productDiscountedPrice }} <span class="mrp">(₹{{ product.productActualPrice }})</span></td>
                   </tr>
-                  <tr>
-                    <th scope="row"><input type="checkbox" name="selectAll" id="selectAll"></th>
-                    <td><img src="../../assets/images/550x750.png" class="inventory-image"></td>
-                    <td>Blackdog</td>
-                    <td>SK_12345</td>
-                    <td>Liquir</td>
-                    <td><span class="wishlist-in-stock">In Stock</span></td>
-                    <td>₹850 <span class="mrp">(₹1560)</span></td>
-                  </tr>
-                  <tr>
-                    <th scope="row"><input type="checkbox" name="selectAll" id="selectAll"></th>
-                    <td><img src="../../assets/images/550x750.png" class="inventory-image"></td>
-                    <td>Blackdog</td>
-                    <td>SK_12345</td>
-                    <td>Liquir</td>
-                    <td><span class="wishlist-in-stock">In Stock</span></td>
-                    <td>₹850 <span class="mrp">(₹1560)</span></td>
-                  </tr>
-                  <tr>
-                    <th scope="row"><input type="checkbox" name="selectAll" id="selectAll"></th>
-                    <td><img src="../../assets/images/550x750.png" class="inventory-image"></td>
-                    <td>Blackdog</td>
-                    <td>SK_12345</td>
-                    <td>Liquir</td>
-                    <td><span class="wishlist-out-of-stock">Out of Stock</span></td>
-                    <td>₹850 <span class="mrp">(₹1560)</span></td>
-                  </tr>
+                             
+                    
                 </tbody>
               </table>
 

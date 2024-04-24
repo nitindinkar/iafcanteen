@@ -1,6 +1,6 @@
 import { ProductComponent } from './../product/product.component';
 import { SharedService } from './../services/shared/shared.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ConstantsService } from '../services/constants/constants.service';
 import { ApiCallingServiceService } from '../services/api-calling/api-calling-service.service';
 import { Router } from '@angular/router';
@@ -15,6 +15,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class HeaderComponent implements OnInit {
 
+ 
   categories: any;
   loggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   selectedCategory: string | undefined;
@@ -23,13 +24,21 @@ export class HeaderComponent implements OnInit {
   pageSize:any;
   searchKey: string = '';
   admin:boolean=false;
-  public cartCount: string | null=localStorage.getItem('cartCount');
+  user:boolean=false;
   loginResponse: any;
   products2: any;
   groccery: boolean=true;
   private cardType: string='';
   filterProducts: any;
   filteredProducts: any[] | undefined;
+  wishResponse: any;
+  cartItems: any;  
+  totalAmount: any;
+  cart: any;
+  subtotal: any;
+  cartEmpty:boolean=false;
+  
+  
 
 
   constructor(private cons:ConstantsService,
@@ -50,6 +59,9 @@ export class HeaderComponent implements OnInit {
         debugger;
         if(role.roleName=='ADMIN')
           this.admin=true;
+
+        if(role.roleName=='USER')
+          this.user=true;
       }
     }
     if(localStorage.getItem('card')==this.cons.constants.liquorCard){
@@ -67,6 +79,9 @@ export class HeaderComponent implements OnInit {
       this.getCartItems();
     }
     this.getcategories();
+    this.getWishList();
+    
+  
 
   }
 
@@ -123,15 +138,21 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     // Call your authentication service logout method
+    debugger;
     localStorage.removeItem('token');
     localStorage.removeItem('loginResponse');
     localStorage.removeItem('card');
+    localStorage.removeItem('cartCount');
+    localStorage.removeItem('cartItems');
+    localStorage.clear();
     this.sharedService.loginResponse=null;
     this.sharedService.cardType=undefined;
     this.sharedService.selectedCategory=undefined;
     this.loggedIn.next(false);
     this.router.navigateByUrl('');
     this.admin=false;
+  
+    
   }
   login(){
     this.loggedIn.next(true);
@@ -149,20 +170,60 @@ export class HeaderComponent implements OnInit {
   }
 
   private getCartItems() {
-    this.cartCount;
+    
+    this.sharedService.cartCount;
     this.apiService.getApiWithToken(this.cons.api.getCartDetailsOfUser+'/'+this.cardType).subscribe(
       (response: object) => {
+        debugger
         let result: { [key: string]: any } = response;
-        this.cartCount=result['response'].length;
-        localStorage.setItem('cartCount',result['response'].length);
-        debugger;
+        this.cartItems=result['response'];
+       
+        if(result['response']=="exception No products found in the cart for the user"){
+          this.sharedService.cartCount=0;
+          this.cartEmpty=true;
+          
+        }else{
+          this.sharedService.cartCount=result['response'].length;
+          this.cartEmpty=false;
+
+        }
+       
       },
       (error) => {
         console.error('Add Product failed:', error);
       }
     );
   }
+
+  getWishList(){
+    debugger;
+  this.apiService.getApiWithToken(this.cons.api.getWishList).subscribe(
+    (response: object) => {
+      let result: { [key: string]: any } = response;
+
+      if(result['response']==0){
+        this.sharedService.wishListCount=0;
+      }else{
+        this.sharedService.wishListCount=result['response'].length;
+      }
+         
+      //   
+
+    },
+    (error: any) => {
+      console.error('Add wishlist failed:', error);
+    }
+  );
+  }
+
+  
 }
+
+
+
+
+
+
 
 
 

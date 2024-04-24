@@ -3,6 +3,7 @@ import {Router} from "@angular/router";
 import { ConstantsService } from '../services/constants/constants.service';
 import { ApiCallingServiceService } from '../services/api-calling/api-calling-service.service';
 import { SharedService } from '../services/shared/shared.service';
+import Swal from 'sweetalert2';
 
 
 
@@ -15,35 +16,24 @@ import { SharedService } from '../services/shared/shared.service';
 export class ProductComponent implements OnInit{
 
   groccery:boolean=true;
-
-  // @ViewChild('image') imageElement: ElementRef;
   categories:any;
   products: any;
   products2: any;
   viewProducts: any;
-  // pageNumber: number = 1;
-  // pageSize: number=6;
-  // searchKey: string = '';
-  // displayedCategories: any[] = [];
-
-  // itemsPerPage: number = 5;
-
-  // pages: any;
-  // totalItems: any;
-  // currentPage: any;
-  // pageChanged: any;
-
-
-
   p: number = 1;
   public currentIndex:number=0;
   private cardType: string='';
   searchKey: string='';
+  isInWishlist: boolean=false;
+  quantity:number=1;
+  cart: any;
+  subtotal:any;
+  
+
   constructor(public cons:ConstantsService,
               private apiService: ApiCallingServiceService,
               private router: Router,
-              private sharedService: SharedService) {
-  }
+              private sharedService: SharedService) {}
 
   ngOnInit(): void {
     debugger;
@@ -51,11 +41,7 @@ export class ProductComponent implements OnInit{
       this.groccery=false;
       this.cardType='L';
       this.getAllProduct();
-      // this.sharedService.selectedCategory={id:8};
-      // console.log("this is shared service "+this.sharedService.selectedCategory);
-      // console.log(localStorage.getItem('card'));
-      // console.log(this.cons.constants.liquorCard);
-    }
+      }
     else{
       this.groccery=true;
       this.cardType='G'
@@ -94,11 +80,19 @@ export class ProductComponent implements OnInit{
   }
 
   public getAllProduct() {
-    
+    if(localStorage.getItem('card')==this.cons.constants.liquorCard){
+      this.groccery=false;
+      this.cardType='L';
+      }
+    else{
+      this.groccery=true;
+      this.cardType='G'
+    }
     this.apiService.getApiWithToken(this.cons.api.getAllProducts+'/'+this.cardType).subscribe(
       (response: object) => {
         let result: { [key: string]: any } = response;
         this.products=result['response'];
+        
 
         // Filter products based on the search key
       if (this.searchKey && this.searchKey.trim() !== '') {
@@ -107,8 +101,7 @@ export class ProductComponent implements OnInit{
           );
           
         }
-        
-        
+               
 
         this.products = this.products.map((product: { imageUrl: string; }) => ({ ...product, imageUrl: this.cons.serviceUrl + product.imageUrl }));
         
@@ -122,7 +115,7 @@ export class ProductComponent implements OnInit{
             this.products2.push(product);
           }
         }
-
+        return(this.products);
       },
       (error) => {
         console.error('Add Product failed:', error);
@@ -134,30 +127,47 @@ export class ProductComponent implements OnInit{
 
 
   addToCart(product:any) {
-    debugger;
-
-
-    if (product.isInCart) {
-      alert("Product is already in the cart!");
-      return; // Exit the function to prevent further execution
-    }
+       
 
     this.apiService.getApiWithToken(this.cons.api.addToCart+'/'+product.productId).subscribe(
       (response: object) => {
         debugger;
         let result: { [key: string]: any } = response;
         this.products=result['response'];
+        console.log(this.products);
 
         if(result['status']==200){
           debugger;
-          alert("Product added successfully");
 
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Product Added To The Cart",
+            showConfirmButton: false,
+            timer: 1800
+          });
+          this.sharedService.cartCount++;
+          debugger;
+          console.log(this.products);
+
+
+          
           //this.showSnackBar('Product added to cart successfully.');
-          product.isInCart = true;
-        }else{
-          alert("Product not added");
-          //this.showSnackBar('Failed to add product to cart.');
+          
         }
+
+        if(this.products==="exception  product is already present in the cart"){
+          debugger;
+          Swal.fire({
+            text: "Product is Already in the Cart",
+            imageUrl: "../assets/cart/cart.jpg",
+            imageWidth: 400,
+            imageHeight: 200,
+            imageAlt: "Custom image",
+            
+          });
+        }
+
       },
       (error) => {
         alert("You are Admin OR You have logged In.. Please Login first to add Product to Cart")
@@ -221,11 +231,25 @@ export class ProductComponent implements OnInit{
         let result: { [key: string]: any } = response;
         this.products=result['response'];
         this.products2 =result['response'];
+        console.log(this.products);
+        console.log(result);
         if(result['status']==200){
+          debugger;
+          product.isInWishlist = true;
 
-          alert("Product added successfully");
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Added to Wihslist",
+            showConfirmButton: false,
+            timer: 1500
+          });
+
+          this.sharedService.wishListCount++;
+
+          // alert("Product added successfully");
           }else{
-          alert("Product not added");
+            Swal.fire("Already Added to wihslist");
           }
       },
       (error) => {
@@ -297,6 +321,42 @@ export class ProductComponent implements OnInit{
     debugger;
 
   }
+
+  decreaseQuantity(i: number) {
+    debugger;
+    if (this.cart[i].product.quantity > 1) {
+      this.cart[i].product.quantity--;
+      this.calculateSubtotal();
+      // Decrease quantity, ensuring it doesn't go below 1
+  }else{
+   
+      }
+
+    //this.cart[i].product.quantity=Number(this.cart[i].product.quantity)-1;
+  }
+  increaseQuantity(i: number) {
+    this.cart[i].product.quantity=Number(this.cart[i].product.quantity)+1;
+    this.calculateSubtotal();
+
+  }
+
+  calculateSubtotal() {
+    this.subtotal = 0;
+  
+    if (this.cart && this.cart.length > 0) {
+      for (let cartItem of this.cart) {
+        if (cartItem.product && cartItem.product.quantity && cartItem.product.productDiscountedPrice) {
+          cartItem.total=Number(Number(cartItem.product.quantity) * Number(cartItem.product.productDiscountedPrice));
+          this.subtotal += cartItem.total;
+        }
+      }
+    }
+    this.sharedService.cartTotal=this.subtotal;
+    this.sharedService.cart=this.cart;
+    console.log("This is my subtotal"+this.subtotal);
+    return this.subtotal;
+    }
+  
 }
 
 

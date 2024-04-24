@@ -1,0 +1,9 @@
+.search-bar {
+    display: flex; /* Use flexbox layout */
+  }
+  
+  .search-bar input {
+    flex: 1; /* Take up remaining space */
+    margin-right: 5px; /* Add some spacing between input and button */
+  }
+  

@@ -21,8 +21,19 @@ import { MyAccountComponent } from './my-account/my-account.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import {WishlistComponent} from "./wishlist/wishlist.component";
 import { AddCategoryComponent } from './add-category/add-category.component';
-
-
+import { Chart } from 'chart.js';
+import { BaseChartDirective } from 'ng2-charts';
+import { AdminComponent } from './admin/admin.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ManageAdminComponent } from './manage-admin/manage-admin.component';
+import { RegistrationComponent } from './registration/registration.component';
+import { IonicModule } from '@ionic/angular';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatInputModule} from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { ManageOrdersComponent } from './manage-orders/manage-orders.component';
+import { OrderDetailsDialogComponent } from './order-details-dialog/order-details-dialog.component';
 
 
 
@@ -41,9 +52,16 @@ import { AddCategoryComponent } from './add-category/add-category.component';
     MyAccountComponent,
     LiquorHomeComponent,
     WishlistComponent,
-    AddCategoryComponent
-
-
+    AddCategoryComponent,
+    AdminComponent,
+    ManageAdminComponent,
+    RegistrationComponent,
+    ManageOrdersComponent,
+    OrderDetailsDialogComponent,
+    
+   
+    
+    
   ],
   imports: [
     BrowserModule,
@@ -52,10 +70,15 @@ import { AddCategoryComponent } from './add-category/add-category.component';
     FormsModule,
     HttpClientModule,
     NgxPaginationModule,
-
-
-
-
+    BaseChartDirective,
+    FontAwesomeModule,
+    IonicModule,
+    MatDatepickerModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatSlideToggleModule,
+    
+      
   ],
   providers: [ SharedService,ProductComponent,
     provideAnimationsAsync()

@@ -1,5 +1,5 @@
 <div class="container-fluid">
-    <div class="px-xl-5 py-5">
+      <div class="px-xl-5 py-5">
         <div class="add-product">
             <h2>Add Product</h2>
             <form action="post">
@@ -14,7 +14,8 @@
                 </div>
                 <div class="mb-3 mt-3 col-md-6 px-2" >
                   <label for="name" class="form-label">Category</label>
-                  <select class="form-control" id="Category" [(ngModel)]="category" [ngModelOptions]="{standalone: true}">
+                  <select class="form-control" id="Category"  [(ngModel)]="category" [ngModelOptions]="{standalone: true}" >
+                  
                   <option *ngFor="let category of categories" [value]="category.id" >{{category.name}}</option>
                  
                   </select>
@@ -28,7 +29,7 @@
                   <input type="text" class="form-control" id="Discounted"  [(ngModel)]="dPrice" placeholder="Discounted Price" name="Discounted">
                 </div>
                 <div class="mb-3 mt-3 col-md-6 px-2">
-                  <label for="name" class="form-label"> Upload Images (550 x 750px in less than 500kb)</label>
+                  <label for="name" class="form-label"> Upload Images (550 x 750px in less than 500kb and jpg/jpeg format only)</label>
                   <input type="file" class="form-control" id="Date" placeholder="Uploadn Images" name="image" accept="image/*" #invoiceFileInput>
 <!--                  <input type="file" id="image" name="image" accept="image/*" #invoiceFileInput>-->
                   <button type="submit" class="btn btn-primary mb-3" (click)="upload()" >Upload File</button>
@@ -42,3 +43,4 @@
     </div>
 
 </div>
+
