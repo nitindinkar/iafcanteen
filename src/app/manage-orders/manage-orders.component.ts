@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { SharedService } from '../services/shared/shared.service';
 import { MatDialog } from '@angular/material/dialog';
 import { OrderDetailsDialogComponent } from '../order-details-dialog/order-details-dialog.component';
+import Swal from 'sweetalert2';
 
 
 
@@ -15,15 +16,16 @@ import { OrderDetailsDialogComponent } from '../order-details-dialog/order-detai
   styleUrl: './manage-orders.component.scss'
 })
 export class ManageOrdersComponent {
-searchOrders() {
-throw new Error('Method not implemented.');
-}
+
+
 
   showRegistrationForm: boolean = false;
   showLoginForm: boolean = true;
   accountDetails: any;
   parsedLoginResponse: any;
   orderDetails: any;
+  searchQuery: string = ''; 
+  filteredOrders: any[] = [];
 
   constructor(private cons:ConstantsService,
     private apiService: ApiCallingServiceService,
@@ -83,6 +85,7 @@ throw new Error('Method not implemented.');
         //   return new Date(a.orderDate).getTime() - new Date(b.orderDate).getTime();
         // });
         this.orderDetails.reverse();
+        this.filteredOrders = this.orderDetails;
         console.log(this.orderDetails);
 
        
@@ -96,18 +99,81 @@ throw new Error('Method not implemented.');
 
   }
 
-  openOrderDetailsDialog(order: any): void {
-    const dialogRef = this.dialog.open(OrderDetailsDialogComponent, {
-      width: '900px',
-      height: '1200px',
-      data: { order: order }
-    });
+  openOrderDetailsDialog(orderId: string): void {
+    debugger;
+    // Fetch the details of the selected order based on its ID
+    this.apiService.getApiWithToken(this.cons.api.getOrderDetailsById+'/'+orderId).subscribe(
+      (orderDetails: any) => {
+        // Open the dialog with the fetched order details
+        const dialogRef = this.dialog.open(OrderDetailsDialogComponent, {
+          width: '600px',
+          
+          data: { order: orderDetails } // Pass the fetched order details to the dialog
+        });
+  
+        dialogRef.afterClosed().subscribe(result => {
+          console.log('The dialog was closed');
+        });
+      },
+      (error: any) => {
+        console.error('Failed to fetch order details:', error);
+      }
+    );
+  }
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+ 
+
+  adminOrderDelete(i: number, orderId: any) {
+    // Show a confirmation dialog using SweetAlert
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You are about to delete this order. This action cannot be undone.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // User confirmed, proceed with order deletion
+        this.apiService.deleteApiWithToken(this.cons.api.adminDeleteOrder + '/' + orderId).subscribe(
+          (response: object) => {
+            // Order deleted successfully, remove it from the orderDetails list
+            this.orderDetails.splice(i, 1);
+            // Show success message
+            Swal.fire(
+              'Deleted!',
+              'The order has been deleted.',
+              'success'
+            );
+          },
+          (error: any) => {
+            // Error handling if deletion fails
+            console.error('Delete order failed:', error);
+            // Show error message
+            Swal.fire(
+              'Error!',
+              'Failed to delete the order.',
+              'error'
+            );
+          }
+        );
+      }
     });
-}
-}
+  }
+
+  searchOrders() {
+    this.filteredOrders = this.orderDetails.filter((order: { orderId: string | string[]; user: { name: string; }; }) => 
+      order.orderId.includes(this.searchQuery) || order.user.name.toLowerCase().includes(this.searchQuery.toLowerCase())
+    );
+  }
+  
+    
+    }
+  
+
+
+
 
   
 

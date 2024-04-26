@@ -1,9 +1,20 @@
 
-<h2>Order Details</h2>
-<div>
-  <!-- Display order details here -->
-  <p>Order ID: {{ data.orderId }}</p>
-  <p>Customer Name: {{ data.customerName }}</p>
-  <!-- Add more details as needed -->
-</div>
+<h2>sumer test</h2>
+<!-- <tr *ngFor="let order of orderDetails">
+  <td>{{ order.orderId }}</td>
+  <td>
+      <ng-container *ngFor="let userOrder of order.userOrders">
+          {{ userOrder.product.productName }} ({{ userOrder.quantity }})
+          <br>
+      </ng-container>
+  </td>
+  <td>
+      <ng-container *ngFor="let userOrder of order.userOrders">
+          {{ userOrder.product.productActualPrice | currency:'INR' }}
+          <br>
+      </ng-container>
+  </td>
+  <td>{{ order.totalOrderAmount | currency:'INR' }}</td>
+</tr> -->
+
 <button mat-button (click)="onClose()">Close</button>

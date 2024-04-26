@@ -8,7 +8,8 @@
            <div class="tab-content">
             <div id="home" class="tab-pane in active">
                 <div class="search-bar mb-3">
-                    <input type="text" class="form-control" placeholder="Search by Order ID or Customer Name">
+                  
+                    <input type="text" class="form-control" placeholder="Search by Order ID or Customer Name" [(ngModel)]="searchQuery">
                     <button class="btn btn-primary search-button" (click)="searchOrders()">Search</button>
                   </div>
                   
@@ -29,9 +30,9 @@
                 </thead>
                 <tbody>
                             
-                            <tr *ngFor="let order of orderDetails">
+                            <tr *ngFor="let order of filteredOrders;  let i=index ">
                                 <td>
-                                    <a href="javascript:void(0)" (click)="openOrderDetailsDialog(order)">{{ order.orderId }}</a>
+                                    <a href="javascript:void(0)" (click)="openOrderDetailsDialog(order.orderId)">{{ order.orderId }}</a>
                                   </td>
                                 
                                 <td>{{ order.orderDate  | date: 'dd-MM-yyyy'  }}</td>
@@ -41,7 +42,7 @@
                                 <td>{{ order.totalOrderAmount }}</td>
                                 
                           <td class="align-middle">
-                          <i style="font-size:24px" class="fa">&#xf00d;</i>
+                            <button (click)="adminOrderDelete(i,order.orderId)"><i style="font-size:24px" class="fa">&#xf00d;</i></button>
                       </td>
                       </tr>
                      </tbody>

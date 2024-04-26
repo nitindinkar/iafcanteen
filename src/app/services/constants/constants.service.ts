@@ -40,6 +40,8 @@ export class ConstantsService {
     getUserAddress:this.serviceUrl+"address/getAddressByUser",
     saveAddress:this.serviceUrl+"address/addAddress",
     getAdminOrders:this.serviceUrl+"order/getAllOrderDetailsOfAdmin/ALL",
+    getOrderDetailsById:this.serviceUrl+"",
+    adminDeleteOrder:this.serviceUrl+"order/cancelOrder",
 
   };
 }
