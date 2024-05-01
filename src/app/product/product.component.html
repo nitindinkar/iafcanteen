@@ -129,8 +129,8 @@
                         <div class="row no-gutters">
                             <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
                                 <!-- Product Slider -->
-                  <div class="product-gallery">
-                    <div class="quickview-slider-active" >
+                  <div class="product-gallery" *ngIf="products2!=undefined">
+                    <div class="quickview-slider-active" *ngIf="products2[currentIndex]!=undefined" >
                       <div class="single-slider">
                         <img [src]="products2[currentIndex].image" width="520" height="560" alt="#">
                       </div>
@@ -149,8 +149,8 @@
                 <!-- End Product slider -->
 
                             <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12"  >
-                                <div class="quickview-content" *ngIf="products2">
-                                    <h2 >{{products2[currentIndex].productName}}</h2>
+                                <div class="quickview-content" *ngIf="products2!=undefined">
+                                    <h2 *ngIf="products2[currentIndex]!=undefined">{{products2[currentIndex].productName}}</h2>
                                     <div class="quickview-ratting-review">
                                         <div class="quickview-ratting-wrap">
                                             <div class="quickview-ratting">
@@ -166,9 +166,9 @@
                                             <span><i class="fa fa-check-circle-o"></i> in stock</span>
                                         </div>
                                     </div>
-                                    <h3>{{products2[currentIndex].productActualPrice}}</h3>
+                                    <h3 *ngIf="products2[currentIndex]!=undefined">{{products2[currentIndex].productActualPrice}}</h3>
                                     <div class="quickview-peragraph">
-                                        <p>{{products2[currentIndex].productDescription}}</p>
+                                        <p *ngIf="products2[currentIndex]!=undefined">{{products2[currentIndex].productDescription}}</p>
                                     </div>
                   <div class="size">
                     <div class="row">
@@ -207,9 +207,9 @@
                       </div>
                     </div>
                   </div> -->
-                  <div class="quantity">
-                    <div class="input-group">
-                        <div class="button minus">
+                  <div class="quantity" *ngIf="products!=undefined">
+                    <div class="input-group" *ngIf="products[currentIndex]!=undefined">
+                        <div class="button minus" >
                             <button type="button" class="btn btn-primary btn-number" (click)="decreaseQuantity(currentIndex)" [disabled]="products[currentIndex].quantity === 1" data-type="minus" data-field="quant[1]">
                                 <i class="ti-minus"></i>
                             </button>
@@ -223,8 +223,8 @@
                     </div>
                     <!--/ End Input Order -->
                 </div>
-                
-                
+
+
                   <div class="add-to-cart">
                     <a  class="btn" (click)="addToCart(products2[currentIndex])" >Add to cart</a>
                     <a  class="btn min"  (click)="addToWish(products2[currentIndex])" ><i class="ti-heart"></i></a>

@@ -30,7 +30,7 @@ export class ProductComponent implements OnInit{
   quantity:number=1;
   cart: any;
   subtotal:any;
-  
+
 
   constructor(public cons:ConstantsService,
               private apiService: ApiCallingServiceService,
@@ -95,19 +95,19 @@ export class ProductComponent implements OnInit{
       (response: object) => {
         let result: { [key: string]: any } = response;
         this.products=result['response'];
-        
+
 
         // Filter products based on the search key
       if (this.searchKey && this.searchKey.trim() !== '') {
             this.products = this.products.filter((product: { productName: string; }) =>
             product.productName.toLowerCase().includes(this.searchKey.toLowerCase())
           );
-          
+
         }
-               
+
 
         this.products = this.products.map((product: { imageUrl: string; }) => ({ ...product, imageUrl: this.cons.serviceUrl + product.imageUrl }));
-        
+
         this.products2=[];
         for(let product of this.products){
           product.imageUrl=this.cons.serviceUrl+product.imageUrl;
@@ -130,7 +130,7 @@ export class ProductComponent implements OnInit{
 
 
   addToCart(product:any) {
-       
+
 
     this.apiService.getApiWithToken(this.cons.api.addToCart+'/'+product.productId).subscribe(
       (response: object) => {
@@ -150,8 +150,8 @@ export class ProductComponent implements OnInit{
             showConfirmButton: false,
             timer: 1800
           });
-          
-          
+
+
         }
 
         if(this.products==="exception  product is already present in the cart"){
@@ -162,7 +162,7 @@ export class ProductComponent implements OnInit{
             imageWidth: 400,
             imageHeight: 200,
             imageAlt: "Custom image",
-            
+
           });
         }
 
@@ -272,7 +272,7 @@ export class ProductComponent implements OnInit{
       }
     }
     debugger;
-    if(count == 0){
+    if(count == 0&&this.products!=undefined){
       for(let product of this.products){
         if(this.groccery&&product.category.type=='G'){
           this.products2.push(product);
@@ -327,7 +327,7 @@ export class ProductComponent implements OnInit{
       this.calculateSubtotal();
       // Decrease quantity, ensuring it doesn't go below 1
   }else{
-   
+
       }
 
     //this.cart[i].product.quantity=Number(this.cart[i].product.quantity)-1;
@@ -340,7 +340,7 @@ export class ProductComponent implements OnInit{
 
   calculateSubtotal() {
     this.subtotal = 0;
-  
+
     if (this.cart && this.cart.length > 0) {
       for (let cartItem of this.cart) {
         if (cartItem.product && cartItem.product.quantity && cartItem.product.productDiscountedPrice) {
@@ -354,7 +354,7 @@ export class ProductComponent implements OnInit{
     console.log("This is my subtotal"+this.subtotal);
     return this.subtotal;
     }
-  
+
 }
 
 
