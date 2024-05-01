@@ -14,9 +14,11 @@ import {WishlistComponent} from "./wishlist/wishlist.component";
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import {AddCategoryComponent} from "./add-category/add-category.component";
 import { AdminComponent } from './admin/admin.component';
-import { ManageAdminComponent } from './manage-admin/manage-admin.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { ManageOrdersComponent } from './manage-orders/manage-orders.component';
+import { ManageAdminsComponent } from './manage-admins/manage-admins.component';
+import { ManageStoreComponent } from './manage-store/manage-store.component';
+
 
 
 const routes: Routes = [
@@ -33,9 +35,10 @@ const routes: Routes = [
   { path: 'wishlist', component:  WishlistComponent},
   { path: 'contact-us', component: ContactUsComponent},
   { path: 'admin', component: AdminComponent},
-  { path: 'manage-admin', component: ManageAdminComponent},
   { path: 'registration', component: RegistrationComponent},
   { path:  'manage-orders', component:ManageOrdersComponent},
+  { path:  'manage-admins', component:ManageAdminsComponent},
+  { path:  'manage-store', component:ManageStoreComponent},
  
   
 ];

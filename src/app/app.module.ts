@@ -1,3 +1,4 @@
+
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
@@ -25,7 +26,7 @@ import { Chart } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 import { AdminComponent } from './admin/admin.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { ManageAdminComponent } from './manage-admin/manage-admin.component';
+
 import { RegistrationComponent } from './registration/registration.component';
 import { IonicModule } from '@ionic/angular';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
@@ -34,6 +35,9 @@ import { MatInputModule} from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ManageOrdersComponent } from './manage-orders/manage-orders.component';
 import { OrderDetailsDialogComponent } from './order-details-dialog/order-details-dialog.component';
+import { ManageAdminsComponent } from './manage-admins/manage-admins.component';
+import { ManageStoreComponent } from './manage-store/manage-store.component';
+
 
 
 
@@ -54,10 +58,14 @@ import { OrderDetailsDialogComponent } from './order-details-dialog/order-detail
     WishlistComponent,
     AddCategoryComponent,
     AdminComponent,
-    ManageAdminComponent,
     RegistrationComponent,
     ManageOrdersComponent,
     OrderDetailsDialogComponent,
+    ManageAdminsComponent,
+    ManageStoreComponent,
+    
+  
+   
     
    
     
@@ -80,7 +88,7 @@ import { OrderDetailsDialogComponent } from './order-details-dialog/order-detail
     
       
   ],
-  providers: [ SharedService,ProductComponent,
+  providers: [ SharedService,ProductComponent,HeaderComponent,
     provideAnimationsAsync()
   ],
   bootstrap: [AppComponent]

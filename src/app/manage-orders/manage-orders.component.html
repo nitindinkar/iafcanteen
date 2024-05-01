@@ -8,10 +8,9 @@
            <div class="tab-content">
             <div id="home" class="tab-pane in active">
                 <div class="search-bar mb-3">
-                  
-                    <input type="text" class="form-control" placeholder="Search by Order ID or Customer Name" [(ngModel)]="searchQuery">
+                   <input type="text" class="form-control" placeholder="Search by Order ID or Customer Name" [(ngModel)]="searchQuery">
                     <button class="btn btn-primary search-button" (click)="searchOrders()">Search</button>
-                  </div>
+                </div>
                   
                   
               
@@ -25,6 +24,7 @@
                     <th scope="col">Order Status</th>
                     <th scope="col">Total Amount</th>
                     <th scope="col">Cancel Order</th>
+                    <th scope="col">Download Order</th>
   
                   </tr>
                 </thead>
@@ -42,8 +42,13 @@
                                 <td>{{ order.totalOrderAmount }}</td>
                                 
                           <td class="align-middle">
-                            <button (click)="adminOrderDelete(i,order.orderId)"><i style="font-size:24px" class="fa">&#xf00d;</i></button>
+                          <button (click)="adminOrderDelete(i,order.orderId)"><i style="font-size:24px" class="fa fa-trash"></i></button>
                       </td>
+                      <td class="align-middle">
+                        <button class="pdf-download-button" (click)="downloadPDF(order.pdfUrl)">
+                          <i class="fas fa-file-pdf"></i>pdf
+                        </button>
+                    </td>
                       </tr>
                      </tbody>
               </table>

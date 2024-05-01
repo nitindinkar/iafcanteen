@@ -4,6 +4,8 @@ import { ConstantsService } from '../services/constants/constants.service';
 import { ApiCallingServiceService } from '../services/api-calling/api-calling-service.service';
 import { SharedService } from '../services/shared/shared.service';
 import Swal from 'sweetalert2';
+import { HeaderComponent } from '../header/header.component';
+import { CartComponent } from '../cart/cart.component';
 
 
 
@@ -33,7 +35,8 @@ export class ProductComponent implements OnInit{
   constructor(public cons:ConstantsService,
               private apiService: ApiCallingServiceService,
               private router: Router,
-              private sharedService: SharedService) {}
+              private sharedService: SharedService,
+            private header:HeaderComponent) {}
 
   ngOnInit(): void {
     debugger;
@@ -134,11 +137,12 @@ export class ProductComponent implements OnInit{
         debugger;
         let result: { [key: string]: any } = response;
         this.products=result['response'];
-        console.log(this.products);
+        debugger;
+        // this.sharedService.cartCount++;
+        debugger;
 
         if(result['status']==200){
-          debugger;
-
+         this.header.ngOnInit();
           Swal.fire({
             position: "center",
             icon: "success",
@@ -146,13 +150,7 @@ export class ProductComponent implements OnInit{
             showConfirmButton: false,
             timer: 1800
           });
-          this.sharedService.cartCount++;
-          debugger;
-          console.log(this.products);
-
-
           
-          //this.showSnackBar('Product added to cart successfully.');
           
         }
 

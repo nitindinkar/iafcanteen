@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ApiCallingServiceService } from '../services/api-calling/api-calling-service.service';
 import { HttpClient } from '@angular/common/http';
 import { ConstantsService } from '../services/constants/constants.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-add-product',
@@ -10,6 +11,8 @@ import { ConstantsService } from '../services/constants/constants.service';
   styleUrl: './add-product.component.scss'
 })
 export class AddProductComponent implements OnInit {
+
+
   @ViewChild('invoiceFileInput') invoiceFileInput: any;
 
   name: any;
@@ -19,6 +22,11 @@ export class AddProductComponent implements OnInit {
   categories: any;
   category:any;
   uploadId:any;
+  groccery: boolean =true;
+  private cardType: string='';
+  products: any;
+  filteredProducts: any;
+searchQuery: any;
 
   constructor(
     private router: Router,
@@ -28,6 +36,7 @@ export class AddProductComponent implements OnInit {
   ) {}
     ngOnInit(): void {
         this.getAllCategories();
+        this.getAllProduct();
   }
 
 
@@ -118,4 +127,116 @@ addProduct() {
   });
 }
 
+
+public getAllProduct() {
+  debugger;
+  if(localStorage.getItem('card')==this.cons.constants.liquorCard){
+    this.groccery=false;
+    this.cardType='L';
+    }
+  else{
+    this.groccery=true;
+    this.cardType='G'
+  }
+  this.apiService.getApiWithToken(this.cons.api.getAllProductAdmin).subscribe(
+    (response: object) => {
+      let result: { [key: string]: any } = response;
+      this.products=result['response'];
+      this.filteredProducts = this.products;
+      console.log(this.products);
+            
+    },
+    (error) => {
+      console.error('Add Product failed:', error);
+    }
+  );
 }
+
+// Inside your component class
+deleteProduct(i: number, productId: any) {
+  debugger;
+  // Show a confirmation dialog using SweetAlert
+  Swal.fire({
+    title: 'Are you sure?',
+    text: 'You are about to delete this order. This action cannot be undone.',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, delete it!'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      // User confirmed, proceed with order deletion
+      this.apiService.deleteApiWithToken(this.cons.api.deleteProduct + '/' + productId).subscribe(
+        (response: object) => {
+          // Order deleted successfully, remove it from the orderDetails list
+          this.products.splice(i, 1);
+          // Show success message
+          Swal.fire(
+            'Deleted!',
+            'The order has been deleted.',
+            'success'
+          );
+        },
+        (error: any) => {
+          // Error handling if deletion fails
+          console.error('Delete order failed:', error);
+          // Show error message
+          Swal.fire(
+            'Error!',
+            'Failed to delete the order.',
+            'error'
+          );
+        }
+      );
+    }
+  });
+}
+
+// Inside your component class
+searchProducts() {
+  debugger;
+  if (!this.searchQuery) {
+    // If search query is empty, reset filteredProducts to all products
+    this.filteredProducts = this.products;
+  } else {
+    // Filter products based on search query
+    this.filteredProducts = this.products.filter((product: { productName: string; category: { name: string; }; }) =>
+      product.productName.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+      product.category.name.toLowerCase().includes(this.searchQuery.toLowerCase())
+    );
+  }
+}
+
+editProduct(productId: any) {
+  // Fetch product details by productId
+  this.apiService.updateApiWithToken(this.cons.api.updateProduct + '/' + productId).subscribe(
+    (response: any) => {
+      let productDetails: any = response;
+      
+      // Populate input fields with fetched product details
+      this.name = productDetails.productName;
+      this.desc = productDetails.productDescription;
+      this.aPrice = productDetails.productActualPrice;
+      this.dPrice = productDetails.productDiscountedPrice;
+      this.category = productDetails.categoryId;
+      this.uploadId = productDetails.uploadId;
+
+      // Change the behavior of the form submission button to update the product
+      // You can set a flag to indicate that the form is in edit mode
+      // For example, you can set a boolean flag like this:
+      // this.isEditMode = true;
+    },
+    (error: any) => {
+      console.error('Error fetching product details:', error);
+    }
+  );
+}
+
+
+
+
+
+
+}
+

@@ -129,6 +129,20 @@ export class ApiCallingServiceService {
       return throwError('Token not available'); // Return an Observable that throws an error
     }
   }
+
+  updateApiWithToken(url: string) {
+    const token = localStorage.getItem('token');
+    if (token) {
+      const headers = new HttpHeaders({
+        'Authorization': token
+      });
+      return this.http.put(url, { headers }).pipe(
+        catchError(this.handleError)
+      );
+    } else {
+      return throwError('Token not available'); // Return an Observable that throws an error
+    }
+  }
   
     
 }

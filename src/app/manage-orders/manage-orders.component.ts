@@ -6,6 +6,7 @@ import { SharedService } from '../services/shared/shared.service';
 import { MatDialog } from '@angular/material/dialog';
 import { OrderDetailsDialogComponent } from '../order-details-dialog/order-details-dialog.component';
 import Swal from 'sweetalert2';
+import { HttpClient } from '@angular/common/http';
 
 
 
@@ -16,6 +17,7 @@ import Swal from 'sweetalert2';
   styleUrl: './manage-orders.component.scss'
 })
 export class ManageOrdersComponent {
+
 
 
 
@@ -31,7 +33,8 @@ export class ManageOrdersComponent {
     private apiService: ApiCallingServiceService,
     private router: Router,
     private sharedService: SharedService,
-    public dialog: MatDialog) {
+    public dialog: MatDialog,
+    private http: HttpClient) {
 }
   ngOnInit(): void {
     
@@ -51,7 +54,7 @@ export class ManageOrdersComponent {
       tab.classList.remove('active');
     });
 
-    // Add 'active' class to the clicked tab
+    // Add 'active' class to url: any, p0: { responseType: string; }ked tab
     const clickedTab = event.target as HTMLElement;
     clickedTab.parentElement?.classList.add('active');
   }
@@ -167,6 +170,21 @@ export class ManageOrdersComponent {
       order.orderId.includes(this.searchQuery) || order.user.name.toLowerCase().includes(this.searchQuery.toLowerCase())
     );
   }
+
+  
+    downloadPDF(pdfUrl: string) {
+      this.http.get(pdfUrl, { responseType: 'blob' }).subscribe((response: any) => {
+        const blob = new Blob([response], { type: 'application/pdf' });
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        document.body.appendChild(a);
+        a.href = url;
+        a.download = 'order.pdf';
+        a.click();
+        window.URL.revokeObjectURL(url);
+        document.body.removeChild(a);
+      });
+    }
   
     
     }

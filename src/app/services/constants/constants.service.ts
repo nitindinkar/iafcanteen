@@ -9,8 +9,9 @@ export class ConstantsService {
   //serviceUrl = 'http://192.168.120.78:8082/';
    //serviceUrl = 'http://192.168.212.84:8082/';
     //serviceUrl = 'http://localhost:8082/';
-    serviceUrl = 'http://13.200.245.74:8083/ecommerce/';
+    serviceUrl = 'http://13.200.245.74:8083/ecommerce/'; // server url
    //serviceUrl=  'http://192.168.54.64:8082/';
+  // serviceUrl = 'http://192.168.201.236:8082/'; // vaibhav localhost
   constants={
     groceryCard:'Grocery',
     liquorCard: 'Liquor'
@@ -42,6 +43,16 @@ export class ConstantsService {
     getAdminOrders:this.serviceUrl+"order/getAllOrderDetailsOfAdmin/ALL",
     getOrderDetailsById:this.serviceUrl+"",
     adminDeleteOrder:this.serviceUrl+"order/cancelOrder",
+    addAdminDetails:this.serviceUrl+"super-admin/create-admin",
+    getActiveAdmins:this.serviceUrl+"super-admin/active-admins",
+    addStore:this.serviceUrl+"super-admin/add-store",
+    deleteProduct:this.serviceUrl+"product/deleteProductDetails",
+    updateProduct:this.serviceUrl+"product/updateProduct",
+    getAllProductAdmin:this.serviceUrl+"product/getAllProductsAdmin"
+    
+
+
+
 
   };
 }

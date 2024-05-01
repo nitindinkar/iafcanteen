@@ -46,7 +46,7 @@ export class InventoryComponent  implements OnInit{
       this.groccery=true;
       this.cardType='G'
     }
-    this.apiService.getApiWithToken(this.cons.api.getAllProducts+'/'+this.cardType).subscribe(
+    this.apiService.getApiWithToken(this.cons.api.getAllProductAdmin).subscribe(
       (response: object) => {
         let result: { [key: string]: any } = response;
         this.products=result['response'];

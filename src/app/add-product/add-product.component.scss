@@ -2,3 +2,8 @@
   select.form-control:not([size]):not([multiple]){
     height: calc(32px) !important;/* Fix the input control height*/
   }
+
+  .add-admin{
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}

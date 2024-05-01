@@ -107,7 +107,7 @@
                     </li>
                   </ul>
                   <div *ngIf="sharedService.cartCount > 0">
-                    <p>Cart count: {{ sharedService.cartCount }}</p>
+                    <p>Cart count: {{sharedService.cartCount}}</p>
                   </div>
                   <div *ngIf="sharedService.cartCount === 0">
                     <p>Your cart is empty</p>
@@ -209,16 +209,20 @@
                     <div class="nav-inner">
                       <ul class="nav main-menu menu navbar-nav">
 
+                        <li *ngIf="admin"  [routerLinkActive]="['active']"><a href="#" [routerLink]="['/admin']">Admin Dashboard</a></li>
+
                         <li *ngIf="user"  [routerLinkActive]="['active']"><a href="#" [routerLink]="['/product']">Product</a></li>
                         <li *ngIf="user" [routerLinkActive]="['active']"><a href="#" [routerLink]="['/cart']">Cart <span class="new" >{{sharedService.cartCount}}</span></a></li>
                         <li *ngIf="admin" [routerLinkActive]="['active']"><a href="#" [routerLink]="['/add-product']">Manage Product</a></li>
                         <li *ngIf="admin" [routerLinkActive]="['active']"><a href="#" [routerLink]="['/add-category']">Manage Category</a></li>
                         <li *ngIf="user" [routerLinkActive]="['active']"><a href="#" [routerLink]="['/my-account']">Order History</a></li>
                         <li *ngIf="admin" [routerLinkActive]="['active']"><a href="#" [routerLink]="['/manage-orders']">Manage Orders</a></li>
-                        <li  *ngIf="admin" [routerLinkActive]="['active']"><a href="#" [routerLink]="['/manage-admin']">Manage Admin</a></li>
+                        <li *ngIf="superadmin" [routerLinkActive]="['active']"><a href="#" [routerLink]="['/manage-admins']">Manage Admin</a></li>
+                        <li *ngIf="superadmin" [routerLinkActive]="['active']"><a href="#" [routerLink]="['/manage-store']">Manage Store</a></li>
                         <li *ngIf="admin" [routerLinkActive]="['active']"><a href="#" [routerLink]="['/inventory']"> Inventory Manager</a></li>
                         <li *ngIf="user"  [routerLinkActive]="['active']"><a href="#" [routerLink]="['/wishlist']" >WishList </a></li>
                         <li *ngIf="user"  [routerLinkActive]="['active']"><a href="#" [routerLink]="['/contact-us']">Contact Us</a></li>
+                        
                        
                         </ul>
                     </div>

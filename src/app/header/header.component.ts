@@ -37,6 +37,7 @@ export class HeaderComponent implements OnInit {
   cart: any;
   subtotal: any;
   cartEmpty:boolean=false;
+  superadmin:boolean=false;
   
   
 
@@ -45,7 +46,7 @@ export class HeaderComponent implements OnInit {
               private apiService: ApiCallingServiceService,
               private router: Router,
               public sharedService:SharedService,
-              private productComp:ProductComponent,
+              //private productComp:ProductComponent,
               ) {
 }
 
@@ -57,11 +58,16 @@ export class HeaderComponent implements OnInit {
       debugger;
       for(let role of this.loginResponse.user.roles){
         debugger;
-        if(role.roleName=='ADMIN')
+        console.log(role.roleName);
+        if(role.roleName=='ADMIN'){
           this.admin=true;
-
-        if(role.roleName=='USER')
+        } 
+        if(role.roleName=='USER'){
           this.user=true;
+        }
+        if(role.roleName=="SUPER_ADMIN"){
+          this.superadmin=true;
+        }
       }
     }
     if(localStorage.getItem('card')==this.cons.constants.liquorCard){
@@ -151,8 +157,52 @@ export class HeaderComponent implements OnInit {
     this.loggedIn.next(false);
     this.router.navigateByUrl('');
     this.admin=false;
+    this.user=false;
   
     
+  }
+  public getAllProduct() {
+    if(localStorage.getItem('card')==this.cons.constants.liquorCard){
+      this.groccery=false;
+      this.cardType='L';
+      }
+    else{
+      this.groccery=true;
+      this.cardType='G'
+    }
+    this.apiService.getApiWithToken(this.cons.api.getAllProducts+'/'+this.cardType).subscribe(
+      (response: object) => {
+        let result: { [key: string]: any } = response;
+        this.products=result['response'];
+        
+
+        // Filter products based on the search key
+      if (this.searchKey && this.searchKey.trim() !== '') {
+            this.products = this.products.filter((product: { productName: string; }) =>
+            product.productName.toLowerCase().includes(this.searchKey.toLowerCase())
+          );
+          
+        }
+               
+
+        this.products = this.products.map((product: { imageUrl: string; }) => ({ ...product, imageUrl: this.cons.serviceUrl + product.imageUrl }));
+        
+        this.products2=[];
+        for(let product of this.products){
+          product.imageUrl=this.cons.serviceUrl+product.imageUrl;
+          if(this.groccery&&product.category.type=='G'){
+            this.products2.push(product);
+          }
+          else if(!this.groccery&&product.category.type=='L'){
+            this.products2.push(product);
+          }
+        }
+        return(this.products);
+      },
+      (error) => {
+        console.error('Add Product failed:', error);
+      }
+    );
   }
   login(){
     this.loggedIn.next(true);
@@ -162,7 +212,7 @@ export class HeaderComponent implements OnInit {
   redirect(cat: any) {
     this.sharedService.selectedCategory=cat;
     if(this.router.url=='/product'){
-      this.productComp.getAllProduct();
+      this.getAllProduct();
     }
     else
       this.router.navigateByUrl('/product');
@@ -183,6 +233,7 @@ export class HeaderComponent implements OnInit {
           this.cartEmpty=true;
           
         }else{
+          debugger;
           this.sharedService.cartCount=result['response'].length;
           this.cartEmpty=false;
 

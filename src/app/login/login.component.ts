@@ -15,6 +15,12 @@ export class LoginComponent implements OnInit{
   Liquor: any;
   Grocery: any;
   token='';
+userType: any;
+serviceNumber: any;
+adminPassword: any;
+serviceNo: any;
+userName: any;
+userPassword: any;
   constructor(private HttpClient: HttpClient,
               private ConstServiceService:ConstantsService,
               private apiService: ApiCallingServiceService,
@@ -131,19 +137,21 @@ export class LoginComponent implements OnInit{
 
 
   verifyLoginCredentials(){
+    this.login();
+  
     const cardType= this.selected;
     const cardNumber=this.cardNumber;
     const extractedLetters = this.cardNumber.substring(0, 2);
-    if(this.selected=="Grocery" && extractedLetters==="Gq"){
-        this.login();
+    // if(this.selected=="Grocery" && extractedLetters==="Gq"){
+    //     this.login();
 
-    }
-    else if(this.selected=="Liquor"&& extractedLetters==="Lq"){
-      this.login();
-      }
-      else{
-        alert("Please Enter Card Type  According to the Card Number");
-      }
+    // }
+    // else if(this.selected=="Liquor"&& extractedLetters==="Lq"){
+    //   this.login();
+    //   }
+      // else{
+      //   alert("Please Enter Card Type  According to the Card Number");
+      // }
 
 
 
@@ -151,22 +159,31 @@ export class LoginComponent implements OnInit{
   }
 
   login(){
+    debugger;
 
     const loginUrl=this.ConstServiceService.api.login;
-    const headers = new HttpHeaders({
-      'cardType': this.selected,
-    });
+    // const headers = new HttpHeaders({
+    //   'cardType': this.selected,
+    // });
+
+    
 
       let credentials:any = {
-      cardNumber:this.cardNumber,
-      userPassword:this.loginPassword
+      userName:this.userName,
+      userPassword:this.userPassword,
+      userType:this.userType,
+      cardType: this.selected !== undefined ? this.selected : null,
     }
 
-      this.HttpClient.post(loginUrl, credentials,{ headers:headers})
+    console.log(credentials);
+
+      this.HttpClient.post(loginUrl, credentials)
       .subscribe(
         (response: object) => {
           let result: { [key: string]: any } = response;
           // Handle successful login, e.g., redirect the user or perform other actions
+
+          console.log(result);
 
             if(result['message']=='success'){
             this.sharedService.loggedIn=true;
@@ -176,25 +193,29 @@ export class LoginComponent implements OnInit{
             localStorage.setItem('userId',JSON.stringify(result['response']['user']['id']))
             this.sharedService.loginResponse=JSON.stringify(result['response']);
             const roleName = result['response']['user']['roles'][0]['roleName'];
+            debugger;
              this.sharedService.role=roleName;
              console.log(roleName);
 
             
             
             console.log(this.sharedService);
-            if(this.selected=='Grocery'){
+            if(this.sharedService.role!='ADMIN'&& this.selected=='Grocery'){
               this.router.navigate(['']);
               this.sharedService.cardType=this.ConstServiceService.constants.groceryCard
             }
 
-            else if(this.selected=='Liquor'){
+            else if(this.sharedService.role!='ADMIN'  && this.selected=='Liquor'){
               localStorage.setItem('card',this.ConstServiceService.constants.liquorCard);
               this.sharedService.cardType=this.ConstServiceService.constants.liquorCard;
               this.router.navigate(['/liquor']);
             }
-
-            if(this.sharedService.role=='Admin'){
+              debugger;
+            if(this.sharedService.role=='ADMIN'){
               this.router.navigate(['/admin']);
+             }
+             if(this.sharedService.role=="SUPER_ADMIN"){
+              this.router.navigate(['/manage-admins']);
              }
             
 

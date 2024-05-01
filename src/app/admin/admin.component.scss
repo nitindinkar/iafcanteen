@@ -1,98 +1,66 @@
-.widget-container {
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .widget {
-    width: 23%; /* Adjust width to fit 4 widgets per row */
-    height: 175px;
-    background-color: #fff;
-    color: #fff;
-    border-radius: 5px;
-    margin: 10px;
-    box-shadow: 5px 5px 5px #939393;
-    display: flex;
-    align-items: center;
-    padding: 20px;
-  }
-  
-  .widget h3 {
-    margin: 0;
-    font-size: 14px;
-    color: #333;
-  }
-  
-  .widget p {
-    margin: 0;
-    font-size: 12px;
-    color: #666;
-  }
-  
-  /* Colors for the widgets */
-  .widget.green {
-    background-color: rgb(4, 67, 66);
-  }
-  
-  .widget.yellow {
-    background-color: rgb(237, 158, 32);
-  }
-  
-  .widget.red {
-    background-color: rgb(126, 5, 5);
-  }
-  
-  .widget.blue {
-    background-color: rgb(105, 32, 251);
-  }
-  
-  @media only screen and (max-width: 1600px) {
-    .widget {
-      width: 22%;
-    }
-  }
-  
-  @media only screen and (max-width: 1500px) {
-    .widget {
-      width: 20%;
-    }
-  }
-  
-  @media only screen and (max-width: 1400px) {
-    .widget {
-      width: 18%;
-    }
-  }
-  
-  @media only screen and (max-width: 1200px) {
-    .widget {
-      width: 16%;
-    }
-  }
-  
-  .widget .icon {
-    width: 100px;
-    font-size: 60px;
-    text-align: center;
-  }
-  
-  .widget .value {
-    text-align: center;
-    width: 175px;
-  }
-  
-  .widget .value .top {
-    font-size: 30px;
-  }
-  
-  .widget .value .bottom {
-    font-size: 20px;
-    margin-top: 10px;
-  }
-  .chart-container {
-    margin-top: 20px; /* Adjust margin as needed */
-    width: 100%;
-    max-width: 800px; /* Adjust max-width as needed */
-    margin: 0 auto; /* Center the container */
-  }
-  
-  
+.tile-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 50px; /* Add space between header and tiles */
+}
+
+.tile {
+  width: 200px;
+  height: 200px;
+  margin: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
+  transition: transform 0.3s ease;
+}
+
+.tile:hover {
+  transform: translateY(-5px); /* Add hover effect */
+}
+
+.green {
+  background-color: #4caf4fcb; /* Green */
+}
+
+.yellow {
+  background-color: #3bffdecb; /* Yellow */
+}
+
+.red {
+  background-color: #f44336d3; /* Red */
+}
+
+.blue {
+  background-color: #2195f3d0; /* Blue */
+}
+
+.icon {
+  font-size: 48px;
+  color: #070707; /* Icon color */
+  margin-bottom: 10px; /* Add margin below the icon */
+}
+
+.value {
+  font-size: 30px;
+  color: #070707; /* Value color */
+  text-align: center;
+  font-weight: bold;
+  display: flex; /* Use flexbox */
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+ 
+}
+
+.bottom {
+  font-size: 14px; /* Adjust font size as needed */
+  color: rgba(39, 37, 37, 0.7); /* Bottom text color */
+  font-family: Arial, sans-serif; /* Use Arial or any desired font */
+  text-align: center; /* Center align text */
+}
+

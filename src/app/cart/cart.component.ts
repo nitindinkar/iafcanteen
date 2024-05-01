@@ -60,6 +60,7 @@ export class CartComponent implements OnInit{
 
         this.cart=result['response'];
         this.sharedService.cartList=this.cart;
+        this.sharedService.cartCount=result['response'].length;
         console.log("this is the total cart"+this.cart);
         
         debugger;
