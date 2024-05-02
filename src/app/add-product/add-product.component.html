@@ -7,7 +7,7 @@
                 <h3 class="seconder-heading mt-4">Add Product</h3>
                  <form action="post">
                       <div class="row">
-                       
+
                         <div class="col-md-4 mb-3 mt-3">
                           <label for="Name" class="form-label">Product Name</label>
                           <input type="text" class="form-control" id="name" [(ngModel)]="name" placeholder="Enter Name" name="name">
@@ -41,7 +41,7 @@
                         </div>
 
                       </div>
-                 </form> 
+                 </form>
               </div>
             <div class="add-admin px-4 my-4">
               <div class="search-bar mb-3 mt-3 d-flex justify-content-between">
@@ -52,7 +52,7 @@
             <table class="table table-striped">
               <thead>
                 <tr>
-                 
+
                   <th scope="col">Product Image</th>
                   <th scope="col">Product Name</th>
                   <th scope="col">Catagory</th>
@@ -62,24 +62,24 @@
               </thead>
               <tbody>
                 <tr *ngFor="let product of filteredProducts let i=index  ">
-                  
+
                   <td><img [src]="product.imageUrl" class="inventory-image"></td>
                   <td>{{ product.productName }}</td>
                   <td>{{ product.category.name }}</td>
                   <td>₹{{ product.productActualPrice}} </td>
                   <td>₹{{ product.productDiscountedPrice }} </td>
-                  <td>         
-                      <button type="submit" class="btn btn-secondary"  (click)="editProduct(product.productId)"  ><i class="fa fa-edit"></i></button>
+                  <td>
+                      <button type="submit" class="btn btn-secondary"  (click)="editProduct(product)"  ><i class="fa fa-edit"></i></button>
                       <button type="submit" class="btn btn-secondary ml-2"  (click)="deleteProduct(i,product.productId)"  ><i class="fa fa-trash"></i></button>
                   </td>
               </tr>
-               
+
               </tbody>
             </table>
-            
+
               </div>
             </div>
       </div>
   </div>
-  
+
 </div>

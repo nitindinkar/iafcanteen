@@ -40,15 +40,15 @@ searchQuery: any;
   }
 
 
- 
+
 
     getAllCategories() {
       this.apiService.getApiWithToken(this.cons.api.getAllCategories).subscribe(
         (response: object) => {
           let result: { [key: string]: any } = response;
            this.categories=result['response'];
-          
-          
+
+
         },
         (error) => {
           console.error('Add Product failed:', error);
@@ -58,7 +58,7 @@ searchQuery: any;
 
 
 
-  
+
 
 
   upload() {
@@ -98,7 +98,7 @@ addProduct() {
     productDiscountedPrice: this.dPrice,
     categoryId:this.category,
     uploadId:this.upload
-    
+
 
   };
   // formData.append('json_data', JSON.stringify(jsonData));
@@ -111,10 +111,10 @@ addProduct() {
         alert("Product added Successfully");
         this.name = '';
         this.desc = '';
-        this.aPrice = null; 
-        this.dPrice = null; 
+        this.aPrice = null;
+        this.dPrice = null;
         this.category = null;
-               
+
       } else {
 
       }
@@ -144,7 +144,7 @@ public getAllProduct() {
       this.products=result['response'];
       this.filteredProducts = this.products;
       console.log(this.products);
-            
+
     },
     (error) => {
       console.error('Add Product failed:', error);
@@ -208,29 +208,31 @@ searchProducts() {
   }
 }
 
-editProduct(productId: any) {
+editProduct(product: any) {
+    debugger;
+    this.name=product.productName;
   // Fetch product details by productId
-  this.apiService.updateApiWithToken(this.cons.api.updateProduct + '/' + productId).subscribe(
-    (response: any) => {
-      let productDetails: any = response;
-      
-      // Populate input fields with fetched product details
-      this.name = productDetails.productName;
-      this.desc = productDetails.productDescription;
-      this.aPrice = productDetails.productActualPrice;
-      this.dPrice = productDetails.productDiscountedPrice;
-      this.category = productDetails.categoryId;
-      this.uploadId = productDetails.uploadId;
-
-      // Change the behavior of the form submission button to update the product
-      // You can set a flag to indicate that the form is in edit mode
-      // For example, you can set a boolean flag like this:
-      // this.isEditMode = true;
-    },
-    (error: any) => {
-      console.error('Error fetching product details:', error);
-    }
-  );
+  // this.apiService.updateApiWithToken(this.cons.api.updateProduct + '/' + productId).subscribe(
+  //   (response: any) => {
+  //     let productDetails: any = response;
+  //
+  //     // Populate input fields with fetched product details
+  //     this.name = productDetails.productName;
+  //     this.desc = productDetails.productDescription;
+  //     this.aPrice = productDetails.productActualPrice;
+  //     this.dPrice = productDetails.productDiscountedPrice;
+  //     this.category = productDetails.categoryId;
+  //     this.uploadId = productDetails.uploadId;
+  //
+  //     // Change the behavior of the form submission button to update the product
+  //     // You can set a flag to indicate that the form is in edit mode
+  //     // For example, you can set a boolean flag like this:
+  //     // this.isEditMode = true;
+  //   },
+  //   (error: any) => {
+  //     console.error('Error fetching product details:', error);
+  //   }
+  // );
 }
 
 
