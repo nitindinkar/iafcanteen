@@ -16,7 +16,7 @@
                     <div class="form-group">
                         <label for="userType">User Type:</label>
                         <select class="form-control" id="userType" [(ngModel)]="userType" name="userType">
-                            <option value="superadmin">Superadmin</option>
+                            <!-- <option value="superadmin">Superadmin</option> -->
                             <option value="admin">Admin</option>
                             <option value="user">User</option>
                         </select>
@@ -59,7 +59,7 @@
                             <input class="form-check-input" type="checkbox" name="remember"> Remember me
                         </label>
                     </div>
-                    <button type="submit" class="btn btn-primary mb-3" (click)="verifyLoginCredentials()">Submit</button>
+                    <button type="submit" class="btn btn-primary mb-3" (click)="login()">Submit</button>
                     <h4>Don't have an account? <a class="register-link" (click)="toggleRegistrationForm()">Register Here</a></h4>
         
                 </form>

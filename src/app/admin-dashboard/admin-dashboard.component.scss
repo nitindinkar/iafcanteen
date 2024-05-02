@@ -1,0 +1,19 @@
+.card-box {
+    background-color: #fff;
+    padding: 1.25rem;
+    -webkit-box-shadow: 0 0 35px 0 rgba(73, 80, 87, .15);
+    box-shadow: 0 0 35px 0 rgba(73, 80, 87, .15);
+    margin-bottom: 24px;
+    border-radius: .25rem;
+}
+.waves-effect {
+    position: relative;
+    cursor: pointer;
+    display: inline-block;
+    overflow: hidden;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}

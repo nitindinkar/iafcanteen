@@ -18,6 +18,8 @@ import { RegistrationComponent } from './registration/registration.component';
 import { ManageOrdersComponent } from './manage-orders/manage-orders.component';
 import { ManageAdminsComponent } from './manage-admins/manage-admins.component';
 import { ManageStoreComponent } from './manage-store/manage-store.component';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { SuperadminDashboardComponent } from './superadmin-dashboard/superadmin-dashboard.component';
 
 
 
@@ -34,11 +36,13 @@ const routes: Routes = [
   { path: 'inventory', component:  InventoryComponent},
   { path: 'wishlist', component:  WishlistComponent},
   { path: 'contact-us', component: ContactUsComponent},
-  { path: 'admin', component: AdminComponent},
+  { path: 'admin', component: AdminDashboardComponent},
   { path: 'registration', component: RegistrationComponent},
   { path:  'manage-orders', component:ManageOrdersComponent},
   { path:  'manage-admins', component:ManageAdminsComponent},
   { path:  'manage-store', component:ManageStoreComponent},
+  { path:  'superadmin', component:SuperadminDashboardComponent},
+ 
  
   
 ];

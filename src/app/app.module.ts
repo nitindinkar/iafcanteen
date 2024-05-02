@@ -37,6 +37,8 @@ import { ManageOrdersComponent } from './manage-orders/manage-orders.component';
 import { OrderDetailsDialogComponent } from './order-details-dialog/order-details-dialog.component';
 import { ManageAdminsComponent } from './manage-admins/manage-admins.component';
 import { ManageStoreComponent } from './manage-store/manage-store.component';
+import { SuperadminDashboardComponent } from './superadmin-dashboard/superadmin-dashboard.component';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 
 
 
@@ -63,6 +65,8 @@ import { ManageStoreComponent } from './manage-store/manage-store.component';
     OrderDetailsDialogComponent,
     ManageAdminsComponent,
     ManageStoreComponent,
+    SuperadminDashboardComponent,
+    AdminDashboardComponent,
     
   
    

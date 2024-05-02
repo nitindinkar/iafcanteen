@@ -29,10 +29,7 @@
                             <input type="text" class="form-control" id="CdNum" [(ngModel)]="contact"   placeholder="Enter Contact Number" name="CdNum">
                           </div>
                           
-                          <div class="col-md-4 mb-3 mt-3">
-                            <label for="store" class="form-label">Store Id:</label>
-                            <input type="text" class="form-control" id="CdNum"    placeholder="Enter Store It" name="CdNum">
-                          </div>
+                          
                           <div class="col-md-12 mb-3 mt-3">
                             <button type="submit" class="btn btn-primary mb-3" (click)="addAdmins()">Submit</button>
                           </div>
@@ -75,50 +72,34 @@
                     <th scope="col"><input type="checkbox" name="selectAll" id="selectAll"></th>
                     <th scope="col">Admin</th>
                     <th scope="col">Status</th>
+                    <th scope="col"  >Change Status</th>
                     <th scope="col">Action</th>
+                    
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
+                  <tr  *ngFor="let admin of admins">
                     <th scope="row"><input type="checkbox" name="selectAll" id="selectAll"></th>
-                    <td>Admin Name</td>
-                    <td>Active</td>
-                    <td>         
+                    <td>{{ admin.name }}</td>
+                    <td>{{admin.status}}</td>
+                    
+                    <td>
+                      <button type="button" class="btn btn-success mr-2" (click)="activeAdmins()">
+                        <i class="fas fa-check"></i> Activate
+                      </button>
+                    
+                        <button type="button" class="btn btn-danger" (click)="deactiveAdmins()" >
+                        <i class="fas fa-times"></i> Deactivate
+                      </button>
+                    </td>
+                    <td>                             
                       <button type="submit" class="btn btn-secondary"><i class="fa fa-edit"></i></button>
                       <button type="submit" class="btn btn-secondary ml-2"><i class="fa fa-trash"></i></button>
-
                     </td>
                   </tr>
-                  <tr>
-                    <th scope="row"><input type="checkbox" name="selectAll" id="selectAll"></th>
-                    <td>Admin Name</td>
-                    <td>Active</td>
-                    <td>         
-                      <button type="submit" class="btn btn-secondary"><i class="fa fa-edit"></i></button>
-                      <button type="submit" class="btn btn-secondary ml-2"><i class="fa fa-trash"></i></button>
-
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row"><input type="checkbox" name="selectAll" id="selectAll"></th>
-                    <td>Admin Name</td>
-                    <td>Active</td>
-                    <td>         
-                      <button type="submit" class="btn btn-secondary"><i class="fa fa-edit"></i></button>
-                      <button type="submit" class="btn btn-secondary ml-2"><i class="fa fa-trash"></i></button>
-
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row"><input type="checkbox" name="selectAll" id="selectAll"></th>
-                    <td>Admin Name</td>
-                    <td>Active</td>
-                    <td>         
-                      <button type="submit" class="btn btn-secondary"><i class="fa fa-edit"></i></button>
-                      <button type="submit" class="btn btn-secondary ml-2"><i class="fa fa-trash"></i></button>
-
-                    </td>
-                  </tr>
+                  
+                  
+                  
                 </tbody>
               </table>
               

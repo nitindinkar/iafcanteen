@@ -70,7 +70,7 @@ export class HeaderComponent implements OnInit {
         }
       }
     }
-    if(localStorage.getItem('card')==this.cons.constants.liquorCard){
+    if(localStorage.getItem('card')==this.cons.constants.liquorCard && this.sharedService.role=="USER"){
       this.groccery=false;
       this.cardType='L'
       this.getCartItems();
@@ -79,7 +79,7 @@ export class HeaderComponent implements OnInit {
       // console.log(localStorage.getItem('card'));
       // console.log(this.cons.constants.liquorCard);
     }
-    else{
+    if (localStorage.getItem('card')==this.cons.constants.groceryCard && this.sharedService.role=="USER"){
       this.groccery=true;
       this.cardType='G'
       this.getCartItems();
@@ -158,6 +158,7 @@ export class HeaderComponent implements OnInit {
     this.router.navigateByUrl('');
     this.admin=false;
     this.user=false;
+    this.superadmin=false;
   
     
   }

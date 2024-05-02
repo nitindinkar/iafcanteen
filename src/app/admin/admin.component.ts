@@ -1,3 +1,4 @@
+import { SharedService } from './../services/shared/shared.service';
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { cilArrowTop, cilOptions } from '@coreui/icons';
@@ -11,12 +12,12 @@ import { cilArrowTop, cilOptions } from '@coreui/icons';
 export class AdminComponent implements OnInit{
 
   isWidgetsComponentShown: boolean = false;
-faLocation: any;
-faShop: any;
-faBoxes: any;
-faMoneyBill: any;
+  faLocation: any;
+  faShop: any;
+  faBoxes: any;
+  faMoneyBill: any;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router,private sharedService:SharedService) {}
 
 
   icons = { cilOptions, cilArrowTop };
@@ -87,6 +88,7 @@ faMoneyBill: any;
   };
 
   ngOnInit(): void {
+    
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         this.isWidgetsComponentShown = this.router.url.includes('widgets');

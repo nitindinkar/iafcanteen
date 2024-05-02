@@ -106,7 +106,7 @@
                       <p class="quantity">{{ cart.product.quantity }} 1x - <span class="amount"> {{cart.product.productDiscountedPrice |  currency: 'INR' }}</span></p>
                     </li>
                   </ul>
-                  <div *ngIf="sharedService.cartCount > 0">
+                  <div *ngIf="sharedService.cartCount!=null">
                     <p>Cart count: {{sharedService.cartCount}}</p>
                   </div>
                   <div *ngIf="sharedService.cartCount === 0">
@@ -209,7 +209,9 @@
                     <div class="nav-inner">
                       <ul class="nav main-menu menu navbar-nav">
 
-                        <li *ngIf="admin"  [routerLinkActive]="['active']"><a href="#" [routerLink]="['/admin']">Admin Dashboard</a></li>
+                        <li *ngIf="admin"  [routerLinkActive]="['active']"><a href="#" [routerLink]="['/admin']">Dashboard</a></li>
+                        <li *ngIf="superadmin"  [routerLinkActive]="['active']"><a href="#" [routerLink]="['/superadmin']">Dashboard</a></li>
+
 
                         <li *ngIf="user"  [routerLinkActive]="['active']"><a href="#" [routerLink]="['/product']">Product</a></li>
                         <li *ngIf="user" [routerLinkActive]="['active']"><a href="#" [routerLink]="['/cart']">Cart <span class="new" >{{sharedService.cartCount}}</span></a></li>

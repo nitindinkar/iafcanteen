@@ -14,6 +14,7 @@ export class HomeComponent implements OnInit {
   products: any;
 
   ngOnInit(): void {
+    debugger;
     if(this.sharedService.loggedIn == true){
       window.location.reload();
     }

@@ -48,7 +48,15 @@ export class ConstantsService {
     addStore:this.serviceUrl+"super-admin/add-store",
     deleteProduct:this.serviceUrl+"product/deleteProductDetails",
     updateProduct:this.serviceUrl+"product/updateProduct",
-    getAllProductAdmin:this.serviceUrl+"product/getAllProductsAdmin"
+    getAllProductAdmin:this.serviceUrl+"product/getAllProductsAdmin",
+    getAllActiveStores:this.serviceUrl+"super-admin/active-stores",
+    activeAdmins:this.serviceUrl+"super-admin/active-admins",
+    deactiveAdmins:this.serviceUrl+"super-admin/inactive-admins",
+    activateStore:this.serviceUrl+"super-admin/re-activate-store",
+    deactivateStore:this.serviceUrl+"super-admin/inactivate-store",
+    deleteStore:this.serviceUrl+"super-admin/deleteStoreById",
+  
+    
     
 
 

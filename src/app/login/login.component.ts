@@ -136,38 +136,35 @@ userPassword: any;
   }
 
 
-  verifyLoginCredentials(){
-    this.login();
+  // verifyLoginCredentials(){
+  //   this.login();
   
-    const cardType= this.selected;
-    const cardNumber=this.cardNumber;
-    const extractedLetters = this.cardNumber.substring(0, 2);
-    // if(this.selected=="Grocery" && extractedLetters==="Gq"){
-    //     this.login();
+  //   const cardType= this.selected;
+  //   const cardNumber=this.cardNumber;
+  //   const extractedLetters = this.cardNumber.substring(0, 2);
+  //   // if(this.selected=="Grocery" && extractedLetters==="Gq"){
+  //   //     this.login();
 
-    // }
-    // else if(this.selected=="Liquor"&& extractedLetters==="Lq"){
-    //   this.login();
-    //   }
-      // else{
-      //   alert("Please Enter Card Type  According to the Card Number");
-      // }
-
-
+  //   // }
+  //   // else if(this.selected=="Liquor"&& extractedLetters==="Lq"){
+  //   //   this.login();
+  //   //   }
+  //     // else{
+  //     //   alert("Please Enter Card Type  According to the Card Number");
+  //     // }
 
 
-  }
+
+
+  // }
 
   login(){
     debugger;
-
     const loginUrl=this.ConstServiceService.api.login;
     // const headers = new HttpHeaders({
     //   'cardType': this.selected,
     // });
-
-    
-
+   
       let credentials:any = {
       userName:this.userName,
       userPassword:this.userPassword,
@@ -215,7 +212,7 @@ userPassword: any;
               this.router.navigate(['/admin']);
              }
              if(this.sharedService.role=="SUPER_ADMIN"){
-              this.router.navigate(['/manage-admins']);
+              this.router.navigate(['/superadmin']);
              }
             
 
