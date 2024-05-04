@@ -138,7 +138,7 @@ export class ProductComponent implements OnInit{
         let result: { [key: string]: any } = response;
         this.products=result['response'];
         debugger;
-        // this.sharedService.cartCount++;
+        
         debugger;
 
         if(result['status']==200){
@@ -148,14 +148,16 @@ export class ProductComponent implements OnInit{
             icon: "success",
             title: "Product Added To The Cart",
             showConfirmButton: false,
+            
             timer: 1800
           });
-
+          this.sharedService.cartCount++;
 
         }
 
         if(this.products==="exception  product is already present in the cart"){
           debugger;
+          
           Swal.fire({
             text: "Product is Already in the Cart",
             imageUrl: "../assets/cart/cart.jpg",

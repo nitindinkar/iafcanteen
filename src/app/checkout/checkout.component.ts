@@ -11,6 +11,10 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {provideNativeDateAdapter} from '@angular/material/core';
+import * as FileSaver from 'file-saver';
+
+
+
 
 
 @Component({
@@ -47,6 +51,8 @@ export class CheckoutComponent implements OnInit {
   showSelectSlot: boolean = false;
   minDate:String|any;
   pinCode: any;
+  orderId: any;
+  pdfDownloadUrl: any;
 
 
   constructor(
@@ -152,6 +158,7 @@ export class CheckoutComponent implements OnInit {
   
 
 bookOrder() {
+  debugger;
   const orderProductQuantityList = [];
 
   if (this.cartItems) {
@@ -187,6 +194,12 @@ bookOrder() {
 
         if (result['message'] == 'success') {
           const pdfUrl = result['response']['pdfUrl'];
+          this.orderId=result['response']['orderId'];
+
+          
+          
+          
+          
           Swal.fire({
             title: 'Order Placed Successfully!',
             text: 'Your order has been placed successfully. Click OK to download your receipt.',
@@ -194,13 +207,9 @@ bookOrder() {
             confirmButtonText: 'OK'
           }).then((result) => {
             if (result.isConfirmed) {
-              const link = document.createElement('a');
-              link.href = pdfUrl;
-              link.download = 'report.pdf';
-              link.target = '_blank';
-              document.body.appendChild(link);
-              link.click();
-              document.body.removeChild(link); // Cleanup after download
+              debugger;
+              
+              this.downloadPdf(pdfUrl, 'report.pdf');
             }
           });
         } else {
@@ -233,6 +242,18 @@ bookOrder() {
     });
   }
 }
+
+
+downloadPdf = (url: string, fileName: string) => {
+  // Create an anchor element
+  const link = document.createElement('a');
+  // Set the href attribute to the PDF URL
+  link.href = url;
+  // Set the download attribute to specify the file name
+  link.download = fileName;
+  // Trigger a click event on the anchor element
+  link.click();
+};
 
 
   getCartDetails(){
@@ -364,11 +385,15 @@ bookOrder() {
 
       }
     }
+
+   
+   
+    }
     
     
 
 
-}
+
 
 
 

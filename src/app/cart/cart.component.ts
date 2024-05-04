@@ -50,17 +50,23 @@ export class CartComponent implements OnInit{
         let result: { [key: string]: any } = response;
         debugger;
        
-        if(result['response']==="exception No products found in the cart for the user")
-          {
+        if(result['response']==="exception No products found in the cart for the user"){
+                   
+            debugger;
            this.cartEmpty=true;
+           this.sharedService.cartCount=0;
+          
            
           }else{
             this.cartEmpty=false;
+            this.cart=result['response'];
+            this.sharedService.cartCount=result['response'].length;
+            this.sharedService.cartList=this.cart;
           }
 
-        this.cart=result['response'];
-        this.sharedService.cartList=this.cart;
-        this.sharedService.cartCount=result['response'].length;
+        
+       
+        
         console.log("this is the total cart"+this.cart);
         
         debugger;

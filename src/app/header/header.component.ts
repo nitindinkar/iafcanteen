@@ -70,7 +70,8 @@ export class HeaderComponent implements OnInit {
         }
       }
     }
-    if(localStorage.getItem('card')==this.cons.constants.liquorCard && this.sharedService.role=="USER"){
+    
+    if(localStorage.getItem('card')==this.cons.constants.liquorCard && this.user==true){
       this.groccery=false;
       this.cardType='L'
       this.getCartItems();
@@ -79,7 +80,7 @@ export class HeaderComponent implements OnInit {
       // console.log(localStorage.getItem('card'));
       // console.log(this.cons.constants.liquorCard);
     }
-    if (localStorage.getItem('card')==this.cons.constants.groceryCard && this.sharedService.role=="USER"){
+    if ( localStorage.getItem('card')!=this.cons.constants.liquorCard && this.user==true){
       this.groccery=true;
       this.cardType='G'
       this.getCartItems();
@@ -221,7 +222,7 @@ export class HeaderComponent implements OnInit {
   }
 
   private getCartItems() {
-    
+    debugger;
     this.sharedService.cartCount;
     this.apiService.getApiWithToken(this.cons.api.getCartDetailsOfUser+'/'+this.cardType).subscribe(
       (response: object) => {
@@ -230,8 +231,10 @@ export class HeaderComponent implements OnInit {
         this.cartItems=result['response'];
        
         if(result['response']=="exception No products found in the cart for the user"){
+          debugger;
           this.sharedService.cartCount=0;
           this.cartEmpty=true;
+          
           
         }else{
           debugger;

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ConstantsService } from '../services/constants/constants.service';
 import { ApiCallingServiceService } from '../services/api-calling/api-calling-service.service';
 import { SharedService } from '../services/shared/shared.service';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -12,6 +13,7 @@ import { SharedService } from '../services/shared/shared.service';
   styleUrl: './my-account.component.scss'
 })
 export class MyAccountComponent implements OnInit{
+[x: string]: any;
 
   showRegistrationForm: boolean = false;
   showLoginForm: boolean = true;
@@ -88,7 +90,50 @@ export class MyAccountComponent implements OnInit{
     );
 
   }
-  
+
+  userOrderCancel(i: number, orderId: any){
+    console.log(orderId);
+    
+    
+
+    debugger;
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You are about to Cancel this order. This action cannot be undone.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, Cancel it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // User confirmed, proceed with order deletion
+        debugger;
+        this.apiService.getApiWithToken(this.cons.api.userCancelOrder + '/' + orderId).subscribe(
+          (response: object) => {
+            // Order deleted successfully, remove it from the orderDetails list
+            this.orderDetails.splice(i, 1);
+            // Show success message
+            Swal.fire(
+              'Order Cancelled!',
+              'The order has been deleted.',
+              'success'
+            );
+          },
+          (error: any) => {
+            // Error handling if deletion fails
+            console.error('Cancel order failed:', error);
+            // Show error message
+            Swal.fire(
+              'Error!',
+              'Failed to Cancel the order.',
+              'error'
+            );
+          }
+        );
+      }
+    });
+  }
 
   
 }

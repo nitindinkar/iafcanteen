@@ -3,6 +3,7 @@ import {Router} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
 import {ApiCallingServiceService} from "../services/api-calling/api-calling-service.service";
 import {ConstantsService} from "../services/constants/constants.service";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-add-category',
@@ -10,6 +11,8 @@ import {ConstantsService} from "../services/constants/constants.service";
   styleUrl: './add-category.component.scss'
 })
 export class AddCategoryComponent implements OnInit {
+searchQuery: any;
+
   @ViewChild('invoiceFileInput') invoiceFileInput: any;
 
   name: any;
@@ -27,6 +30,11 @@ export class AddCategoryComponent implements OnInit {
     name:this.cons.constants.groceryCard
   }];
   catType: any;
+  filteredProducts: any;
+edited: any;
+  type: any;
+  id: any;
+  isEdit: boolean=false;
 
   constructor(
     private router: Router,
@@ -35,6 +43,7 @@ export class AddCategoryComponent implements OnInit {
     private cons: ConstantsService,
   ) {}
   ngOnInit(): void {
+    this.getcategories();
   }
   upload() {
     debugger;
@@ -89,6 +98,120 @@ export class AddCategoryComponent implements OnInit {
       complete: () => console.log(),
     });
   }
+
+  getcategories(){
+    
+
+    this.apiService.getApiWithToken(this.cons.api.getAllCategories).subscribe(
+      (response: object) => {
+        let result: { [key: string]: any } = response;
+        this.categories=result['response'];   
+        this.filteredProducts = this.categories;      
+        console.log(this.filteredProducts);
+        
+      },
+      (error) => {
+        console.error('Add Product failed:', error);
+      }
+    );
+  }
+  // searchProducts() {
+  //   debugger;
+  //   if (!this.searchQuery) {
+  //     // If search query is empty, reset filteredProducts to all products
+  //     this.filteredProducts = this.categories;
+  //   } else {
+  //     // Filter products based on search query
+  //     this.filteredProducts = this.categories.filter((categories: { name: string; category: { name: string; }; }) =>
+  //       product.productName.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+  //       product.category.name.toLowerCase().includes(this.searchQuery.toLowerCase())
+  //     );
+  //   }
+  // }
+
+  editCategory(category: any,categoryId:any) {
+    this.id=categoryId;
+    this.name=category.name;
+    this.desc =category.description;
+    this.uploadId=category.uploadId;
+    this.type=category.type;
+    this.isEdit = true;
+        
+  }
+
+  updateCategory(){
+debugger;
+    const data = {
+      id:this.id,
+      name: this.name,
+      description: this.desc,
+      type: this.catType ,
+      uploadId:this.upload
+      
+    };
+    console.log(data);  
+  ///Fetch product details by productId
+  this.apiService.updateApiWithTokenPatch(this.cons.api.updateCategory ,data).subscribe(
+    (response: any) => {
+      let productDetails: any = response;
+      this.isEdit = false;
+
+      this.id='',
+      this.name='',
+      this.desc='',
+      this.catType='' ,
+      
+      this.getcategories();
+
+       
+     },
+    (error: any) => {
+      console.error('Error fetching product details:', error);
+    }
+  );
+}
+
+// deleteCategory(i: number, productId: any) {
+//   debugger;
+//   // Show a confirmation dialog using SweetAlert
+//   Swal.fire({
+//     title: 'Are you sure?',
+//     text: 'You are about to delete this order. This action cannot be undone.',
+//     icon: 'warning',
+//     showCancelButton: true,
+//     confirmButtonColor: '#3085d6',
+//     cancelButtonColor: '#d33',
+//     confirmButtonText: 'Yes, delete it!'
+//   }).then((result) => {
+//     if (result.isConfirmed) {
+//       // User confirmed, proceed with order deletion
+//       this.apiService.deleteApiWithToken(this.cons.api.deleteProduct + '/' + productId).subscribe(
+//         (response: object) => {
+//           // Order deleted successfully, remove it from the orderDetails list
+//           this.categories.splice(i, 1);
+//           // Show success message
+//           Swal.fire(
+//             'Deleted!',
+//             'The order has been deleted.',
+//             'success'
+//           );
+//         },
+//         (error: any) => {
+//           // Error handling if deletion fails
+//           console.error('Delete order failed:', error);
+//           // Show error message
+//           Swal.fire(
+//             'Error!',
+//             'Failed to delete the order.',
+//             'error'
+//           );
+//         }
+//       );
+//     }
+//   });
+// }
+
+
 
 }
 

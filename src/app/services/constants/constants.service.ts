@@ -55,6 +55,12 @@ export class ConstantsService {
     activateStore:this.serviceUrl+"super-admin/re-activate-store",
     deactivateStore:this.serviceUrl+"super-admin/inactivate-store",
     deleteStore:this.serviceUrl+"super-admin/deleteStoreById",
+    updateSuperAdminStore:this.serviceUrl+"super-admin/updateStore",
+    userCancelOrder:this.serviceUrl+"order/cancelOrder",
+    updateCategory:this.serviceUrl+"category/update-category",
+    downloadPdf:this.serviceUrl+"order/pdf"
+
+    
   
     
     

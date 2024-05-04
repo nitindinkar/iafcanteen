@@ -27,7 +27,7 @@
               </thead>
               <tbody>
               
-               <tr *ngFor="let order of orderDetails">
+               <tr *ngFor="let order of orderDetails; let i=index">
                 <td>{{ order.orderId }}</td>
                 <td>
                   <ng-container *ngFor="let userOrder of order.userOrders">
@@ -52,8 +52,8 @@
                 
                 <td>{{ order.orderStatus }}</td>
                 <td class="align-middle">
-                  <i style="font-size:24px" class="fa">&#xf00d;</i>
-                </td>
+                  <button (click)="userOrderCancel(i,order.id)"><i style="font-size:24px" class="fa fa-trash"></i></button>
+              </td>
               </tr>
               <!-- <tr>
                 <th scope="row"><input type="checkbox" name="selectAll" id="selectAll"></th>

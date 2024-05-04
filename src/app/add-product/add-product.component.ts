@@ -27,6 +27,9 @@ export class AddProductComponent implements OnInit {
   products: any;
   filteredProducts: any;
 searchQuery: any;
+  edited: boolean=false;
+  stock: any;
+  image: any;
 
   constructor(
     private router: Router,
@@ -87,17 +90,22 @@ searchQuery: any;
   }
 
 addProduct() {
+  this.edited=false;
   //const file: File = this.invoiceFileInput.nativeElement;
   // console.log(file);
   const formData = new FormData();
+  debugger;
   //formData.append('imageFiles', file);
   const jsonData = {
     productName: this.name,
     productDescription: this.desc,
-    productActualPrice: this.aPrice,
     productDiscountedPrice: this.dPrice,
+    productActualPrice: this.aPrice,
     categoryId:this.category,
-    uploadId:this.upload
+    uploadId:this.upload,
+    avialableStock:this.stock,
+    
+
 
 
   };
@@ -207,32 +215,53 @@ searchProducts() {
     );
   }
 }
-
-editProduct(product: any) {
+id:any;
+editProduct(product: any,productId:any) {
     debugger;
+    console.log(productId);
+
+    this.edited=true;   
+
     this.name=product.productName;
-  // Fetch product details by productId
-  // this.apiService.updateApiWithToken(this.cons.api.updateProduct + '/' + productId).subscribe(
-  //   (response: any) => {
-  //     let productDetails: any = response;
-  //
-  //     // Populate input fields with fetched product details
-  //     this.name = productDetails.productName;
-  //     this.desc = productDetails.productDescription;
-  //     this.aPrice = productDetails.productActualPrice;
-  //     this.dPrice = productDetails.productDiscountedPrice;
-  //     this.category = productDetails.categoryId;
-  //     this.uploadId = productDetails.uploadId;
-  //
-  //     // Change the behavior of the form submission button to update the product
-  //     // You can set a flag to indicate that the form is in edit mode
-  //     // For example, you can set a boolean flag like this:
-  //     // this.isEditMode = true;
-  //   },
-  //   (error: any) => {
-  //     console.error('Error fetching product details:', error);
-  //   }
-  // );
+    this.desc=product.productDescription;
+    this.aPrice=product.productActualPrice;
+    this.dPrice=product.productDiscountedPrice;
+    this.category=product.categoryId;
+    this.id=productId;
+    this.image=product.imageUrl;
+  
+    
+  }
+  
+  updateProd(){
+
+    debugger;
+    
+
+    const data = {
+      productId: this.id,
+      productName: this.name,
+      productDescription: this.desc,
+      productDiscountedPrice: this.dPrice,
+      productActualPrice: this.aPrice,
+      imageUrl:this.image,
+      uploadId:this.upload,
+      categoryId:this.category,
+      availableStock:this.stock
+      
+    };
+    console.log(data);  
+  ///Fetch product details by productId
+  this.apiService.postApiWithToken(this.cons.api.updateProduct + '/' + this.id,data).subscribe(
+    (response: any) => {
+      let productDetails: any = response;
+      this.edited=false;
+       
+     },
+    (error: any) => {
+      console.error('Error fetching product details:', error);
+    }
+  );
 }
 
 
@@ -240,5 +269,8 @@ editProduct(product: any) {
 
 
 
+
 }
+
+  
 

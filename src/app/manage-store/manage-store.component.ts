@@ -34,6 +34,7 @@ constructor(
 
 
   addStore() {    
+    debugger;
     const jsonData = {
       name : this.name,
       id:this.id,
@@ -142,7 +143,7 @@ constructor(
     });
   }
 
-  deleteStore() {
+  deleteStore(storeId:any) {
     debugger;
     Swal.fire({
       title: 'Delete Store',
@@ -169,7 +170,23 @@ constructor(
       }
     });
   }
+
+  editStore(stores:any,storeId:any){
+
+
+  //   this.apiService.updateApiWithToken(this.cons.api.updateSuperAdminStore + '/' + this.storeId).subscribe(
+  //     (response: any) => {
+  //       let productDetails: any = response;
+    
+         
+  //      },
+  //     (error: any) => {
+  //       console.error('Error fetching product details:', error);
+  //     }
+  //   );
+  // }
   
 
 
+}
 }

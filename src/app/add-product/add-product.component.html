@@ -30,15 +30,24 @@
                           <label for="contact" class="form-label">Discounted Price</label>
                           <input type="text" class="form-control" id="Discounted"  [(ngModel)]="dPrice" placeholder="Discounted Price" name="Discounted">
                         </div>
+                        <div class="col-md-4 mb-3 mt-3" >
+                          <label for="contact" class="form-label">Stock</label>
+                          <input type="text" class="form-control" id="stock"  [(ngModel)]="stock" placeholder="Number of Products" name="Stock">
+                        </div>
                         <div class="col-md-4 mb-3 mt-3">
                           <label for="name" class="form-label"> Upload Images (550 x 750px in less than 500kb and jpg/jpeg format only)</label>
                           <input type="file" class="form-control" id="Date" placeholder="Uploadn Images" name="image" accept="image/*" #invoiceFileInput>
                           <!--<input type="file" id="image" name="image" accept="image/*" #invoiceFileInput>-->
                           <button type="submit" class="btn btn-primary mb-3" (click)="upload()" >Upload File</button>
                         </div>
-                        <div class="col-md-12 mb-3 mt-3">
+                        <div class="col-md-12 mb-3 mt-3" *ngIf="!edited">
                           <button type="submit" class="btn btn-primary mb-3" (click)="addProduct()">Submit</button>
                         </div>
+                        <div class="col-md-12 mb-3 mt-3" *ngIf="edited">
+                          <button type="submit" class="btn btn-primary mb-3" (click)="updateProd()">Update</button>
+                        </div>
+                        
+                       
 
                       </div>
                  </form>
@@ -69,7 +78,7 @@
                   <td>₹{{ product.productActualPrice}} </td>
                   <td>₹{{ product.productDiscountedPrice }} </td>
                   <td>
-                      <button type="submit" class="btn btn-secondary"  (click)="editProduct(product)"  ><i class="fa fa-edit"></i></button>
+                      <button type="submit" class="btn btn-secondary"  (click)="editProduct(product,product.productId)"  ><i class="fa fa-edit"></i></button>
                       <button type="submit" class="btn btn-secondary ml-2"  (click)="deleteProduct(i,product.productId)"  ><i class="fa fa-trash"></i></button>
                   </td>
               </tr>

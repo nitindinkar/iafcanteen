@@ -5,6 +5,7 @@ import {ApiCallingServiceService} from "../services/api-calling/api-calling-serv
 import {Router} from "@angular/router";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {SharedService} from "../services/shared/shared.service";
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -188,18 +189,28 @@ userPassword: any;
             localStorage.setItem('token','Bearer '+this.token);
             localStorage.setItem('loginResponse', JSON.stringify(result['response']));
             localStorage.setItem('userId',JSON.stringify(result['response']['user']['id']))
+           
             this.sharedService.loginResponse=JSON.stringify(result['response']);
             const roleName = result['response']['user']['roles'][0]['roleName'];
             debugger;
              this.sharedService.role=roleName;
+
+             let cardType = '';
+             if (result['response']['user']['liquorCardNumber']) {
+              cardType = 'Liquor';
+              console.log("this is liquor cardtype"+cardType);
+              } else if (result['response']['user']['groceryCardNumber']) {
+               cardType = 'Grocery';
+               console.log("this is liquor cardtype"+cardType);
+              }
              console.log(roleName);
 
             
             
             console.log(this.sharedService);
             if(this.sharedService.role!='ADMIN'&& this.selected=='Grocery'){
-              this.router.navigate(['']);
               this.sharedService.cardType=this.ConstServiceService.constants.groceryCard
+              this.router.navigate(['']);
             }
 
             else if(this.sharedService.role!='ADMIN'  && this.selected=='Liquor'){

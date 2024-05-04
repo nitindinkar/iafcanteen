@@ -126,29 +126,33 @@ export class ManageOrdersComponent {
 
  
 
-  adminOrderDelete(i: number, orderId: any) {
+  adminOrderDelete(i: number, orderId: number) {
+    debugger;
+    console.log("this is order is of admn"+orderId);
     // Show a confirmation dialog using SweetAlert
     Swal.fire({
       title: 'Are you sure?',
-      text: 'You are about to delete this order. This action cannot be undone.',
+      text: 'You are about to Cancel this order. This action cannot be undone.',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!'
+      confirmButtonText: 'Yes, Cancel it!'
     }).then((result) => {
       if (result.isConfirmed) {
         // User confirmed, proceed with order deletion
-        this.apiService.deleteApiWithToken(this.cons.api.adminDeleteOrder + '/' + orderId).subscribe(
+        debugger;
+        this.apiService.getApiWithToken(this.cons.api.adminDeleteOrder + '/' + orderId).subscribe(
           (response: object) => {
             // Order deleted successfully, remove it from the orderDetails list
             this.orderDetails.splice(i, 1);
             // Show success message
             Swal.fire(
               'Deleted!',
-              'The order has been deleted.',
+              'The order has been Cancel.',
               'success'
             );
+            this.order();
           },
           (error: any) => {
             // Error handling if deletion fails
@@ -173,6 +177,7 @@ export class ManageOrdersComponent {
 
   
     downloadPDF(pdfUrl: string) {
+      debugger;
       this.http.get(pdfUrl, { responseType: 'blob' }).subscribe((response: any) => {
         const blob = new Blob([response], { type: 'application/pdf' });
         const url = window.URL.createObjectURL(blob);

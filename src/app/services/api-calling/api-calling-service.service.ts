@@ -130,13 +130,28 @@ export class ApiCallingServiceService {
     }
   }
 
-  updateApiWithToken(url: string) {
+  updateApiWithToken(url: string,jsonPayload: any) {
+    debugger;
     const token = localStorage.getItem('token');
     if (token) {
       const headers = new HttpHeaders({
         'Authorization': token
       });
-      return this.http.put(url, { headers }).pipe(
+      return this.http.put(url, jsonPayload,{ headers }).pipe(
+        catchError(this.handleError)
+      );
+    } else {
+      return throwError('Token not available'); // Return an Observable that throws an error
+    }
+  }
+  updateApiWithTokenPatch(url: string,jsonPayload: any) {
+    debugger;
+    const token = localStorage.getItem('token');
+    if (token) {
+      const headers = new HttpHeaders({
+        'Authorization': token
+      });
+      return this.http.patch(url, jsonPayload,{ headers }).pipe(
         catchError(this.handleError)
       );
     } else {
