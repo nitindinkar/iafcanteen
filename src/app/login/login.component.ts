@@ -183,15 +183,21 @@ userPassword: any;
 
           console.log(result);
 
+          debugger;
+
             if(result['message']=='success'){
             this.sharedService.loggedIn=true;
             this.token=result['response'].jwtToken.toString();
             localStorage.setItem('token','Bearer '+this.token);
             localStorage.setItem('loginResponse', JSON.stringify(result['response']));
             localStorage.setItem('userId',JSON.stringify(result['response']['user']['id']))
+
            
             this.sharedService.loginResponse=JSON.stringify(result['response']);
             const roleName = result['response']['user']['roles'][0]['roleName'];
+           
+            
+            
             debugger;
              this.sharedService.role=roleName;
 

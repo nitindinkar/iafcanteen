@@ -10,28 +10,31 @@
                          
                           <div class="col-md-4 mb-3 mt-3">
                             <label for="Name" class="form-label">Name:</label>
-                            <input type="text" class="form-control" id="CdNum"  [(ngModel)]="name"  placeholder="Enter Name" name="CdNum" >
+                            <input type="text" class="form-control" id="name"  [(ngModel)]="name"  placeholder="Enter Name" name="name" >
                           </div>
                           <div class="col-md-4 mb-3 mt-3">
                             <label for="service" class="form-label">Service Number:</label>
-                            <input type="text" class="form-control" id="CdNum"   [(ngModel)]="serviceNo" placeholder="Enter Number" name="CdNum">
+                            <input type="text" class="form-control" id="serviceNo"   [(ngModel)]="serviceNo" placeholder="Enter Number" name="serviceNo">
                           </div>
                           <div class="col-md-4 mb-3 mt-3">
                             <label for="service" class="form-label">Password:</label>
-                            <input type="text" class="form-control" id="CdNum"   [(ngModel)]="password" placeholder="Enter Number" name="CdNum">
+                            <input type="text" class="form-control" id="password"   [(ngModel)]="password" placeholder="Enter Number" name="password">
                           </div>
                           <div class="col-md-4 mb-3 mt-3">
                             <label for="email" class="form-label">Email:</label>
-                            <input type="text" class="form-control" id="CdNum"   [(ngModel)]="email" placeholder="Enter Number" name="CdNum">
+                            <input type="text" class="form-control" id="email"   [(ngModel)]="email" placeholder="Enter Number" name="email">
                           </div>
                           <div class="col-md-4 mb-3 mt-3">
                             <label for="contact" class="form-label">Contact Number:</label>
-                            <input type="text" class="form-control" id="CdNum" [(ngModel)]="contact"   placeholder="Enter Contact Number" name="CdNum">
+                            <input type="text" class="form-control" id="contact" [(ngModel)]="contact"   placeholder="Enter Contact Number" name="contact">
                           </div>
                           
                           
-                          <div class="col-md-12 mb-3 mt-3">
+                          <div class="col-md-12 mb-3 mt-3" *ngIf="!edit">
                             <button type="submit" class="btn btn-primary mb-3" (click)="addAdmins()">Submit</button>
+                          </div>
+                          <div class="col-md-12 mb-3 mt-3" *ngIf="edit">
+                            <button type="submit" class="btn btn-primary mb-3" (click)="updatePdf()">update</button>
                           </div>
 
                         </div>
@@ -75,7 +78,7 @@
                     <th scope="col">Service Number</th>
                     <th scope="col">Contact</th>
                     <th scope="col">Status</th>
-                    <th scope="col"  >Change Status</th>
+                    <th scope="col" >Change Status</th>
                     <th scope="col">Action</th>
                     
                   </tr>

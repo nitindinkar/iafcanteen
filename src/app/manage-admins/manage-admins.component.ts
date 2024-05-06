@@ -19,6 +19,7 @@ contact: any;
   allAdmins:any;
   name: any;
   id: any;
+  edit: boolean=false;
 
 constructor(
   private router: Router,
@@ -169,8 +170,14 @@ editAdmin(admin:any,adminId:any){
       this.name=admin.name;
       this.serviceNo=admin.serviceNo;
       this.email=admin.email;       
-      // this.contact=admin.contact;
-      
+      this.contact=admin.contact;
+     this.edit=true;
+}
+
+updatePdf(){
+
+  
+
 }
 
 
