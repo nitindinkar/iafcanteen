@@ -244,7 +244,7 @@ editProduct(product: any,productId:any) {
       productDescription: this.desc,
       productDiscountedPrice: this.dPrice,
       productActualPrice: this.aPrice,
-      imageUrl:this.image,
+      // imageUrl:this.image,
       uploadId:this.upload,
       categoryId:this.category,
       availableStock:this.stock

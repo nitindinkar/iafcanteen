@@ -28,6 +28,7 @@ export class ManageOrdersComponent {
   orderDetails: any;
   searchQuery: string = ''; 
   filteredOrders: any[] = [];
+  pdfDownload: any;
 
   constructor(private cons:ConstantsService,
     private apiService: ApiCallingServiceService,
@@ -176,19 +177,33 @@ export class ManageOrdersComponent {
   }
 
   
-    downloadPDF(pdfUrl: string) {
-      debugger;
-      this.http.get(pdfUrl, { responseType: 'blob' }).subscribe((response: any) => {
-        const blob = new Blob([response], { type: 'application/pdf' });
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        document.body.appendChild(a);
-        a.href = url;
-        a.download = 'order.pdf';
-        a.click();
-        window.URL.revokeObjectURL(url);
-        document.body.removeChild(a);
-      });
+    // downloadPDF(pdfUrl: string) {
+    //   debugger;
+    //   this.http.get(pdfUrl, { responseType: 'blob' }).subscribe((response: any) => {
+    //     const blob = new Blob([response], { type: 'application/pdf' });
+    //     const url = window.URL.createObjectURL(blob);
+    //     const a = document.createElement('a');
+    //     document.body.appendChild(a);
+    //     a.href = url;
+    //     a.download = 'order.pdf';
+    //     a.click();
+    //     window.URL.revokeObjectURL(url);
+    //     document.body.removeChild(a);
+    //   });
+    // }
+
+    downloadPdf(orderId:any){
+      this.apiService.getApiWithToken(this.cons.api.downloadPdf+"/"+orderId).subscribe(
+        (response: object) => {
+          let result: { [key: string]: any } = response;
+          this.pdfDownload=result['response'];
+        },
+        (error) => {
+          console.error('Add Product failed:', error);
+        }
+      );
+      
+
     }
   
     

@@ -26,13 +26,33 @@
                             <label for="contact" class="form-label">Store Address</label>
                             <input type="text" class="form-control"  [(ngModel)]="address"  placeholder="Store Address " name="CdNum">
                           </div>
-                          <div class="col-md-4 mb-3 mt-3"> 
+                          <!-- <div class="col-md-4 mb-3 mt-3"> 
                             <label for="contact" class="form-label">Store Admin Id </label>
                             <input type="text" class="form-control"   [(ngModel)]="admin" placeholder="Enter Admin Id " name="CdNum">
+                          </div> -->
+
+                          <!-- <div class="col-md-4 mb-3 mt-3">
+                            <label for="contact" class="form-label">Store Admin Id </label>
+                            <input type="text" class="form-control" [(ngModel)]="admin" placeholder="Enter Admin Id" name="CdNum" (focus)="getDeactiveAdmins()">
+                            <ul  class="list-group mt-2">
+                              <li class="list-group-item" *ngFor="let deactiveAdmin of deactiveAdmins">{{ deactiveAdmin.id }}</li>
+                            </ul>
+                          </div> -->
+
+                          <div class="col-md-4 mb-3 mt-3">
+                            <label for="service" class="form-label">Store Admin Id</label>
+                            <select class="form-control" id="Category" [(ngModel)]="selectedAdminId">
+                              <option *ngFor="let admin of allAdmins " [value]="admin.id">{{admin.id}}</option>
+                            </select>
                           </div>
                           
-                          <div class="col-md-12 mb-3 mt-3">
+                          
+                          
+                          <div class="col-md-12 mb-3 mt-3" *ngIf="!edit">
                             <button type="submit" class="btn btn-primary mb-3" (click)="addStore()">Submit</button>
+                          </div>
+                          <div class="col-md-12 mb-3 mt-3" *ngIf="edit">
+                            <button type="submit" class="btn btn-primary mb-3" (click)="updateStore()">Submit</button>
                           </div>
 
                         </div>
@@ -74,6 +94,7 @@
                     <th scope="col">Store Name</th>
                     <th scope="col">Contact </th>
                     <th scope="col">Store Admin Id</th>
+                    <!-- <th scope="col">Store Admin Name</th> -->
                     <th scope="col"> Status</th>
                     <th scope="col">Change Status</th>
                     <th scope="col">Action</th>
@@ -85,14 +106,15 @@
                     <th scope="row"><input type="checkbox" name="selectAll" id="selectAll"></th>
                     <td>{{store.name}}</td>
                     <td>{{store.contact}}</td>
-                    <td>{{store.adminId}}</td>
-                    <td>{{store.active}}</td>
+                    <td>{{store.admin.id}}</td>
+                    <!-- <td>{{store.admin.name}}</td> -->
+                    <td>{{ store.active ? 'Active' : 'Inactive' }}</td>
                     <td>
-                      <button type="button" class="btn btn-success mr-2" (click)=" activateStore()">
+                      <button type="button" class="btn btn-success mr-2" (click)=" activateStore(store.id)">
                         <i class="fas fa-check"></i> Activate
                       </button>
                     
-                        <button type="button" class="btn btn-danger" (click)="deactivateStore()" >
+                        <button type="button" class="btn btn-danger" (click)="deactivateStore(store.id)" >
                         <i class="fas fa-times"></i> Deactivate
                       </button>
                     </td>

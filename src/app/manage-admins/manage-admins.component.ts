@@ -16,6 +16,9 @@ serviceNo: any;
 password: any;
 email: any;
 contact: any;
+  allAdmins:any;
+  name: any;
+  id: any;
 
 constructor(
   private router: Router,
@@ -26,23 +29,19 @@ constructor(
 ) {}
 
 
-admins: { name: string, status: string }[] = [
-  { name: 'Admin 1', status: 'Active' },
-  { name: 'Admin 2', status: 'Inactive' },
-  { name: 'Admin 3', status: 'Active' },
-  // Add more admins as needed
-];
- 
+
  
   ngOnInit(): void {
    
     
     this.getAllActiveAdmins();
+    this.getAllAdminsDetails();
     
   }
 
   addAdmins() {    
     const jsonData = {
+      name:this.name,
       serviceNo: this.serviceNo,
       email:this.email,
       password:this.password,
@@ -58,7 +57,7 @@ admins: { name: string, status: string }[] = [
           title: 'Success',
           text: 'Admin added successfully!',
         });
-        
+        this.name='';
         this.serviceNo = '';
         this.email= '';
         this.password = ''; 
@@ -94,7 +93,7 @@ admins: { name: string, status: string }[] = [
     admin.status = 'Active' === 'Active' ? 'Inactive' : 'Active';
 
  }
- activeAdmins() {
+ activeAdmins(adminId:any) {
   Swal.fire({
     title: 'Are you sure?',
     text: 'You are about to retrieve active admins. Do you want to continue?',
@@ -106,10 +105,11 @@ admins: { name: string, status: string }[] = [
   }).then((result) => {
     if (result.isConfirmed) {
       // User clicked confirm button, make API call
-      this.apiService.getApiWithToken(this.cons.api.activeAdmins).subscribe(
+      this.apiService.getApiWithToken(this.cons.api.activateAdmin+"/"+adminId).subscribe(
         (response: object) => {
           let result: { [key: string]: any } = response;
           console.log(result);
+          this.getAllAdminsDetails();
           // You can add further handling here if needed
         },
         (error) => {
@@ -122,7 +122,7 @@ admins: { name: string, status: string }[] = [
 
  
 
- deactiveAdmins() {
+ deactiveAdmins(adminId:any) {
   Swal.fire({
     title: 'Are you sure?',
     text: 'You are about to deactivate admins. Do you want to continue?',
@@ -134,10 +134,11 @@ admins: { name: string, status: string }[] = [
   }).then((result) => {
     if (result.isConfirmed) {
       // User clicked confirm button, make API call
-      this.apiService.getApiWithToken(this.cons.api.deactiveAdmins).subscribe(
+      this.apiService.getApiWithToken(this.cons.api.deactivateAdmin+"/"+adminId).subscribe(
         (response: object) => {
           let result: { [key: string]: any } = response;
-          console.log(result);
+          this.allAdmins=result;
+          this.getAllAdminsDetails();
           // You can add further handling here if needed
         },
         (error) => {
@@ -147,4 +148,61 @@ admins: { name: string, status: string }[] = [
     }
   });
 }
+
+getAllAdminsDetails(){
+  this.apiService.getApiWithToken(this.cons.api.getAllAdmins).subscribe(
+    (response: object) => {
+      let result: { [key: string]: any } = response;
+      this.allAdmins=result['response'];      
+    },
+    (error) => {
+      console.error('Add Product failed:', error);
+    }
+  );
 }
+
+editAdmin(admin:any,adminId:any){
+  console.log(admin);
+  console.log(adminId);
+  debugger;
+      this.id=adminId;
+      this.name=admin.name;
+      this.serviceNo=admin.serviceNo;
+      this.email=admin.email;       
+      // this.contact=admin.contact;
+      
+}
+
+
+
+deleteAdmin(delAdminId:any) {
+  debugger;
+  Swal.fire({
+    title: 'Delete Store',
+    text: 'Are you sure you want to delete this store?',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#d33',
+    cancelButtonColor: '#3085d6',
+    confirmButtonText: 'Yes, delete it'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      // User confirmed, make delete API call
+      
+      this.apiService.deleteApiWithToken(this.cons.api.deleteStore + '/' + delAdminId).subscribe({
+        next: (response: any) => {
+          console.log('Delete request successful:', response);
+          // Handle success here if needed, such as displaying a success message to the user
+          this.getAllAdminsDetails()
+        },
+        error: (error) => {
+          console.error('Delete request failed:', error);
+          // Handle error here if needed, such as displaying an error message to the user
+        }
+      });
+    }
+  });
+}
+
+}
+

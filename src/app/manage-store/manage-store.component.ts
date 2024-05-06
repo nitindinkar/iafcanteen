@@ -17,7 +17,13 @@ address: any;
 admin: any;
 name: any;
 stores: any[] = [];
-  storeId: any;
+storeId: any;
+activeAdmins: string[] = []; 
+  deactiveAdmins: any;
+selectedAdminId: any;
+  edit: boolean=false;
+  allAdmins: any;
+
 
 
 constructor(
@@ -29,7 +35,11 @@ constructor(
  
   
   ngOnInit(): void {
+   
+    this.getDeactiveAdmins();
     this.getStore();
+    this.getActiveAdmins();
+    this.getAllAdminsDetails();
   }
 
 
@@ -40,7 +50,8 @@ constructor(
       id:this.id,
       contact :this.contact,
       address:this.address,
-      admin:this.admin,
+      //admin:this.admin,
+       admin:this.selectedAdminId,
    };
      
    this.apiService.postApiWithToken(this.cons.api.addStore, jsonData).subscribe({
@@ -73,11 +84,11 @@ constructor(
   }
 
   getStore(){
-    this.apiService.getApiWithToken(this.cons.api.getAllActiveStores).subscribe(
+    this.apiService.getApiWithToken(this.cons.api.getAllStore).subscribe(
       (response: object) => {
         let result: { [key: string]: any } = response;
         this.stores=result['response'];
-        this.storeId = this.stores[0].id;
+        
         console.log(this.storeId);
         
                 
@@ -88,7 +99,7 @@ constructor(
     );
   }
 
-  activateStore() {
+  activateStore(activeId:any) {
     Swal.fire({
       title: 'Activate Store',
       text: 'Are you sure you want to activate this store?',
@@ -100,11 +111,12 @@ constructor(
     }).then((result) => {
       if (result.isConfirmed) {
         // User confirmed, make API call
-        this.apiService.getApiWithToken(this.cons.api.activateStore + "/" + this.storeId).subscribe(
+        this.apiService.getApiWithToken(this.cons.api.activateStore + "/" +activeId).subscribe(
           (response: object) => {
             let result: { [key: string]: any } = response;
             this.stores = result['response'];
             console.log(this.stores);
+            this.getStore();
             // You can add further handling here if needed
           },
           (error) => {
@@ -116,7 +128,7 @@ constructor(
   }
 
   
-  deactivateStore() {
+  deactivateStore(deactiveId:any) {
     Swal.fire({
       title: 'Deactivate Store',
       text: 'Are you sure you want to deactivate this store?',
@@ -128,11 +140,12 @@ constructor(
     }).then((result) => {
       if (result.isConfirmed) {
         // User confirmed, make API call
-        this.apiService.getApiWithToken(this.cons.api.deactivateStore + "/" + this.storeId).subscribe(
+        this.apiService.getApiWithToken(this.cons.api.deactivateStore + "/" + deactiveId).subscribe(
           (response: object) => {
             let result: { [key: string]: any } = response;
             this.stores = result['response'];
             console.log(this.stores);
+            this.getStore();
             // You can add further handling here if needed
           },
           (error) => {
@@ -143,7 +156,7 @@ constructor(
     });
   }
 
-  deleteStore(storeId:any) {
+  deleteStore(delId:any) {
     debugger;
     Swal.fire({
       title: 'Delete Store',
@@ -157,7 +170,8 @@ constructor(
       if (result.isConfirmed) {
         // User confirmed, make delete API call
         console.log(this.storeId);
-        this.apiService.deleteApiWithToken(this.cons.api.deleteStore + '/' + this.storeId).subscribe({
+        // Make API call to delete the store
+        this.apiService.deleteApiWithToken(this.cons.api.deleteStore + '/' + delId).subscribe({
           next: (response: any) => {
             console.log('Delete request successful:', response);
             // Handle success here if needed, such as displaying a success message to the user
@@ -171,10 +185,23 @@ constructor(
     });
   }
 
-  editStore(stores:any,storeId:any){
+  editStore(stores:any,storeIdEdit:any){
+debugger;
+  console.log('Stores:', stores);
+  
 
-
-  //   this.apiService.updateApiWithToken(this.cons.api.updateSuperAdminStore + '/' + this.storeId).subscribe(
+  // Ensure that the correct property names are used to assign values
+  this.name = stores.name;
+  this.id = storeIdEdit;
+  this.contact = stores.contact;
+  this.address = stores.address;
+  this.admin = stores.admin; // Assuming adminId is the correct property name
+  this.edit = true;
+  }
+  updateStore(){
+    this.edit=false;
+ 
+    // this.apiService.updateApiWithToken(this.cons.api.updateSuperAdminStore + '/' + this.storeId,).subscribe(
   //     (response: any) => {
   //       let productDetails: any = response;
     
@@ -186,7 +213,52 @@ constructor(
   //   );
   // }
   
-
-
+ 
 }
+
+  // This will hold the list of active admins
+  
+getActiveAdmins() {
+
+  this.apiService.getApiWithToken(this.cons.api.activeAdmins).subscribe(
+    (response: object) => {
+      let result: { [key: string]: any } = response;
+      this.activeAdmins = result['response'];
+      console.log(this.activeAdmins);
+      // You can add further handling here if needed
+    },
+    (error) => {
+      console.error('Activate Store failed:', error);
+    }
+  );
+}
+
+getDeactiveAdmins() {
+
+  this.apiService.getApiWithToken(this.cons.api.deactivedAdmins).subscribe(
+    (response: object) => {
+      let result: { [key: string]: any } = response;
+      this.deactiveAdmins = result['response'];
+      console.log(this.deactiveAdmins);
+      // You can add further handling here if needed
+    },
+    (error) => {
+      console.error('Activate Store failed:', error);
+    }
+  );
+}
+
+getAllAdminsDetails(){
+  this.apiService.getApiWithToken(this.cons.api.getAllAdmins).subscribe(
+    (response: object) => {
+      let result: { [key: string]: any } = response;
+      this.allAdmins=result['response'];      
+    },
+    (error) => {
+      console.error('Add Product failed:', error);
+    }
+  );
+}
+  
+
 }

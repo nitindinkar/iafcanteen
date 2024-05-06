@@ -45,8 +45,8 @@
                           <button (click)="adminOrderDelete(i,order.id)"><i style="font-size:24px" class="fa fa-trash"></i></button>
                       </td>
                       <td class="align-middle">
-                        <button class="pdf-download-button" (click)="downloadPDF(order.pdfUrl)">
-                          <i class="fas fa-file-pdf"></i>pdf
+                        <button class="pdf-download-button" (click)="downloadPdf(order.orderId)">
+                          <i class="fa fa-file-pdf-o" style="font-size:24px;color:red"></i>
                         </button>
                     </td>
                       </tr>
