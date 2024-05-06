@@ -83,7 +83,7 @@ export class MyAccountComponent implements OnInit{
         console.log("user id 1 wali hai...."+this.orderDetails)
         
       },
-      (error) => {
+      (error: any) => {
         console.error('Add Product failed:', error);
       }
       

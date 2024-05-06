@@ -19,10 +19,10 @@ name: any;
 stores: any[] = [];
 storeId: any;
 activeAdmins: string[] = []; 
-  deactiveAdmins: any;
+deactiveAdmins: any;
 selectedAdminId: any;
-  edit: boolean=false;
-  allAdmins: any;
+edit: boolean=false;
+allAdmins: any;
 
 
 
@@ -45,6 +45,7 @@ constructor(
 
   addStore() {    
     debugger;
+    
     const jsonData = {
       name : this.name,
       id:this.id,
@@ -198,23 +199,31 @@ debugger;
   this.admin = stores.admin; // Assuming adminId is the correct property name
   this.edit = true;
   }
-  updateStore(){
-    this.edit=false;
- 
-    // this.apiService.updateApiWithToken(this.cons.api.updateSuperAdminStore + '/' + this.storeId,).subscribe(
-  //     (response: any) => {
-  //       let productDetails: any = response;
-    
-         
-  //      },
-  //     (error: any) => {
-  //       console.error('Error fetching product details:', error);
-  //     }
-  //   );
-  // }
+
+  updateStore(){   
+    debugger; 
+    const data = {
+      id: this.id,
+      name: this.name,
+      contact: this.contact,
+      address: this.address,
+      adminId: this.selectedAdminId // Assuming adminId is the correct property name
+    };
+    console.log(data);
+     this.apiService.updateApiWithToken(this.cons.api.updateSuperAdminStore + '/' + this.id,data).subscribe(
+      (response: any) => {
+        let productDetails: any = response;
+        this.edit=false;
+             
+       },
+      (error: any) => {
+        console.error('Error fetching product details:', error);
+      }
+    );
+  }
   
  
-}
+
 
   // This will hold the list of active admins
   

@@ -9,22 +9,22 @@
                         <div class="row">
                             <div class="col-md-4 mb-3 mt-3">
                                 <label for="store" class="form-label">Store Id:</label>
-                                <input type="text" class="form-control"  [(ngModel)]="id" placeholder="Enter Store Id" name="CdNum">
+                                <input type="text" class="form-control"  [(ngModel)]="id" placeholder="Enter Store Id" name="id">
                               </div>
                           
                           <div class="col-md-4 mb-3 mt-3">
                             <label for="service" class="form-label">Store Name:</label>
-                            <input type="text" class="form-control"  [(ngModel)]="name"  placeholder="Enter Number" name="CdNum">
+                            <input type="text" class="form-control"  [(ngModel)]="name"  placeholder="Enter Number" name="name">
                           </div>
                           
                           <div class="col-md-4 mb-3 mt-3">
                             <label for="contact" class="form-label">Store Contact Number:</label>
-                            <input type="text" class="form-control"  [(ngModel)]="contact" placeholder="Enter Contact Number" name="CdNum">
+                            <input type="text" class="form-control"  [(ngModel)]="contact" placeholder="Enter Contact Number" name="contact">
                           </div>
 
                           <div class="col-md-4 mb-3 mt-3">
                             <label for="contact" class="form-label">Store Address</label>
-                            <input type="text" class="form-control"  [(ngModel)]="address"  placeholder="Store Address " name="CdNum">
+                            <input type="text" class="form-control"  [(ngModel)]="address"  placeholder="Store Address " name="address">
                           </div>
                           <!-- <div class="col-md-4 mb-3 mt-3"> 
                             <label for="contact" class="form-label">Store Admin Id </label>
@@ -42,7 +42,7 @@
                           <div class="col-md-4 mb-3 mt-3">
                             <label for="service" class="form-label">Store Admin Id</label>
                             <select class="form-control" id="Category" [(ngModel)]="selectedAdminId">
-                              <option *ngFor="let admin of allAdmins " [value]="admin.id">{{admin.id}}</option>
+                              <option *ngFor="let admin of allAdmins " [ngValue]="admin.id">{{admin.id}}</option>
                             </select>
                           </div>
                           
@@ -52,7 +52,7 @@
                             <button type="submit" class="btn btn-primary mb-3" (click)="addStore()">Submit</button>
                           </div>
                           <div class="col-md-12 mb-3 mt-3" *ngIf="edit">
-                            <button type="submit" class="btn btn-primary mb-3" (click)="updateStore()">Submit</button>
+                            <button type="submit" class="btn btn-primary mb-3" (click)="updateStore()">update</button>
                           </div>
 
                         </div>

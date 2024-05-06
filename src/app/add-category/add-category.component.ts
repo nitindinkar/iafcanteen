@@ -140,7 +140,7 @@ edited: any;
   }
 
   updateCategory(){
-debugger;
+     debugger;
     const data = {
       id:this.id,
       name: this.name,
