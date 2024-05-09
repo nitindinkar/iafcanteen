@@ -20,6 +20,7 @@ import { ManageAdminsComponent } from './manage-admins/manage-admins.component';
 import { ManageStoreComponent } from './manage-store/manage-store.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { SuperadminDashboardComponent } from './superadmin-dashboard/superadmin-dashboard.component';
+import {ProductFilteredComponent} from "./product-filtered/product-filtered.component";
 
 
 
@@ -28,6 +29,7 @@ const routes: Routes = [
   { path: 'liquor', component:  LiquorHomeComponent},
   { path: 'login', component:  LoginComponent},
   { path: 'product', component:  ProductComponent},
+  { path: 'product-filtered', component:  ProductFilteredComponent},
   { path: 'cart', component:  CartComponent},
   { path: 'checkout', component:  CheckoutComponent},
   { path: 'add-product', component:  AddProductComponent},
@@ -42,9 +44,9 @@ const routes: Routes = [
   { path:  'manage-admins', component:ManageAdminsComponent},
   { path:  'manage-store', component:ManageStoreComponent},
   { path:  'superadmin', component:SuperadminDashboardComponent},
- 
- 
-  
+
+
+
 ];
 
 

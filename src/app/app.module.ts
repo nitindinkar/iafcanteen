@@ -39,6 +39,7 @@ import { ManageAdminsComponent } from './manage-admins/manage-admins.component';
 import { ManageStoreComponent } from './manage-store/manage-store.component';
 import { SuperadminDashboardComponent } from './superadmin-dashboard/superadmin-dashboard.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import {ProductFilteredComponent} from "./product-filtered/product-filtered.component";
 
 
 
@@ -63,17 +64,18 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
     RegistrationComponent,
     ManageOrdersComponent,
     OrderDetailsDialogComponent,
+    ProductFilteredComponent,
     ManageAdminsComponent,
     ManageStoreComponent,
     SuperadminDashboardComponent,
     AdminDashboardComponent,
-    
-  
-   
-    
-   
-    
-    
+
+
+
+
+
+
+
   ],
   imports: [
     BrowserModule,
@@ -89,8 +91,8 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
     MatInputModule,
     MatFormFieldModule,
     MatSlideToggleModule,
-    
-      
+
+
   ],
   providers: [ SharedService,ProductComponent,HeaderComponent,
     provideAnimationsAsync()

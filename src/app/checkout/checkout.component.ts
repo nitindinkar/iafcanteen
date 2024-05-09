@@ -60,7 +60,7 @@ export class CheckoutComponent implements OnInit {
     private http: HttpClient,
     private apiService: ApiCallingServiceService,
     private cons: ConstantsService,
-    private sharedService:SharedService   
+    private sharedService:SharedService
   ) {
     this.minDate = new Date().toISOString().split('T')[0];
   }
@@ -85,14 +85,14 @@ export class CheckoutComponent implements OnInit {
     }
     this.cartItems=this.sharedService.cart;
     this.cartTotal=this.sharedService.cartTotal;
-      
+
   }
 
 
   // bookOrder(){
 
   //   const orderProductQuantityList = [];
-    
+
 
   //   if (this.cartItems) {
   //   for (let cart of this.cartItems) {
@@ -104,12 +104,12 @@ export class CheckoutComponent implements OnInit {
   //     orderProductQuantityList.push({ productId: productId, quantity: quantity });
   //   }
   //  }
-   
+
   //  const selectedSavedAddressIndex = 0; // Adjust as needed
 
   //  if (this.savedAddresses && this.savedAddresses.length > selectedSavedAddressIndex) {
-  //      const selectedAddress = this.savedAddresses[selectedSavedAddressIndex];  
-    
+  //      const selectedAddress = this.savedAddresses[selectedSavedAddressIndex];
+
   //   this.flag=true;
   //   const billingData = {
   //     fullName: this.sharedService.userName, // Use the fullName from the selected address
@@ -127,20 +127,20 @@ export class CheckoutComponent implements OnInit {
   //       debugger;
   //       let result: { [key: string]: any } = v;
   //       console.log(result['pdfUrl']);
-        
+
   //       this.sharedService.cartCount=0;
   //       this.sharedService.cartList=[];
-      
+
   //       if (result['message'] == 'success') {
-           
+
   //          const pdfUrl = result['response']['pdfUrl'];
   //          console.log("the pdf url is ......."+pdfUrl);
   //          const link = document.createElement('a');
   //          link.href = pdfUrl;
   //          link.download = 'report.pdf'; // You can specify any file name here
   //          link.target = '_blank'; // Open in a new tab if needed
-  //          link.click();          
-  //       } 
+  //          link.click();
+  //       }
   //     },
   //     error: (e) => {
 
@@ -155,7 +155,7 @@ export class CheckoutComponent implements OnInit {
 
   // }
 
-  
+
 
 bookOrder() {
   debugger;
@@ -176,14 +176,15 @@ bookOrder() {
     this.flag = true;
     debugger;
     const billingData = {
-     
+
       fullName: this.sharedService.userName,
       fullAddress: selectedAddress.flatNumberOrHouseNumber + ', ' + selectedAddress.area + ', ' + selectedAddress.city + ', ' + selectedAddress.state + ', ' + selectedAddress.pinCode,
       contactNumber: selectedAddress.mobile,
       alternateContactNumber: selectedAddress.alternateContactNumber,
       selectedStore: "Delhi",
       cardType: this.cardType,
-      orderProductQuantityList
+      orderProductQuantityList,
+      storeId:52
     };
 
     this.apiService.postApiWithToken(this.cons.api.buyProduct + "/" + this.flag, billingData).subscribe({
@@ -197,10 +198,10 @@ bookOrder() {
           const pdfUrl = result['response']['pdfUrl'];
           this.orderId=result['response']['orderId'];
 
-          
-          
-          
-          
+
+
+
+
           Swal.fire({
             title: 'Order Placed Successfully!',
             text: 'Your order has been placed successfully. Click OK to download your receipt.',
@@ -209,7 +210,7 @@ bookOrder() {
           }).then((result) => {
             if (result.isConfirmed) {
               debugger;
-              
+
               this.downloadPdf(pdfUrl, 'report.pdf');
             }
           });
@@ -264,7 +265,7 @@ downloadPdf = (url: string, fileName: string) => {
       (response: object) => {
         let result: { [key: string]: any } = response;
         this.cart=result['response'];
-        
+
         for(let product of this.cart){
           product.product.quantity=1;
           console.log(product.product);
@@ -292,7 +293,7 @@ downloadPdf = (url: string, fileName: string) => {
     }
 
     saveAddress(): void {
-         
+
       const addressDetails = {
           flatNumberOrHouseNumber: this.flatNumberOrHouseNumber,
           landMark: this.landMark,
@@ -301,7 +302,7 @@ downloadPdf = (url: string, fileName: string) => {
           state: this.state,
           addressType:  this.selectedAddressType,
           pinCode:this.pinCode,
-          userId: this.sharedService.userId,                          
+          userId: this.sharedService.userId,
       };
        // Check if the address is already saved
       if (this.display) {
@@ -327,7 +328,7 @@ downloadPdf = (url: string, fileName: string) => {
                         if(response['status']==200){
                           Swal.fire("Address Saved!", "", "success");
                           this.display = true;
-                        }                    
+                        }
                       },
                       (error) => {
                           console.error('Save Address failed:', error);
@@ -341,7 +342,7 @@ downloadPdf = (url: string, fileName: string) => {
       }
   }
 
-  
+
 
     changeInputType(target: EventTarget | null) {
       if (target instanceof HTMLInputElement) {
@@ -352,7 +353,7 @@ downloadPdf = (url: string, fileName: string) => {
       }
     }
 
-    
+
     getAddress(): void {
       this.apiService.getApiWithToken(this.cons.api.getUserAddress+"/"+this.sharedService.userId).subscribe(
         (response: any) => {
@@ -387,11 +388,11 @@ downloadPdf = (url: string, fileName: string) => {
       }
     }
 
-   
-   
+
+
     }
-    
-    
+
+
 
 
 

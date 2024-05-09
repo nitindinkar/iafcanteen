@@ -15,7 +15,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class HeaderComponent implements OnInit {
 
- 
+
   categories: any;
   loggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   selectedCategory: string | undefined;
@@ -32,14 +32,14 @@ export class HeaderComponent implements OnInit {
   filterProducts: any;
   filteredProducts: any[] | undefined;
   wishResponse: any;
-  cartItems: any;  
+  cartItems: any;
   totalAmount: any;
   cart: any;
   subtotal: any;
   cartEmpty:boolean=false;
   superadmin:boolean=false;
-  
-  
+
+
 
 
   constructor(private cons:ConstantsService,
@@ -61,7 +61,7 @@ export class HeaderComponent implements OnInit {
         console.log(role.roleName);
         if(role.roleName=='ADMIN'){
           this.admin=true;
-        } 
+        }
         if(role.roleName=='USER'){
           this.user=true;
         }
@@ -70,7 +70,7 @@ export class HeaderComponent implements OnInit {
         }
       }
     }
-    
+
     if(localStorage.getItem('card')==this.cons.constants.liquorCard && this.user==true){
       this.groccery=false;
       this.cardType='L'
@@ -87,8 +87,8 @@ export class HeaderComponent implements OnInit {
     }
     this.getcategories();
     this.getWishList();
-    
-  
+
+
 
   }
 
@@ -100,7 +100,7 @@ export class HeaderComponent implements OnInit {
       (response: object) => {
         let result: { [key: string]: any } = response;
         this.categories=result['response'];
-               
+
         for(let cat of this.categories){
           if(this.groccery&&cat.type=='G'){
             this.categoriesSorted.push(cat);
@@ -117,22 +117,22 @@ export class HeaderComponent implements OnInit {
   }
 
 
-  
+
  searchProducts(): void {
   debugger;
   if (this.router.url === '/product') {
         this.sharedService.searchKey = this.searchKey;
-     
+
     }
      else{
     this.sharedService.searchKey = this.searchKey;
     this.router.navigate(['/product']);
 
      }
-     
+
   }
 
-  
+
 // Method to get filtered products
   categoriesSorted:any[]=[];
   getFilteredProducts() {
@@ -160,8 +160,8 @@ export class HeaderComponent implements OnInit {
     this.admin=false;
     this.user=false;
     this.superadmin=false;
-  
-    
+
+
   }
   public getAllProduct() {
     if(localStorage.getItem('card')==this.cons.constants.liquorCard){
@@ -176,19 +176,19 @@ export class HeaderComponent implements OnInit {
       (response: object) => {
         let result: { [key: string]: any } = response;
         this.products=result['response'];
-        
+
 
         // Filter products based on the search key
       if (this.searchKey && this.searchKey.trim() !== '') {
             this.products = this.products.filter((product: { productName: string; }) =>
             product.productName.toLowerCase().includes(this.searchKey.toLowerCase())
           );
-          
+
         }
-               
+
 
         this.products = this.products.map((product: { imageUrl: string; }) => ({ ...product, imageUrl: this.cons.serviceUrl + product.imageUrl }));
-        
+
         this.products2=[];
         for(let product of this.products){
           product.imageUrl=this.cons.serviceUrl+product.imageUrl;
@@ -214,7 +214,7 @@ export class HeaderComponent implements OnInit {
   redirect(cat: any) {
     this.sharedService.selectedCategory=cat;
     if(this.router.url=='/product'){
-      this.getAllProduct();
+      this.router.navigateByUrl('/product-filtered');
     }
     else
       this.router.navigateByUrl('/product');
@@ -229,20 +229,20 @@ export class HeaderComponent implements OnInit {
         debugger
         let result: { [key: string]: any } = response;
         this.cartItems=result['response'];
-       
+
         if(result['response']=="exception No products found in the cart for the user"){
           debugger;
           this.sharedService.cartCount=0;
           this.cartEmpty=true;
-          
-          
+
+
         }else{
           debugger;
           this.sharedService.cartCount=result['response'].length;
           this.cartEmpty=false;
 
         }
-       
+
       },
       (error) => {
         console.error('Add Product failed:', error);
@@ -261,8 +261,8 @@ export class HeaderComponent implements OnInit {
       }else{
         this.sharedService.wishListCount=result['response'].length;
       }
-         
-      //   
+
+      //
 
     },
     (error: any) => {
@@ -271,7 +271,7 @@ export class HeaderComponent implements OnInit {
   );
   }
 
-  
+
 }
 
 
