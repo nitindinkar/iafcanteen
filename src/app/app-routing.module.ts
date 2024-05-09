@@ -20,6 +20,7 @@ import { ManageAdminsComponent } from './manage-admins/manage-admins.component';
 import { ManageStoreComponent } from './manage-store/manage-store.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { SuperadminDashboardComponent } from './superadmin-dashboard/superadmin-dashboard.component';
+import {ProductFilteredComponent} from "./product-filtered/product-filtered.component";
 import { SuperAdminNotificationComponent } from './super-admin-notification/super-admin-notification.component';
 import { AdminMyAccountComponent } from './admin-my-account/admin-my-account.component';
 
@@ -30,6 +31,7 @@ const routes: Routes = [
   { path: 'liquor', component:  LiquorHomeComponent},
   { path: 'login', component:  LoginComponent},
   { path: 'product', component:  ProductComponent},
+  { path: 'product-filtered', component:  ProductFilteredComponent},
   { path: 'cart', component:  CartComponent},
   { path: 'checkout', component:  CheckoutComponent},
   { path: 'add-product', component:  AddProductComponent},
@@ -47,9 +49,12 @@ const routes: Routes = [
   { path:  'superadmin-notification', component:SuperAdminNotificationComponent},
   { path:  'admin-myAccount', component:AdminMyAccountComponent},
 
- 
- 
-  
+
+
+
+
+
+
 ];
 
 

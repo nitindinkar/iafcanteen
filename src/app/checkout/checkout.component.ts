@@ -65,7 +65,7 @@ selectedCanteen: { name: string, id: number } = { name: '', id: 0 };
     private http: HttpClient,
     private apiService: ApiCallingServiceService,
     private cons: ConstantsService,
-    private sharedService:SharedService   
+    private sharedService:SharedService
   ) {
     this.minDate = new Date().toISOString().split('T')[0];
   }
@@ -91,14 +91,14 @@ selectedCanteen: { name: string, id: number } = { name: '', id: 0 };
     }
     this.cartItems=this.sharedService.cart;
     this.cartTotal=this.sharedService.cartTotal;
-      
+
   }
 
 
   // bookOrder(){
 
   //   const orderProductQuantityList = [];
-    
+
 
   //   if (this.cartItems) {
   //   for (let cart of this.cartItems) {
@@ -110,12 +110,12 @@ selectedCanteen: { name: string, id: number } = { name: '', id: 0 };
   //     orderProductQuantityList.push({ productId: productId, quantity: quantity });
   //   }
   //  }
-   
+
   //  const selectedSavedAddressIndex = 0; // Adjust as needed
 
   //  if (this.savedAddresses && this.savedAddresses.length > selectedSavedAddressIndex) {
-  //      const selectedAddress = this.savedAddresses[selectedSavedAddressIndex];  
-    
+  //      const selectedAddress = this.savedAddresses[selectedSavedAddressIndex];
+
   //   this.flag=true;
   //   const billingData = {
   //     fullName: this.sharedService.userName, // Use the fullName from the selected address
@@ -133,20 +133,20 @@ selectedCanteen: { name: string, id: number } = { name: '', id: 0 };
   //       debugger;
   //       let result: { [key: string]: any } = v;
   //       console.log(result['pdfUrl']);
-        
+
   //       this.sharedService.cartCount=0;
   //       this.sharedService.cartList=[];
-      
+
   //       if (result['message'] == 'success') {
-           
+
   //          const pdfUrl = result['response']['pdfUrl'];
   //          console.log("the pdf url is ......."+pdfUrl);
   //          const link = document.createElement('a');
   //          link.href = pdfUrl;
   //          link.download = 'report.pdf'; // You can specify any file name here
   //          link.target = '_blank'; // Open in a new tab if needed
-  //          link.click();          
-  //       } 
+  //          link.click();
+  //       }
   //     },
   //     error: (e) => {
 
@@ -161,7 +161,7 @@ selectedCanteen: { name: string, id: number } = { name: '', id: 0 };
 
   // }
 
-  
+
 
 bookOrder() {
   debugger;
@@ -204,10 +204,10 @@ bookOrder() {
           const pdfUrl = result['response']['pdfUrl'];
           this.orderId=result['response']['orderId'];
 
-          
-          
-          
-          
+
+
+
+
           Swal.fire({
             title: 'Order Placed Successfully!',
             text: 'Your order has been placed successfully. Click OK to download your receipt.',
@@ -216,7 +216,7 @@ bookOrder() {
           }).then((result) => {
             if (result.isConfirmed) {
               debugger;
-              
+
               this.downloadPdf(pdfUrl, 'report.pdf');
             }
           });
@@ -271,7 +271,7 @@ downloadPdf = (url: string, fileName: string) => {
       (response: object) => {
         let result: { [key: string]: any } = response;
         this.cart=result['response'];
-        
+
         for(let product of this.cart){
           product.product.quantity=1;
           console.log(product.product);
@@ -299,7 +299,7 @@ downloadPdf = (url: string, fileName: string) => {
     }
 
     saveAddress(): void {
-         
+
       const addressDetails = {
           flatNumberOrHouseNumber: this.flatNumberOrHouseNumber,
           landMark: this.landMark,
@@ -308,7 +308,7 @@ downloadPdf = (url: string, fileName: string) => {
           state: this.state,
           addressType:  this.selectedAddressType,
           pinCode:this.pinCode,
-          userId: this.sharedService.userId,                          
+          userId: this.sharedService.userId,
       };
        // Check if the address is already saved
       if (this.display) {
@@ -334,7 +334,7 @@ downloadPdf = (url: string, fileName: string) => {
                         if(response['status']==200){
                           Swal.fire("Address Saved!", "", "success");
                           this.display = true;
-                        }                    
+                        }
                       },
                       (error) => {
                           console.error('Save Address failed:', error);
@@ -348,7 +348,7 @@ downloadPdf = (url: string, fileName: string) => {
       }
   }
 
-  
+
 
     changeInputType(target: EventTarget | null) {
       if (target instanceof HTMLInputElement) {
@@ -359,7 +359,7 @@ downloadPdf = (url: string, fileName: string) => {
       }
     }
 
-    
+
     getAddress(): void {
       this.apiService.getApiWithToken(this.cons.api.getUserAddress+"/"+this.sharedService.userId).subscribe(
         (response: any) => {
@@ -400,11 +400,11 @@ downloadPdf = (url: string, fileName: string) => {
         (response: object) => {
           let result: { [key: string]: any } = response;
           this.stores=result['response'];
-          
+
           // this.filteredStores = this.stores;
           this.activeStores = this.stores.filter((store: { active: any; }) => store.active).map((store: { id: any; name: any; }) => ({ id: store.id, name: store.name }));
          console.log(this.activeStores);
-                          
+
         },
         (error) => {
           console.error('Add Product failed:', error);
@@ -412,11 +412,11 @@ downloadPdf = (url: string, fileName: string) => {
       );
     }
 
-   
-   
+
+
     }
-    
-    
+
+
 
 
 

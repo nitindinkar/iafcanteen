@@ -39,6 +39,7 @@ import { ManageAdminsComponent } from './manage-admins/manage-admins.component';
 import { ManageStoreComponent } from './manage-store/manage-store.component';
 import { SuperadminDashboardComponent } from './superadmin-dashboard/superadmin-dashboard.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import {ProductFilteredComponent} from "./product-filtered/product-filtered.component";
 import { SuperAdminNotificationComponent } from './super-admin-notification/super-admin-notification.component';
 import { AdminMyAccountComponent } from './admin-my-account/admin-my-account.component';
 
@@ -53,6 +54,7 @@ import { AdminMyAccountComponent } from './admin-my-account/admin-my-account.com
     HomeComponent,
     LoginComponent,
     ProductComponent,
+    ProductFilteredComponent,
     CartComponent,
     CheckoutComponent,
     AddProductComponent,
@@ -69,15 +71,22 @@ import { AdminMyAccountComponent } from './admin-my-account/admin-my-account.com
     ManageStoreComponent,
     SuperadminDashboardComponent,
     AdminDashboardComponent,
+
+
+
+
+
+
+
     SuperAdminNotificationComponent,
     AdminMyAccountComponent,
-    
-  
-   
-    
-   
-    
-    
+
+
+
+
+
+
+
   ],
   imports: [
     BrowserModule,
@@ -93,8 +102,8 @@ import { AdminMyAccountComponent } from './admin-my-account/admin-my-account.com
     MatInputModule,
     MatFormFieldModule,
     MatSlideToggleModule,
-    
-      
+
+
   ],
   providers: [ SharedService,ProductComponent,HeaderComponent,
     provideAnimationsAsync()
