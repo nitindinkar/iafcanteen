@@ -78,9 +78,13 @@ export class MyAccountComponent implements OnInit{
         this.orderDetails = this.orderDetails.filter((order: { user: { id: any; }; }) => order.user.id === this.parsedLoginResponse.user.id);
 
           // Reverse the order of the filtered array
-           this.orderDetails.reverse();
+          //  this.orderDetails.reverse();
+          debugger;
+          this.orderDetails.sort((a: { orderDate: string | number | Date; }, b: { orderDate: string | number | Date; }) => {
+            return new Date(b.orderDate).getTime() - new Date(a.orderDate).getTime();
+          });
 
-        console.log("user id 1 wali hai...."+this.orderDetails)
+        console.log("user id 1 wali hai...."+this.orderDetails);
         
       },
       (error: any) => {
@@ -119,6 +123,7 @@ export class MyAccountComponent implements OnInit{
               'The order has been deleted.',
               'success'
             );
+            this.order();
           },
           (error: any) => {
             // Error handling if deletion fails

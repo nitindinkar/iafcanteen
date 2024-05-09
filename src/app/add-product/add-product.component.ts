@@ -75,9 +75,17 @@ searchQuery: any;
           let result: { [key: string]: any } = v;
             this.upload=result['response'].uploadDocId;
             if(result["status"]==200){
-              alert("Image Uploaded Successfully")
+              Swal.fire({
+                icon: 'success',
+                title: 'Success',
+                text: 'Image Uploaded Successfully'
+              });
             }else{
-              alert("Please Upload of same size image");
+              Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Failed to Upload Image. Please try again later.'
+              });
             }
 
 
@@ -103,11 +111,8 @@ addProduct() {
     productActualPrice: this.aPrice,
     categoryId:this.category,
     uploadId:this.upload,
-    avialableStock:this.stock,
+    availableStock:Number(this.stock),
     
-
-
-
   };
   // formData.append('json_data', JSON.stringify(jsonData));
   // debugger;
@@ -116,20 +121,32 @@ addProduct() {
     next: (v: object) => {
       let result: { [key: string]: any } = v;
       if (result['message'] == 'success') {
-        alert("Product added Successfully");
+        Swal.fire({
+          icon: 'success',
+          title: 'Success',
+          text: 'Product added Successfully'
+        });
+
+        this.getAllProduct();
+        
+
         this.name = '';
         this.desc = '';
         this.aPrice = null;
         this.dPrice = null;
         this.category = null;
-
-      } else {
+        this.stock='';
 
       }
     },
     error: (e) => {
 
       console.error(e);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Failed to add product. Please try again later.'
+      });
     },
     complete: () => console.log(),
   });
@@ -166,7 +183,7 @@ deleteProduct(i: number, productId: any) {
   // Show a confirmation dialog using SweetAlert
   Swal.fire({
     title: 'Are you sure?',
-    text: 'You are about to delete this order. This action cannot be undone.',
+    text: 'You are about to delete this Product. This action cannot be undone.',
     icon: 'warning',
     showCancelButton: true,
     confirmButtonColor: '#3085d6',
@@ -182,17 +199,17 @@ deleteProduct(i: number, productId: any) {
           // Show success message
           Swal.fire(
             'Deleted!',
-            'The order has been deleted.',
+            'The Product has been deleted.',
             'success'
           );
         },
         (error: any) => {
           // Error handling if deletion fails
-          console.error('Delete order failed:', error);
+          console.error('Delete Product failed:', error);
           // Show error message
           Swal.fire(
             'Error!',
-            'Failed to delete the order.',
+            'Failed to delete the Product.',
             'error'
           );
         }
@@ -229,22 +246,18 @@ editProduct(product: any,productId:any) {
     this.category=product.categoryId;
     this.id=productId;
     this.image=product.imageUrl;
-  
-    
+     
   }
   
   updateProd(){
-
-    debugger;
     
-
     const data = {
       productId: this.id,
       productName: this.name,
       productDescription: this.desc,
       productDiscountedPrice: this.dPrice,
       productActualPrice: this.aPrice,
-      // imageUrl:this.image,
+      imageUrl:this.image,
       uploadId:this.upload,
       categoryId:this.category,
       availableStock:this.stock
@@ -252,13 +265,24 @@ editProduct(product: any,productId:any) {
     };
     console.log(data);  
   ///Fetch product details by productId
-  this.apiService.postApiWithToken(this.cons.api.updateProduct + '/' + this.id,data).subscribe(
+  this.apiService.postApiWithToken(this.cons.api.updateProduct,data).subscribe(
     (response: any) => {
       let productDetails: any = response;
       this.edited=false;
+      Swal.fire({
+        icon: 'success',
+        title: 'Success',
+        text: ' Product Updated Successfully'
+      });
+
        
      },
     (error: any) => {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Failed to Update product. Something Went Wrong.'
+      });
       console.error('Error fetching product details:', error);
     }
   );

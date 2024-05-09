@@ -104,13 +104,21 @@
               <label for="date" class="form-label">Select Date</label>
               <input type="date" class="form-control" id="date" name="date" placeholder="Select Date" min="{{ minDate }}" >
             </div>
-            <div class="mb-3 mt-3 col-md-6 px-2">
+            <!-- <div class="mb-3 mt-3 col-md-6 px-2">
               <label for="store" class="form-label">Select Store</label>
               <select class="form-control" id="store">
                 <option>IAF Canteen 1</option>
                 <option>IAF Canteen 2</option>
               </select>
-            </div>
+            </div> -->
+            <div class="mb-3 mt-3 col-md-6 px-2">
+              <label for="store" class="form-label">Select Store</label>
+              <select class="form-control" id="store" [(ngModel)]="selectedCanteen" [ngModelOptions]="{standalone: true}">
+                  <option *ngFor="let store of activeStores" [ngValue]="store">{{ store.name }}</option>
+              </select>
+          </div>
+          
+            
             <div class="mb-3 mt-3 col-md-6 px-2">
               <label for="slot" class="form-label">Select Your Slot</label>
               <select class="form-control" id="slot">

@@ -61,12 +61,15 @@ export class HeaderComponent implements OnInit {
         console.log(role.roleName);
         if(role.roleName=='ADMIN'){
           this.admin=true;
+          
         } 
         if(role.roleName=='USER'){
           this.user=true;
-        }
+          }
+          
         if(role.roleName=="SUPER_ADMIN"){
           this.superadmin=true;
+          
         }
       }
     }

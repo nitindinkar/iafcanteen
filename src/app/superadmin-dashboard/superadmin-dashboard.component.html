@@ -6,44 +6,48 @@
                 <div class="row">
                     <div class="col-xl-3 col-md-6">
                         <div class="card-box tilebox-two">
-                            <a href="#" class="btn btn-sm btn-secondary waves-effect waves-light float-right">View</a>
+                            <!-- <a href="#" class="btn btn-sm btn-secondary waves-effect waves-light float-right">View</a> -->
                             <h6 class="text-muted text-uppercase mt-0">Active Admins</h6>
-                            <h3 class="my-3"><span data-plugin="counterup">200</span></h3>
+                            <h3 class="my-3"><span data-plugin="counterup">{{activeAdminCount}}</span></h3>
                             <div class="progress progress-md">
-                                <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                <!-- <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div> -->
+                                <div class="progress-bar progress-bar-striped bg-info" role="progressbar" [style.width.%]="activeCompletionPercentage" aria-valuenow="activeAdminsCount" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                         </div>
                     </div>
 
                     <div class="col-xl-3 col-md-6">
                         <div class="card-box tilebox-two">
-                            <a href="#" class="btn btn-sm btn-secondary waves-effect waves-light float-right">View</a>
+                            <!-- <a href="#" class="btn btn-sm btn-secondary waves-effect waves-light float-right">View</a> -->
                             <h6 class="text-muted text-uppercase mt-0">Active Stores</h6>
-                            <h3 class="my-3">₹<span data-plugin="counterup">250</span></h3>
+                            <h3 class="my-3">₹<span data-plugin="counterup">{{activeStore}}</span></h3>
                             <div class="progress progress-md">
-                                <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                                <!-- <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div> -->
+                                <div class="progress-bar progress-bar-striped bg-info" role="progressbar" [style.width.%]="activeStoreCompletionPercentage" aria-valuenow="activeStore" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                         </div>
                     </div>
 
                     <div class="col-xl-3 col-md-6">
                         <div class="card-box tilebox-two">
-                            <a href="#" class="btn btn-sm btn-secondary waves-effect waves-light float-right">View</a>
+                            <!-- <a href="#" class="btn btn-sm btn-secondary waves-effect waves-light float-right">View</a> -->
                             <h6 class="text-muted text-uppercase mt-0"> Total Admins</h6>
-                            <h3 class="my-3" data-plugin="counterup">300</h3>
+                            <h3 class="my-3" data-plugin="counterup">{{totalAdminCount}}</h3>
                             <div class="progress progress-md">
-                                <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                <!-- <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div> -->
+                                <div class="progress-bar progress-bar-striped bg-info" role="progressbar" [style.width.%]="totalAdminCompletionPercentage" aria-valuenow="totalAdminCount" aria-valuemin="0" aria-valuemax="100"></div> <div class="progress-bar progress-bar-striped bg-info" role="progressbar" [style.width.%]="totalAdminCompletionPercentage" aria-valuenow="totalAdminCount" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                         </div>
                     </div>
 
                     <div class="col-xl-3 col-md-6">
                         <div class="card-box tilebox-two">
-                            <a href="#" class="btn btn-sm btn-secondary waves-effect waves-light float-right">View</a>
+                            <!-- <a href="#" class="btn btn-sm btn-secondary waves-effect waves-light float-right">View</a> -->
                             <h6 class="text-muted text-uppercase mt-0">Total Stores</h6>
-                            <h3 class="my-3">₹<span data-plugin="counterup">750</span></h3>
+                            <h3 class="my-3">₹<span data-plugin="counterup">{{totalStoreCount}}</span></h3>
                             <div class="progress progress-md">
-                                <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="90"></div>
+                                <!-- <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="90"></div> -->
+                                <div class="progress-bar progress-bar-striped bg-info" role="progressbar" [style.width.%]="totalStoreCompletionPercentage" aria-valuenow="totalStoreCount" aria-valuemin="0" aria-valuemax="100"></div> 
                             </div>
                         </div>
                     </div>

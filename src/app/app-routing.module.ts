@@ -20,6 +20,8 @@ import { ManageAdminsComponent } from './manage-admins/manage-admins.component';
 import { ManageStoreComponent } from './manage-store/manage-store.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { SuperadminDashboardComponent } from './superadmin-dashboard/superadmin-dashboard.component';
+import { SuperAdminNotificationComponent } from './super-admin-notification/super-admin-notification.component';
+import { AdminMyAccountComponent } from './admin-my-account/admin-my-account.component';
 
 
 
@@ -42,6 +44,9 @@ const routes: Routes = [
   { path:  'manage-admins', component:ManageAdminsComponent},
   { path:  'manage-store', component:ManageStoreComponent},
   { path:  'superadmin', component:SuperadminDashboardComponent},
+  { path:  'superadmin-notification', component:SuperAdminNotificationComponent},
+  { path:  'admin-myAccount', component:AdminMyAccountComponent},
+
  
  
   

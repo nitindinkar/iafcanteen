@@ -39,6 +39,8 @@ import { ManageAdminsComponent } from './manage-admins/manage-admins.component';
 import { ManageStoreComponent } from './manage-store/manage-store.component';
 import { SuperadminDashboardComponent } from './superadmin-dashboard/superadmin-dashboard.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { SuperAdminNotificationComponent } from './super-admin-notification/super-admin-notification.component';
+import { AdminMyAccountComponent } from './admin-my-account/admin-my-account.component';
 
 
 
@@ -67,6 +69,8 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
     ManageStoreComponent,
     SuperadminDashboardComponent,
     AdminDashboardComponent,
+    SuperAdminNotificationComponent,
+    AdminMyAccountComponent,
     
   
    

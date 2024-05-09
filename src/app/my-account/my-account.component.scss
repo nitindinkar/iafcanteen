@@ -24,9 +24,21 @@
 }
 .table th{
   border-top: none !important;
+  align-items: center;
 }
 .tab-content{
   border-width: 0 1px 1px 1px;
   border-style: solid;
   border-color: #e6e6e6;
+
+}
+
+.orderDate {
+  white-space: nowrap; /* Prevents wrapping of text */
+  width: 100px; /* Adjust the width as needed */
+}
+
+
+.orderDate{
+  margin-right: 5px;
 }

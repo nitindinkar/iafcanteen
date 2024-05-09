@@ -5,7 +5,7 @@
       <div class="my-account">
         <ul class="nav nav-tabs">
           <li><a (click)="setActiveTab($event)" data-toggle="tab" href="#home" (click)="order()">Orders</a></li>
-          <li><a (click)="setActiveTab($event)" data-toggle="tab" href="#menu1" (click)="myAccount()">Account Details</a></li>
+          <li ><a (click)="setActiveTab($event)" data-toggle="tab" href="#menu1" (click)="myAccount()">Account Details</a></li>
           <li><a (click)="setActiveTab($event)" data-toggle="tab" href="#menu2">Change password</a></li>
         </ul>
 
@@ -16,6 +16,7 @@
               <thead>
                 <tr>
                   <th scope="col">Order ID</th>
+                  <th scope="col">Date</th>
                   <th scope="col">Product Name</th>
                   <th scope="col">Price</th>
                   <th scope="col">Quantity</th>
@@ -27,8 +28,9 @@
               </thead>
               <tbody>
               
-               <tr *ngFor="let order of orderDetails; let i=index">
+               <tr *ngFor="let order of orderDetails; ; let i=index">
                 <td>{{ order.orderId }}</td>
+                <td class="orderDate">{{ order.orderDate | date:'dd MMM yyyy'}}</td>
                 <td>
                   <ng-container *ngFor="let userOrder of order.userOrders">
                     {{ userOrder.product.productName }}
@@ -52,7 +54,7 @@
                 
                 <td>{{ order.orderStatus }}</td>
                 <td class="align-middle">
-                  <button (click)="userOrderCancel(i,order.id)"><i style="font-size:24px" class="fa fa-trash"></i></button>
+                  <button (click)="userOrderCancel(i,order.id)"><i class="fa fa-close" style="font-size:24px"></i></button>
               </td>
               </tr>
               <!-- <tr>
