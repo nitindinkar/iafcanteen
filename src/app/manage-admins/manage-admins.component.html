@@ -34,7 +34,7 @@
                             <button type="submit" class="btn btn-primary mb-3" (click)="addAdmins()">Submit</button>
                           </div>
                           <div class="col-md-12 mb-3 mt-3" *ngIf="edit">
-                            <button type="submit" class="btn btn-primary mb-3" (click)="updatePdf()">update</button>
+                            <button type="submit" class="btn btn-primary mb-3" (click)="update()">update</button>
                           </div>
 
                         </div>
@@ -44,26 +44,33 @@
                 <div class="filters mt-3">
                     <form action="post">
                         <div class="row">
-                          <div class="mb-3 mt-3 col-md-2 px-2">
+                          <!-- <div class="mb-3 mt-3 col-md-2 px-2">
                             <select class="form-control" id="action">
                             <option>Bulk Action</option>
                             <option>Delete</option>
                             </select>
-                          </div>
-                          <div class="mt-3 col-md-1 px-2">
+                          </div> -->
+                          <!-- <div class="mt-3 col-md-1 px-2">
                             <button type="submit" class="btn btn-primary mb-3 form-filter">Apply</button>
-                        </div>
+                        </div> -->
                           
-                          <div class="mb-3 mt-3 col-md-5 px-4">
+                          <!-- <div class="mb-3 mt-3 col-md-5 px-4">
                             <select class="form-control" id="status">
                             <option>Filter By Admin Status</option>
                             <option>Active</option>
                             <option>Deactive</option>
                             </select>
+                          </div> -->
+                          <div class="mb-3 mt-3 col-md-5 px-4">
+                            <select class="form-control" id="status" [(ngModel)]="selectedStatus" [ngModelOptions]="{standalone: true}"  >
+                              <option value="Filter By Admin Status">Filter By Admin Status</option>
+                              <option value="Active">Active</option>
+                              <option value="Deactive">Deactive</option>
+                            </select>
                           </div>
                           <div class="mt-3 col-md-3 px-3">
-                              <button type="submit" class="btn btn-primary mb-3 form-filter">Filter</button>
-                              <span >   Total Admin : 400   </span>
+                              <button type="submit" class="btn btn-primary mb-3 form-filter" (click)="filterByAdmin()">Filter</button>
+                              <span >   Total Admin : {{this.allAdmins.length}}   </span>
                           </div>
                           </div>
                         </form> 
@@ -84,7 +91,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr  *ngFor="let admin of allAdmins">
+                  <tr  *ngFor="let admin of filteredAdmin">
                     <th scope="row"><input type="checkbox" name="selectAll" id="selectAll"></th>
                     <td>{{ admin.id }}</td>
                     <td>{{ admin.name }}</td>
@@ -103,7 +110,7 @@
                     </td>
                     <td>                             
                       <button type="submit" class="btn btn-secondary" (click)="editAdmin(admin,admin.id)"><i class="fa fa-edit"></i></button>
-                      <button type="submit" class="btn btn-secondary ml-2" (click)="deleteAdmin(admin.id)"><i class="fa fa-trash"></i></button>
+                      <!-- <button type="submit" class="btn btn-secondary ml-2" (click)="deleteAdmin(admin.id)"><i class="fa fa-trash"></i></button> -->
                     </td>
                   </tr>
                   

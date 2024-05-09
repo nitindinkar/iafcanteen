@@ -56,9 +56,17 @@ edited: any;
         let result: { [key: string]: any } = v;
         this.upload=result['response'].uploadDocId;
         if(result["status"]==200){
-          alert("Image Uploaded Successfully")
+          Swal.fire({
+            icon: 'success',
+            title: 'Success',
+            text: 'Image Uploaded Successfully'
+          });
         }else{
-          alert("Please Upload of same size image");
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Failed to Upload Image. Please try again later.'
+          });
         }
       },
       error: (e) => {
@@ -84,10 +92,20 @@ edited: any;
       next: (v: object) => {
         let result: { [key: string]: any } = v;
         if (result['message'] == 'success') {
-          alert("Category added Successfully");
+          Swal.fire({
+            icon: 'success',
+            title: 'Success',
+            text: ' Catagory  Added Successfully'
+          });
+          this.getcategories();
           this.name = '';
           this.desc = '';
         } else {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Failed to Add Category. Please try again later.'
+          });
 
         }
       },
@@ -100,9 +118,7 @@ edited: any;
   }
 
   getcategories(){
-    
-
-    this.apiService.getApiWithToken(this.cons.api.getAllCategories).subscribe(
+        this.apiService.getApiWithToken(this.cons.api.getAllCategories).subscribe(
       (response: object) => {
         let result: { [key: string]: any } = response;
         this.categories=result['response'];   
@@ -140,7 +156,7 @@ edited: any;
   }
 
   updateCategory(){
-debugger;
+     debugger;
     const data = {
       id:this.id,
       name: this.name,
@@ -155,17 +171,26 @@ debugger;
     (response: any) => {
       let productDetails: any = response;
       this.isEdit = false;
-
       this.id='',
       this.name='',
       this.desc='',
       this.catType='' ,
+      Swal.fire({
+        icon: 'success',
+        title: 'Success',
+        text: ' Category Updated Successfully'
+      });
       
       this.getcategories();
 
        
      },
     (error: any) => {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Category Not  Updated , Something Went Wrong '
+      });
       console.error('Error fetching product details:', error);
     }
   );

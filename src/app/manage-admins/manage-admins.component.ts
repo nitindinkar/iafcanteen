@@ -20,6 +20,9 @@ contact: any;
   name: any;
   id: any;
   edit: boolean=false;
+ 
+  filteredAdmin: any;
+  selectedStatus:String ='Filter By Admin Status';
 
 constructor(
   private router: Router,
@@ -64,6 +67,7 @@ constructor(
         this.password = ''; 
         this.contact = ''; 
       } 
+      this.getAllAdminsDetails();
     },
     error: (e) => {
       console.error(e);
@@ -109,6 +113,8 @@ constructor(
       this.apiService.getApiWithToken(this.cons.api.activateAdmin+"/"+adminId).subscribe(
         (response: object) => {
           let result: { [key: string]: any } = response;
+          console.log("this is the total active admins");
+          console.log((result['response'].length));
           console.log(result);
           this.getAllAdminsDetails();
           // You can add further handling here if needed
@@ -154,7 +160,8 @@ getAllAdminsDetails(){
   this.apiService.getApiWithToken(this.cons.api.getAllAdmins).subscribe(
     (response: object) => {
       let result: { [key: string]: any } = response;
-      this.allAdmins=result['response'];      
+      this.allAdmins=result['response'];  
+      this.filteredAdmin=this.allAdmins;    
     },
     (error) => {
       console.error('Add Product failed:', error);
@@ -174,11 +181,43 @@ editAdmin(admin:any,adminId:any){
      this.edit=true;
 }
 
-updatePdf(){
+update(){
+  debugger;
+  const data={
+    serviceNo:this.serviceNo,
+    name:this.name,
+    contact:this.contact,
+    email:this.email,
+      }
+
+  this.apiService.postApiWithToken(this.cons.api.updateAdmin + '/' + this.id,data).subscribe(
+    (response: any) => {
+      if(response['message']==="success"){
+      Swal.fire({
+        icon: 'success',
+        title: 'Success',
+        text: ' Admin Updated successfully!',
+      });
+      
+      this.serviceNo='';
+      this.name='';
+      this.contact='';
+      this.email='';
+      this.edit=false;
+    }
+    this.getAllAdminsDetails();
+        
+           
+     },
+    (error: any) => {
+      console.error('Error fetching product details:', error);
+    }
+  );
+}
 
   
 
-}
+
 
 
 
@@ -209,6 +248,20 @@ deleteAdmin(delAdminId:any) {
       });
     }
   });
+}
+
+filterByAdmin(): void {
+  debugger;
+  if (this.selectedStatus === 'Filter By Admin Status') {
+    // If no status selected, show all stores
+    this.filteredAdmin = this.allAdmins;
+  } else {
+    // Filter stores based on selected status
+    this.filteredAdmin  = this.allAdmins.filter((admin: { active: boolean; }) => {
+      // Check if the admin's active status matches the selected status
+      return admin.active === (this.selectedStatus === 'Active');
+    });
+  }
 }
 
 }

@@ -5,6 +5,7 @@ import {ApiCallingServiceService} from "../services/api-calling/api-calling-serv
 import {Router} from "@angular/router";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {SharedService} from "../services/shared/shared.service";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -183,6 +184,15 @@ userPassword: any;
 
           console.log(result);
 
+          if(result['response']==='exception bad credentials from user'){
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: 'Please Enter Valid Credentials. Please try again ...'
+            });
+
+          }
+
           debugger;
 
             if(result['message']=='success'){
@@ -190,15 +200,20 @@ userPassword: any;
             this.token=result['response'].jwtToken.toString();
             localStorage.setItem('token','Bearer '+this.token);
             localStorage.setItem('loginResponse', JSON.stringify(result['response']));
-            localStorage.setItem('userId',JSON.stringify(result['response']['user']['id']))
+            localStorage.setItem('userId',JSON.stringify(result['response']['user']['id']));
+            localStorage.setItem('userName',JSON.stringify(result['response']['user']['name']));
+            localStorage.setItem('contactNumber',JSON.stringify(result['response']['user']['contactNumber']));
 
            
             this.sharedService.loginResponse=JSON.stringify(result['response']);
             const roleName = result['response']['user']['roles'][0]['roleName'];
-           
             
+            const user=result['response']['user'];
             
-            debugger;
+            // this.sharedService.userName=user.name;
+            // this.sharedService.contactNumber=user.contactNumber;
+            this.sharedService.alternateNumber='9621671793';
+                       
              this.sharedService.role=roleName;
 
              let cardType = '';
@@ -237,7 +252,11 @@ userPassword: any;
          
         },
         (error) => {
-          alert("please Enter Valid Credential");
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Please Enter Valid Credentials. Please try again ...'
+          });
         }
       );
 

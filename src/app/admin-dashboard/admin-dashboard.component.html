@@ -6,44 +6,44 @@
                 <div class="row">
                     <div class="col-xl-3 col-md-6">
                         <div class="card-box tilebox-two">
-                            <a href="#" class="btn btn-sm btn-secondary waves-effect waves-light float-right">View</a>
+                            <!-- <a href="#" class="btn btn-sm btn-secondary waves-effect waves-light float-right">View</a> -->
                             <h6 class="text-muted text-uppercase mt-0">Total Product</h6>
-                            <h3 class="my-3"><span data-plugin="counterup">1,890</span></h3>
+                            <h3 class="my-3"><span data-plugin="counterup">{{totalProduct}}</span></h3>
                             <div class="progress progress-md">
-                                <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar progress-bar-striped bg-info" role="progressbar" [style.width.%]="productCompletionPercentage" aria-valuenow="totalProduct" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                         </div>
                     </div>
 
                     <div class="col-xl-3 col-md-6">
                         <div class="card-box tilebox-two">
-                            <a href="#" class="btn btn-sm btn-secondary waves-effect waves-light float-right">View</a>
+                            <!-- <a href="#" class="btn btn-sm btn-secondary waves-effect waves-light float-right">View</a> -->
                             <h6 class="text-muted text-uppercase mt-0">Total Catagories</h6>
-                            <h3 class="my-3">₹<span data-plugin="counterup">25</span></h3>
+                            <h3 class="my-3">₹<span data-plugin="counterup">{{totalCategory}}</span></h3>
                             <div class="progress progress-md">
-                                <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" [style.width.%]="categoryCompletionPercentage" aria-valuenow="totalCategory" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                         </div>
                     </div>
 
                     <div class="col-xl-3 col-md-6">
                         <div class="card-box tilebox-two">
-                            <a href="#" class="btn btn-sm btn-secondary waves-effect waves-light float-right">View</a>
+                            <!-- <a href="#" class="btn btn-sm btn-secondary waves-effect waves-light float-right">View</a> -->
                             <h6 class="text-muted text-uppercase mt-0"> Total Orders</h6>
-                            <h3 class="my-3" data-plugin="counterup">97,540</h3>
+                            <h3 class="my-3" data-plugin="counterup">{{totalOrder}}</h3>
                             <div class="progress progress-md">
-                                <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar progress-bar-striped bg-success" role="progressbar" [style.width.%]="orderCompletionPercentage" aria-valuenow="totalOrder" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                         </div>
                     </div>
 
                     <div class="col-xl-3 col-md-6">
                         <div class="card-box tilebox-two">
-                            <a href="#" class="btn btn-sm btn-secondary waves-effect waves-light float-right">View</a>
+                            <!-- <a href="#" class="btn btn-sm btn-secondary waves-effect waves-light float-right">View</a> -->
                             <h6 class="text-muted text-uppercase mt-0">Cancel Orderd</h6>
-                            <h3 class="my-3">₹<span data-plugin="counterup">22,459</span></h3>
+                            <h3 class="my-3">₹<span data-plugin="counterup">20</span></h3>
                             <div class="progress progress-md">
-                                <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="90"></div>
+                                <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" [style.width.%]="cancelledOrdersPercentage" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                         </div>
                     </div>

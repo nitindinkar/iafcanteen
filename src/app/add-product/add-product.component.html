@@ -12,10 +12,7 @@
                           <label for="Name" class="form-label">Product Name</label>
                           <input type="text" class="form-control" id="name" [(ngModel)]="name" placeholder="Enter Name" name="name">
                         </div>
-                        <div class="col-md-4 mb-3 mt-3">
-                          <label for="service" class="form-label">Description</label>
-                          <input type="text" class="form-control" id="Liquir"  [(ngModel)]="desc" placeholder="Discription" name="Liquir">
-                        </div>
+                        
                         <div class="col-md-4 mb-3 mt-3">
                           <label for="service" class="form-label">Catagory</label>
                           <select class="form-control" id="Category"  [(ngModel)]="category" [ngModelOptions]="{standalone: true}" >
@@ -33,6 +30,10 @@
                         <div class="col-md-4 mb-3 mt-3" >
                           <label for="contact" class="form-label">Stock</label>
                           <input type="text" class="form-control" id="stock"  [(ngModel)]="stock" placeholder="Number of Products" name="Stock">
+                        </div>
+                        <div class="col-md-4 mb-3 mt-3">
+                          <label for="service" class="form-label">Description</label>
+                          <textarea class="form-control custom-textarea" id="description" [(ngModel)]="desc" placeholder="Description" name="description" rows="3"></textarea>
                         </div>
                         <div class="col-md-4 mb-3 mt-3">
                           <label for="name" class="form-label"> Upload Images (550 x 750px in less than 500kb and jpg/jpeg format only)</label>

@@ -9,9 +9,9 @@ export class ConstantsService {
   //serviceUrl = 'http://192.168.120.78:8082/';
    //serviceUrl = 'http://192.168.212.84:8082/';
     //serviceUrl = 'http://localhost:8082/';
-    serviceUrl = 'http://13.200.245.74:8083/ecommerce/'; // server url
+     serviceUrl = 'http://13.200.245.74:8083/ecommerce/'; // server url
    //serviceUrl=  'http://192.168.54.64:8082/';
-  //  serviceUrl = 'http://192.168.201.236:8082/'; // vaibhav localhost
+    //  serviceUrl = 'http://192.168.13.236:8083/'; // vaibhav localhost
   constants={
     groceryCard:'Grocery',
     liquorCard: 'Liquor'
@@ -53,6 +53,7 @@ export class ConstantsService {
     getAllProductAdmin:this.serviceUrl+"product/getAllProductsAdmin",
     updateCategory:this.serviceUrl+"category/update-category",
     downloadPdf:this.serviceUrl+"order/pdf",
+    updateStockOnly:this.serviceUrl+"product/updateStock",
 
     // superadmin api started
     getActiveAdmins:this.serviceUrl+"super-admin/active-admins",
@@ -63,13 +64,23 @@ export class ConstantsService {
     deactivedAdmins:this.serviceUrl+"super-admin/inactive-admins",
     activateStore:this.serviceUrl+"super-admin/re-activate-store",
     deactivateStore:this.serviceUrl+"super-admin/inactivate-store",
-    deleteStore:this.serviceUrl+"super-admin/deleteStoreById",
-    updateSuperAdminStore:this.serviceUrl+"super-admin/updateStore",
+    deleteStore:this.serviceUrl+"super-admin/deleteStoreByStoreId",
+    updateSuperAdminStore:this.serviceUrl+"super-admin/update-store",
     getAllAdmins:this.serviceUrl+"super-admin/admins",
     activateAdmin:this.serviceUrl+"super-admin/activate-admin",
     deactivateAdmin:this.serviceUrl+"super-admin/deactivate-admin",
     deleteAdmin:this.serviceUrl+"super-admin/deleteAdminById",
     getAllStore:this.serviceUrl+"super-admin/stores",
+    pushNotification:this.serviceUrl+"super-admin/publish-message",
+    updateAdmin:this.serviceUrl+"super-admin/update-admin",
+
+    // api for dashboard superadmin
+
+    getActiveStoreCount:this.serviceUrl+"super-admin/active-stores-count",
+    getTotalStoreCount:this.serviceUrl+"super-admin/stores-count",
+    getActiveAdminCount:this.serviceUrl+"super-admin/active-admins-count",
+    getTotalAdminsCount:this.serviceUrl+"super-admin/admins-count",
+    getAllInactiveAdmins:this.serviceUrl+"super-admin/inactive-admins"
     
 
     

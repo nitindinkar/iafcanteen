@@ -19,10 +19,14 @@ name: any;
 stores: any[] = [];
 storeId: any;
 activeAdmins: string[] = []; 
-  deactiveAdmins: any;
+deactiveAdmins: any;
 selectedAdminId: any;
-  edit: boolean=false;
-  allAdmins: any;
+edit: boolean=false;
+allAdmins: any;
+filteredStores: any;
+
+// selectedCategory: string = 'Filter By Category'; // Initialize selected category
+selectedStatus:String ='Filter By Admin Status';
 
 
 
@@ -31,6 +35,7 @@ constructor(
   private http: HttpClient,
   private apiService: ApiCallingServiceService,
   private cons: ConstantsService,
+  
 ) {}
  
   
@@ -45,13 +50,14 @@ constructor(
 
   addStore() {    
     debugger;
+    
     const jsonData = {
       name : this.name,
-      id:this.id,
+      // id:this.id,
       contact :this.contact,
       address:this.address,
       //admin:this.admin,
-       admin:this.selectedAdminId,
+       adminId:this.selectedAdminId,
    };
      
    this.apiService.postApiWithToken(this.cons.api.addStore, jsonData).subscribe({
@@ -63,12 +69,22 @@ constructor(
           title: 'Success',
           text: 'Store added successfully!',
         });
+
         this.name = '';
         this.id = '';
         this.contact = ''; 
         this.address = '';
         this.admin = ''; 
+       
       } 
+      this.getStore();
+      if (result['message'] == "") {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'This Admin is Already Assigned to Store. Please Select Another Admin',
+        });
+      }
     },
     error: (e) => {
       console.error(e);
@@ -88,16 +104,25 @@ constructor(
       (response: object) => {
         let result: { [key: string]: any } = response;
         this.stores=result['response'];
-        
+        this.filteredStores = this.stores;
         console.log(this.storeId);
-        
-                
+                        
       },
       (error) => {
         console.error('Add Product failed:', error);
       }
     );
   }
+
+  // filterStores(): void {
+  //   if (this.selectedStatus === '') {
+  //     // If no status selected, show all stores
+  //     this.filteredStores = this.stores;
+  //   } else {
+  //     // Filter stores based on selected status
+  //     this.filteredStores = this.stores.filter(store => store.active === (this.selectedStatus === 'Active'));
+  //   }
+  // }
 
   activateStore(activeId:any) {
     Swal.fire({
@@ -115,6 +140,7 @@ constructor(
           (response: object) => {
             let result: { [key: string]: any } = response;
             this.stores = result['response'];
+            this.filteredStores = this.stores;
             console.log(this.stores);
             this.getStore();
             // You can add further handling here if needed
@@ -174,9 +200,40 @@ constructor(
         this.apiService.deleteApiWithToken(this.cons.api.deleteStore + '/' + delId).subscribe({
           next: (response: any) => {
             console.log('Delete request successful:', response);
+            debugger;
+            if (response && response.response !== "exception Store is active" && response.message === "" ) {
+              Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Failed to Delete store. Please try again later.',
+              });
+            } 
+            else if(response && response.response === "exception Store is active"){
+              Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Can Not Delete the Active Store. Please Make it Inactive To Delete.',
+              });
+
+            }
+            else{
+              Swal.fire({
+                icon: 'success',
+                title: 'Success',
+                text: 'Store Deleted successfully!',
+              });
+            }
+            this.getStore();
+           
             // Handle success here if needed, such as displaying a success message to the user
           },
           error: (error) => {
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: 'Failed to delete store. Please try again later.',
+            });
+            
             console.error('Delete request failed:', error);
             // Handle error here if needed, such as displaying an error message to the user
           }
@@ -198,23 +255,50 @@ debugger;
   this.admin = stores.admin; // Assuming adminId is the correct property name
   this.edit = true;
   }
-  updateStore(){
-    this.edit=false;
- 
-    // this.apiService.updateApiWithToken(this.cons.api.updateSuperAdminStore + '/' + this.storeId,).subscribe(
-  //     (response: any) => {
-  //       let productDetails: any = response;
-    
-         
-  //      },
-  //     (error: any) => {
-  //       console.error('Error fetching product details:', error);
-  //     }
-  //   );
-  // }
+
+  updateStore(){   
+    debugger; 
+    const data = {
+      // id: this.id,
+      address: this.address,
+      name: this.name,
+      contact: this.contact,
+   
+      // adminId: this.selectedAdminId // Assuming adminId is the correct property name
+    };
+    console.log(data);
+     this.apiService.postApiWithToken(this.cons.api.updateSuperAdminStore + '/' + this.id,data).subscribe(
+      (response: any) => {
+        if(response['message']==="success"){
+        Swal.fire({
+          icon: 'success',
+          title: 'Success',
+          text: ' Store Updated successfully!',
+        });
+        this.changeAdmin();
+        this.getStore();
+        this.address='';
+        this.name='';
+        this.contact='';
+        this.id ='';
+
+      }
+        let productDetails: any = response;
+        this.edit=false;
+             
+       },
+      (error: any) => {
+        console.error('Error fetching product details:', error);
+      }
+    );
+  }
+
+  changeAdmin(){
+
+  }
   
  
-}
+
 
   // This will hold the list of active admins
   
@@ -258,6 +342,26 @@ getAllAdminsDetails(){
       console.error('Add Product failed:', error);
     }
   );
+}
+
+filterStores(): void {
+  debugger;
+  if (this.selectedStatus === 'Filter By Admin Status') {
+    // If no status selected, show all stores
+    this.filteredStores = this.stores;
+  } else {
+    // Filter stores based on selected status
+    this.filteredStores = this.stores.filter(store => {
+      // Check if the admin's active status matches the selected status
+      return store.active === (this.selectedStatus === 'Active');
+    });
+  }
+}
+
+
+filterByStore(): void {
+  // Call filterStores() function to apply filtering
+  this.filterStores();
 }
   
 

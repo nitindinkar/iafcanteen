@@ -53,6 +53,11 @@ export class CheckoutComponent implements OnInit {
   pinCode: any;
   orderId: any;
   pdfDownloadUrl: any;
+  stores: any;
+  activeStores: any;
+selectedStore: any;
+selectedCanteen: { name: string, id: number } = { name: '', id: 0 };
+
 
 
   constructor(
@@ -75,6 +80,7 @@ export class CheckoutComponent implements OnInit {
   ngOnInit(): void {
 
     this.getAddress();
+    this.getStore();
 
     if(localStorage.getItem('card')==this.cons.constants.liquorCard) {
       this.cardType = 'L';
@@ -173,18 +179,18 @@ bookOrder() {
 
   if (this.savedAddresses && this.savedAddresses.length > selectedSavedAddressIndex) {
     const selectedAddress = this.savedAddresses[selectedSavedAddressIndex];
+    console.log(selectedAddress);
     this.flag = true;
     debugger;
     const billingData = {
-
       fullName: this.sharedService.userName,
       fullAddress: selectedAddress.flatNumberOrHouseNumber + ', ' + selectedAddress.area + ', ' + selectedAddress.city + ', ' + selectedAddress.state + ', ' + selectedAddress.pinCode,
-      contactNumber: selectedAddress.mobile,
-      alternateContactNumber: selectedAddress.alternateContactNumber,
-      selectedStore: "Delhi",
+      contactNumber: this.sharedService.mobile,
+      alternateContactNumber: '9621671793',
+      selectedStore:this.selectedCanteen.name,
+      storeId: this.selectedCanteen.id,
       cardType: this.cardType,
-      orderProductQuantityList,
-      storeId:52
+      orderProductQuantityList
     };
 
     this.apiService.postApiWithToken(this.cons.api.buyProduct + "/" + this.flag, billingData).subscribe({
@@ -386,6 +392,24 @@ downloadPdf = (url: string, fileName: string) => {
         console.log("this is my selection ................"+this.showSelectSlot);
 
       }
+    }
+
+    getStore(){
+      debugger;
+      this.apiService.getApiWithToken(this.cons.api.getAllStore).subscribe(
+        (response: object) => {
+          let result: { [key: string]: any } = response;
+          this.stores=result['response'];
+
+          // this.filteredStores = this.stores;
+          this.activeStores = this.stores.filter((store: { active: any; }) => store.active).map((store: { id: any; name: any; }) => ({ id: store.id, name: store.name }));
+         console.log(this.activeStores);
+
+        },
+        (error) => {
+          console.error('Add Product failed:', error);
+        }
+      );
     }
 
 

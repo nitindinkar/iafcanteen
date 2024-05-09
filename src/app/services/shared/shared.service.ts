@@ -18,7 +18,7 @@ export class SharedService {
   public loginResponse=localStorage.getItem('loginResponse');
   public userId=localStorage.getItem('userId');
   public userName=localStorage.getItem('userName');
-  public Mobile=localStorage.getItem('mobile');
+  public mobile=localStorage.getItem('contactNumber');
   public cartTotal: any;
   public cart: any;
   selectedCategory: any;
@@ -29,6 +29,10 @@ export class SharedService {
   wishListCount:any;
   cartItems: any;
   cartList=[];
+  
+  alternateNumber: any;
+ 
+  
   constructor(
     private router: Router,
     private http: HttpClient,

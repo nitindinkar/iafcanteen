@@ -12,15 +12,17 @@
                           <label for="Name" class="form-label">Category Name</label>
                           <input type="text" class="form-control" id="name" [(ngModel)]="name" placeholder="Enter Name" name="name">
                         </div>
-                        <div class="col-md-4 mb-3 mt-3">
-                          <label for="service" class="form-label">Description</label>
-                          <input type="text" class="form-control" id="Liquir"  [(ngModel)]="desc" placeholder="Discription" name="Liquir">
-                        </div>
+                       
                         <div class="col-md-4 mb-3 mt-3">
                           <label for="service" class="form-label">Category Type</label>
                           <select class="form-control" id="Category" [(ngModel)]="catType" [ngModelOptions]="{standalone: true}">
                             <option *ngFor="let type of types" [value]="type.id" >{{type.name}}</option>
                           </select>
+                        </div>
+                        <div class="col-md-4 mb-3 mt-3">
+                          <label for="service" class="form-label">Description</label>
+                          <!-- <input type="text" class="form-control" id="Liquir"  [(ngModel)]="desc" placeholder="Discription" name="Liquir"> -->
+                          <textarea class="form-control custom-textarea" id="description" [(ngModel)]="desc" placeholder="Description" name="description" rows="3"></textarea>
                         </div>
                                   
                         

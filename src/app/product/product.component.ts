@@ -27,7 +27,7 @@ export class ProductComponent implements OnInit{
   private cardType: string='';
   searchKey: string='';
   isInWishlist: boolean=false;
-  quantity:number=1;
+  quantity:number = 1;
   cart: any;
   subtotal:any;
 
@@ -111,6 +111,7 @@ export class ProductComponent implements OnInit{
         this.products2=[];
         for(let product of this.products){
           product.imageUrl=this.cons.serviceUrl+product.imageUrl;
+          product.quantity=1;
           if(this.groccery&&product.category.type=='G'){
             this.products2.push(product);
           }
@@ -324,18 +325,20 @@ export class ProductComponent implements OnInit{
 
   decreaseQuantity(i: number) {
     debugger;
-    if (this.cart[i].product.quantity > 1) {
-      this.cart[i].product.quantity--;
+    if (this.products[i].quantity > 1) {
+      // this.cart[i].product.quantity--;
+      this.products2[i].quantity--;
       this.calculateSubtotal();
       // Decrease quantity, ensuring it doesn't go below 1
   }else{
-
+    
       }
 
     //this.cart[i].product.quantity=Number(this.cart[i].product.quantity)-1;
   }
   increaseQuantity(i: number) {
-    this.cart[i].product.quantity=Number(this.cart[i].product.quantity)+1;
+    // this.cart[i].product.quantity++;
+    this.products2[i].quantity++;
     this.calculateSubtotal();
 
   }

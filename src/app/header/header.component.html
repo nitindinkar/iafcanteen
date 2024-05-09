@@ -18,9 +18,10 @@
             <!-- Top Right -->
             <div class="right-content">
               <ul class="list-main">
-                <li ><i class="ti-location-pin"></i> Store location</li>
-                 <li ><i class="ti-alarm-clock"></i> <a href="#">Daily deal</a></li>
-                <li [routerLinkActive]="['active']"><i class="ti-user"></i> <a href="#" [routerLink]="['/my-account']">My account</a></li>
+                <li *ngIf="user"><i class="ti-location-pin"></i> Store location</li>
+                 <li *ngIf="user"><i class="ti-alarm-clock"></i> <a href="#">Daily deal</a></li>
+                <li *ngIf="user" [routerLinkActive]="['active']"><i class="ti-user"></i> <a href="#" [routerLink]="['/my-account']">My account</a></li>
+                <li *ngIf="!user" [routerLinkActive]="['active']"><i class="ti-user"></i> <a href="#" [routerLink]="['/admin-myAccount']">My account</a></li>
                 <li *ngIf="sharedService.loginResponse==null"><i class="ti-power-off"></i><a href="#" [routerLink]="['/login']" (click)="login()">Login</a></li>
                 <!-- <li *ngIf="isLoggedIn"><i class="ti-power-off"></i><a href="#" [routerLink]="['/login']">Login</a></li> -->
                 <li *ngIf="sharedService.loginResponse!=null"><i class="ti-power-off"></i><a href="#" [routerLink]="['']"(click)="logout()">Logout</a></li>
@@ -34,11 +35,11 @@
     <!-- End Topbar -->
     <div class="middle-inner">
       <div class="container">
-        <div class="row">
+        <div class="row"  *ngIf="user" >
           <div class="col-lg-2 col-md-2 col-12">
             <!-- Logo -->
-            <div class="logo" style="width: 200px;">
-              <a href="#"><img src="assets/images/logo.png" alt="logo">eURC</a>
+            <div class="logo" style="width: 240px;">
+              <a href="#"><img src="assets/images/logo.png" alt="logo">E-URC</a>
             </div>
             <!--/ End Logo -->
             <!-- Search Form -->
@@ -47,7 +48,7 @@
               <!-- Search Form -->
               <div class="search-top">
                 <form class="search-form">
-                  <input type="text" placeholder="Search here..." name="search">
+                  <input  class="search-fix" type="text" placeholder="Search here..." name="search">
                   <button value="search" type="submit"><i class="ti-search"></i></button>
                 </form>
               </div>
@@ -60,7 +61,7 @@
             <div class="search-bar-top">
               <div class="search-bar">
                 <form  (ngSubmit)="searchProducts()" >
-                  <input name="search" placeholder="Search Products Here....."  name="searchKey" [(ngModel)]="searchKey" type="search">
+                  <input  class="search-fix" name="search" placeholder="Search Products Here....."  name="searchKey" [(ngModel)]="searchKey" type="search">
                   <button class="btnn"><i class="ti-search"></i></button>
                 </form>
               </div>
@@ -82,7 +83,7 @@
                 <div class="shopping-item" *ngIf="sharedService.cartCount!=null">
                   <div class="dropdown-cart-header">
                     <span>{{sharedService.cartCount}} Items</span>
-                    <a href="#">View Cart</a>
+                    <a href="#" [routerLink]="['/cart']">View Cart</a>
                   </div>
                   <!-- <ul class="shopping-list">
                     <li>
@@ -118,7 +119,7 @@
                       <span>Total</span>
                       <span class="total-amount">{{subtotal | currency: 'INR'}}</span>
                     </div> -->
-                    <a href="#" class="btn animate">Checkout</a>
+                    <a href="#" class="btn animate" [routerLink]="['/cart']">Checkout</a>
                   </div>
                 </div>
                 <!--/ End Shopping Item -->
@@ -126,6 +127,33 @@
             </div>
           </div>
         </div>
+        <div class="row" *ngIf="!user">
+          <div class="col-lg-2 col-md-5 col-12">
+            <!-- Logo -->
+            <div class="logo" style="width: 240px;">
+              <a href="#"><img src="assets/images/logo.png" alt="logo">E-URC</a>
+            </div>
+            <!--/ End Logo -->
+          </div>
+          <div class="col-lg-8 col-md-7 col-12">
+            <div class="search-bar-top">
+              <div class="search-bar">
+                <form (ngSubmit)="searchProducts()">
+                  <input class="search-fix" name="search" placeholder="Search Here" name="searchKey" [(ngModel)]="searchKey" type="search">
+                  <button class="btnn"><i class="ti-search"></i></button>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-2 col-md-3 col-12">
+            <div class="right-bar">
+              <div class="sinlge-bar">
+                <a href="#" class="single-icon" [routerLink]="['/admin-myAccount']"><i class="fa fa-user-circle-o" aria-hidden="true"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        
       </div>
     </div>
     <!-- Header Inner -->
@@ -221,6 +249,7 @@
                         <li *ngIf="admin" [routerLinkActive]="['active']"><a href="#" [routerLink]="['/manage-orders']">Manage Orders</a></li>
                         <li *ngIf="superadmin" [routerLinkActive]="['active']"><a href="#" [routerLink]="['/manage-admins']">Manage Admin</a></li>
                         <li *ngIf="superadmin" [routerLinkActive]="['active']"><a href="#" [routerLink]="['/manage-store']">Manage Store</a></li>
+                        <li *ngIf="superadmin" [routerLinkActive]="['active']"><a href="#" [routerLink]="['/superadmin-notification']">Send Notification</a></li>
                         <li *ngIf="admin" [routerLinkActive]="['active']"><a href="#" [routerLink]="['/inventory']"> Inventory Manager</a></li>
                         <li *ngIf="user"  [routerLinkActive]="['active']"><a href="#" [routerLink]="['/wishlist']" >WishList </a></li>
                         <li *ngIf="user"  [routerLinkActive]="['active']"><a href="#" [routerLink]="['/contact-us']">Contact Us</a></li>

@@ -62,11 +62,15 @@ export class HeaderComponent implements OnInit {
         if(role.roleName=='ADMIN'){
           this.admin=true;
         }
+
+        }
         if(role.roleName=='USER'){
           this.user=true;
-        }
+          }
+
         if(role.roleName=="SUPER_ADMIN"){
           this.superadmin=true;
+
         }
       }
     }
@@ -100,6 +104,7 @@ export class HeaderComponent implements OnInit {
       (response: object) => {
         let result: { [key: string]: any } = response;
         this.categories=result['response'];
+
 
         for(let cat of this.categories){
           if(this.groccery&&cat.type=='G'){

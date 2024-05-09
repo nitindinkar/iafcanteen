@@ -149,7 +149,7 @@ export class ManageOrdersComponent {
             this.orderDetails.splice(i, 1);
             // Show success message
             Swal.fire(
-              'Deleted!',
+              'Cancelled!',
               'The order has been Cancel.',
               'success'
             );
@@ -157,7 +157,7 @@ export class ManageOrdersComponent {
           },
           (error: any) => {
             // Error handling if deletion fails
-            console.error('Delete order failed:', error);
+            console.error('Cancel order failed:', error);
             // Show error message
             Swal.fire(
               'Error!',
@@ -193,10 +193,12 @@ export class ManageOrdersComponent {
     // }
 
     downloadPdf(orderId:any){
+      debugger;
       this.apiService.getApiWithToken(this.cons.api.downloadPdf+"/"+orderId).subscribe(
         (response: object) => {
           let result: { [key: string]: any } = response;
-          this.pdfDownload=result['response'];
+          this.pdfDownload=result['response'][0];
+          this.downloadPdfUrl(this.pdfDownload,'report.pdf');
         },
         (error) => {
           console.error('Add Product failed:', error);
@@ -205,6 +207,16 @@ export class ManageOrdersComponent {
       
 
     }
+    downloadPdfUrl = (url: string, fileName: string) => {
+      // Create an anchor element
+      const link = document.createElement('a');
+      // Set the href attribute to the PDF URL
+      link.href = url;
+      // Set the download attribute to specify the file name
+      link.download = fileName;
+      // Trigger a click event on the anchor element
+      link.click();
+    };
   
     
     }

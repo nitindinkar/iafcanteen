@@ -7,24 +7,28 @@
                   <h3 class="seconder-heading mt-4">Add Stores</h3>
                    <form action="post">
                         <div class="row">
-                            <div class="col-md-4 mb-3 mt-3">
+                            <!-- <div class="col-md-4 mb-3 mt-3">
                                 <label for="store" class="form-label">Store Id:</label>
-                                <input type="text" class="form-control"  [(ngModel)]="id" placeholder="Enter Store Id" name="CdNum">
-                              </div>
+                                <input type="text" class="form-control"  [(ngModel)]="id" placeholder="Enter Store Id" name="id">
+                              </div> -->
                           
                           <div class="col-md-4 mb-3 mt-3">
                             <label for="service" class="form-label">Store Name:</label>
-                            <input type="text" class="form-control"  [(ngModel)]="name"  placeholder="Enter Number" name="CdNum">
+                            <input type="text" class="form-control"  [(ngModel)]="name"  placeholder="Enter Number" name="name">
                           </div>
                           
                           <div class="col-md-4 mb-3 mt-3">
                             <label for="contact" class="form-label">Store Contact Number:</label>
-                            <input type="text" class="form-control"  [(ngModel)]="contact" placeholder="Enter Contact Number" name="CdNum">
+                            <input type="text" class="form-control"  [(ngModel)]="contact" placeholder="Enter Contact Number" name="contact">
                           </div>
 
+                          <!-- <div class="col-md-4 mb-3 mt-3">
+                            <label for="contact" class="form-label">Store Address</label>
+                            <input type="text" class="form-control"  [(ngModel)]="address"  placeholder="Store Address " name="address">
+                          </div> -->
                           <div class="col-md-4 mb-3 mt-3">
                             <label for="contact" class="form-label">Store Address</label>
-                            <input type="text" class="form-control"  [(ngModel)]="address"  placeholder="Store Address " name="CdNum">
+                            <textarea class="form-control custom-textarea" id="address"  [(ngModel)]="address" placeholder="Store Address " name="address" rows="3"></textarea>
                           </div>
                           <!-- <div class="col-md-4 mb-3 mt-3"> 
                             <label for="contact" class="form-label">Store Admin Id </label>
@@ -41,8 +45,8 @@
 
                           <div class="col-md-4 mb-3 mt-3">
                             <label for="service" class="form-label">Store Admin Id</label>
-                            <select class="form-control" id="Category" [(ngModel)]="selectedAdminId">
-                              <option *ngFor="let admin of allAdmins " [value]="admin.id">{{admin.id}}</option>
+                            <select class="form-control" id="Category" [(ngModel)]="selectedAdminId" [ngModelOptions]="{standalone: true}">
+                              <option *ngFor="let admin of allAdmins " [ngValue]="admin.id">{{admin.id}}</option>
                             </select>
                           </div>
                           
@@ -52,7 +56,7 @@
                             <button type="submit" class="btn btn-primary mb-3" (click)="addStore()">Submit</button>
                           </div>
                           <div class="col-md-12 mb-3 mt-3" *ngIf="edit">
-                            <button type="submit" class="btn btn-primary mb-3" (click)="updateStore()">Submit</button>
+                            <button type="submit" class="btn btn-primary mb-3" (click)="updateStore()">update</button>
                           </div>
 
                         </div>
@@ -62,26 +66,34 @@
                 <div class="filters mt-3">
                     <form action="post">
                         <div class="row">
-                          <div class="mb-3 mt-3 col-md-2 px-2">
+                          <!-- <div class="mb-3 mt-3 col-md-2 px-2">
                             <select class="form-control" id="action">
                             <option>Bulk Action</option>
                             <option>Delete</option>
                             </select>
-                          </div>
-                          <div class="mt-3 col-md-1 px-2">
+                          </div> -->
+                          <!-- <div class="mt-3 col-md-1 px-2">
                             <button type="submit" class="btn btn-primary mb-3 form-filter">Apply</button>
-                        </div>
+                        </div> -->
                           
-                          <div class="mb-3 mt-3 col-md-5 px-4">
+                          <!-- <div class="mb-3 mt-3 col-md-5 px-4">
                             <select class="form-control" id="status">
                             <option>Filter By Admin Status</option>
                             <option>Active</option>
                             <option>Deactive</option>
                             </select>
+                          </div> -->
+                          <div class="mb-3 mt-3 col-md-5 px-4">
+                            <select class="form-control" id="status" [(ngModel)]="selectedStatus" [ngModelOptions]="{standalone: true}"  >
+                              <option value="Filter By Admin Status">Filter By Admin Status</option>
+                              <option value="Active">Active</option>
+                              <option value="Deactive">Deactive</option>
+                            </select>
                           </div>
+                          
                           <div class="mt-3 col-md-3 px-3">
-                              <button type="submit" class="btn btn-primary mb-3 form-filter">Filter</button>
-                              <span >   Total Stores : 400   </span>
+                              <button type="submit" class="btn btn-primary mb-3 form-filter" (click)="filterByStore()">Filter</button>
+                              <span >   Total Stores : {{ filteredStores.length }}  </span>
                           </div>
                           </div>
                         </form> 
@@ -102,7 +114,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let store of stores">
+                  <tr *ngFor="let store of filteredStores">
                     <th scope="row"><input type="checkbox" name="selectAll" id="selectAll"></th>
                     <td>{{store.name}}</td>
                     <td>{{store.contact}}</td>
