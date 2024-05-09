@@ -103,7 +103,7 @@ export class HeaderComponent implements OnInit {
       (response: object) => {
         let result: { [key: string]: any } = response;
         this.categories=result['response'];
-               
+        
         for(let cat of this.categories){
           if(this.groccery&&cat.type=='G'){
             this.categoriesSorted.push(cat);

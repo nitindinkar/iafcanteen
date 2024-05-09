@@ -38,8 +38,8 @@
         <div class="row"  *ngIf="user" >
           <div class="col-lg-2 col-md-2 col-12">
             <!-- Logo -->
-            <div class="logo" style="width: 200px;">
-              <a href="#"><img src="assets/images/logo.png" alt="logo">eURC</a>
+            <div class="logo" style="width: 240px;">
+              <a href="#"><img src="assets/images/logo.png" alt="logo">E-URC</a>
             </div>
             <!--/ End Logo -->
             <!-- Search Form -->
@@ -48,7 +48,7 @@
               <!-- Search Form -->
               <div class="search-top">
                 <form class="search-form">
-                  <input type="text" placeholder="Search here..." name="search">
+                  <input  class="search-fix" type="text" placeholder="Search here..." name="search">
                   <button value="search" type="submit"><i class="ti-search"></i></button>
                 </form>
               </div>
@@ -61,7 +61,7 @@
             <div class="search-bar-top">
               <div class="search-bar">
                 <form  (ngSubmit)="searchProducts()" >
-                  <input name="search" placeholder="Search Products Here....."  name="searchKey" [(ngModel)]="searchKey" type="search">
+                  <input  class="search-fix" name="search" placeholder="Search Products Here....."  name="searchKey" [(ngModel)]="searchKey" type="search">
                   <button class="btnn"><i class="ti-search"></i></button>
                 </form>
               </div>
@@ -83,7 +83,7 @@
                 <div class="shopping-item" *ngIf="sharedService.cartCount!=null">
                   <div class="dropdown-cart-header">
                     <span>{{sharedService.cartCount}} Items</span>
-                    <a href="#">View Cart</a>
+                    <a href="#" [routerLink]="['/cart']">View Cart</a>
                   </div>
                   <!-- <ul class="shopping-list">
                     <li>
@@ -119,7 +119,7 @@
                       <span>Total</span>
                       <span class="total-amount">{{subtotal | currency: 'INR'}}</span>
                     </div> -->
-                    <a href="#" class="btn animate">Checkout</a>
+                    <a href="#" class="btn animate" [routerLink]="['/cart']">Checkout</a>
                   </div>
                 </div>
                 <!--/ End Shopping Item -->
@@ -130,8 +130,8 @@
         <div class="row" *ngIf="!user">
           <div class="col-lg-2 col-md-5 col-12">
             <!-- Logo -->
-            <div class="logo" style="width: 200px;">
-              <a href="#"><img src="assets/images/logo.png" alt="logo">eURC</a>
+            <div class="logo" style="width: 240px;">
+              <a href="#"><img src="assets/images/logo.png" alt="logo">E-URC</a>
             </div>
             <!--/ End Logo -->
           </div>
@@ -139,7 +139,7 @@
             <div class="search-bar-top">
               <div class="search-bar">
                 <form (ngSubmit)="searchProducts()">
-                  <input name="search" placeholder="Search Here" name="searchKey" [(ngModel)]="searchKey" type="search">
+                  <input class="search-fix" name="search" placeholder="Search Here" name="searchKey" [(ngModel)]="searchKey" type="search">
                   <button class="btnn"><i class="ti-search"></i></button>
                 </form>
               </div>
