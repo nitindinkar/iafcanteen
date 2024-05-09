@@ -218,6 +218,8 @@ export class HeaderComponent implements OnInit {
     this.sharedService.selectedCategory=cat;
     if(this.router.url=='/product'){
       this.router.navigateByUrl('/product-filtered');
+    }else if(this.router.url=='/product-filtered'){
+      this.router.navigateByUrl('/product');
     }
     else
       this.router.navigateByUrl('/product');

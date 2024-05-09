@@ -54,6 +54,7 @@ import { AdminMyAccountComponent } from './admin-my-account/admin-my-account.com
     HomeComponent,
     LoginComponent,
     ProductComponent,
+    ProductFilteredComponent,
     CartComponent,
     CheckoutComponent,
     AddProductComponent,
