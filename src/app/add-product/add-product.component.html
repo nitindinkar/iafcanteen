@@ -12,27 +12,27 @@
                           <label for="Name" class="form-label">Product Name</label>
                           <input type="text" class="form-control" id="name" [(ngModel)]="name" placeholder="Enter Name" name="name">
                         </div>
-                        
+
                         <div class="col-md-4 mb-3 mt-3">
-                          <label for="service" class="form-label">Catagory</label>
+                          <label for="Category" class="form-label">Catagory</label>
                           <select class="form-control" id="Category"  [(ngModel)]="category" [ngModelOptions]="{standalone: true}" >
                               <option *ngFor="let category of categories" [value]="category.id" >{{category.name}}</option>
                         </select>
                         </div>
                         <div class="col-md-4 mb-3 mt-3">
-                          <label for="email" class="form-label">Actual Price </label>
+                          <label for="Pan" class="form-label">Actual Price </label>
                           <input type="text" class="form-control" id="Pan"  [(ngModel)]="aPrice" placeholder="Actual Price"  name="Pan">
                         </div>
                         <div class="col-md-4  mt-3">
-                          <label for="contact" class="form-label">Discounted Price</label>
+                          <label for="Discounted" class="form-label">Discounted Price</label>
                           <input type="text" class="form-control" id="Discounted"  [(ngModel)]="dPrice" placeholder="Discounted Price" name="Discounted">
                         </div>
                         <div class="col-md-4 mb-3 mt-3" >
-                          <label for="contact" class="form-label">Stock</label>
+                          <label for="stock" class="form-label">Stock</label>
                           <input type="text" class="form-control" id="stock"  [(ngModel)]="stock" placeholder="Number of Products" name="Stock">
                         </div>
                         <div class="col-md-4 mb-2 mt-3">
-                          <label for="service" class="form-label">Description</label>
+                          <label for="description" class="form-label">Description</label>
                           <textarea class="form-control custom-textarea" id="description" [(ngModel)]="desc" placeholder="Description" name="description" rows="3"></textarea>
                         </div>
                         <div class="col-md-4 mb-4">
@@ -48,14 +48,14 @@
                             <button type="submit" class="btn btn-primary ms-2" *ngIf="edited" (click)="updateProd()">Update</button>
                           </div>
                         </div>
-                        
+
                         <!-- <div class="col-md-12 mb-3 mt-3" *ngIf="!edited">
                           <button type="submit" class="btn btn-primary mb-3" (click)="addProduct()">Submit</button>
                         </div>
                         <div class="col-md-12 mb-3 mt-3" *ngIf="edited">
                           <button type="submit" class="btn btn-primary mb-3" (click)="updateProd()">Update</button>
                         </div> -->
-                                   
+
 
                       </div>
                  </form>
@@ -69,7 +69,7 @@
                 <input type="text" class="form-control" placeholder=" Search by Product Name or Category" [(ngModel)]="searchQuery" (input)="searchProducts()">
               <button class="btn btn-primary search-button ml-2 mr-3">Search</button>
               </div>
-          
+
               <div class="row overflow-auto" style="max-height: 400px;">
             <table class="table table-striped">
               <thead>
@@ -108,6 +108,6 @@
 </div>
 
 
-
+</div>
 
 

@@ -34,11 +34,11 @@ export class AddProductComponent implements OnInit {
   stock: any;
   image: any;
   productUploadId: any;
-  
- 
- 
 
-  
+
+
+
+
 
   constructor(
     private router: Router,
@@ -83,7 +83,7 @@ export class AddProductComponent implements OnInit {
         return b + c * t * t;
       }
     };
-  
+
     this.pageScrollService.scroll(config);
   }
 
@@ -119,7 +119,7 @@ export class AddProductComponent implements OnInit {
 
   //         let result: { [key: string]: any } = v;
   //           this.upload=result['response'].uploadDocId;
-            
+
   //           if(result["status"]==200){
   //             Swal.fire({
   //               icon: 'success',
@@ -127,13 +127,13 @@ export class AddProductComponent implements OnInit {
   //               text: 'Image Uploaded Successfully'
   //             });
   //           }else{
-              
+
   //             Swal.fire({
   //               icon: 'error',
   //               title: 'Error',
   //               text: 'Failed to Upload Image. Please try again later.'
   //             });
-               
+
   //           }
 
 
@@ -160,7 +160,7 @@ export class AddProductComponent implements OnInit {
 //     categoryId:this.category,
 //     uploadId:this.upload,
 //     availableStock:Number(this.stock),
-    
+
 //   };
 //   // formData.append('json_data', JSON.stringify(jsonData));
 //   // debugger;
@@ -176,7 +176,7 @@ export class AddProductComponent implements OnInit {
 //         });
 
 //         this.getAllProduct();
-        
+
 
 //         this.name = '';
 //         this.desc = '';
@@ -283,21 +283,21 @@ deleteProduct(i: number, productId: any) {
 
 
 id:any;
-editProduct(product: any,productId:any) {   
-    this.edited=true;   
+editProduct(product: any,productId:any) {
+    this.edited=true;
     this.name=product.productName;
     this.desc=product.productDescription;
     this.aPrice=product.productActualPrice;
     this.dPrice=product.productDiscountedPrice;
-    this.category=product.categoryId;
+    this.category=product.category.id;
     this.id=productId;
     this.image=product.imageUrl;
     this.productUploadId=product.uploadId;
     this.stock=product.availableStock;
 }
 
-    
-  
+
+
 //   updateProd(){
 
 //     const data = {
@@ -310,9 +310,9 @@ editProduct(product: any,productId:any) {
 //       uploadId:this.upload,
 //       categoryId:this.category,
 //       availableStock:this.stock
-      
+
 //     };
-//     console.log(data);  
+//     console.log(data);
 //   ///Fetch product details by productId
 //   this.apiService.postApiWithToken(this.cons.api.updateProduct,data).subscribe(
 //     (response: any) => {
@@ -325,7 +325,7 @@ editProduct(product: any,productId:any) {
 //       });
 //       this.getAllProduct();
 
-       
+
 //      },
 //     (error: any) => {
 //       Swal.fire({
@@ -352,13 +352,13 @@ searchProducts() {
 }
 
 // new optimisation code for add product and update product .
-// new method  for add product 
+// new method  for add product
 
 addProduct() {
   this.edited = false;
-  
+
   const file: File = this.invoiceFileInput.nativeElement.files[0];
-  
+
   // Check if a file is uploaded
   if (file) {
     const formData = new FormData();
@@ -447,7 +447,8 @@ addProductWithImage() {
   });
 }
 
-// new function for upadate product 
+// new function for upadate product
+  category1: any;
 
 updateProd() {
   debugger;
@@ -529,7 +530,7 @@ updateProduct(uploadId: any) {
         this.dPrice = null;
         this.category = null;
         this.stock = '';
-        
+
         // Reset file input
         this.invoiceFileInput.nativeElement.value = '';
       this.getAllProduct();
@@ -553,5 +554,5 @@ updateProduct(uploadId: any) {
 
 }
 
-  
+
 
