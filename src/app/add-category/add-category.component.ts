@@ -31,7 +31,7 @@ searchQuery: any;
   }];
   catType: any;
   filteredProducts: any;
-edited: any;
+  edited: any;
   type: any;
   id: any;
   isEdit: boolean=false;
@@ -45,77 +45,79 @@ edited: any;
   ngOnInit(): void {
     this.getcategories();
   }
-  upload() {
-    debugger;
-    const file: File = this.invoiceFileInput.nativeElement.files[0];
-    const formData = new FormData();
-    formData.append('file', file);
-    this.apiService.postApiWithToken(this.cons.api.upload, formData).subscribe({
-      next: (v: object) => {
 
-        let result: { [key: string]: any } = v;
-        this.upload=result['response'].uploadDocId;
-        if(result["status"]==200){
-          Swal.fire({
-            icon: 'success',
-            title: 'Success',
-            text: 'Image Uploaded Successfully'
-          });
-        }else{
-          Swal.fire({
-            icon: 'error',
-            title: 'Error',
-            text: 'Failed to Upload Image. Please try again later.'
-          });
-        }
-      },
-      error: (e) => {
-        console.error(e);
-      },
-      complete: () => console.log(),
-    });
-  }
 
-  addCategory() {
-    //const file: File = this.invoiceFileInput.nativeElement;
-    // console.log(file);
-    const formData = new FormData();
-    //formData.append('imageFiles', file);
-    const jsonData = {
-      name: this.name,
-      description: this.desc,
-      type: this.catType ,
-      uploadId:this.upload
-    };
+  // upload() {
+  //   debugger;
+  //   const file: File = this.invoiceFileInput.nativeElement.files[0];
+  //   const formData = new FormData();
+  //   formData.append('file', file);
+  //   this.apiService.postApiWithToken(this.cons.api.upload, formData).subscribe({
+  //     next: (v: object) => {
 
-    this.apiService.postApiWithToken(this.cons.api.addCategory, jsonData).subscribe({
-      next: (v: object) => {
-        let result: { [key: string]: any } = v;
-        if (result['message'] == 'success') {
-          Swal.fire({
-            icon: 'success',
-            title: 'Success',
-            text: ' Catagory  Added Successfully'
-          });
-          this.getcategories();
-          this.name = '';
-          this.desc = '';
-        } else {
-          Swal.fire({
-            icon: 'error',
-            title: 'Error',
-            text: 'Failed to Add Category. Please try again later.'
-          });
+  //       let result: { [key: string]: any } = v;
+  //       this.upload=result['response'].uploadDocId;
+  //       if(result["status"]==200){
+  //         Swal.fire({
+  //           icon: 'success',
+  //           title: 'Success',
+  //           text: 'Image Uploaded Successfully'
+  //         });
+  //       }else{
+  //         Swal.fire({
+  //           icon: 'error',
+  //           title: 'Error',
+  //           text: 'Failed to Upload Image. Please try again later.'
+  //         });
+  //       }
+  //     },
+  //     error: (e) => {
+  //       console.error(e);
+  //     },
+  //     complete: () => console.log(),
+  //   });
+  // }
 
-        }
-      },
-      error: (e) => {
+  // addCategory() {
+  //   //const file: File = this.invoiceFileInput.nativeElement;
+  //   // console.log(file);
+  //   const formData = new FormData();
+  //   //formData.append('imageFiles', file);
+  //   const jsonData = {
+  //     name: this.name,
+  //     description: this.desc,
+  //     type: this.catType ,
+  //     uploadId:this.upload
+  //   };
 
-        console.error(e);
-      },
-      complete: () => console.log(),
-    });
-  }
+  //   this.apiService.postApiWithToken(this.cons.api.addCategory, jsonData).subscribe({
+  //     next: (v: object) => {
+  //       let result: { [key: string]: any } = v;
+  //       if (result['message'] == 'success') {
+  //         Swal.fire({
+  //           icon: 'success',
+  //           title: 'Success',
+  //           text: ' Catagory  Added Successfully'
+  //         });
+  //         this.getcategories();
+  //         this.name = '';
+  //         this.desc = '';
+  //       } else {
+  //         Swal.fire({
+  //           icon: 'error',
+  //           title: 'Error',
+  //           text: 'Failed to Add Category. Please try again later.'
+  //         });
+
+  //       }
+  //     },
+  //     error: (e) => {
+
+  //       console.error(e);
+  //     },
+  //     complete: () => console.log(),
+  //   });
+  // }
 
   getcategories(){
         this.apiService.getApiWithToken(this.cons.api.getAllCategories).subscribe(
@@ -147,54 +149,61 @@ edited: any;
 
   editCategory(category: any,categoryId:any) {
     this.id=categoryId;
-    this.name=category.name;
+     this.name=category.name;
+    const matchingType = this.types.find(type => type.id === category.type);
+  if (matchingType) {
+    this.catType = matchingType.id;
+  } else {
+    // If no matching type is found, set catType to null or a default value
+    this.catType = null;
+  }
     this.desc =category.description;
     this.uploadId=category.uploadId;
-    this.type=category.type;
+    // this.type=category.type;
     this.isEdit = true;
         
   }
 
-  updateCategory(){
-     debugger;
-    const data = {
-      id:this.id,
-      name: this.name,
-      description: this.desc,
-      type: this.catType ,
-      uploadId:this.upload
+//   updateCategory(){
+//      debugger;
+//     const data = {
+//       id:this.id,
+//       name: this.name,
+//       description: this.desc,
+//       type: this.catType ,
+//       uploadId:this.upload
       
-    };
-    console.log(data);  
-  ///Fetch product details by productId
-  this.apiService.updateApiWithTokenPatch(this.cons.api.updateCategory ,data).subscribe(
-    (response: any) => {
-      let productDetails: any = response;
-      this.isEdit = false;
-      this.id='',
-      this.name='',
-      this.desc='',
-      this.catType='' ,
-      Swal.fire({
-        icon: 'success',
-        title: 'Success',
-        text: ' Category Updated Successfully'
-      });
+//     };
+//     console.log(data);  
+//   ///Fetch product details by productId
+//   this.apiService.updateApiWithTokenPatch(this.cons.api.updateCategory ,data).subscribe(
+//     (response: any) => {
+//       let productDetails: any = response;
+//       this.isEdit = false;
+//       this.id='',
+//       this.name='',
+//       this.desc='',
+//       this.catType='' ,
+//       Swal.fire({
+//         icon: 'success',
+//         title: 'Success',
+//         text: ' Category Updated Successfully'
+//       });
       
-      this.getcategories();
+//       this.getcategories();
 
        
-     },
-    (error: any) => {
-      Swal.fire({
-        icon: 'error',
-        title: 'Error',
-        text: 'Category Not  Updated , Something Went Wrong '
-      });
-      console.error('Error fetching product details:', error);
-    }
-  );
-}
+//      },
+//     (error: any) => {
+//       Swal.fire({
+//         icon: 'error',
+//         title: 'Error',
+//         text: 'Category Not  Updated , Something Went Wrong '
+//       });
+//       console.error('Error fetching product details:', error);
+//     }
+//   );
+// }
 
 // deleteCategory(i: number, productId: any) {
 //   debugger;
@@ -250,6 +259,166 @@ autoSearch() {
     );
   }
 }
+
+
+// new optimised code...
+addCategory() {
+  const file: File = this.invoiceFileInput.nativeElement.files[0];
+  if (!file) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: 'Please select an image to upload.'
+    });
+    return;
+  }
+
+  const formData = new FormData();
+  formData.append('file', file);
+
+  this.apiService.postApiWithToken(this.cons.api.upload, formData).subscribe({
+    next: (v: object) => {
+      let result: { [key: string]: any } = v;
+      this.uploadId = result['response'].uploadDocId;
+      if (result["status"] == 200) {
+        const jsonData = {
+          name: this.name,
+          description: this.desc,
+          type: this.catType,
+          uploadId: this.uploadId
+        };
+
+        this.apiService.postApiWithToken(this.cons.api.addCategory, jsonData).subscribe({
+          next: (v: object) => {
+            let result: { [key: string]: any } = v;
+            if (result['message'] == 'success') {
+              Swal.fire({
+                icon: 'success',
+                title: 'Success',
+                text: ' Category Added Successfully'
+              });
+              this.getcategories();
+              this.name = '';
+              this.desc = '';
+              this.uploadId = ''; // Reset uploadId after successful addition
+              this.invoiceFileInput.nativeElement.value = ''; 
+            } else {
+              Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Failed to Add Category. Please try again later.'
+              });
+            }
+          },
+          error: (e) => {
+            console.error(e);
+          },
+          complete: () => console.log(),
+        });
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Failed to Upload Image. Please try again later.'
+        });
+      }
+    },
+    error: (e) => {
+      console.error(e);
+    },
+    complete: () => console.log(),
+  });
+}
+
+updateCategory() {
+  const file: File = this.invoiceFileInput.nativeElement.files[0];
+  if (file) {
+    // If a new image is uploaded, first upload the image
+    this.upload((uploadId: any) => {
+      // Once the upload is done, update the category with the new uploadId
+      this.updateCategoryWithImage(uploadId);
+    });
+  } else {
+    // If no new image is uploaded, update the category without changing the image
+    this.updateCategoryWithImage(this.uploadId); // Pass the existing uploadId
+  }
+}
+
+upload(callback: (uploadId: any) => void) {
+  const file: File = this.invoiceFileInput.nativeElement.files[0];
+  const formData = new FormData();
+  formData.append('file', file);
+  this.apiService.postApiWithToken(this.cons.api.upload, formData).subscribe({
+    next: (v: object) => {
+      let result: { [key: string]: any } = v;
+      const uploadId = result['response'].uploadDocId;
+
+      if (result["status"] == 200) {
+        Swal.fire({
+          icon: 'success',
+          title: 'Success',
+          text: 'Image Uploaded Successfully'
+        });
+        // Call the callback function with the new uploadId
+        callback(uploadId);
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Failed to Upload Image. Please try again later.'
+        });
+      }
+    },
+    error: (e) => {
+      console.error(e);
+    },
+    complete: () => console.log(),
+  });
+}
+
+updateCategoryWithImage(uploadId: any) {
+  // Update category with the new or existing uploadId
+  const data = {
+    id: this.id,
+    name: this.name,
+    description: this.desc,
+    type: this.catType,
+    uploadId: uploadId, // Include the new or existing uploadId
+  };
+
+  this.apiService.updateApiWithTokenPatch(this.cons.api.updateCategory, data).subscribe(
+    (response: any) => {
+      let categoryDetails: any = response;
+      this.isEdit = false;
+      Swal.fire({
+        icon: 'success',
+        title: 'Success',
+        text: 'Category Updated Successfully'
+      });
+      
+      // Reset input values
+      this.id = '';
+      this.name = '';
+      this.desc = '';
+      this.catType = '';
+
+      // Reset file input
+      this.invoiceFileInput.nativeElement.value = '';
+
+      // Refresh category list
+      this.getcategories();
+    },
+    (error: any) => {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Category Not Updated, Something Went Wrong.'
+      });
+      console.error('Error fetching category details:', error);
+    }
+  );
+}
+
 
 
 

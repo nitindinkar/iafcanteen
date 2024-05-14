@@ -66,7 +66,7 @@
               <table class="table table-striped">
                 <thead>
                   <tr >
-                    <th scope="col"><input type="checkbox" name="selectAll" id="selectAll1"></th>
+                    <!-- <th scope="col"><input type="checkbox" name="selectAll" id="selectAll1"></th> -->
                     <th scope="col">Images</th>
                     <th scope="col">Name</th>
                     <th scope="col">Category</th>
@@ -78,7 +78,7 @@
                 </thead>
                 <tbody>
                   <tr *ngFor="let product of filteredProducts;let i = index">
-                    <th scope="row"><input type="checkbox" name="selectAll" id="selectAll" [checked]="isSelected(product)"(change)="toggleSelectProduct($event, product)" ></th>
+                    <!-- <th scope="row"><input type="checkbox" name="selectAll" id="selectAll" [checked]="isSelected(product)"(change)="toggleSelectProduct($event, product)" ></th> -->
                     <td><img  [src]="product.imageUrl" class="inventory-image"></td>
                     <td>{{ product.productName }}</td>
                     <td>{{ product.category.name }}</td>
@@ -95,7 +95,9 @@
                       </td>
 
                     <td>₹{{ product.productDiscountedPrice }} <span class="mrp">(₹{{ product.productActualPrice }})</span></td>
-                    <td><a data-toggle="modal"  data-target="#exampleModal" title="Quick View" href="#"><button mat-raised-button color="primary" (click)="setCurrent(product,i)"><i class="fa fa-plus" style="font-size:24px"></i></button></a></td>
+                    <td class="text-center">
+                      <a data-toggle="modal"  data-target="#exampleModal" title="Quick View" href="#"><button mat-raised-button color="primary" (click)="setCurrent(product,i)">
+                      <i class="fa fa-plus" style="font-size:24px"></i></button></a></td>
 
                   </tr>
 

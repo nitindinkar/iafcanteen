@@ -283,12 +283,8 @@ deleteProduct(i: number, productId: any) {
 
 
 id:any;
-editProduct(product: any,productId:any) {
-    debugger;
-    console.log(productId);
-
+editProduct(product: any,productId:any) {   
     this.edited=true;   
-
     this.name=product.productName;
     this.desc=product.productDescription;
     this.aPrice=product.productActualPrice;
@@ -298,8 +294,9 @@ editProduct(product: any,productId:any) {
     this.image=product.imageUrl;
     this.productUploadId=product.uploadId;
     this.stock=product.availableStock;
-     
-  }
+}
+
+    
   
 //   updateProd(){
 

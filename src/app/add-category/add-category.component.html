@@ -35,9 +35,9 @@
                         </div>
                         <div class="col justify-content-end mt-3">
                           <div class="col-md-12 mt-4 d-flex justify-content-between">
-                            <button type="submit" class="btn btn-primary ms-2 " *ngIf="!edited"  (click)="upload()">Upload File</button>
-                            <button type="submit" class="btn btn-primary ms-2 " *ngIf="!edited" (click)="addCategory()">Submit</button>
-                            <button type="submit" class="btn btn-primary ms-2" *ngIf="edited" (click)="updateCategory()">Update</button>
+                            <!-- <button type="submit" class="btn btn-primary ms-2 " *ngIf="!edited"  (click)="upload()">Upload File</button> -->
+                            <button type="submit" class="btn btn-primary ms-2 " *ngIf="!isEdit" (click)="addCategory()">Submit</button>
+                            <button type="submit" class="btn btn-primary ms-2" *ngIf="isEdit" (click)="updateCategory()">Update</button>
                           </div>
                         </div>
                         <!-- <div class="col-md-12 mb-3 mt-3" *ngIf="!isEdit">
