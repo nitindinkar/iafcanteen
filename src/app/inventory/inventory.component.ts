@@ -9,7 +9,6 @@ import { Router } from '@angular/router';
 import { SharedService } from '../services/shared/shared.service';
 import Swal from 'sweetalert2';
 import { MatDialog } from '@angular/material/dialog';
-import { AddStockDialogComponent } from '../add-stock-dialog/add-stock-dialog.component';
 
 
 @Component({
@@ -232,25 +231,6 @@ updateStock(productIdUpdate:number, newStockValue: number) {
 
 
 }
-
-
-openAddStockDialog(product: any): void {
-  debugger;
-  const dialogRef = this.dialog.open(AddStockDialogComponent, {
-    width: '300px',
-    data: { product: product }
-  });
-
-  dialogRef.afterClosed().subscribe(result => {
-    if (result !== undefined) {
-      // Perform the stock update operation here using the result
-      this.updateStock(product.productId, product.availableStock + result);
-    }
-  });
-
-
-}
-
   // Function to confirm adding stock
   confirmAddStock(): void {
     debugger;
