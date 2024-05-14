@@ -42,6 +42,8 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
 import {ProductFilteredComponent} from "./product-filtered/product-filtered.component";
 import { SuperAdminNotificationComponent } from './super-admin-notification/super-admin-notification.component';
 import { AdminMyAccountComponent } from './admin-my-account/admin-my-account.component';
+import { NgxPageScrollCoreModule } from 'ngx-page-scroll-core';
+import { AddStockDialogComponent } from './add-stock-dialog/add-stock-dialog.component';
 
 
 
@@ -71,15 +73,9 @@ import { AdminMyAccountComponent } from './admin-my-account/admin-my-account.com
     ManageStoreComponent,
     SuperadminDashboardComponent,
     AdminDashboardComponent,
-
-
-
-
-
-
-
     SuperAdminNotificationComponent,
     AdminMyAccountComponent,
+    AddStockDialogComponent,
 
 
 
@@ -88,6 +84,8 @@ import { AdminMyAccountComponent } from './admin-my-account/admin-my-account.com
 
 
   ],
+
+  
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -102,10 +100,12 @@ import { AdminMyAccountComponent } from './admin-my-account/admin-my-account.com
     MatInputModule,
     MatFormFieldModule,
     MatSlideToggleModule,
+    NgxPageScrollCoreModule,
 
 
   ],
-  providers: [ SharedService,ProductComponent,HeaderComponent,
+  
+  providers: [ SharedService,ProductComponent,HeaderComponent,InventoryComponent,
     provideAnimationsAsync()
   ],
   bootstrap: [AppComponent]

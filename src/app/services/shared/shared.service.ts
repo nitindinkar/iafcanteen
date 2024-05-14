@@ -31,6 +31,7 @@ export class SharedService {
   cartList=[];
   
   alternateNumber: any;
+  filteredProducts: any;
  
   
   constructor(

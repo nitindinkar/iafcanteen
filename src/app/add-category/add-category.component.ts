@@ -237,6 +237,21 @@ edited: any;
 // }
 
 
+autoSearch() {
+  if (!this.searchQuery) {
+    // If search query is empty, reset filteredProducts to all categories
+    this.filteredProducts = this.categories;
+  } else {
+    // Filter categories based on search query
+    this.filteredProducts = this.categories.filter((category: any) =>
+      category.name.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+      category.type.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+      category.description.toLowerCase().includes(this.searchQuery.toLowerCase())
+    );
+  }
+}
+
+
 
 }
 

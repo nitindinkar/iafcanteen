@@ -4,6 +4,9 @@ import { ApiCallingServiceService } from '../services/api-calling/api-calling-se
 import { HttpClient } from '@angular/common/http';
 import { ConstantsService } from '../services/constants/constants.service';
 import Swal from 'sweetalert2';
+import { NgxPageScrollCoreModule, PageScrollService } from 'ngx-page-scroll-core';
+
+
 
 @Component({
   selector: 'app-add-product',
@@ -26,20 +29,62 @@ export class AddProductComponent implements OnInit {
   private cardType: string='';
   products: any;
   filteredProducts: any;
-searchQuery: any;
+  searchQuery: any;
   edited: boolean=false;
   stock: any;
   image: any;
+  productUploadId: any;
+  
+ 
+ 
+
+  
 
   constructor(
     private router: Router,
     private http: HttpClient,
     private apiService: ApiCallingServiceService,
     private cons: ConstantsService,
-  ) {}
+    private pageScrollService: PageScrollService,
+    ) {}
     ngOnInit(): void {
         this.getAllCategories();
         this.getAllProduct();
+  }
+
+  // scrollToTop() {
+  //   const config = {
+  //     document: document,
+  //     scrollTarget: 'body',
+  //     scrollViews: [document.documentElement],
+  //     scrollOffset: 0,
+  //     duration: 50, // Set the duration to scroll (in milliseconds), adjust as needed
+  //     easingLogic: (t: number, b: number, c: number, d: number): number => {
+  //       // Custom easing function, you can adjust this for faster or slower scrolling
+  //       t /= d;
+  //       return b + c * t * t;
+  //     }
+  //   }
+  //   this.pageScrollService.scroll(config);
+  // }
+
+  scrollToTop() {
+    debugger;
+    const offset = 500; // Adjust this value to change the scroll offset
+    const config = {
+      document: document,
+      scrollTarget: 'body',
+      scrollViews: [document.documentElement],
+      scrollOffset: offset, // Set the scroll offset to the desired value
+      duration: 50, // Adjust the duration for smoother scrolling
+      easingLogic: (t: number, b: number, c: number, d: number): number => {
+        // Custom easing function, you can adjust this for faster or slower scrolling
+        t /= d;
+        return b + c * t * t;
+      }
+    };
+  
+    this.pageScrollService.scroll(config);
   }
 
 
@@ -64,93 +109,96 @@ searchQuery: any;
 
 
 
-  upload() {
-    debugger;
-      const file: File = this.invoiceFileInput.nativeElement.files[0];
-      const formData = new FormData();
-      formData.append('file', file);
-      this.apiService.postApiWithToken(this.cons.api.upload, formData).subscribe({
-        next: (v: object) => {
+  // upload() {
+  //   debugger;
+  //     const file: File = this.invoiceFileInput.nativeElement.files[0];
+  //     const formData = new FormData();
+  //     formData.append('file', file);
+  //     this.apiService.postApiWithToken(this.cons.api.upload, formData).subscribe({
+  //       next: (v: object) => {
 
-          let result: { [key: string]: any } = v;
-            this.upload=result['response'].uploadDocId;
-            if(result["status"]==200){
-              Swal.fire({
-                icon: 'success',
-                title: 'Success',
-                text: 'Image Uploaded Successfully'
-              });
-            }else{
-              Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: 'Failed to Upload Image. Please try again later.'
-              });
-            }
+  //         let result: { [key: string]: any } = v;
+  //           this.upload=result['response'].uploadDocId;
+            
+  //           if(result["status"]==200){
+  //             Swal.fire({
+  //               icon: 'success',
+  //               title: 'Success',
+  //               text: 'Image Uploaded Successfully'
+  //             });
+  //           }else{
+              
+  //             Swal.fire({
+  //               icon: 'error',
+  //               title: 'Error',
+  //               text: 'Failed to Upload Image. Please try again later.'
+  //             });
+               
+  //           }
 
 
-        },
-        error: (e) => {
-          console.error(e);
-        },
-        complete: () => console.log(),
-      });
-  }
+  //       },
+  //       error: (e) => {
+  //         console.error(e);
+  //       },
+  //       complete: () => console.log(),
+  //     });
+  // }
 
-addProduct() {
-  this.edited=false;
-  //const file: File = this.invoiceFileInput.nativeElement;
-  // console.log(file);
-  const formData = new FormData();
-  debugger;
-  //formData.append('imageFiles', file);
-  const jsonData = {
-    productName: this.name,
-    productDescription: this.desc,
-    productDiscountedPrice: this.dPrice,
-    productActualPrice: this.aPrice,
-    categoryId:this.category,
-    uploadId:this.upload,
-    availableStock:Number(this.stock),
+// addProduct() {
+//   this.edited=false;
+//   //const file: File = this.invoiceFileInput.nativeElement;
+//   // console.log(file);
+//   const formData = new FormData();
+//   debugger;
+//   //formData.append('imageFiles', file);
+//   const jsonData = {
+//     productName: this.name,
+//     productDescription: this.desc,
+//     productDiscountedPrice: this.dPrice,
+//     productActualPrice: this.aPrice,
+//     categoryId:this.category,
+//     uploadId:this.upload,
+//     availableStock:Number(this.stock),
     
-  };
-  // formData.append('json_data', JSON.stringify(jsonData));
-  // debugger;
+//   };
+//   // formData.append('json_data', JSON.stringify(jsonData));
+//   // debugger;
 
-  this.apiService.postApiWithToken(this.cons.api.addProduct, jsonData).subscribe({
-    next: (v: object) => {
-      let result: { [key: string]: any } = v;
-      if (result['message'] == 'success') {
-        Swal.fire({
-          icon: 'success',
-          title: 'Success',
-          text: 'Product added Successfully'
-        });
+//   this.apiService.postApiWithToken(this.cons.api.addProduct, jsonData).subscribe({
+//     next: (v: object) => {
+//       let result: { [key: string]: any } = v;
+//       if (result['message'] == 'success') {
+//         Swal.fire({
+//           icon: 'success',
+//           title: 'Success',
+//           text: 'Product added Successfully'
+//         });
 
-        this.getAllProduct();
+//         this.getAllProduct();
         
 
-        this.name = '';
-        this.desc = '';
-        this.aPrice = null;
-        this.dPrice = null;
-        this.category = null;
-        this.stock='';
+//         this.name = '';
+//         this.desc = '';
+//         this.aPrice = null;
+//         this.dPrice = null;
+//         this.category = null;
+//         this.stock='';
 
-      }
-    },
-    error: (e) => {
+//       }
+//     },
+//     error: (e) => {
 
-      console.error(e);
-      Swal.fire({
-        icon: 'error',
-        title: 'Error',
-        text: 'Failed to add product. Please try again later.'
-      });
-    },
-    complete: () => console.log(),
-  });
-}
+//       console.error(e);
+//       Swal.fire({
+//         icon: 'error',
+//         title: 'Error',
+//         text: 'Failed to add product. Please try again later.'
+//       });
+//     },
+//     complete: () => console.log(),
+//   });
+// }
 
 
 public getAllProduct() {
@@ -219,19 +267,21 @@ deleteProduct(i: number, productId: any) {
 }
 
 // Inside your component class
-searchProducts() {
-  debugger;
-  if (!this.searchQuery) {
-    // If search query is empty, reset filteredProducts to all products
-    this.filteredProducts = this.products;
-  } else {
-    // Filter products based on search query
-    this.filteredProducts = this.products.filter((product: { productName: string; category: { name: string; }; }) =>
-      product.productName.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-      product.category.name.toLowerCase().includes(this.searchQuery.toLowerCase())
-    );
-  }
-}
+// searchProducts() {
+//   debugger;
+//   if (!this.searchQuery) {
+//     // If search query is empty, reset filteredProducts to all products
+//     this.filteredProducts = this.products;
+//   } else {
+//     // Filter products based on search query
+//     this.filteredProducts = this.products.filter((product: { productName: string; category: { name: string; }; }) =>
+//       product.productName.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+//       product.category.name.toLowerCase().includes(this.searchQuery.toLowerCase())
+//     );
+//   }
+// }
+
+
 id:any;
 editProduct(product: any,productId:any) {
     debugger;
@@ -246,37 +296,247 @@ editProduct(product: any,productId:any) {
     this.category=product.categoryId;
     this.id=productId;
     this.image=product.imageUrl;
+    this.productUploadId=product.uploadId;
+    this.stock=product.availableStock;
      
   }
   
-  updateProd(){
-    
-    const data = {
-      productId: this.id,
-      productName: this.name,
-      productDescription: this.desc,
-      productDiscountedPrice: this.dPrice,
-      productActualPrice: this.aPrice,
-      imageUrl:this.image,
-      uploadId:this.upload,
-      categoryId:this.category,
-      availableStock:this.stock
+//   updateProd(){
+
+//     const data = {
+//       productId: this.id,
+//       productName: this.name,
+//       productDescription: this.desc,
+//       productDiscountedPrice: this.dPrice,
+//       productActualPrice: this.aPrice,
+//       imageUrl:this.image,
+//       uploadId:this.upload,
+//       categoryId:this.category,
+//       availableStock:this.stock
       
-    };
-    console.log(data);  
-  ///Fetch product details by productId
-  this.apiService.postApiWithToken(this.cons.api.updateProduct,data).subscribe(
+//     };
+//     console.log(data);  
+//   ///Fetch product details by productId
+//   this.apiService.postApiWithToken(this.cons.api.updateProduct,data).subscribe(
+//     (response: any) => {
+//       let productDetails: any = response;
+//       this.edited=false;
+//       Swal.fire({
+//         icon: 'success',
+//         title: 'Success',
+//         text: ' Product Updated Successfully'
+//       });
+//       this.getAllProduct();
+
+       
+//      },
+//     (error: any) => {
+//       Swal.fire({
+//         icon: 'error',
+//         title: 'Error',
+//         text: 'Failed to Update product. Something Went Wrong.'
+//       });
+//       console.error('Error fetching product details:', error);
+//     }
+//   );
+// }
+
+searchProducts() {
+  if (!this.searchQuery) {
+      // If search query is empty, reset filteredProducts to all products
+      this.filteredProducts = this.products;
+  } else {
+      // Filter products based on search query
+      this.filteredProducts = this.products.filter((product: { productName: string; category: { name: string; }; }) =>
+          product.productName.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+          product.category.name.toLowerCase().includes(this.searchQuery.toLowerCase())
+      );
+  }
+}
+
+// new optimisation code for add product and update product .
+// new method  for add product 
+
+addProduct() {
+  this.edited = false;
+  
+  const file: File = this.invoiceFileInput.nativeElement.files[0];
+  
+  // Check if a file is uploaded
+  if (file) {
+    const formData = new FormData();
+    formData.append('file', file);
+
+    this.apiService.postApiWithToken(this.cons.api.upload, formData).subscribe({
+      next: (v: object) => {
+        let result: { [key: string]: any } = v;
+        if (result["status"] == 200) {
+          // If upload is successful, proceed with adding the product
+          this.upload = result['response'].uploadDocId;
+          this.addProductWithImage(); // Call the function to add product with image
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Failed to Upload Image. Please try again later.'
+          });
+        }
+      },
+      error: (e) => {
+        console.error(e);
+      },
+      complete: () => console.log(),
+    });
+  } else {
+    // If no file is uploaded, show an error message
+    Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: 'Please upload an image.'
+    });
+  }
+}
+
+addProductWithImage() {
+  // Check if uploadId is available
+  if (!this.upload) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: 'Failed to obtain image ID. Please try again later.'
+    });
+    return; // Exit the function if uploadId is not available
+  }
+
+  // Add product with image and uploadId
+  const jsonData = {
+    productName: this.name,
+    productDescription: this.desc,
+    productDiscountedPrice: this.dPrice,
+    productActualPrice: this.aPrice,
+    categoryId: this.category,
+    uploadId: this.upload,
+    availableStock: Number(this.stock),
+  };
+
+  this.apiService.postApiWithToken(this.cons.api.addProduct, jsonData).subscribe({
+    next: (v: object) => {
+      let result: { [key: string]: any } = v;
+      if (result['message'] == 'success') {
+        Swal.fire({
+          icon: 'success',
+          title: 'Success',
+          text: 'Product added Successfully'
+        });
+        this.getAllProduct();
+
+        this.name = '';
+        this.desc = '';
+        this.aPrice = null;
+        this.dPrice = null;
+        this.category = null;
+        this.stock = '';
+      }
+    },
+    error: (e) => {
+      console.error(e);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Failed to add product. Please try again later.'
+      });
+    },
+    complete: () => console.log(),
+  });
+}
+
+// new function for upadate product 
+
+updateProd() {
+  debugger;
+  const file: File = this.invoiceFileInput.nativeElement.files[0];
+  if (file) {
+    // If a new image is uploaded, first upload the image
+    this.upload((uploadId: any) => {
+      // Once the upload is done, update the product with the new uploadId
+      this.updateProduct(uploadId);
+    });
+  } else {
+    // If no new image is uploaded, update the product without changing the image
+    this.updateProduct(this.productUploadId); // Pass the existing uploadId
+  }
+}
+
+upload(callback: (uploadId: any) => void) {
+  debugger;
+  const file: File = this.invoiceFileInput.nativeElement.files[0];
+  const formData = new FormData();
+  formData.append('file', file);
+  this.apiService.postApiWithToken(this.cons.api.upload, formData).subscribe({
+    next: (v: object) => {
+      let result: { [key: string]: any } = v;
+      const uploadId = result['response'].uploadDocId;
+
+      if (result["status"] == 200) {
+        Swal.fire({
+          icon: 'success',
+          title: 'Success',
+          text: 'Image Uploaded Successfully'
+        });
+        // Call the callback function with the new uploadId
+        callback(uploadId);
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Failed to Upload Image. Please try again later.'
+        });
+      }
+    },
+    error: (e) => {
+      console.error(e);
+    },
+    complete: () => console.log(),
+  });
+}
+
+updateProduct(uploadId: any) {
+  debugger;
+  // Update product with the new or existing uploadId
+  const data = {
+    productId: this.id,
+    productName: this.name,
+    productDescription: this.desc,
+    productDiscountedPrice: this.dPrice,
+    productActualPrice: this.aPrice,
+    imageUrl: this.image, // Preserve the existing image URL
+    uploadId: uploadId, // Include the new or existing uploadId
+    categoryId: this.category,
+    availableStock: this.stock
+  };
+  debugger;
+
+  this.apiService.postApiWithToken(this.cons.api.updateProduct, data).subscribe(
     (response: any) => {
       let productDetails: any = response;
-      this.edited=false;
+      this.edited = false;
       Swal.fire({
         icon: 'success',
         title: 'Success',
         text: ' Product Updated Successfully'
       });
-
-       
-     },
+        // Reset input values
+        this.name = '';
+        this.desc = '';
+        this.aPrice = null;
+        this.dPrice = null;
+        this.category = null;
+        this.stock = '';
+        
+        // Reset file input
+        this.invoiceFileInput.nativeElement.value = '';
+      this.getAllProduct();
+    },
     (error: any) => {
       Swal.fire({
         icon: 'error',

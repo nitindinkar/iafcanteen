@@ -20,6 +20,7 @@ export class MyAccountComponent implements OnInit{
   accountDetails: any;
   parsedLoginResponse: any;
   orderDetails: any;
+  pdfDownloadUser:any;
 
   constructor(private cons:ConstantsService,
     private apiService: ApiCallingServiceService,
@@ -139,6 +140,32 @@ export class MyAccountComponent implements OnInit{
       }
     });
   }
+
+  downloadPdfUser(orderId:any){
+    debugger;
+    this.apiService.getApiWithToken(this.cons.api.downloadPdf+"/"+orderId).subscribe(
+      (response: object) => {
+        let result: { [key: string]: any } = response;
+        this.pdfDownloadUser=result['response'][0];
+        this.downloadPdfUrl(this.pdfDownloadUser,'report.pdf');
+      },
+      (error) => {
+        console.error('Add Product failed:', error);
+      }
+    );
+    
+
+  }
+  downloadPdfUrl = (url: string, fileName: string) => {
+    // Create an anchor element
+    const link = document.createElement('a');
+    // Set the href attribute to the PDF URL
+    link.href = url;
+    // Set the download attribute to specify the file name
+    link.download = fileName;
+    // Trigger a click event on the anchor element
+    link.click();
+  };
 
   
 }

@@ -28,6 +28,8 @@ export class AdminDashboardComponent implements OnInit {
   orderCompletionPercentage: any;
   categoryCompletionPercentage: any;
   productCompletionPercentage: any;
+  cancelOrder: any;
+  deliveredOrder: any;
 
   constructor(
     private router: Router,
@@ -44,7 +46,7 @@ export class AdminDashboardComponent implements OnInit {
     this.getAllProduct();
     this.getcategories();
     this.viewCharts();
-    this.calculateCancelledOrdersPercentage();
+    
  
   }
   
@@ -68,6 +70,7 @@ public getAllProduct() {
       this.totalProduct=this.products.length;
       this.filteredProducts = this.products;
       this.calculateProductCompletionPercentage();
+      
      
       console.log(this.products);
 
@@ -97,11 +100,16 @@ getcategories(){
 }
 
 order(){
+
   this.apiService.getApiWithToken(this.cons.api.getAdminOrders).subscribe(
     (response: object) => {
       let result: { [key: string]: any } = response;
+      debugger;
       this.orderDetails=result['response'];
       this.totalOrder=this.orderDetails.length;
+    
+      this.cancelOrder = this.orderDetails.filter((order: { orderStatus: string; }) => order.orderStatus === 'CANCELLED').length;
+      this.deliveredOrder = this.orderDetails.filter((order: { orderStatus: string; }) => order.orderStatus === 'DELIVERED').length;
      
       // this.orderDetails.sort((a: { orderDate: string | number | Date; }, b: { orderDate: string | number | Date; }) => {
       //   return new Date(a.orderDate).getTime() - new Date(b.orderDate).getTime();
@@ -109,6 +117,7 @@ order(){
       this.orderDetails.reverse();
       this.filteredOrders = this.orderDetails;
       this.calculateOrderCompletionPercentage();
+      this.calculateCancelledOrdersPercentage();
       console.log(this.orderDetails);
 
      
@@ -130,9 +139,9 @@ public  async  viewCharts(){
     const ordersResponse = await this.apiService.getApiWithToken(this.cons.api.getAdminOrders).toPromise();
     
     const data = {
-      labels: ['Total Products', 'Total Catagory', 'Total Orders', 'Delivered Order','Cancel Order'],
+      labels: ['Total Products', 'Total Catagory', 'Total Orders', 'Delivered Order','Cancelled  Order'],
       datasets: [{       
-        data: [this.totalProduct, this.totalCategory, this.totalOrder, 30, 20],
+        data: [this.totalProduct, this.totalCategory, this.totalOrder, this.deliveredOrder, this.cancelOrder],
           backgroundColor: [
             '#1cc88a',
             '#4e73df',
@@ -167,9 +176,9 @@ new Chart(chartItem, config)
 
 
 const data2 = {
-  labels:['Total Products', 'Total Catagory', 'Total Orders', 'Delivered Order','Cancel Order'],
+  labels:['Total Products', 'Total Catagory', 'Total Orders', 'Delivered Order','Cancelled  Order'],
   datasets:[{
-    data: [this.totalProduct, this.totalCategory, this.totalOrder, 30, 20],
+    data: [this.totalProduct, this.totalCategory, this.totalOrder, this.deliveredOrder, this.cancelOrder],
     backgroundColor: [
       '#1cc88a',
             '#4e73df',
@@ -203,7 +212,8 @@ new Chart(chartItem2, config2)
 
 
 calculateCancelledOrdersPercentage(): void {
-  this.cancelledOrdersPercentage = (20 /100) * 100;
+  debugger;
+  this.cancelledOrdersPercentage = (this.cancelOrder /100) * 100;
 }
 calculateOrderCompletionPercentage(): void {
   this.orderCompletionPercentage = (this.totalOrder/ 100) * 100;

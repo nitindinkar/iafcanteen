@@ -12,7 +12,7 @@
                             <option>Edit</option>
                             </select>
                           </div> -->
-                          <div class="mb-3 mt-3 col-md-2 px-2">
+                          <!-- <div class="mb-3 mt-3 col-md-2 px-2">
                             <select class="form-control" id="action" (change)="handleEditAction()" >
                               <option>Action</option>
                               <option>Edit</option>
@@ -20,7 +20,7 @@
                           </div>
                           <div class="mt-3 col-md-1 px-2">
                             <button type="button" class="btn btn-primary mb-3 form-filter" (click)="handleApply()">Apply</button>
-                          </div>
+                          </div> -->
                           <!-- <div class="mt-3 col-md-1 px-2">
                             <button type="submit" class="btn btn-primary mb-3 form-filter">Apply</button>
                         </div> -->
@@ -54,14 +54,15 @@
                             </select>
                         </div>
                         
-                          <div class="mt-3 col-md-3 px-2">
-                              <button type="submit" class="btn btn-primary mb-3 form-filter" (click)="applyFilters()">Filter</button>
-                              <span> Total Products : {{productCount}}</span>
+                          <div class="mt-3 col-md-3 px-2 ">
+                              <button type="submit" class="btn btn-primary mb-3 form-filter mr-2" (click)="applyFilters()">Filter</button>
+                              <!-- <span > Total Products : {{productCount}}</span> -->
+                                <span class="font-bold" style="font-weight: bold;">Total Products : <span>{{productCount}}</span></span>
                           </div>
                           </div>
                         </form>
                 </div>
-                <div class="row overflow-auto">
+                <div class="row overflow-auto" style="max-height: 600px;">
               <table class="table table-striped">
                 <thead>
                   <tr >
@@ -72,6 +73,7 @@
                     <th scope="col">Total Stock</th>
                     <th scope="col">Stock Status</th>
                     <th scope="col">Price</th>
+                    <th scope="col">Update Stock</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -93,6 +95,7 @@
                       </td>
                     
                     <td>₹{{ product.productDiscountedPrice }} <span class="mrp">(₹{{ product.productActualPrice }})</span></td>
+                    <td><button mat-raised-button color="primary" (click)="openAddStockDialog(product)"><i class="fa fa-plus" style="font-size:24px"></i></button></td>
                   </tr>
                              
                     

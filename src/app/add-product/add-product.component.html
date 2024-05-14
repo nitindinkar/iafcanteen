@@ -3,7 +3,7 @@
       <div class="add-product">
           <h2>Manage Products</h2>
             <div class="inventory">
-              <div class="add-admin px-4 my-4">
+              <div class="add-admin px-4 my-4 ">
                 <h3 class="seconder-heading mt-4">Add Product</h3>
                  <form action="post">
                       <div class="row">
@@ -23,7 +23,7 @@
                           <label for="email" class="form-label">Actual Price </label>
                           <input type="text" class="form-control" id="Pan"  [(ngModel)]="aPrice" placeholder="Actual Price"  name="Pan">
                         </div>
-                        <div class="col-md-4 mb-3 mt-3">
+                        <div class="col-md-4  mt-3">
                           <label for="contact" class="form-label">Discounted Price</label>
                           <input type="text" class="form-control" id="Discounted"  [(ngModel)]="dPrice" placeholder="Discounted Price" name="Discounted">
                         </div>
@@ -31,34 +31,46 @@
                           <label for="contact" class="form-label">Stock</label>
                           <input type="text" class="form-control" id="stock"  [(ngModel)]="stock" placeholder="Number of Products" name="Stock">
                         </div>
-                        <div class="col-md-4 mb-3 mt-3">
+                        <div class="col-md-4 mb-2 mt-3">
                           <label for="service" class="form-label">Description</label>
                           <textarea class="form-control custom-textarea" id="description" [(ngModel)]="desc" placeholder="Description" name="description" rows="3"></textarea>
                         </div>
-                        <div class="col-md-4 mb-3 mt-3">
+                        <div class="col-md-4 mb-4">
                           <label for="name" class="form-label"> Upload Images (550 x 750px in less than 500kb and jpg/jpeg format only)</label>
                           <input type="file" class="form-control" id="Date" placeholder="Uploadn Images" name="image" accept="image/*" #invoiceFileInput>
                           <!--<input type="file" id="image" name="image" accept="image/*" #invoiceFileInput>-->
-                          <button type="submit" class="btn btn-primary mb-3" (click)="upload()" >Upload File</button>
+                          <!-- <button type="submit" class="btn btn-primary mb-2 mt-2" (click)="upload()" >Upload File</button> -->
                         </div>
-                        <div class="col-md-12 mb-3 mt-3" *ngIf="!edited">
+                        <div class="col justify-content-end mt-3">
+                          <div class="col-md-12 mt-4 d-flex justify-content-between">
+                            <!-- <button type="submit" class="btn btn-primary ms-2 " *ngIf="!edited"  (click)="upload()">Upload File</button> -->
+                            <button type="submit" class="btn btn-primary ms-2 " *ngIf="!edited" (click)="addProduct()">Submit</button>
+                            <button type="submit" class="btn btn-primary ms-2" *ngIf="edited" (click)="updateProd()">Update</button>
+                          </div>
+                        </div>
+                        
+                        <!-- <div class="col-md-12 mb-3 mt-3" *ngIf="!edited">
                           <button type="submit" class="btn btn-primary mb-3" (click)="addProduct()">Submit</button>
                         </div>
                         <div class="col-md-12 mb-3 mt-3" *ngIf="edited">
                           <button type="submit" class="btn btn-primary mb-3" (click)="updateProd()">Update</button>
-                        </div>
-                        
-                       
+                        </div> -->
+                                   
 
                       </div>
                  </form>
               </div>
-            <div class="add-admin px-4 my-4">
-              <div class="search-bar mb-3 mt-3 d-flex justify-content-between">
+            <div class="add-admin px-4 my-4" >
+              <!-- <div class="search-bar mb-3 mt-3 d-flex justify-content-between">
                 <input type="text" class="form-control" placeholder="Search by Order ID or Customer Name" [(ngModel)]="searchQuery">
                  <button class="btn btn-primary search-button" (click)="searchProducts()">Search</button>
-             </div>
-              <div class="row overflow-auto">
+             </div> -->
+              <div class="search-bar mb-3 mt-3 d-flex justify-content-between outline-none">
+                <input type="text" class="form-control" placeholder=" Search by Product Name or Category" [(ngModel)]="searchQuery" (input)="searchProducts()">
+              <button class="btn btn-primary search-button ml-2 mr-3">Search</button>
+              </div>
+          
+              <div class="row overflow-auto" style="max-height: 400px;">
             <table class="table table-striped">
               <thead>
                 <tr>
@@ -79,7 +91,8 @@
                   <td>₹{{ product.productActualPrice}} </td>
                   <td>₹{{ product.productDiscountedPrice }} </td>
                   <td>
-                      <button type="submit" class="btn btn-secondary"  (click)="editProduct(product,product.productId)"  ><i class="fa fa-edit"></i></button>
+                      <button type="submit" class="btn btn-secondary" (click)="editProduct(product,product.productId);scrollToTop()">
+                        <i class="fa fa-edit"></i></button>
                       <button type="submit" class="btn btn-secondary ml-2"  (click)="deleteProduct(i,product.productId)"  ><i class="fa fa-trash"></i></button>
                   </td>
               </tr>
@@ -93,3 +106,8 @@
   </div>
 
 </div>
+
+
+
+
+

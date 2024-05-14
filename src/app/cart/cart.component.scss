@@ -21,3 +21,13 @@
 h5{
     font-weight: 500 !important;
 }
+.inventory-image {
+    width: 50px; /* Adjust the width as needed */
+    height: auto; /* Maintain aspect ratio */
+    display: block; /* Ensure the image is treated as a block element */
+    margin: 0 auto; /* Center the image horizontally */
+}
+.product-name {
+    margin-left: 14px; /* Adjust the margin as needed */
+    margin-right: 10px;
+}

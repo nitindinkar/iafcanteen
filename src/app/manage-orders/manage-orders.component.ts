@@ -11,6 +11,7 @@ import { HttpClient } from '@angular/common/http';
 
 
 
+
 @Component({
   selector: 'app-manage-orders',
   templateUrl: './manage-orders.component.html',
@@ -128,6 +129,19 @@ export class ManageOrdersComponent {
  
 
   adminOrderDelete(i: number, orderId: number) {
+
+    const order = this.orderDetails.find((order: { id: number; status: string; }) => order.id === orderId);
+
+    // Check if the order exoists and if its status is 'Delivered'
+  if (order && order.orderStatus === 'DELIVERED') {
+    // If the order is delivered, display an error message and return
+    Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: 'This order has already been delivered and cannot be cancelled.',
+    });
+    return;
+  }
     debugger;
     console.log("this is order is of admn"+orderId);
     // Show a confirmation dialog using SweetAlert
@@ -217,6 +231,46 @@ export class ManageOrdersComponent {
       // Trigger a click event on the anchor element
       link.click();
     };
+
+    delivered(i: number, deliverOrderId:number){
+      debugger;
+       // Check if the order status is 'Cancelled'
+         const order = this.orderDetails.find((order: { id: number; }) => order.id === deliverOrderId);
+          if (order && order.orderStatus=== 'CANCELLED') {
+          // If the order is cancelled, display an error message
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: 'This order has already been cancelled and cannot be marked as delivered.',
+            });
+            return; // Exit the method
+            }
+      
+
+      this.apiService.getApiWithToken(this.cons.api.markDelivered+"/"+deliverOrderId).subscribe(
+        (response: object) => {
+          let result: { [key: string]: any } = response;
+        
+            Swal.fire({
+              icon: 'success',
+              title: 'Order Delivered',
+              text: 'The order has been marked as delivered successfully.',
+            });
+
+            this.order();
+                   
+        },
+        (error) => {
+          console.error('Add Product failed:', error);
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Failed to mark order as delivered. Please try again later.',
+          });
+        }
+      );
+
+    }
   
     
     }

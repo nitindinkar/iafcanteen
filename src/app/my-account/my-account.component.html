@@ -22,6 +22,7 @@
                   <th scope="col">Quantity</th>
                   <th scope="col">Total</th>
                   <th scope="col">Order Status</th>
+                  <th scope="col">Download Pdf</th>
                   <th scope="col">Cancel Order</th>
 
                 </tr>
@@ -51,8 +52,15 @@
                 </td>
                 
                  <td>{{ order.totalOrderAmount | currency:'INR' }}</td>
+                 
+                 
                 
                 <td>{{ order.orderStatus }}</td>
+                <td class="align-middle">
+                  <button class="pdf-download-button" (click)="downloadPdfUser(order.orderId)">
+                    <i class="fa fa-file-pdf-o" style="font-size:24px;color:red"></i>
+                  </button>
+                  </td>
                 <td class="align-middle">
                   <button (click)="userOrderCancel(i,order.id)"><i class="fa fa-close" style="font-size:24px"></i></button>
               </td>

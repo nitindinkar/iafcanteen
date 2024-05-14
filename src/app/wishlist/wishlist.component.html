@@ -8,8 +8,8 @@
                 <thead>
                   <tr>
                     <!-- <th scope="col">Images</th> -->
+                    <th scope="col">Images</th>      
                     <th scope="col">Name</th>                    
-                    
                     <th scope="col">Price</th>
                     <th scope="col">Stock Status</th>
                     <th scope="col">Add To Cart </th>
@@ -20,6 +20,7 @@
                 <tbody>
                   <tr *ngFor="let wishList of wishResponse;let i=index ">
                     <!-- <td><img src="../../assets/images/550x750.png" class="inventory-image"></td> -->
+                    <td class="align-middle"><img  [src]="wishList.product.imageUrl" class="inventory-image"></td>
                     <td>{{ wishList.product.productName }}</td>            
                     
                     <td>₹{{ wishList.product.productDiscountedPrice }}<span class="mrp">(₹{{ wishList.product.productActualPrice }})</span></td>

@@ -54,6 +54,7 @@ export class ConstantsService {
     updateCategory:this.serviceUrl+"category/update-category",
     downloadPdf:this.serviceUrl+"order/pdf",
     updateStockOnly:this.serviceUrl+"product/updateStock",
+    markDelivered:this.serviceUrl+"order/markOrderAsDelivered",
 
     // superadmin api started
     getActiveAdmins:this.serviceUrl+"super-admin/active-admins",
