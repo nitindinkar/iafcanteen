@@ -27,12 +27,14 @@ export class InventoryComponent  implements OnInit{
   allProducts: any;
   editingMode: boolean = false;
   selectedProducts: any[] = [];
- 
+
   productCount: any;
 
   selectedCategory: string = 'Filter By Category'; // Initialize selected category
   selectedStockStatus: string = 'Filter By Stock Status'; // Initialize selected stock status
-  
+  private data: any;
+  currentIndex: number=0;
+
 
   constructor(public cons:ConstantsService,
     private apiService: ApiCallingServiceService,
@@ -41,13 +43,13 @@ export class InventoryComponent  implements OnInit{
     private CommonService:CommonService,
     public dialog: MatDialog) { }
 
- 
-  
-  
+
+
+
   ngOnInit(): void {
     this.getAllProduct();
     this.getcategories();
-    
+
   }
 
   // public getAllProduct() {
@@ -65,7 +67,7 @@ export class InventoryComponent  implements OnInit{
   //       this.products=result['response'];
   //       const availableStock = result[0]['availableStock'];
   //       console.log(this.products);
-              
+
   //     },
   //     (error) => {
   //       console.error('Add Product failed:', error);
@@ -78,8 +80,8 @@ export class InventoryComponent  implements OnInit{
     this.apiService.getApiWithToken(this.cons.api.getAllCategories).subscribe(
       (response: object) => {
         let result: { [key: string]: any } = response;
-        this.categories=result['response'];         
-        
+        this.categories=result['response'];
+
       },
       (error) => {
         console.error('Add Product failed:', error);
@@ -97,6 +99,8 @@ export class InventoryComponent  implements OnInit{
   //     this.filteredProducts = this.products;
   //   }
   // }
+  currentStock=0;
+  newStockValue=0;
 
   public getAllProduct() {
     // Fetch all products
@@ -176,7 +180,7 @@ handleApply(): void {
   this.selectedProducts = [];
   this.editingMode = false;
 }
- 
+
 
 toggleSelectAll(event: any) {
   const checkbox = event.target as HTMLInputElement;
@@ -211,7 +215,7 @@ updateStock(productIdUpdate:number, newStockValue: number) {
           text: 'Stock Updated Successfully'
         });
         this.getAllProduct();
-        
+
       }
     },
     error: (e) => {
@@ -226,7 +230,7 @@ updateStock(productIdUpdate:number, newStockValue: number) {
     complete: () => console.log(),
   });
 
-  
+
 }
 
 
@@ -244,10 +248,21 @@ openAddStockDialog(product: any): void {
     }
   });
 
-  
+
 }
 
+  // Function to confirm adding stock
+  confirmAddStock(): void {
+    debugger;
+    console.log(this.data);
+    // Call the updateStock function with the new stock value
+    this.updateStock(this.data.product.productId, this.newStockValue);
+  }
 
+  setCurrent(product: any,i:number) {
+    this.currentStock=product.availableStock;
+    this.currentIndex=i;
+  }
 }
 
 

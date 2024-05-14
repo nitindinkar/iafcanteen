@@ -30,7 +30,7 @@
                             <option *ngFor="let category of categories" [ngValue]="category.name">{{ category.name }}</option>
                           </select>
                         </div>
-                        
+
                           <div class="mb-3 mt-3 col-md-3 px-2">
                             <select class="form-control" id="status">
                             <option>Filter By Stock Status</option>
@@ -45,7 +45,7 @@
                                 <option *ngFor="let category of categories" [ngValue]="category.name">{{ category.name }}</option>
                             </select>
                         </div>
-                        
+
                         <div class="mb-3 mt-3 col-md-3 px-2">
                             <select class="form-control" id="status" [(ngModel)]="selectedStockStatus"  [ngModelOptions]="{standalone: true}" (change)="filterProductsByStockStatus()">
                                 <option value="Filter By Stock Status">Filter By Stock Status</option>
@@ -53,7 +53,7 @@
                                 <option>Out of Stock</option>
                             </select>
                         </div>
-                        
+
                           <div class="mt-3 col-md-3 px-2 ">
                               <button type="submit" class="btn btn-primary mb-3 form-filter mr-2" (click)="applyFilters()">Filter</button>
                               <!-- <span > Total Products : {{productCount}}</span> -->
@@ -66,7 +66,7 @@
               <table class="table table-striped">
                 <thead>
                   <tr >
-                    <th scope="col"><input type="checkbox" name="selectAll" id="selectAll"></th>
+                    <th scope="col"><input type="checkbox" name="selectAll" id="selectAll1"></th>
                     <th scope="col">Images</th>
                     <th scope="col">Name</th>
                     <th scope="col">Category</th>
@@ -77,7 +77,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let product of filteredProducts">
+                  <tr *ngFor="let product of filteredProducts;let i = index">
                     <th scope="row"><input type="checkbox" name="selectAll" id="selectAll" [checked]="isSelected(product)"(change)="toggleSelectProduct($event, product)" ></th>
                     <td><img  [src]="product.imageUrl" class="inventory-image"></td>
                     <td>{{ product.productName }}</td>
@@ -86,19 +86,20 @@
                       <span *ngIf="!editingMode">{{ product.availableStock }}</span>
                       <input type="number" *ngIf="editingMode && selectedProducts.includes(product)" [(ngModel)]="product.availableStock">
                     </td>
-                   
+
                     <!-- <td>{{ product.availableStock}}</td> -->
-                    
+
                       <td>
                         <span class="wishlist-in-stock" *ngIf="product.availableStock !== null && product.availableStock > 0">In Stock</span>
                         <span class="wishlist-out-of-stock"  *ngIf="product.availableStock === 0 || product.availableStock === null">Out of Stock</span>
                       </td>
-                    
+
                     <td>₹{{ product.productDiscountedPrice }} <span class="mrp">(₹{{ product.productActualPrice }})</span></td>
-                    <td><button mat-raised-button color="primary" (click)="openAddStockDialog(product)"><i class="fa fa-plus" style="font-size:24px"></i></button></td>
+                    <td><a data-toggle="modal"  data-target="#exampleModal" title="Quick View" href="#"><button mat-raised-button color="primary" (click)="setCurrent(product,i)"><i class="fa fa-plus" style="font-size:24px"></i></button></a></td>
+
                   </tr>
-                             
-                    
+
+
                 </tbody>
               </table>
 
@@ -107,3 +108,35 @@
     </div>
 
 </div>
+
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document" style="width: 500px">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span class="ti-close" aria-hidden="true"></span></button>
+      </div>
+<!--      <div class="modal-body">-->
+      <div >
+<!--        <div class="row no-gutters">-->
+        <div>
+          <h2 class="custom-dialog-title" mat-dialog-title>Add Stock</h2>
+          <div class="custom-dialog-content">
+            <p class="current-stock">Current Stock: {{ currentStock }}</p>
+            <mat-form-field appearance="fill">
+              <mat-label>New Stock</mat-label>
+              <input matInput type="number" [(ngModel)]="newStockValue" placeholder="Add New Stock">
+            </mat-form-field>
+          </div>
+          <div class="custom-dialog-actions" mat-dialog-actions>
+            <button mat-button class="custom-dialog-cancel"  data-dismiss="modal">Cancel</button>
+            <button mat-button class="custom-dialog-confirm" color="primary" data-dismiss="modal" [disabled]="newStockValue <= 0" (click)="updateStock(filteredProducts[currentIndex].productId,newStockValue)">Add Stock</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal end -->

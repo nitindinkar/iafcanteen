@@ -43,7 +43,6 @@ import {ProductFilteredComponent} from "./product-filtered/product-filtered.comp
 import { SuperAdminNotificationComponent } from './super-admin-notification/super-admin-notification.component';
 import { AdminMyAccountComponent } from './admin-my-account/admin-my-account.component';
 import { NgxPageScrollCoreModule } from 'ngx-page-scroll-core';
-import { AddStockDialogComponent } from './add-stock-dialog/add-stock-dialog.component';
 
 
 
@@ -75,7 +74,6 @@ import { AddStockDialogComponent } from './add-stock-dialog/add-stock-dialog.com
     AdminDashboardComponent,
     SuperAdminNotificationComponent,
     AdminMyAccountComponent,
-    AddStockDialogComponent,
 
 
 
@@ -85,7 +83,7 @@ import { AddStockDialogComponent } from './add-stock-dialog/add-stock-dialog.com
 
   ],
 
-  
+
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -104,7 +102,7 @@ import { AddStockDialogComponent } from './add-stock-dialog/add-stock-dialog.com
 
 
   ],
-  
+
   providers: [ SharedService,ProductComponent,HeaderComponent,InventoryComponent,
     provideAnimationsAsync()
   ],
