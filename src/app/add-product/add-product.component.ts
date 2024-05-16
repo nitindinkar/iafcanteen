@@ -47,6 +47,7 @@ export class AddProductComponent implements OnInit {
     private cons: ConstantsService,
     private pageScrollService: PageScrollService,
     ) {}
+    
     ngOnInit(): void {
         this.getAllCategories();
         this.getAllProduct();
