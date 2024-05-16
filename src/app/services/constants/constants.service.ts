@@ -12,11 +12,14 @@ export class ConstantsService {
      serviceUrl = 'http://13.200.245.74:8083/ecommerce/'; // server url
    //serviceUrl=  'http://192.168.54.64:8082/';
     //  serviceUrl = 'http://192.168.13.236:8083/'; // vaibhav localhost
+    
   constants={
     groceryCard:'Grocery',
     liquorCard: 'Liquor'
   };
   api = {
+
+      
 
     // user api started
     getCartDetailsOfUser:this.serviceUrl+'cart/getCartDetailsOfUser',

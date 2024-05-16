@@ -17,6 +17,7 @@ import { CartComponent } from '../cart/cart.component';
 })
 export class ProductComponent implements OnInit{
 
+
   groccery:boolean=true;
   categories:any;
   products: any;
@@ -359,6 +360,18 @@ export class ProductComponent implements OnInit{
     console.log("This is my subtotal"+this.subtotal);
     return this.subtotal;
     }
+
+    showOutOfStockMessage() {
+      
+      Swal.fire({
+        title: "Out of Stock",
+        text: "We're sorry, but this product is currently out of stock. Please check back later or explore other products.",
+        icon: "info",
+        confirmButtonColor: "#3085d6",
+        confirmButtonText: "OK"
+    });
+          
+      }
 
 }
 
