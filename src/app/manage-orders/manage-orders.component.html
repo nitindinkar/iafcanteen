@@ -1,23 +1,19 @@
 <div class="container-fluid">
-    <div class="px-xl-5 py-5">
-      <div class="add-product">
-        <h2 class="mb-4">Order History Of Admin</h2>
-        <div class="my-account">
-         
-  
-           <div class="tab-content">
-            <div id="home" class="tab-pane in active">
-                <div class="search-bar mb-3">
-                   <input type="text" class="form-control" placeholder="Search by Order ID or Customer Name" [(ngModel)]="searchQuery">
-                    <button class="btn btn-primary search-button" (click)="searchOrders()">Search</button>
-                </div>
-                  
-                  
-              
-                <div class="row overflow-auto" style="max-height: 600px;">
-              
-              <table class="table table-striped" >
-                
+  <div class="px-xl-5 py-5">
+    <div class="add-product">
+      <h2 class="mb-4">Order History Of Admin</h2>
+      <div class="my-account">
+
+
+        <div class="tab-content">
+          <div id="home" class="tab-pane in active">
+            <div class="search-bar mb-3">
+              <input type="text" class="form-control" placeholder="Search by Order ID or Customer Name"
+                [(ngModel)]="searchQuery">
+              <button class="btn btn-primary search-button" (click)="searchOrders()">Search</button>
+            </div>
+            <div class="row overflow-auto" style="max-height: 600px;">
+              <table class="table table-striped">
                 <thead>
                   <tr>
                     <th scope="col">Order ID</th>
@@ -29,46 +25,89 @@
                     <th scope="col">Cancel Order</th>
                     <th scope="col">Download Order</th>
                     <th scope="col">Delivered</th>
-  
+                    <th scope="col">View Order</th>
+
                   </tr>
                 </thead>
                 <tbody>
-                            
-                            <tr *ngFor="let order of filteredOrders;  let i=index ">
-                                <td>
-                                    <a href="javascript:void(0)" (click)="openOrderDetailsDialog(order.orderId)">{{ order.orderId }}</a>
-                                  </td>
-                                
-                                <td>{{ order.orderDate  | date: 'dd-MM-yyyy'  }}</td>
-                                <td>{{ order.user.name }}</td>
-                                <td>{{ order.user.contactNumber }}</td>
-                                <td>{{ order.orderStatus }}</td>
-                                <td>{{ order.totalOrderAmount }}</td>
-                                
-                          <td class="align-middle">
-                          <button (click)="adminOrderDelete(i,order.id)">
-                          <i class="fa fa-close" style="font-size:24px"></i></button>
-                      </td>
-                      <td class="align-middle">
-                        <button class="pdf-download-button" (click)="downloadPdf(order.orderId)">
-                          <i class="fa fa-file-pdf-o" style="font-size:24px;color:red"></i>
-                        </button>
+                  <tr *ngFor="let order of filteredOrders;  let i=index ">
+                    <td>{{ order.orderId}}</td>
+                    <td>{{ order.orderDate | date: 'dd-MM-yyyy' }}</td>
+                    <td>{{ order.user.name }}</td>
+                    <td>{{ order.user.contactNumber }}</td>
+                    <td>{{ order.orderStatus }}</td>
+                    <td>{{ order.totalOrderAmount }}</td>
+
+                    <td class="align-middle">
+                      <button (click)="adminOrderDelete(i,order.id)">
+                        <i class="fa fa-close" style="font-size:24px"></i></button>
+                    </td>
+                    <td class="align-middle">
+                      <button class="pdf-download-button" (click)="downloadPdf(order.orderId)">
+                        <i class="fa fa-file-pdf-o" style="font-size:24px;color:red"></i>
+                      </button>
                     </td>
                     <td><button (click)="delivered(i,order.id)">
-                      <i class="material-icons" style="font-size:24px">done</i></button></td>
-                      </tr>
-                     </tbody>
+                        <i class="material-icons" style="font-size:24px">done</i></button>
+                    </td>
+                    <td>
+                      <a data-toggle="modal" data-target="#exampleModal" title="Quick View" href="#">
+                        <button type="button" (click)="viewOrderDetails(i, order.userOrders)">
+                            <i class="fa fa-eye"  style="font-size:24px" aria-hidden="true"></i>
+                        </button>
+                    </a>
+                    </td>
+                    
+                  </tr>
+                </tbody>
               </table>
             </div>
-            </div>
-        </div> 
-  
-          
-          
+          </div>
         </div>
-  
-  
       </div>
     </div>
   </div>
-  
+</div>
+
+<!--  model start -->
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      
+      <!-- <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Order Details</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div> -->
+   
+      <div class="modal-body">
+        <!-- Table to display product details -->
+        <table class="modal-table">
+          <thead>
+            <tr>
+              <th>Sno</th>
+              <th>Product Name</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th>Notify</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Use Angular directives to populate the table with product information -->
+            <tr *ngFor="let productItems of selectedOrder let i=index">
+              <td>{{ i+1}}</td>
+              <td>{{ productItems.product.productName }}</td>
+              <td>{{ productItems.product.productDiscountedPrice }}</td>
+              <td>{{ productItems.quantity }}</td>
+              <mat-slide-toggle></mat-slide-toggle>
+              
+
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

@@ -6,6 +6,112 @@
     flex: 1; /* Take up remaining space */
     margin-right: 5px; /* Add some spacing between input and button */
   }
+
+  /* Modal Table Styles */
+
+/* Modal Styles */
+
+/* Modal backdrop */
+/* Modal Header Styles */
+
+/* Modal header */
+.modal-header {
+  background-color: #007bff; /* Blue color */
+  color: #fff; /* White text color */
+  padding: 15px;
+  border-bottom: 1px solid #dee2e6; /* Gray border */
+  display: flex;
+  justify-content: space-between; /* Align items with space between */
+  align-items: center; /* Center vertically */
+}
+
+/* Modal title */
+.modal-title {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+/* Close button */
+.close {
+  color: #fff; /* White text color */
+  font-size: 1.5rem;
+  font-weight: 700;
+  cursor: pointer;
+  border: none; /* Remove button border */
+  background: transparent; /* Transparent background */
+}
+
+/* Close button hover */
+.close:hover {
+  color: #ccc; /* Light gray text color on hover */
+}
+
+/* Modal Content Styles */
+
+/* Modal content */
+.modal-content {
+  border-radius: 10px;
+}
+
+/* Modal Body Styles */
+
+/* Modal body */
+.modal-body {
+  padding: 20px;
+}
+
+/* Modal Table Styles */
+
+/* Table */
+.modal-table {
+  width: 100%;
+  margin-bottom: 0;
+  background-color: #fff;
+  border-collapse: collapse;
+}
+
+/* Table header */
+.modal-table th {
+  text-align: left;
+  background-color: #f2f2f2;
+  border-bottom: 1px solid #ddd;
+  padding: 8px;
+}
+
+/* Table row */
+.modal-table td {
+  border-bottom: 1px solid #ddd;
+  padding: 8px;
+}
+
+/* Table row on hover */
+.modal-table tbody tr:hover {
+  background-color: #f5f5f5;
+}
+
+/* Button in table cell */
+.modal-table button {
+  padding: 5px 10px;
+  border: none;
+  background-color: #007bff; /* Blue color */
+  color: #fff;
+  cursor: pointer;
+}
+
+/* Button in table cell on hover */
+.modal-table button:hover {
+  background-color: #0056b3; /* Darker blue */
+}
+.modal-title {
+  margin: 0; /* Remove default margin */
+  font-size: 1.5rem; /* Set font size */
+  font-weight: bold; /* Set font weight */
+  color: #333; /* Set text color */
+  align-items: center;
+  text-align: center;
+}
+
+  
   
 
   

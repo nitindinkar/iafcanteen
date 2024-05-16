@@ -99,7 +99,8 @@
                     <td>{{ admin.contact }}</td>
                     <td>{{ admin.active ? 'Active' : 'Inactive' }}</td>
                     
-                    <td>
+                    
+                    <!-- <td>
                       <button type="button" class="btn btn-success mr-2" (click)="activeAdmins(admin.id)">
                         <i class="fas fa-check"></i> Activate
                       </button>
@@ -107,7 +108,13 @@
                         <button type="button" class="btn btn-danger" (click)="deactiveAdmins(admin.id)" >
                         <i class="fas fa-times"></i> Deactivate
                       </button>
-                    </td>
+                    </td> -->
+                    <td><mat-slide-toggle [checked]="admin.active" (change)="toggleAdminStatus(admin)"></mat-slide-toggle></td>
+                    <!-- <td>
+                      <mat-slide-toggle [checked]="admin.active" (change)="toggleAdminStatus(admin)" [ngClass]="{'active-toggle': admin.active, 'inactive-toggle': !admin.active}"></mat-slide-toggle>
+                    </td> -->
+                    
+                    
                     <td>                             
                       <button type="submit" class="btn btn-secondary" (click)="editAdmin(admin,admin.id)"><i class="fa fa-edit"></i></button>
                       <!-- <button type="submit" class="btn btn-secondary ml-2" (click)="deleteAdmin(admin.id)"><i class="fa fa-trash"></i></button> -->

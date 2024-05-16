@@ -30,6 +30,8 @@ export class ManageOrdersComponent {
   searchQuery: string = ''; 
   filteredOrders: any[] = [];
   pdfDownload: any;
+  selectedOrder: any;
+  slideToggleValue: any;
 
   constructor(private cons:ConstantsService,
     private apiService: ApiCallingServiceService,
@@ -270,6 +272,24 @@ export class ManageOrdersComponent {
         }
       );
 
+    }
+
+    viewOrderDetails(id: any, order: any) {
+      this.selectedOrder = order;
+      console.log(this.selectedOrder)
+      
+    }
+
+    handleSlideToggleChange() {
+      if (this.slideToggleValue) {
+        // If slide toggle is true
+        console.log('Slide toggle is true');
+        // Add your logic for true state here
+      } else {
+        // If slide toggle is false
+        console.log('Slide toggle is false');
+        // Add your logic for false state here
+      }
     }
   
     

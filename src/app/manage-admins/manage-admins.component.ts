@@ -23,6 +23,8 @@ contact: any;
  
   filteredAdmin: any;
   selectedStatus:String ='Filter By Admin Status';
+  slideToggleValue: any;
+  initialAdminActiveState: any;
 
 constructor(
   private router: Router,
@@ -93,11 +95,33 @@ constructor(
     );
   }
 
-  toggleAdminStatus(admin: any): void {
-    // Toggle the admin's status between 'Active' and 'Inactive'
-    admin.status = 'Active' === 'Active' ? 'Inactive' : 'Active';
+//   toggleAdminStatus(admin: any): void {
+//     // Toggle the admin's status between 'Active' and 'Inactive'
+//     admin.status = 'Active' === 'Active' ? 'Inactive' : 'Active';
 
- }
+//  }
+
+toggleAdminStatus(admin: any): void {
+  this.initialAdminActiveState = admin.active;
+  admin.active = !admin.active; // Toggle the active state of the admin
+  if (admin.active) {
+    // Call method to activate admin
+    this.activeAdmins(admin.id);
+  } else {
+    // Call method to deactivate admin
+    this.deactiveAdmins(admin.id);
+  }
+}
+
+cancelToggleAction(adminId: any): void {
+  // Revert the toggle to its initial state
+  const admin = this.allAdmins.find((admin: { id: any; }) => admin.id === adminId);
+  if (admin) {
+    // Revert the toggle to its initial state
+    admin.active = this.initialAdminActiveState;
+  }
+}
+
  activeAdmins(adminId:any) {
   Swal.fire({
     title: 'Are you sure?',
@@ -117,12 +141,21 @@ constructor(
           console.log((result['response'].length));
           console.log(result);
           this.getAllAdminsDetails();
+          Swal.fire({
+            icon: 'success',
+            title: 'Admin Activated',
+            text: 'Admin has been successfully activated!',
+          });
           // You can add further handling here if needed
         },
         (error) => {
           console.error('Retrieve Active Admins failed:', error);
         }
       );
+    }
+    else{
+      this.cancelToggleAction(adminId);
+      this.getAllAdminsDetails();
     }
   });
 }
@@ -146,12 +179,22 @@ constructor(
           let result: { [key: string]: any } = response;
           this.allAdmins=result;
           this.getAllAdminsDetails();
+          Swal.fire({
+            icon: 'success',
+            title: 'Admin Deactivated',
+            text: 'Admin has been successfully Deactivated!',
+          });
+          
           // You can add further handling here if needed
         },
         (error) => {
           console.error('Deactivate Admins failed:', error);
         }
       );
+    }
+    else{
+      this.cancelToggleAction(adminId);
+      this.getAllAdminsDetails();
     }
   });
 }
@@ -263,6 +306,7 @@ filterByAdmin(): void {
     });
   }
 }
+
 
 }
 
