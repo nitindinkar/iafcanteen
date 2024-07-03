@@ -1,100 +1,108 @@
 <div class="container-fluid">
   <div class="px-xl-5 py-5">
-      <div class="add-product">
-          <h2>Manage Categories</h2>
-            <div class="inventory">
-              <div class="add-admin px-4 my-4">
-                <h3 class="seconder-heading mt-4">Add Category</h3>
-                 <form action="post">
-                      <div class="row">
+    <div class="add-product">
+      <h2>Manage Categories</h2>
+      <div class="inventory">
+        <div class="add-admin px-4 my-4">
+          <h3 class="seconder-heading mt-4">Add Category</h3>
+          <form action="post">
+            <div class="row">
 
-                        <div class="col-md-4 mb-3 mt-3">
-                          <label for="Name" class="form-label">Category Name</label>
-                          <input type="text" class="form-control" id="name" [(ngModel)]="name" placeholder="Enter Name" name="name">
-                        </div>
-                       
-                        <div class="col-md-4 mb-3 mt-3">
-                          <label for="service" class="form-label">Category Type</label>
-                          <select class="form-control" id="Category" [(ngModel)]="catType" [ngModelOptions]="{standalone: true}">
-                            <option *ngFor="let type of types" [value]="type.id" >{{type.name}}</option>
-                          </select>
-                        </div>
-                        <div class="col-md-4 mb-2 mt-3">
-                          <label for="service" class="form-label">Description</label>
-                          <!-- <input type="text" class="form-control" id="Liquir"  [(ngModel)]="desc" placeholder="Discription" name="Liquir"> -->
-                          <textarea class="form-control custom-textarea" id="description" [(ngModel)]="desc" placeholder="Description" name="description" rows="3"></textarea>
-                        </div>
-                                  
-                        
-                        <div class="col-md-4 mb-4 ">
-                          <label for="name" class="form-label"> Upload Images (550 x 750px in less than 500kb and jpg/jpeg format only)</label>
-                          <input type="file" class="form-control" id="Date" placeholder="Uploadn Images" name="image" accept="image/*" #invoiceFileInput>
-            <!--                  <input type="file" id="image" name="image" accept="image/*" #invoiceFileInput>-->
-                                  <!-- <button type="submit" class="btn btn-primary mb-3" (click)="upload()" >Upload File</button> -->
+              <div class="col-md-4 mb-3 mt-3">
+                <label for="Name" class="form-label">Category Name</label>
+                <input type="text" class="form-control" id="name" [(ngModel)]="name" placeholder="Enter Name"
+                  name="name">
+              </div>
 
-                        </div>
-                        <div class="col justify-content-end mt-3">
-                          <div class="col-md-12 mt-4 d-flex justify-content-between">
-                            <!-- <button type="submit" class="btn btn-primary ms-2 " *ngIf="!edited"  (click)="upload()">Upload File</button> -->
-                            <button type="submit" class="btn btn-primary ms-2 " *ngIf="!isEdit" (click)="addCategory()">Submit</button>
-                            <button type="submit" class="btn btn-primary ms-2" *ngIf="isEdit" (click)="updateCategory()">Update</button>
-                          </div>
-                        </div>
-                        <!-- <div class="col-md-12 mb-3 mt-3" *ngIf="!isEdit">
+              <div class="col-md-4 mb-3 mt-3">
+                <label for="service" class="form-label">Category Type</label>
+                <select class="form-control" id="Category" [(ngModel)]="catType" [ngModelOptions]="{standalone: true}">
+                  <option *ngFor="let type of types" [value]="type.id">{{type.name}}</option>
+                </select>
+              </div>
+              <div class="col-md-4 mb-2 mt-3">
+                <label for="service" class="form-label">Description</label>
+                <!-- <input type="text" class="form-control" id="Liquir"  [(ngModel)]="desc" placeholder="Discription" name="Liquir"> -->
+                <textarea class="form-control custom-textarea" id="description" [(ngModel)]="desc"
+                  placeholder="Description" name="description" rows="3"></textarea>
+              </div>
+
+
+              <div class="col-md-4 mb-4 ">
+                <label for="name" class="form-label"> Upload Images (550 x 750px in less than 500kb and jpg/jpeg format
+                  only)</label>
+                <input type="file" class="form-control" id="Date" placeholder="Uploadn Images" name="image"
+                  accept="image/*" #invoiceFileInput>
+                <!--                  <input type="file" id="image" name="image" accept="image/*" #invoiceFileInput>-->
+                <!-- <button type="submit" class="btn btn-primary mb-3" (click)="upload()" >Upload File</button> -->
+
+              </div>
+              <div class="col justify-content-end mt-3">
+                <div class="col-md-12 mt-4 d-flex justify-content-between">
+                  <!-- <button type="submit" class="btn btn-primary ms-2 " *ngIf="!edited"  (click)="upload()">Upload File</button> -->
+                  <button type="submit" class="btn btn-primary ms-2 " *ngIf="!isEdit"
+                    (click)="addCategory()">Submit</button>
+                  <button type="submit" class="btn btn-primary ms-2" *ngIf="isEdit"
+                    (click)="updateCategory()">Update</button>
+                </div>
+              </div>
+              <!-- <div class="col-md-12 mb-3 mt-3" *ngIf="!isEdit">
                           <button type="submit" class="btn btn-primary mb-3" (click)="addCategory()">Submit</button>
                         </div>
                         <div class="col-md-12 mb-3 mt-3" *ngIf="isEdit">
                           <button type="submit" class="btn btn-primary mb-3" (click)="updateCategory()">Update</button>
                         </div> -->
-                        
-                       
 
-                      </div>
-                 </form>
-              </div>
-            <div class="add-admin px-4 my-4">
-              <!-- <div class="search-bar mb-3 mt-3 d-flex justify-content-between">
+
+
+            </div>
+          </form>
+        </div>
+        <div class="add-admin px-4 my-4">
+          <!-- <div class="search-bar mb-3 mt-3 d-flex justify-content-between">
                 <input type="text" class="form-control" placeholder="Search by Order ID or Customer Name" [(ngModel)]="searchQuery">
                  <button class="btn btn-primary search-button ml-2 mr-3" >Search</button>
               </div> -->
-              <div class="search-bar mb-3 mt-3 d-flex justify-content-between">
-                <input type="text" class="form-control" placeholder="Search by Category Name, Type, or Description" [(ngModel)]="searchQuery" (ngModelChange)="autoSearch()">
-                <button class="btn btn-primary search-button ml-2 mr-3" (click)="autoSearch()">Search</button>
-              </div>
-              <div class="row overflow-auto">
+          <div class="search-bar mb-3 mt-3 d-flex justify-content-between">
+            <input type="text" class="form-control" placeholder="Search by Category Name, Type, or Description"
+              [(ngModel)]="searchQuery" (ngModelChange)="autoSearch()">
+            <button class="btn btn-primary search-button ml-2 mr-3" (click)="autoSearch()">Search</button>
+          </div>
+          <div class="row overflow-auto">
             <table class="table table-striped">
               <thead>
                 <tr>
 
-                  
+
                   <th scope="col">Category Name</th>
                   <th scope="col">Catagory Type</th>
                   <th scope="col">Description</th>
                   <th scope="col">Edit Category</th>
-                  
-                  
+
+
                 </tr>
               </thead>
               <tbody>
                 <tr *ngFor="let category of filteredProducts let i=index  ">
 
-                  
+
                   <td>{{ category.name }}</td>
                   <td>{{ category.type }}</td>
                   <td>{{ category.description}} </td>
-                  
+
                   <td>
-                      <button type="submit" class="btn btn-secondary"  (click)="editCategory(category,category.id)"  ><i class="fa fa-edit"></i></button>
-                      <!-- <button type="submit" class="btn btn-secondary ml-2"  (click)="deleteCategory(i,category.id)"  ><i class="fa fa-trash"></i></button> -->
+                    <button type="submit" class="btn btn-secondary" (click)="editCategory(category,category.id)"><i
+                        class="fa fa-edit"></i></button>
+                    <!-- <button type="submit" class="btn btn-secondary ml-2"  (click)="deleteCategory(i,category.id)"  ><i class="fa fa-trash"></i></button> -->
                   </td>
-              </tr>
+                </tr>
 
               </tbody>
             </table>
 
-              </div>
-            </div>
+          </div>
+        </div>
       </div>
-  </div>
+    </div>
 
-</div>
+  </div>

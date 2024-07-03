@@ -6,7 +6,7 @@
 
       <form action="post">
         <div class="row billing-form p-3">
-          <div class="mb-3 mt-3 col-md-6 px-2" >
+          <div class="mb-3 mt-3 col-md-6 px-2">
             <label class="form-label">Select Saved Address</label>
             <div *ngFor="let address of savedAddresses" class="form-check">
               <input class="form-check-input" type="radio" name="savedAddress" [value]="address.id"
@@ -21,9 +21,9 @@
               <button class="btn btn-outline-primary" (click)="toggleAddAddressForm()">Add New Address</button>
             </div>
           </div>
-          
+
           <!-- Add address form -->
-          <form  *ngIf="showAddAddressForm">
+          <form *ngIf="showAddAddressForm">
             <form class="row billing-form p-3">
 
 
@@ -55,7 +55,8 @@
 
               <div class="mb-3 mt-3 col-md-6 px-2">
                 <label for="pincode" class="form-label">PinCode</label>
-                <input type="text" class="form-control" id="pincode" placeholder="Enter Pincode" name="pincode"[(ngModel)]="pinCode">
+                <input type="text" class="form-control" id="pincode" placeholder="Enter Pincode" name="pincode"
+                  [(ngModel)]="pinCode">
               </div>
 
               <div class="mb-3 mt-3 col-md-8 px-2">
@@ -91,18 +92,19 @@
                     </label>
                   </div>
                   <div class="mt-3 col-md-6 px-2">
-                    <button type="submit" class="btn btn-primary mb-3" (click)="saveAddress()" >Submit</button>
+                    <button type="submit" class="btn btn-primary mb-3" (click)="saveAddress()">Submit</button>
                   </div>
                 </div>
               </div>
             </form>
 
-            
+
           </form>
           <div class="row" *ngIf="showSelectSlot">
             <div class="mb-3 mt-3 col-md-6 px-2">
               <label for="date" class="form-label">Select Date</label>
-              <input type="date" class="form-control" id="date" name="date" placeholder="Select Date" min="{{ minDate }}" >
+              <input type="date" class="form-control" id="date" name="date" placeholder="Select Date"
+                min="{{ minDate }}">
             </div>
             <!-- <div class="mb-3 mt-3 col-md-6 px-2">
               <label for="store" class="form-label">Select Store</label>
@@ -113,12 +115,13 @@
             </div> -->
             <div class="mb-3 mt-3 col-md-6 px-2">
               <label for="store" class="form-label">Select Store</label>
-              <select class="form-control" id="store" [(ngModel)]="selectedCanteen" [ngModelOptions]="{standalone: true}">
-                  <option *ngFor="let store of activeStores" [ngValue]="store">{{ store.name }}</option>
+              <select class="form-control" id="store" [(ngModel)]="selectedCanteen"
+                [ngModelOptions]="{standalone: true}">
+                <option *ngFor="let store of activeStores" [ngValue]="store">{{ store.name }}</option>
               </select>
-          </div>
-          
-            
+            </div>
+
+
             <div class="mb-3 mt-3 col-md-6 px-2">
               <label for="slot" class="form-label">Select Your Slot</label>
               <select class="form-control" id="slot">
@@ -131,7 +134,7 @@
                 <option>4 pm to 5 pm</option>
               </select>
             </div>
-            
+
           </div>
         </div>
       </form>
@@ -162,7 +165,8 @@
             <h5>Total</h5>
             <h5>{{cartTotal+10}}</h5>
           </div>
-          <button class="btn btn-block btn-primary font-weight-bold my-3 py-3" (click)="bookOrder()">Place Order</button>
+          <button class="btn btn-block btn-primary font-weight-bold my-3 py-3" (click)="bookOrder()">Place
+            Order</button>
         </div>
       </div>
     </div>

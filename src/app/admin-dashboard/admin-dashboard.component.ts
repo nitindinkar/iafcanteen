@@ -10,15 +10,14 @@ import { forkJoin } from 'rxjs';
 @Component({
   selector: 'app-admin-dashboard',
   templateUrl: './admin-dashboard.component.html',
-  styleUrl: './admin-dashboard.component.scss'
+  styleUrl: './admin-dashboard.component.scss',
 })
 export class AdminDashboardComponent implements OnInit {
-  
   groccery: any;
   cardType: any;
   products: any;
   filteredProducts: any;
-  totalProduct:any;
+  totalProduct: any;
   categories: any;
   totalCategory: any;
   orderDetails: any;
@@ -36,112 +35,120 @@ export class AdminDashboardComponent implements OnInit {
     private http: HttpClient,
     private apiService: ApiCallingServiceService,
     private cons: ConstantsService,
-    private sharedService:SharedService
+    private sharedService: SharedService
   ) {}
   ngOnInit(): void {
-    if(this.sharedService.loggedIn == true){
+    if (this.sharedService.loggedIn == true) {
       window.location.reload();
     }
     this.order();
     this.getAllProduct();
     this.getcategories();
     this.viewCharts();
-    
- 
   }
-  
- 
 
-
-public getAllProduct() {
-  debugger;
-  if(localStorage.getItem('card')==this.cons.constants.liquorCard){
-    this.groccery=false;
-    this.cardType='L';
+  public getAllProduct() {
+    debugger;
+    if (localStorage.getItem('card') == this.cons.constants.liquorCard) {
+      this.groccery = false;
+      this.cardType = 'L';
+    } else {
+      this.groccery = true;
+      this.cardType = 'G';
     }
-  else{
-    this.groccery=true;
-    this.cardType='G'
+    this.apiService.getApiWithToken(this.cons.api.getAllProductAdmin).subscribe(
+      (response: object) => {
+        let result: { [key: string]: any } = response;
+        this.products = result['response'];
+        this.totalProduct = this.products.length;
+        this.filteredProducts = this.products;
+        this.calculateProductCompletionPercentage();
+
+        console.log(this.products);
+      },
+      (error) => {
+        console.error('Add Product failed:', error);
+      }
+    );
   }
-  this.apiService.getApiWithToken(this.cons.api.getAllProductAdmin).subscribe(
-    (response: object) => {
-      let result: { [key: string]: any } = response;
-      this.products=result['response'];
-      this.totalProduct=this.products.length;
-      this.filteredProducts = this.products;
-      this.calculateProductCompletionPercentage();
-      
-     
-      console.log(this.products);
 
-    },
-    (error) => {
-      console.error('Add Product failed:', error);
-    }
-  );
-}
+  getcategories() {
+    this.apiService.getApiWithToken(this.cons.api.getAllCategories).subscribe(
+      (response: object) => {
+        let result: { [key: string]: any } = response;
+        this.categories = result['response'];
+        this.totalCategory = this.categories.length;
+        console.log(this.totalCategory);
+        this.filteredProducts = this.categories;
+        this.calculateCategoryCompletionPercentage();
+        console.log(this.filteredProducts);
+      },
+      (error) => {
+        console.error('Add Product failed:', error);
+      }
+    );
+  }
 
-getcategories(){
-  this.apiService.getApiWithToken(this.cons.api.getAllCategories).subscribe(
-(response: object) => {
-  let result: { [key: string]: any } = response;
-  this.categories=result['response']; 
-  this.totalCategory=this.categories.length; 
-  console.log(this.totalCategory);
-  this.filteredProducts = this.categories; 
-  this.calculateCategoryCompletionPercentage();     
-  console.log(this.filteredProducts);
-  
-},
-(error) => {
-  console.error('Add Product failed:', error);
-}
-);
-}
+  order() {
+    this.apiService.getApiWithToken(this.cons.api.getAdminOrders).subscribe(
+      (response: object) => {
+        let result: { [key: string]: any } = response;
+        debugger;
+        this.orderDetails = result['response'];
+        this.totalOrder = this.orderDetails.length;
 
-order(){
+        this.cancelOrder = this.orderDetails.filter(
+          (order: { orderStatus: string }) => order.orderStatus === 'CANCELLED'
+        ).length;
+        this.deliveredOrder = this.orderDetails.filter(
+          (order: { orderStatus: string }) => order.orderStatus === 'DELIVERED'
+        ).length;
 
-  this.apiService.getApiWithToken(this.cons.api.getAdminOrders).subscribe(
-    (response: object) => {
-      let result: { [key: string]: any } = response;
-      debugger;
-      this.orderDetails=result['response'];
-      this.totalOrder=this.orderDetails.length;
-    
-      this.cancelOrder = this.orderDetails.filter((order: { orderStatus: string; }) => order.orderStatus === 'CANCELLED').length;
-      this.deliveredOrder = this.orderDetails.filter((order: { orderStatus: string; }) => order.orderStatus === 'DELIVERED').length;
-     
-      // this.orderDetails.sort((a: { orderDate: string | number | Date; }, b: { orderDate: string | number | Date; }) => {
-      //   return new Date(a.orderDate).getTime() - new Date(b.orderDate).getTime();
-      // });
-      this.orderDetails.reverse();
-      this.filteredOrders = this.orderDetails;
-      this.calculateOrderCompletionPercentage();
-      this.calculateCancelledOrdersPercentage();
-      console.log(this.orderDetails);
+        // this.orderDetails.sort((a: { orderDate: string | number | Date; }, b: { orderDate: string | number | Date; }) => {
+        //   return new Date(a.orderDate).getTime() - new Date(b.orderDate).getTime();
+        // });
+        this.orderDetails.reverse();
+        this.filteredOrders = this.orderDetails;
+        this.calculateOrderCompletionPercentage();
+        this.calculateCancelledOrdersPercentage();
+        console.log(this.orderDetails);
+      },
+      (error) => {
+        console.error('Add Product failed:', error);
+      }
+    );
+  }
 
-     
-      
-    },
-    (error) => {
-      console.error('Add Product failed:', error);
-    }
-    
-  );
-
-}
-
-public  async  viewCharts(){
-  debugger;
+  public async viewCharts() {
+    debugger;
     Chart.register(...registerables);
-    const productsResponse = await this.apiService.getApiWithToken(this.cons.api.getAllProductAdmin).toPromise();
-    const categoriesResponse = await this.apiService.getApiWithToken(this.cons.api.getAllCategories).toPromise();
-    const ordersResponse = await this.apiService.getApiWithToken(this.cons.api.getAdminOrders).toPromise();
-    
+    const productsResponse = await this.apiService
+      .getApiWithToken(this.cons.api.getAllProductAdmin)
+      .toPromise();
+    const categoriesResponse = await this.apiService
+      .getApiWithToken(this.cons.api.getAllCategories)
+      .toPromise();
+    const ordersResponse = await this.apiService
+      .getApiWithToken(this.cons.api.getAdminOrders)
+      .toPromise();
+
     const data = {
-      labels: ['Total Products', 'Total Catagory', 'Total Orders', 'Delivered Order','Cancelled  Order'],
-      datasets: [{       
-        data: [this.totalProduct, this.totalCategory, this.totalOrder, this.deliveredOrder, this.cancelOrder],
+      labels: [
+        'Total Products',
+        'Total Catagory',
+        'Total Orders',
+        'Delivered Order',
+        'Cancelled  Order',
+      ],
+      datasets: [
+        {
+          data: [
+            this.totalProduct,
+            this.totalCategory,
+            this.totalOrder,
+            this.deliveredOrder,
+            this.cancelOrder,
+          ],
           backgroundColor: [
             '#1cc88a',
             '#4e73df',
@@ -149,81 +156,94 @@ public  async  viewCharts(){
             '#e74a3b',
             'rgb(248, 108, 107)',
           ],
-          label:'E-URC'
-
+          label: 'E-URC',
         },
-    ]
-};
-const options = {
-  scales: {
-    y: {
-      beginAtZero: true,
-      display: true
-    }
-  },
-  legends:{
-    display:false
-  }
-}
-const config: ChartConfiguration = {
-  type: 'bar',
-  data: data,
-  options: options
-}
-const chartItem: ChartItem = document.getElementById('my-chart') as ChartItem
-new Chart(chartItem, config)
+      ],
+    };
+    const options = {
+      scales: {
+        y: {
+          beginAtZero: true,
+          display: true,
+        },
+      },
+      legends: {
+        display: false,
+      },
+    };
+    const config: ChartConfiguration = {
+      type: 'bar',
+      data: data,
+      options: options,
+    };
+    const chartItem: ChartItem = document.getElementById(
+      'my-chart'
+    ) as ChartItem;
+    new Chart(chartItem, config);
 
-
-
-const data2 = {
-  labels:['Total Products', 'Total Catagory', 'Total Orders', 'Delivered Order','Cancelled  Order'],
-  datasets:[{
-    data: [this.totalProduct, this.totalCategory, this.totalOrder, this.deliveredOrder, this.cancelOrder],
-    backgroundColor: [
-      '#1cc88a',
+    const data2 = {
+      labels: [
+        'Total Products',
+        'Total Catagory',
+        'Total Orders',
+        'Delivered Order',
+        'Cancelled  Order',
+      ],
+      datasets: [
+        {
+          data: [
+            this.totalProduct,
+            this.totalCategory,
+            this.totalOrder,
+            this.deliveredOrder,
+            this.cancelOrder,
+          ],
+          backgroundColor: [
+            '#1cc88a',
             '#4e73df',
             '#36b9cc',
             '#e74a3b',
             'rgb(248, 108, 107)',
           ],
-           fill: true,
-  }]
-};
-const options2 = {
-  scales: {
-    y: {
-      beginAtZero: true,
-      display: false
-    }
-  },
-}
-const config2: ChartConfiguration = {
-  type: 'polarArea',
-  data: data2,
-  options: options2
-}
-Chart.overrides.polarArea.plugins.legend.position = 'left';
-Chart.overrides.polarArea.aspectRatio=1.4;
-const chartItem2: ChartItem = document.getElementById('my-chart2') as ChartItem
-new Chart(chartItem2, config2)
+          fill: true,
+        },
+      ],
+    };
+    const options2 = {
+      scales: {
+        y: {
+          beginAtZero: true,
+          display: false,
+        },
+      },
+    };
+    const config2: ChartConfiguration = {
+      type: 'polarArea',
+      data: data2,
+      options: options2,
+    };
+    Chart.overrides.polarArea.plugins.legend.position = 'left';
+    Chart.overrides.polarArea.aspectRatio = 1.4;
+    const chartItem2: ChartItem = document.getElementById(
+      'my-chart2'
+    ) as ChartItem;
+    new Chart(chartItem2, config2);
+  }
 
-}
-
-
-
-calculateCancelledOrdersPercentage(): void {
-  debugger;
-  this.cancelledOrdersPercentage = (this.cancelOrder /100) * 100;
-}
-calculateOrderCompletionPercentage(): void {
-  this.orderCompletionPercentage = (this.totalOrder/ 100) * 100;
-}
-calculateCategoryCompletionPercentage(): void {
-  this.categoryCompletionPercentage = (this.totalCategory / 100) * 100;
-}
-calculateProductCompletionPercentage(): void {
-  // Assuming you have a total number of products available or a maximum value to represent
-  const totalMaxProducts = 500; // Update this with your maximum product count
-  this.productCompletionPercentage = (this.totalProduct / totalMaxProducts) * 100;
-}
+  calculateCancelledOrdersPercentage(): void {
+    debugger;
+    this.cancelledOrdersPercentage = (this.cancelOrder / 100) * 100;
+  }
+  calculateOrderCompletionPercentage(): void {
+    this.orderCompletionPercentage = (this.totalOrder / 100) * 100;
+  }
+  calculateCategoryCompletionPercentage(): void {
+    this.categoryCompletionPercentage = (this.totalCategory / 100) * 100;
+  }
+  calculateProductCompletionPercentage(): void {
+    // Assuming you have a total number of products available or a maximum value to represent
+    const totalMaxProducts = 500; // Update this with your maximum product count
+    this.productCompletionPercentage =
+      (this.totalProduct / totalMaxProducts) * 100;
+  }
 }

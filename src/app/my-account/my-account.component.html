@@ -5,14 +5,15 @@
       <div class="my-account">
         <ul class="nav nav-tabs">
           <li><a (click)="setActiveTab($event)" data-toggle="tab" href="#home" (click)="order()">Orders</a></li>
-          <li ><a (click)="setActiveTab($event)" data-toggle="tab" href="#menu1" (click)="myAccount()">Account Details</a></li>
+          <li><a (click)="setActiveTab($event)" data-toggle="tab" href="#menu1" (click)="myAccount()">Account
+              Details</a></li>
           <li><a (click)="setActiveTab($event)" data-toggle="tab" href="#menu2">Change password</a></li>
         </ul>
 
-         <div class="tab-content">
+        <div class="tab-content">
           <div id="home" class="tab-pane in active">
-            
-            <table class="table table-striped" >
+
+            <table class="table table-striped">
               <thead>
                 <tr>
                   <th scope="col">Order ID</th>
@@ -28,44 +29,45 @@
                 </tr>
               </thead>
               <tbody>
-              
-               <tr *ngFor="let order of orderDetails; ; let i=index">
-                <td>{{ order.orderId }}</td>
-                <td class="orderDate">{{ order.orderDate | date:'dd MMM yyyy'}}</td>
-                <td>
-                  <ng-container *ngFor="let userOrder of order.userOrders">
-                    {{ userOrder.product.productName }}
-                    <br>
-                  </ng-container>
-                </td>
-                <td>
-                  <ng-container *ngFor="let userOrder of order.userOrders">
-                    {{ userOrder.product.productActualPrice | currency:'INR'}}
-                    <br>
-                  </ng-container>
-                </td>
-                <td>
-                  <ng-container *ngFor="let userOrder of order.userOrders">
-                    {{ userOrder.quantity }}
-                    <br>
-                  </ng-container>
-                </td>
-                
-                 <td>{{ order.totalOrderAmount | currency:'INR' }}</td>
-                 
-                 
-                
-                <td>{{ order.orderStatus }}</td>
-                <td class="align-middle">
-                  <button class="pdf-download-button" (click)="downloadPdfUser(order.orderId)">
-                    <i class="fa fa-file-pdf-o" style="font-size:24px;color:red"></i>
-                  </button>
+
+                <tr *ngFor="let order of orderDetails; ; let i=index">
+                  <td>{{ order.orderId }}</td>
+                  <td class="orderDate">{{ order.orderDate | date:'dd MMM yyyy'}}</td>
+                  <td>
+                    <ng-container *ngFor="let userOrder of order.userOrders">
+                      {{ userOrder.product.productName }}
+                      <br>
+                    </ng-container>
                   </td>
-                <td class="align-middle">
-                  <button (click)="userOrderCancel(i,order.id)"><i class="fa fa-close" style="font-size:24px"></i></button>
-              </td>
-              </tr>
-              <!-- <tr>
+                  <td>
+                    <ng-container *ngFor="let userOrder of order.userOrders">
+                      {{ userOrder.product.productActualPrice | currency:'INR'}}
+                      <br>
+                    </ng-container>
+                  </td>
+                  <td>
+                    <ng-container *ngFor="let userOrder of order.userOrders">
+                      {{ userOrder.quantity }}
+                      <br>
+                    </ng-container>
+                  </td>
+
+                  <td>{{ order.totalOrderAmount | currency:'INR' }}</td>
+
+
+
+                  <td>{{ order.orderStatus }}</td>
+                  <td class="align-middle">
+                    <button class="pdf-download-button" (click)="downloadPdfUser(order.orderId)">
+                      <i class="fa fa-file-pdf-o" style="font-size:24px;color:red"></i>
+                    </button>
+                  </td>
+                  <td class="align-middle">
+                    <button (click)="userOrderCancel(i,order.id)"><i class="fa fa-close"
+                        style="font-size:24px"></i></button>
+                  </td>
+                </tr>
+                <!-- <tr>
                 <th scope="row"><input type="checkbox" name="selectAll" id="selectAll"></th>
                 <td><img src="../../assets/images/550x750.png" class="inventory-image"></td>
                 <td>Blackdog</td>
@@ -85,7 +87,7 @@
             </table>
           </div>
 
-         <!-- <div class="tab-content"> 
+          <!-- <div class="tab-content"> 
             <div id="home" class="tab-pane in active">
               <table class="table table-striped">
                 <thead>
@@ -138,45 +140,53 @@
               </table>
             </div>
           </div> -->
-          
+
 
           <div id="menu1" class="tab-pane">
             <!-- <-- My Account content  -->
             <div class="quickview-content updateregister">
-              <form >
+              <form>
                 <div class="row">
                   <div class="mb-3 mt-3 col-md-6 px-2">
                     <label for="name" class="form-label">Name:</label>
-                    <input type="text" class="form-control" id="name" placeholder="Abc Kumar" name="name" [(ngModel)]="parsedLoginResponse.user.name" >
+                    <input type="text" class="form-control" id="name" placeholder="Abc Kumar" name="name"
+                      [(ngModel)]="parsedLoginResponse.user.name">
                   </div>
                   <div class="mb-3 mt-3 col-md-6 px-2">
                     <label for="name" class="form-label">Liquir Card No:</label>
-                    <input type="text" class="form-control" id="Liquir" placeholder="0123456" name="Liquir" [(ngModel)]="parsedLoginResponse.user.liquorCardNumber">
+                    <input type="text" class="form-control" id="Liquir" placeholder="0123456" name="Liquir"
+                      [(ngModel)]="parsedLoginResponse.user.liquorCardNumber">
                   </div>
                   <div class="mb-3 mt-3 col-md-6 px-2">
                     <label for="name" class="form-label">Grocery Card No:</label>
-                    <input type="text" class="form-control" id="Grocery" placeholder="1234567" name="Grocery"  [(ngModel)]="parsedLoginResponse.user.groceryCardNumber">
+                    <input type="text" class="form-control" id="Grocery" placeholder="1234567" name="Grocery"
+                      [(ngModel)]="parsedLoginResponse.user.groceryCardNumber">
                   </div>
                   <div class="mb-3 mt-3 col-md-6 px-2">
                     <label for="name" class="form-label">Pan No:</label>
-                    <input type="text" class="form-control" id="Pan" placeholder="CHUDG8922" name="Pan" [(ngModel)]="parsedLoginResponse.user.pan">
+                    <input type="text" class="form-control" id="Pan" placeholder="CHUDG8922" name="Pan"
+                      [(ngModel)]="parsedLoginResponse.user.pan">
                   </div>
                   <div class="mb-3 mt-3 col-md-6 px-2">
                     <label for="name" class="form-label">Adhaar No:</label>
-                    <input type="text" class="form-control" id="Adhaar" placeholder="567776579876" name="Adhaar" [(ngModel)]="parsedLoginResponse.user.adhaar">
+                    <input type="text" class="form-control" id="Adhaar" placeholder="567776579876" name="Adhaar"
+                      [(ngModel)]="parsedLoginResponse.user.adhaar">
                   </div>
                   <div class="mb-3 mt-3 col-md-6 px-2">
                     <label for="name" class="form-label">Date of Birth:</label>
-                    <input type="text" class="form-control" id="Date" name="Date" placeholder="00-00-0000" [(ngModel)]="parsedLoginResponse.user.dob" (focus)="changeInputType($event.target)">
+                    <input type="text" class="form-control" id="Date" name="Date" placeholder="00-00-0000"
+                      [(ngModel)]="parsedLoginResponse.user.dob" (focus)="changeInputType($event.target)">
                   </div>
                   <div class="mb-3 mt-3 col-md-6 px-2">
                     <label for="number" class="form-label">Mobile:</label>
-                    <input type="phone" class="form-control" id="mobile" placeholder="Enter mobile number" name="mobile" [(ngModel)]="parsedLoginResponse.user.contactNumber">
+                    <input type="phone" class="form-control" id="mobile" placeholder="Enter mobile number" name="mobile"
+                      [(ngModel)]="parsedLoginResponse.user.contactNumber">
                   </div>
 
                   <div class="mb-3 mt-3 col-md-6 px-2">
                     <label for="pwd" class="form-label">Email:</label>
-                    <input type="gmail" class="form-control" id="pwd" placeholder="abc@gmail.com" name="gmal" [(ngModel)]="parsedLoginResponse.user.email">
+                    <input type="gmail" class="form-control" id="pwd" placeholder="abc@gmail.com" name="gmal"
+                      [(ngModel)]="parsedLoginResponse.user.email">
                   </div>
 
                 </div>
@@ -198,7 +208,8 @@
                   </div>
                   <div class="mb-3 mt-3 col-md-12 px-2ter">
                     <label for="pwd" class="form-label">Confirm Password:</label>
-                    <input type="password" class="form-control" id="pwd" placeholder="Enter confirm password" name="pswd">
+                    <input type="password" class="form-control" id="pwd" placeholder="Enter confirm password"
+                      name="pswd">
                   </div>
                   <div class="mb-3 mt-3 col-md-12 px-2">
                     <button type="submit" class="btn btn-primary mb-3"> Update Details</button>
@@ -207,10 +218,10 @@
               </form>
             </div>
           </div>
-        </div> 
+        </div>
 
-        
-        
+
+
       </div>
 
 

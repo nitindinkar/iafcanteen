@@ -43,6 +43,8 @@ import {ProductFilteredComponent} from "./product-filtered/product-filtered.comp
 import { SuperAdminNotificationComponent } from './super-admin-notification/super-admin-notification.component';
 import { AdminMyAccountComponent } from './admin-my-account/admin-my-account.component';
 import { NgxPageScrollCoreModule } from 'ngx-page-scroll-core';
+import { NgxSpinnerModule } from 'ngx-spinner';
+
 
 
 
@@ -74,6 +76,7 @@ import { NgxPageScrollCoreModule } from 'ngx-page-scroll-core';
     AdminDashboardComponent,
     SuperAdminNotificationComponent,
     AdminMyAccountComponent,
+    
 
 
 
@@ -99,6 +102,7 @@ import { NgxPageScrollCoreModule } from 'ngx-page-scroll-core';
     MatFormFieldModule,
     MatSlideToggleModule,
     NgxPageScrollCoreModule,
+    NgxSpinnerModule,
 
 
   ],

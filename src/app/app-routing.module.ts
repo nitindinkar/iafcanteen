@@ -26,6 +26,7 @@ import { AdminMyAccountComponent } from './admin-my-account/admin-my-account.com
 
 
 
+
 const routes: Routes = [
   { path: '', component:  HomeComponent},
   { path: 'liquor', component:  LiquorHomeComponent},
@@ -48,6 +49,7 @@ const routes: Routes = [
   { path:  'superadmin', component:SuperadminDashboardComponent},
   { path:  'superadmin-notification', component:SuperAdminNotificationComponent},
   { path:  'admin-myAccount', component:AdminMyAccountComponent},
+  
 
 
 

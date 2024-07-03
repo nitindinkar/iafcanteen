@@ -1,106 +1,113 @@
 <div class="container-fluid">
-    <div class="px-xl-5 py-5">
-        <div class="add-product">
-            <h2>Manage Admin</h2>
-              <div class="inventory">
-                <div class="add-admin px-4 my-4">
-                  <h3 class="seconder-heading mt-4">Add Admin</h3>
-                   <form action="post">
-                        <div class="row">
-                         
-                          <div class="col-md-4 mb-3 mt-3">
-                            <label for="Name" class="form-label">Name:</label>
-                            <input type="text" class="form-control" id="name"  [(ngModel)]="name"  placeholder="Enter Name" name="name" >
-                          </div>
-                          <div class="col-md-4 mb-3 mt-3">
-                            <label for="service" class="form-label">Service Number:</label>
-                            <input type="text" class="form-control" id="serviceNo"   [(ngModel)]="serviceNo" placeholder="Enter Number" name="serviceNo">
-                          </div>
-                          <div class="col-md-4 mb-3 mt-3">
-                            <label for="service" class="form-label">Password:</label>
-                            <input type="text" class="form-control" id="password"   [(ngModel)]="password" placeholder="Enter Number" name="password">
-                          </div>
-                          <div class="col-md-4 mb-3 mt-3">
-                            <label for="email" class="form-label">Email:</label>
-                            <input type="text" class="form-control" id="email"   [(ngModel)]="email" placeholder="Enter Number" name="email">
-                          </div>
-                          <div class="col-md-4 mb-3 mt-3">
-                            <label for="contact" class="form-label">Contact Number:</label>
-                            <input type="text" class="form-control" id="contact" [(ngModel)]="contact"   placeholder="Enter Contact Number" name="contact">
-                          </div>
-                          
-                          
-                          <div class="col-md-12 mb-3 mt-3" *ngIf="!edit">
-                            <button type="submit" class="btn btn-primary mb-3" (click)="addAdmins()">Submit</button>
-                          </div>
-                          <div class="col-md-12 mb-3 mt-3" *ngIf="edit">
-                            <button type="submit" class="btn btn-primary mb-3" (click)="update()">update</button>
-                          </div>
+  <div class="px-xl-5 py-5">
+    <div class="add-product">
+      <h2>Manage Admin</h2>
+      <div class="inventory">
+        <div class="add-admin px-4 my-4">
+          <h3 class="seconder-heading mt-4">Add Admin</h3>
+          <form action="post">
+            <div class="row">
 
-                        </div>
-                   </form> 
-                </div>
-              <div class="add-admin px-4 my-4">
-                <div class="filters mt-3">
-                    <form action="post">
-                        <div class="row">
-                          <!-- <div class="mb-3 mt-3 col-md-2 px-2">
+              <div class="col-md-4 mb-3 mt-3">
+                <label for="Name" class="form-label">Name:</label>
+                <input type="text" class="form-control" id="name" [(ngModel)]="name" placeholder="Enter Name"
+                  name="name">
+              </div>
+              <div class="col-md-4 mb-3 mt-3">
+                <label for="service" class="form-label">Service Number:</label>
+                <input type="text" class="form-control" id="serviceNo" [(ngModel)]="serviceNo"
+                  placeholder="Enter Number" name="serviceNo">
+              </div>
+              <div class="col-md-4 mb-3 mt-3">
+                <label for="service" class="form-label">Password:</label>
+                <input type="text" class="form-control" id="password" [(ngModel)]="password" placeholder="Enter Number"
+                  name="password">
+              </div>
+              <div class="col-md-4 mb-3 mt-3">
+                <label for="email" class="form-label">Email:</label>
+                <input type="text" class="form-control" id="email" [(ngModel)]="email" placeholder="Enter Number"
+                  name="email">
+              </div>
+              <div class="col-md-4 mb-3 mt-3">
+                <label for="contact" class="form-label">Contact Number:</label>
+                <input type="text" class="form-control" id="contact" [(ngModel)]="contact"
+                  placeholder="Enter Contact Number" name="contact">
+              </div>
+
+
+              <div class="col-md-12 mb-3 mt-3" *ngIf="!edit">
+                <button type="submit" class="btn btn-primary mb-3" (click)="addAdmins()">Submit</button>
+              </div>
+              <div class="col-md-12 mb-3 mt-3" *ngIf="edit">
+                <button type="submit" class="btn btn-primary mb-3" (click)="update()">update</button>
+              </div>
+
+            </div>
+          </form>
+        </div>
+        <div class="add-admin px-4 my-4">
+          <div class="filters mt-3">
+            <form action="post">
+              <div class="row">
+                <!-- <div class="mb-3 mt-3 col-md-2 px-2">
                             <select class="form-control" id="action">
                             <option>Bulk Action</option>
                             <option>Delete</option>
                             </select>
                           </div> -->
-                          <!-- <div class="mt-3 col-md-1 px-2">
+                <!-- <div class="mt-3 col-md-1 px-2">
                             <button type="submit" class="btn btn-primary mb-3 form-filter">Apply</button>
                         </div> -->
-                          
-                          <!-- <div class="mb-3 mt-3 col-md-5 px-4">
+
+                <!-- <div class="mb-3 mt-3 col-md-5 px-4">
                             <select class="form-control" id="status">
                             <option>Filter By Admin Status</option>
                             <option>Active</option>
                             <option>Deactive</option>
                             </select>
                           </div> -->
-                          <div class="mb-3 mt-3 col-md-5 px-4">
-                            <select class="form-control" id="status" [(ngModel)]="selectedStatus" [ngModelOptions]="{standalone: true}"  >
-                              <option value="Filter By Admin Status">Filter By Admin Status</option>
-                              <option value="Active">Active</option>
-                              <option value="Deactive">Deactive</option>
-                            </select>
-                          </div>
-                          <div class="mt-3 col-md-3 px-3">
-                              <button type="submit" class="btn btn-primary mb-3 form-filter" (click)="filterByAdmin()">Filter</button>
-                              <span >   Total Admin : {{this.allAdmins.length}}   </span>
-                          </div>
-                          </div>
-                        </form> 
+                <div class="mb-3 mt-3 col-md-5 px-4">
+                  <select class="form-control" id="status" [(ngModel)]="selectedStatus"
+                    [ngModelOptions]="{standalone: true}">
+                    <option value="Filter By Admin Status">Filter By Admin Status</option>
+                    <option value="Active">Active</option>
+                    <option value="Deactive">Deactive</option>
+                  </select>
                 </div>
-                <div class="row overflow-auto">
-              <table class="table table-striped">
-                <thead>
-                  <tr>
-                    <th scope="col"><input type="checkbox" name="selectAll" id="selectAll"></th>
-                    <th scope="col">Admin Id</th>
-                    <th scope="col">Admin</th>
-                    <th scope="col">Service Number</th>
-                    <th scope="col">Contact</th>
-                    <th scope="col">Status</th>
-                    <th scope="col" >Change Status</th>
-                    <th scope="col">Action</th>
-                    
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr  *ngFor="let admin of filteredAdmin">
-                    <th scope="row"><input type="checkbox" name="selectAll" id="selectAll"></th>
-                    <td>{{ admin.id }}</td>
-                    <td>{{ admin.name }}</td>
-                    <td>{{ admin.serviceNo }}</td>
-                    <td>{{ admin.contact }}</td>
-                    <td>{{ admin.active ? 'Active' : 'Inactive' }}</td>
-                    
-                    
-                    <!-- <td>
+                <div class="mt-3 col-md-3 px-3">
+                  <button type="submit" class="btn btn-primary mb-3 form-filter"
+                    (click)="filterByAdmin()">Filter</button>
+                  <span> Total Admin : {{this.allAdmins.length}} </span>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="row overflow-auto">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col"><input type="checkbox" name="selectAll" id="selectAll"></th>
+                  <th scope="col">Admin Id</th>
+                  <th scope="col">Admin</th>
+                  <th scope="col">Service Number</th>
+                  <th scope="col">Contact</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Change Status</th>
+                  <th scope="col">Action</th>
+
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let admin of filteredAdmin">
+                  <th scope="row"><input type="checkbox" name="selectAll" id="selectAll"></th>
+                  <td>{{ admin.id }}</td>
+                  <td>{{ admin.name }}</td>
+                  <td>{{ admin.serviceNo }}</td>
+                  <td>{{ admin.contact }}</td>
+                  <td>{{ admin.active ? 'Active' : 'Inactive' }}</td>
+
+
+                  <!-- <td>
                       <button type="button" class="btn btn-success mr-2" (click)="activeAdmins(admin.id)">
                         <i class="fas fa-check"></i> Activate
                       </button>
@@ -109,26 +116,28 @@
                         <i class="fas fa-times"></i> Deactivate
                       </button>
                     </td> -->
-                    <td><mat-slide-toggle [checked]="admin.active" (change)="toggleAdminStatus(admin)"></mat-slide-toggle></td>
-                    <!-- <td>
+                  <td><mat-slide-toggle [checked]="admin.active" (change)="toggleAdminStatus(admin)"></mat-slide-toggle>
+                  </td>
+                  <!-- <td>
                       <mat-slide-toggle [checked]="admin.active" (change)="toggleAdminStatus(admin)" [ngClass]="{'active-toggle': admin.active, 'inactive-toggle': !admin.active}"></mat-slide-toggle>
                     </td> -->
-                    
-                    
-                    <td>                             
-                      <button type="submit" class="btn btn-secondary" (click)="editAdmin(admin,admin.id)"><i class="fa fa-edit"></i></button>
-                      <!-- <button type="submit" class="btn btn-secondary ml-2" (click)="deleteAdmin(admin.id)"><i class="fa fa-trash"></i></button> -->
-                    </td>
-                  </tr>
-                  
-                  
-                  
-                </tbody>
-              </table>
-              
-                </div>
-              </div>
+
+
+                  <td>
+                    <button type="submit" class="btn btn-secondary" (click)="editAdmin(admin,admin.id)"><i
+                        class="fa fa-edit"></i></button>
+                    <!-- <button type="submit" class="btn btn-secondary ml-2" (click)="deleteAdmin(admin.id)"><i class="fa fa-trash"></i></button> -->
+                  </td>
+                </tr>
+
+
+
+              </tbody>
+            </table>
+
+          </div>
         </div>
+      </div>
     </div>
-    
-</div>
+
+  </div>
