@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Management</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 50vh;
+      background-color: #f4f4f4;
+      
+    }
+
+    .container {
+      text-align: center;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 10px 20px;
+      margin: 10px;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      text-decoration: none;
+      
+    }
+
+    .button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h2>Admin Management</h2>
+    <button class="button"  [routerLink]="['/registration']">New Registration</button>
+    <button class="button" onclick="openEditAdmin()">Edit Admin</button>
+    <button class="button" onclick="openDeleteAdmin()">Delete Admin</button>
+  </div>
+
+  <script>
+    function openNewRegistration() {
+      window.location.href = 'new-registration.html';
+    }
+
+    function openEditAdmin() {
+      window.location.href = 'edit-admin.html';
+    }
+
+    function openDeleteAdmin() {
+      window.location.href = 'delete-admin.html';
+    }
+  </script>
+</body>
+
+</html>
+

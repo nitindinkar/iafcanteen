@@ -1,0 +1,209 @@
+<div class="container-fluid">
+  <div class="px-xl-5 py-5">
+    <div class="add-product">
+      <h2 class="mb-4">My Account</h2>
+      <div class="my-account">
+        <ul class="nav nav-tabs">
+          <li><a (click)="setActiveTab($event)" data-toggle="tab" href="#home" (click)="order()">Orders</a></li>
+          <li><a (click)="setActiveTab($event)" data-toggle="tab" href="#menu1" (click)="myAccount()">Account Details</a></li>
+          <li><a (click)="setActiveTab($event)" data-toggle="tab" href="#menu2">Change password</a></li>
+        </ul>
+
+         <div class="tab-content">
+          <div id="home" class="tab-pane in active">
+            
+            <table class="table table-striped" >
+              <thead>
+                <tr>
+                  <th scope="col">Order ID</th>
+                  <th scope="col">Product Name</th>
+                  <th scope="col">Price</th>
+                  <th scope="col">Quantity</th>
+                  <th scope="col">Total</th>
+                  <th scope="col">Order Status</th>
+                  <th scope="col">Cancel Order</th>
+
+                </tr>
+              </thead>
+              <tbody>
+              
+               <tr *ngFor="let order of orderDetails">
+                <td>{{ order.orderId }}</td>
+                <td>
+                  <ng-container *ngFor="let userOrder of order.userOrders">
+                    {{ userOrder.product.productName }}
+                    <br>
+                  </ng-container>
+                </td>
+                <td>
+                  <ng-container *ngFor="let userOrder of order.userOrders">
+                    {{ userOrder.product.productActualPrice | currency:'INR'}}
+                    <br>
+                  </ng-container>
+                </td>
+                <td>
+                  <ng-container *ngFor="let userOrder of order.userOrders">
+                    {{ userOrder.quantity }}
+                    <br>
+                  </ng-container>
+                </td>
+                
+                 <td>{{ order.totalOrderAmount | currency:'INR' }}</td>
+                
+                <td>{{ order.orderStatus }}</td>
+                <td class="align-middle">
+                  <i style="font-size:24px" class="fa">&#xf00d;</i>
+                </td>
+              </tr>
+              <!-- <tr>
+                <th scope="row"><input type="checkbox" name="selectAll" id="selectAll"></th>
+                <td><img src="../../assets/images/550x750.png" class="inventory-image"></td>
+                <td>Blackdog</td>
+                <td>SK_12345</td>
+                <td>Liquir</td>
+                <td>₹850 <span class="mrp">(₹1560)</span></td>
+              </tr>
+              <tr>
+                <th scope="row"><input type="checkbox" name="selectAll" id="selectAll"></th>
+                <td><img src="../../assets/images/550x750.png" class="inventory-image"></td>
+                <td>Blackdog</td>
+                <td>SK_12345</td>
+                <td>Liquir</td>
+                <td>₹850 <span class="mrp">(₹1560)</span></td>
+              </tr>  -->
+              </tbody>
+            </table>
+          </div>
+
+         <!-- <div class="tab-content"> 
+            <div id="home" class="tab-pane in active">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">Order ID</th>
+                    <th scope="col">Product Name</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Total</th>
+                    <th scope="col">Order Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let order of orderDetails">
+                    <td>{{ order.orderId }}</td>
+                    <td>
+                      <ng-container *ngFor="let userOrder of order.userOrders">
+                        {{ userOrder.product.productName }}
+                        <br>
+                      </ng-container>
+                    </td>
+                    <td>
+                      <ng-container *ngFor="let userOrder of order.userOrders">
+                        {{ userOrder.product.productActualPrice | currency }}
+                        <br>
+                      </ng-container>
+                    </td>
+                    <td>
+                      <ng-container *ngFor="let userOrder of order.userOrders">
+                        {{ userOrder.quantity }}
+                        <br>
+                      </ng-container>
+                    </td>
+                    <td>
+                      <ng-container *ngFor="let userOrder of order.userOrders">
+                        {{ userOrder.product.category.name }}
+                        <br>
+                      </ng-container>
+                    </td>
+                    <td>
+                      <ng-container *ngFor="let userOrder of order.userOrders">
+                        {{ userOrder.productTotalAmount | currency }}
+                        <br>
+                      </ng-container>
+                    </td>
+                    <td>{{ order.orderStatus }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div> -->
+          
+
+          <div id="menu1" class="tab-pane">
+            <!-- <-- My Account content  -->
+            <div class="quickview-content updateregister">
+              <form >
+                <div class="row">
+                  <div class="mb-3 mt-3 col-md-6 px-2">
+                    <label for="name" class="form-label">Name:</label>
+                    <input type="text" class="form-control" id="name" placeholder="Abc Kumar" name="name" [(ngModel)]="parsedLoginResponse.user.name" >
+                  </div>
+                  <div class="mb-3 mt-3 col-md-6 px-2">
+                    <label for="name" class="form-label">Liquir Card No:</label>
+                    <input type="text" class="form-control" id="Liquir" placeholder="0123456" name="Liquir" [(ngModel)]="parsedLoginResponse.user.liquorCardNumber">
+                  </div>
+                  <div class="mb-3 mt-3 col-md-6 px-2">
+                    <label for="name" class="form-label">Grocery Card No:</label>
+                    <input type="text" class="form-control" id="Grocery" placeholder="1234567" name="Grocery"  [(ngModel)]="parsedLoginResponse.user.groceryCardNumber">
+                  </div>
+                  <div class="mb-3 mt-3 col-md-6 px-2">
+                    <label for="name" class="form-label">Pan No:</label>
+                    <input type="text" class="form-control" id="Pan" placeholder="CHUDG8922" name="Pan" [(ngModel)]="parsedLoginResponse.user.pan">
+                  </div>
+                  <div class="mb-3 mt-3 col-md-6 px-2">
+                    <label for="name" class="form-label">Adhaar No:</label>
+                    <input type="text" class="form-control" id="Adhaar" placeholder="567776579876" name="Adhaar" [(ngModel)]="parsedLoginResponse.user.adhaar">
+                  </div>
+                  <div class="mb-3 mt-3 col-md-6 px-2">
+                    <label for="name" class="form-label">Date of Birth:</label>
+                    <input type="text" class="form-control" id="Date" name="Date" placeholder="00-00-0000" [(ngModel)]="parsedLoginResponse.user.dob" (focus)="changeInputType($event.target)">
+                  </div>
+                  <div class="mb-3 mt-3 col-md-6 px-2">
+                    <label for="number" class="form-label">Mobile:</label>
+                    <input type="phone" class="form-control" id="mobile" placeholder="Enter mobile number" name="mobile" [(ngModel)]="parsedLoginResponse.user.contactNumber">
+                  </div>
+
+                  <div class="mb-3 mt-3 col-md-6 px-2">
+                    <label for="pwd" class="form-label">Email:</label>
+                    <input type="gmail" class="form-control" id="pwd" placeholder="abc@gmail.com" name="gmal" [(ngModel)]="parsedLoginResponse.user.email">
+                  </div>
+
+                </div>
+                <button type="submit" class="btn btn-primary mb-3"> Update Details</button>
+              </form>
+            </div>
+          </div>
+          <div id="menu2" class="tab-pane">
+            <div class="quickview-content changepassword">
+              <form action="/action_page.php">
+                <div class="row">
+                  <div class="mb-3 mt-3 col-md-12 px-2">
+                    <label for="pwd" class="form-label">Old Password:</label>
+                    <input type="password" class="form-control" id="pwd" placeholder="Enter old password" name="pswd">
+                  </div>
+                  <div class="mb-3 mt-3 col-md-12 px-2">
+                    <label for="pwd" class="form-label">New Password:</label>
+                    <input type="password" class="form-control" id="pwd" placeholder="Enter newpassword" name="pswd">
+                  </div>
+                  <div class="mb-3 mt-3 col-md-12 px-2ter">
+                    <label for="pwd" class="form-label">Confirm Password:</label>
+                    <input type="password" class="form-control" id="pwd" placeholder="Enter confirm password" name="pswd">
+                  </div>
+                  <div class="mb-3 mt-3 col-md-12 px-2">
+                    <button type="submit" class="btn btn-primary mb-3"> Update Details</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div> 
+
+        
+        
+      </div>
+
+
+    </div>
+  </div>
+</div>
